@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="style.css">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+	
+<h1>Learning Vocabulary</h1>
+<header class="header-10">
+    <div class="container">
+      <ul class="pull-left">
+        <a href="index.html">Flash Card</a>
+        <a href="list.html">Vocabulary List</a></li>
+      </ul>    
+    </div>
+</header>
+
+</header>
+<section>
+    
+</section>
+</body>
+
+<script src="https://unpkg.com/whatwg-fetch@3.6.2/dist/fetch.umd.js"></script>
+<script>
+
+fetch('lib.txt')
+  .then(response => response.text())
+  .then(text => {
+    var row = text.replace(/\r/g, "").split('\n');
+    var table = document.createElement("table");
+    row.forEach(line => {
+      var lineWords = line.split('\t');
+      var row = document.createElement("tr");
+      for (let i = 0; i<lineWords.length ; i++){
+        if(i % 2 ==0){
+            var cell1 = document.createElement("td");
+            cell1.setAttribute("id",i);
+            cell1.setAttribute("class","playable")
+            cell1.innerHTML = lineWords[i];
+            row.appendChild(cell1);
+            var cell2 = document.createElement("td");
+            cell2.setAttribute("id",i+1);
+            cell2.innerHTML = lineWords[i+1];
+            row.appendChild(cell2)
+        }
+      };
+      table.appendChild(row);
+    });
+    document.body.appendChild(table);
+  })
+  .catch(error => console.error(error));
+
+
+</script>
+
+<script>
+    var widget;
+    
+    $('body').on('click', '.playable', function(event){
+        if (widget){
+            var text = $(this).html();
+            widget.fetch(text, "english");
+             $(".ygParent").show();
+        }
+        else {
+            alert("YG is unavailable. Try again later");
+        }
+        
+    });
+    
+    function onYouglishAPIReady(){
+        widget = YG.getWidget("yg-widget-0");
+        if (widget){
+            widget.addEventListener("onError", errorHdler);
+        }
+    }
+    
+    function errorHdler(event){
+        switch(event.code){
+            case YG.Error.OUTDATED_BROWSER: 
+                alert("YG can't be run. Upgrade your browser and try again!");
+                break;
+            case YG.Error.TIMEOUT: 
+                 $(".ygParent").hide();
+                 if (widget) widget.close();
+                alert("YG is unavailable. Try again later.");
+                break;
+        }
+    }
+</script>
+<script async src="https://youglish.com/public/emb/widget.js" charset="utf-8"></script>
+  
+</html>
