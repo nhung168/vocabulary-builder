@@ -14,6 +14,9 @@
         <a href="list.html">My Dictionary</a></li>
       </ul>    
     </div>
+    <div class='ygParent'>
+      <a id="yg-widget-0" class="youglish-widget" data-components="7423" data-delay-load="1" data-toggle-ui="1"  href="https://youglish.com">Visit YouGlish.com</a>
+    </div>
 </header>
 
 </header>
@@ -61,7 +64,7 @@ fetch('lib.txt')
     $('body').on('click', '.playable', function(event){
         if (widget){
             var text = $(this).html();
-            widget.fetch(text, "english");
+            widget.search(text, "english");
              $(".ygParent").show();
         }
         else {
