@@ -11,11 +11,8 @@
     <div class="container">
       <ul class="pull-left">
         <a href="index.html">Flash Card</a>
-        <a href="list.html">My Dictionary</a></li>
+        <a href="list.html">Vocabulary List</a></li>
       </ul>    
-    </div>
-    <div class='ygParent'>
-      <a id="yg-widget-0" class="youglish-widget" data-components="7423" data-delay-load="1" data-toggle-ui="1"  href="https://youglish.com">Visit YouGlish.com</a>
     </div>
 </header>
 
@@ -64,7 +61,7 @@ fetch('lib.txt')
     $('body').on('click', '.playable', function(event){
         if (widget){
             var text = $(this).html();
-            widget.search(text, "english");
+            widget.fetch(text, "english");
              $(".ygParent").show();
         }
         else {
