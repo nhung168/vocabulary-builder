@@ -44,7 +44,7 @@
   // read list from txt file
 let words = []; // declare the variable outside the block
 
-fetch('lib.txt')
+fetch('/lib.txt')
   .then(response => response.text())
   .then(text => {
     var row = text.replace(/\r/g, "").split('\n');

@@ -28,7 +28,7 @@
 <script src="https://unpkg.com/whatwg-fetch@3.6.2/dist/fetch.umd.js"></script>
 <script>
 
-fetch('lib.txt')
+fetch('/lib.txt')
   .then(response => response.text())
   .then(text => {
     var row = text.replace(/\r/g, "").split('\n');
