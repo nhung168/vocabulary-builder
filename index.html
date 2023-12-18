@@ -89,7 +89,10 @@ var widget;
       <!-- Wait for YG library to be loaded -->
       function onYouglishAPIReady(output) {
         <!-- retrieve the widget object-->
-        widget = YG.getWidget("yg-widget-0");
+        widget = YG.getWidget("yg-widget-0",{
+          width: 640,
+          components:8192, //search box & caption 
+        });
         <!-- use the API...-->
         widget.search(output);
       }
