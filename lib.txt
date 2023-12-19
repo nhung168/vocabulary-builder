@@ -1,6 +1,6 @@
-
-deterrence   the practice of dissuading bad behavior through the threat of significant punishment
-stringent   (of regulations, requirements, or conditions) strict, precise, and exacting		
+	
+deterrence	the practice of dissuading bad behavior through the threat of significant punishment
+stringent	(of regulations, requirements, or conditions) strict, precise, and exacting		
 courteous	nice and showing respect        
 bashful	feeling embarrassed due to modesty
 Vocation	(n) any trade, profession, or occupation; a sense of fitness or special calling for one's work
