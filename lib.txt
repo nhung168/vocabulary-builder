@@ -1,11 +1,12 @@
 	
+plunge	v. fall / to become lower in value very quickly
+exponential	adj. dramatic (increase)
 deterrence	the practice of dissuading bad behavior through the threat of significant punishment
 stringent	(of regulations, requirements, or conditions) strict, precise, and exacting		
 courteous	nice and showing respect        
 bashful	feeling embarrassed due to modesty
 Vocation	(n) any trade, profession, or occupation; a sense of fitness or special calling for one's work
 utter	complete
-Impending	about to happen
 Fruiton	The state of being real
 Realm	Region, area
 hefty	Large in size, height, quantity
@@ -33,7 +34,6 @@ improvident	not careful
 hound	pursue relentlessly
 compound	make more intense
 elude	fail to be grasped
-stringent	strict, precise, and exacting
 savvy	well-informed
 lament	a passionate expression of grief or sorrow
 bemoan	lament
@@ -94,7 +94,7 @@ deteriorate	become progressively worse
 suppress	prevent the development, action, or expression of (a feeling, impulse, idea, etc.); restrain.
 concur	agree
 universal	of, affecting, or done by all people or things in the world or in a particular group; applicable to all cases.
-subsistence farming	farming that provides enough food for the farmer and their family to live on, but not enough for them to sell
+subsistence farming that provides enough food for the farmer and their family to live on, but not enough for them to sell
 appalling	causing shock or dismay; horrific.
 manifestation	an event, action, or object that clearly shows or embodies something, especially a theory or an abstract idea.
 asteroid	is a minor planet of the inner Solar System
@@ -216,11 +216,11 @@ cadeverous	corpse-like (Some actors take challenging roles in which they have to
 intrepid	fearless (Captain Ahab was an ..captain whose reckless and fearless style ultimately leads to his downfall)
 fraternity	a group of people who have the same job or interest
 arcane	obscure (Most college franternities are known for ...rituals that those hoping to join the fraternity must learn)
-junta	group seizing power (As dangerous of a threat as North Korea is, some analysts believe that were a .. Suddenly to gain power, it could be even more unpredictable and bellicose than the current leadership
+junta	group seizing power (As dangerous of a threat as North Korea is, some analysts believe that were a .. Suddenly to gain power, it could be even more unpredictable and bellicose than the current leadership)
 claustrophobia	extreme or irrational fear of confined places
 confine	prison
 immure	confine (The modern supermarket experience makes many feel claustrophobic, as they are ... in walls upon walls of products)
-pugnacious	combative (The comedian told one flat joke after another, and when the audience started booing, he ... spat back at them,"Hey you think this is easy - why don't you buffoons give it a shot?"
+pugnacious	combative (The comedian told one flat joke after another, and when the audience started booing, he ... spat back at them,"Hey you think this is easy - why don't you buffoons give it a shot?")
 conspicuous	obvious (Among the tall trees and flower fields, the building seemed out of place with its ...,col concrete and angular steel exterior.)
 supercilious	arrogant (Nelly fet the Quiz Bowl director acted ... towards the underclassmen; really she fumed, must he act so preternaturally omniscient each time he intones some obscure fact)
 dogmatic	opinionated (Bryan is ... in his belief that the earth is flat, claiming that all pictures of a spherical earth are computer generated)
