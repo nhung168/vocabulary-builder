@@ -1,171 +1,167 @@
 	
-hinge on	pv. to depend on
-havoc-wreaking	adj. used to describe the destructive or chaotic effects of something or someone
-quintessential	adj. representing the most perfect or most typical example of something
-hog	n. a pig esp. one allowed to grow large so that it can be used as food
-akin to	adj.  ~ similar/like to
-uphold	v. conserve or defend a principal or law
-outsmart	v. to obtain advantage over someony by using your intelligence
-splurge on	v. spend a lot of money on buying goods esp. expensive one
-imprint	v. to make a surface by pressing sth into it for fix sth firmly in the memory
-manifold	adj. many and different types
-permeate	v. to spread through something and be present in every part of it
-distill	v. extract the most essential meaning/aspect
-embark on	pv. start something new
-stem from	pv. start to developp as the result of something
-contagious	adj.  spread from one person or organism to another
-extrinsic	adj. not part of essential nature of someone or something
-intrinsic	adj. belonging  naturally, essential
-galvanize	v. shock or excite someone into taking action
-resort to	phrasal v.  you do not want to do because you cannot find any other way of achieving something
-instill	v. gradually but firmly establish (an idea or attitude) in a person's mind
-curb	v.n. restrain or control something
-nudge	v. gently tell someone to do without forcing them
-compel	v. force | oblige to do sth
-hindrance	one that creates difficulties
-hitherto	adv. until now
-exert	v. use authority,influence to make sth happen | make an effort
-budge	make or cause to make the slightest movement
-vault out of	 v. quickly exit or escape a situation or place by jumping over it, often implying the use of hands or a pole for support
-gin up	v. stir up or generate some level of enthusiasm or support for something
 plunge	v. fall / to become lower in value very quickly
 exponential	adj. dramatic (increase)
-deterrence	the practice of dissuading bad behavior through the threat of significant punishment
-stringent	(of regulations, requirements, or conditions) strict, precise, and exacting		
-courteous	nice and showing respect        
-bashful	feeling embarrassed due to modesty
-Vocation	(n) any trade, profession, or occupation; a sense of fitness or special calling for one's work
-utter	complete
-Fruition	The state of being real
-Realm	Region, area
-hefty	Large in size, height, quantity
-intrude	to come or go in without permission or welcome
-chivalrous	marked by honor, courtesy, and courage
-fortify	to strengthen
-yammer	to whine or complain
-scrumptious	extremely appetizing or delicious
-languish	become weak
-assiduously	with great care
-debonair	sophisticated, charming
-preempt	take the place of
-contemptuous	scornful
-primacy	of greatest importance
-betray	reveal (with gold medal at stake, the gymnast awaited his turn, his quivering lip betraying his intense emotions)
-afford	give opportunity for
-forthright	honest in speaking
-effervescent	bubbly
-cornucopia	abundant supply
-heyday	pinnacle
-profusion	abundance
-arduous	requiring great effort
-hodgepodge	mixture
-improvident	not careful
-hound	pursue relentlessly
-compound	make more intense
-elude	fail to be grasped
-savvy	well-informed
-lament	a passionate expression of grief or sorrow
-bemoan	lament
-thwart	block
-impending	about to happen
-imbide	absorb ideas (Plato .. Socrates' teaching to such an extent that he was able to write volumes of work that he directly attributed)
-animosity	extreme hostility (The governor's animosity toward his rival was only inflamed when the latter spread false lies regarding the governor's first term)
 perturb	disturb
-spartan	unconcerned with comfort
-meticulous	detail oriented
-demean	insult (at first the soccer players bantered back and forth, but as soon as one of the players became ...)
-jubilant	overjoyed
-corroborate	confirm (Her claim that frog populations were falling precipitously in Central America was ... by locals)
-avid	enthusiastice, keen
-miser	one who is cheap
-amply	fully (The boat was amply supplied for its year at sea)
-disingenuous	pretending to be honest
-opaque	tough to understand
-unassailable	immune to attack
-affluent	wealthy
-pragmatic	practical
-unruly	noisy, uncontrollable
-accolade	high praise (Jean Paul-Sartre was not a fan of ... and such, he refused to accept the Nobel Prize for Literature in 1964)
-indecorous	impolite
-antiquated	old
-intimation	indirect suggestion
-iconoclastic	defying tradition
-inarticulate	not speaking clearly
 appreciable	noticeable
-nonchalant	appearing unconcerned
-evasive	avoiding commitment
-intermittent	occuring on and off
-dissipate	squander
-unyielding	completely unwilling to change a decision
-check	hold back from doing
-impeccable	flawless
-transitory	short-lasting
-futile	pointless
-indifference	apathy
-adamant	unyielding
-autocratic	tyrannical
-discreet	careful
-exemplar	model
-meteoric	very fast
 avert	prevent
-arbitrary	random
-resolve	determine
-mesmerize	to hold completely the attention or interest
-hypnotize	mesmerize
-gratify	give (someone) pleasure or satisfaction.
-articulate	(adj) having or showing the ability to speak fluently and coherently
-divergent	conformity to the law or to rules
-legitimacy	ability to be defended with logic or justification; validity.
-supersede	take the place of
-inferior	lower in rank
-undermine	erode the foundation
-deteriorate	become progressively worse
 suppress	prevent the development, action, or expression of (a feeling, impulse, idea, etc.); restrain.
-concur	agree
-universal	of, affecting, or done by all people or things in the world or in a particular group; applicable to all cases.
-subsistence farming that provides enough food for the farmer and their family to live on, but not enough for them to sell
-appalling	causing shock or dismay; horrific.
-manifestation	an event, action, or object that clearly shows or embodies something, especially a theory or an abstract idea.
-asteroid	is a minor planet of the inner Solar System
-ceres	is the largest object in the asteroid belt between the orbits of Mars and Jupiter
+tractable	easily managed (compared to middle school students, who have an untamed wildness about them, high school students are somewhat more..)
+flux	n.  quandary (Ever since Elvira resigned as the head of marketing, evrerything about our sale strategy has been in state of ..)
+prognostication	prediction (When the Senator was asked about where the negotiations would lead, he said that any guess he could make would be an unreliable ...)
+buck	resist (The profits at our firm .. The general downturn that affected the real estate industry)
+apotheosis	height of development (as difficult as it is to imagine, the ..of Mark Zuckerberg's career, many believe is yet to come.)
+burgeon	grow rapidly (China's housing market is ..., but some predict that the growth is merely, a bubble and will burst much like the US real estate bubble of 2008)
+flush	abundant
+antedate	precede
+surfeit	excessive amount
+quandary	uncertainty
+ameliorate	improve. Three cups of tea tells the story of western man who hopes to blank poverty and the lack of education in afghanistan
+replete	fully stocked
+provident	planning ahead
+inundate	flood
+ascribe	attribute
+patent	glaringly obvious
+prolific	productive
+presumptuous	overly forward
+cede	give up control
+aberrant	abnormal
+entice	tempt
+copious	abundant
+morph	change dramatically
+upheaval	a great change
+inimitable	without equal
+fickle	change unpredictably
+taper off	to become gradually smaller or less frequent
+attenuate	taper off
+nadir	lowest point
+upswing	an increase or improvement
+persistent	lasting for long time or difficult to get rid of
+imprint	v. to make a surface by pressing sth into it for fix sth firmly in the memory
+permeate	v. to spread through something and be present in every part of it
+contagious	adj.  spread from one person or organism to another
+imbide	absorb ideas (Plato .. Socrates' teaching to such an extent that he was able to write volumes of work that he directly attributed)
+opaque	tough to understand
+arbitrary	random
+subsistence farming	that provides enough food for the farmer and their family to live on, but not enough for them to sell
 cliché	betray a lack of origins
 tatalizing	tormenting or teasing with the sight or promise of something unobtainable.
 oblique	difficult to understand (Mr Golding delivered an... warning, talking of the danger of sudden action.)
-dab	press against (something) lightly with a piece of absorbent material in order to clean or dry it.
 pentameter	is a poetic meter
 strata	a level or class to which people are assigned according to their social status, education, or income.
 surmise	suppose that something is true without having evidence to confirm it
-smear	coat or mark (something) messily or carelessly with a greasy or sticky substance
 sediment	matter that settles to the bottom of a liquid; dregs
 convoluted	extremely complex and difficult to follow
-bulldog	a person noted for courageous or stubborn tenacity
-delicate	fragile
-keystone habits	small changes or habits that people introduce into their routines that unintentionally carry over into other aspects of their lives
-get the hang of it	begin to understand or realize how to do it
-red-herring	something, especially a clue, that is or is intended to be misleading or distracting.
-demoralized	having lost confidence or hope; disheartened.
+abstruse	incomprehensible (Physics textbooks can seem so ...to the uninitiated that readers feel as though they are looking at hieroglyphics)
+graft	corruption (In countries with rampant ..getting a driver's license can require no more than paying an official)
+invective	abusive language (The internet has unleashed the ...in many of us, many people post stinging criticism on the comment section)
+poignant	emotionally touching (After the Montagues and Capulets discover the dead bodies of Romeo and Juliet, in the play's most ..moment, the two griefstricken families agree to end their feud once and for all)
+lugubrious	overly sad (at the funeral, ...song filled the small church)
+hackneyed	cliché (Cheryl rolled her eyes when she heard the lecturer's ...advice to be true to yourself)
+proselytize	attempt to convert (Lise loves her Mac but says little about it; by contrast, Jake will ..., interrogating anyone with an Android about why she didn't purchase an iPhone)
+arcane	obscure (Most college franternities are known for ...rituals that those hoping to join the fraternity must learn)
+maudlin	overly emotional (Just as those who were alive during the 70s are mortified that they once cavorted about in bellbottoms, many who lived during the 80s are aghast at the ... pop songs they used to enjoy - really, just what exactly is a total eclipse of the heart?)
+byzantine	overly complex (Getting a drive's license is not simply a matter of taking a test, the regulations and procedures are so ... that many have found themselves at the mercy of the department of Motor vehicles)
+brook	put up with (While she was at the chalkboard, the teacher did not ... any form of talking - even a tiny peep resulted in afternoon detention)
+immutable	not changeable (Taxes are one of the ... laws of the land, so there is no use arguing about paying them)
+ineffable	cant be put in words (While art critics can occasionally pinpoint a work's greatness, much of why a piece captures our imaginations is completely ...
+unscrupulous	unethical (In the courtroom, the lawyer was .. , using every manner of deceit and manipulation to secure a victory for himself)
+incongruous	lacking harmony (the vast economic inequality of modern society is .. With America's ideals.
+amalgam	mixture (the bland's music was an .. Of hihphop, flamenco and jazz, blening the three styles with suprising results)
+mournful	sorrowful
+elegiac	mournful (Few can listen to the ... opening bars of the Moonlight sonata without feeling the urge to cry)
+sanguin	cheerful (with the prospect of having to learn 3,000 words during the course of the summer, Paul was anything but ...)
+peruse	read closely (Instead of ... important documents, people all too often rush to the bottom of the page and plaster their signatures at the bottom.)
+anodyne	that which soothes (Muzak, which is played in department stores, is intended to be an ... but is often so cheesy and over the top that customers become irritated)
+versatile	able to change easily
+protean	versatile
+wax	increase gradually (her enthusiasm for the diva's new album only waxed with each song, by the end of the album, it was her favourite CD yet.)
+inflammatory	controversial
+inkling	vague sense
+tumult	chaos, confusion
+esoteric	understood by few
+quixotic	wildly impractical. Example: for every thousand startups with quixotic plans to be the next big name in ecommere, only a handful ever become profitable
+pampered	given special treatment that makes you feel as comfortable as possible or gives you whatever you want
+cosseted	overly pampered
+sterling	excellent, valuable
+tangential	(of a subject or activity) different from or not directly connected with the one you are talking about or doing
+creed	a set of beliefs that influences the way you live
+ostensible	appearing or claiming to be one thing when it is really something else
+exonerate	free from blame. Eg: the document clearly indicated that Nick was out of the state at the time of the crime and so served to ... him of any charges
+defiant	proudly refusing to obey authority
+proscribe	ban
+punctilious	overly precise
+malfeasance	misconduct
+involved	complicated
+verisimilitude	appearance of truth
+tirade	angry speech
+elusive	hard to pin down, to describe, find, achieve, or remember
+chimera	illusion
+apothegm	short saying
+trite	lacking originality
+belligerent	eager to fight
+machinate	scheme
+unpropitious	unlikely to be successful
+ostracize	exclude
+diatribe	verbal attack
+holy	related to religion or a god
+consecrate	make holy
+pertinent	revelant
+decorum	proper conduct
+equivocate	speak vaguely
+discourse	written or spoken communication or debate.
+didacticism	Didacticism is a term that refers to a particular philosophy in art and literature that emphasizes the idea that different forms of art and literature ought to convey information and instructions, along with pleasure and entertainment.
 nectar	a sugar-rich liquid produced by plants
 secrete	produce and discharge (a substance)
+ubiquitous	adj. found or existing everywhere
+Fruition	The state of being real
+universal	of, affecting, or done by all people or things in the world or in a particular group; applicable to all cases.
+interior	n. of something is the inside part of it
+confine	prison
+conspicuous	obvious (Among the tall trees and flower fields, the building seemed out of place with its ...,col concrete and angular steel exterior.)
+factitious	artifical (The defendant's story was largely ... and did not accord with eyewitness testimonies)
+convivial	friendly and lively (The wedding reception was ... ; friends who hadn't seen each other for ages drank and ate together before heading to the dance floor.)
+eponym	derived from a name (Alexandria, Egypt is an .. Because it is named after the Alexander the Great)
+rarefied	refined (Jack's vulgar jokes were not so successful in the ... environment of college professors)
+ascendancy	dominant position (the ... of the Carishad water polo team is clear - they have a decade of championships behind them)
+taciturn	quiet
+prevalent	worldwide spread
+haphazard	unorganized
+hush	a sudden calm, silent
+courteous	nice and showing respect        
+bashful	feeling embarrassed due to modesty
+Vocation	(n) any trade, profession, or occupation; a sense of fitness or special calling for one's work
+chivalrous	marked by honor, courtesy, and courage
+yammer	to whine or complain
+assiduously	with great care
+debonair	sophisticated, charming
+contemptuous	scornful
+lament	a passionate expression of grief or sorrow
+demean	insult (at first the soccer players bantered back and forth, but as soon as one of the players became ...)
+avid	enthusiastice, keen
+miser	one who is cheap
+disingenuous	pretending to be honest
+affluent	wealthy
+accolade	high praise (Jean Paul-Sartre was not a fan of ... and such, he refused to accept the Nobel Prize for Literature in 1964)
+indecorous	impolite
+dissipate	squander
+autocratic	tyrannical
+discreet	careful
+exemplar	model
+gratify	give (someone) pleasure or satisfaction.
+inferior	lower in rank
+manifestation	an event, action, or object that clearly shows or embodies something, especially a theory or an abstract idea.
+bulldog	a person noted for courageous or stubborn tenacity
 reckless	doing something dangerous and not worrying about the risks and the possible results
 speculate	to guess possible answers to a question when you do not have enough information to be certain
-abstruse	incomprehensible (Physics textbooks can seem so ...to the uninitiated that readers feel as though they are looking at hieroglyphics)
 apostate	rejector of faith (An ...of the Republican Party, Sheldon has yet to become affiliated with any party and dubs himself as an independence)
 macabre	gruesome (Edgar Allen Poe was considered the master of the ...: his stories vividly describe the moment leading up to - and often those moments after - a grisly death.)
 craven	cowardly (Though the man could have at least alerted the police, he crouched ...in the corner as the old woman was mugged)
-incumbent	necessary (Middle managers at times make important decisions, but real responsibility for the financial well-being of the corporation is ultimately ...on the CEO)
-espouse	support a cause (As a college student, Charlie ... Marxism, growing his beard out and railing against the evils of the free market)
 fractious	irritable (We rarely invite my ...Uncle Nino over for dinner, he always complains about the food, and usually launches into a tirade on some touchy subject)
-untoward	inconvenient (Some professors find teaching ... as having to prepare for lectures and conduct office hours prevents them from focusing on their research)
-glut	excessive supply (the Internet offers such a ...of news related stories that many find it difficult to know which story to read first.)
 dissemble	act deceitfully (To get close to the senator, the assassin ...his intentions, convincing many people that he was a reporter for a well-known newspaper)
 panache	distinctive style (Jim with his typical ...came to the wedding reception with a top hat, a cane, and a long cape covered in sequins)
 hector	bully (The boss's ...ing manner put off many employees, some of whom quit as soon as they found new jobs)
 untrammeled	not limit (The whole notion of living ...inspired the American Revolution and was enshrined in the Declaration of Independence and the Constitution)
-litany	long account (Mr. Rogers spoke to a Senate committee and did not give a ...of reasons to keep funding the program, but instead, appealed to the basic human decency of all present)
 sybarite	lover of luxury (Despite the fact that he'd maxed out fifteen credit cards, Max was still a ...at heart)
-interior	n. of something is the inside part of it
-gelatinous	substances or mixtures are wet and sticky
-flammable	chemicals, gases, cloth, or other things catch fire and burn easily.
 saboteur	a person who deliberately damages or destroys things such as machines
 timid	showing a lack of courage or confidence
 cocoon	the covering made of soft, smooth threads that surrounds and protects particular insects during the pupa stage as they develop into adult form
@@ -174,67 +170,31 @@ dignity	the state or quality of being worthy of honor or respect.
 cretin	stupid, imbecile
 dumbbell	foolish
 muttonhead	a person lacking intelligence
-inevitable	certain to happen, unavoidable
-disenchanted	disappointed with
 prick	vulgar, obsolete
-mockery	the sardonic action
 superstition	belief in things that are not real or possible, for example magic.
 nitwit	stupid and silly
-graft	corruption (In countries with rampant ..getting a driver's license can require no more than paying an official)
 contrition	remorse (Those who show ..during their prison terms - especially when under review by a parole board - often get shortened sentences)
 staunch	dependable (No longer a ...supporter of Anarchism, Terry now sometimes questions whether society would be better off withot defined hierachies)
-pithy	concise yet expressive (I enjoy reading the Daodejing for its ..and insightful prose, it always give me something to think about)
-invective	abusive language (The internet has unleashed the ...in many of us, many people post stinging criticism on the comment section)
-hegemony	dominance (Until the Spanish Amada was defeated in 1587, Spain had ...over the seas, controlling waters stretching as far as the Americas)
 incisive	acute
-checkered	disreputable (one by one, the presidential candidates dropped out of the race, their respective .. Past - from embezzlement to infidelity - sabotaging their campaigns)
-tractable	easily managed (compared to middle school students, who have an untamed wildness about them, high school students are somewhat more..)
-trenchant	incisive (Jill presented a rather superficial treatment of sales in Asia, but her ...analysis of sales in Europe inspired a number of insights into how to proceed in that market)
-flux	quandary (Ever since Elvira resigned as the head of marketing, evrerything about our sale strategy has been in state of ..)
-arrogate	seize without authority (Arriving at the small town, the outlaw ..the privileges of a lord, asking the frightened citizens to provide foo, drink and entertainment)
-exhort	encourage (Nelson's parent ..him to study medicine, urging him to choose a respectable profession, intransigent, Nelson left home to become a grffiti artist)
 wanton	showing no limits (Due to ..behavior and crude language, the drunk man was thrown out of the bar and asked to never return)
 panegyric	formal praise (Dave asked Andrew to do just a simple toast, but Andrew launched into a full ..., enumeratiing a complete list of Dave achievements and admirable qualities)
 dabbler	someone who takes a slight and not very serious interest in a subject, or tries a particular activity for a short period
 dilettante	dabbler (Fred has no formal medical training, while he likes to claim authority on medical issues, he is little more than a ...)
 gumption	resourcefulness (Wallace Stegner lamented the lack of ..in the US during the sixties, claiming that no young person knew the value of work)
-objurgate	scold severely (The manager spent an hour ... the employee in the hopes that he would not make these mistakes again)
-strife	strong disagreement or fighting (Money is a major cause of ... in many marriages. )
-straying	mislead
-errant	straying from course (Unlike his peers, who spent their hours studying in the library, Matthew prefered ...walks through the university campus)
-poignant	emotionally touching (After the Montagues and Capulets discover the dead bodies of Romeo and Juliet, in the play's most ..moment, the two griefstricken families agree to end their feud once and for all)
-lugubrious	overly sad (at the funeral, ...song filled the small church)
-prognostication	prediction (When the Senator was asked about where the negotiations would lead, he said that any guess he could make would be an unreliable ...)
-umbrage	offense (Since he was so in love with her, he took .. At her comments, even though she had only meant to gently tease him)
+errant	used to describe someone who behaves recklessly or who is irresponsible. For example, "The errant driver caused a multi-car accident on the freeway"
 gregarious	sociable (Often we think that great leaders are those who are gregarious, always in the middle of a large group of people, yet, as Mahatma Gandhi and many others have shown us, leaders can also be introverted)
 pollyannaish	overly optimistic (Even in the midst of a lousy sales quarter, Debbie remained ...,never losing her shrill voice and wide smile, even when prospective customers hung up on her)
 ersatz	fake (The car dealer's ...laughter was immediately followed by a price quote, one that Shelly found highly inflated)
 acerbic	harsh (Most movie critics are ..towards summer blockbusters, often refering to them as garbage)
 jejune	immature (Although many top chefs have secured culinary foam's popularity in haute cuisine, Waters criticizes it for being ...and unfilling)
-superfluous	more than necessary (How can we hope to stay open if we don't eliminate all ... spending , like catered meetings and free acupuncture Tuesday?)
-cogent	convincing (A ... argument will change the minds of even the most skeptical audience)
-plodding	slow-moving (Charlie may seem to run at a ...pace, but he is an ultramarathoner, meaning he runs distances of up to 100 miles, and can run for ten hours at a stretch)
 temerity	fearless daring (No child has the ..to go in the rundown house at the end of the street and see if it is haunted)
 vilify	speak ill of (Todd was noble after the divorce, choosing to say only complimentary things abot Barbara, but Barbara did not hesitate to ..Todd)
-broadside	verbal attack (Political ...are usually strongest in the weeks leading up to a national election)
-balk	refuse to accept (The students were willing to clean up the broken glass, but when the teacher asked them to mop the entire floor, they...citing reasons why they needed to leave.)
 choleric	easily angered (while a brilliant lecturer, Mr. Dawson came across as..and unapproachable -- very rarely did students come to his office hours)
-hackneyed	cliché (Cheryl rolled her eyes when she heard the lecturer's ...advice to be true to yourself)
-internecine	marked by internal strife (The guerilla group, which had become so powerful as to own the state police, was finally destroyed by an ...conflict)
 obdurate	stubborn (no number of pleas and bribes would get him to change his ...attitude)
-semblance	misleading appearance (While the banker maintained a ...of respectability in public, those who knew him well were familiar with his many crimes)
-stance	a way of thinking about something
-utterance	statement
-buck	resist (The profits at our firm .. The general downturn that affected the real estate industry)
-opinionated	have very strong opinions and refuse to accept that they may be wrong
 magnanimous	likely to forgive (He was a great sportman, in defeat he was complementary and in victory he was ..)
-apotheosis	height of development (as difficult as it is to imagine, the ..of Mark Zuckerberg's career, many believe is yet to come.)
 pontificate	speak pompously (The vice-president would often ...about economic theory, as if no oneelse in the room were qualified to speak on the topic)
-dispensation	exemption (Since her father is a billionaire, she is give .. From many of the school's policies)
 raconteur	storyteller (Jude is entertaining, but he is no .., beyond the handful of amusing stories he has memorized he has absolutely no spontaneous story-telling ability)
-atavism	throwback (Much of modern art movement was an ...to a style of art found only in small villages through Africa and South America)
 perspicacious	very insightful (Many modern observers regard Eisenhower as .., particularly in his accurate prediction of the growth of the military.)
-proselytize	attempt to convert (Lise loves her Mac but says little about it; by contrast, Jake will ..., interrogating anyone with an Android about why she didn't purchase an iPhone)
 grumpy	bad tempered and irritable
 bilious	grumpy (Rex was ..all morning, and his face would only take on a look of contentedness when he'd had his morning cup of coffee)
 unstinting	very generous (Helen is ...with her time, often spending hours at the house of a sick friend)
@@ -243,171 +203,79 @@ deign	stoop to (The master of the house never .. To answer questions from the se
 guffaw	laugh loudly (Whenever the jester fell to the ground in mock pain, the king .., exposing his yellow, fang-like teeth.)
 cadeverous	corpse-like (Some actors take challenging roles in which they have to lose so much weight that they appear ...)
 intrepid	fearless (Captain Ahab was an ..captain whose reckless and fearless style ultimately leads to his downfall)
-fraternity	a group of people who have the same job or interest
-arcane	obscure (Most college franternities are known for ...rituals that those hoping to join the fraternity must learn)
-junta	group seizing power (As dangerous of a threat as North Korea is, some analysts believe that were a .. Suddenly to gain power, it could be even more unpredictable and bellicose than the current leadership)
 claustrophobia	extreme or irrational fear of confined places
-confine	prison
-immure	confine (The modern supermarket experience makes many feel claustrophobic, as they are ... in walls upon walls of products)
 pugnacious	combative (The comedian told one flat joke after another, and when the audience started booing, he ... spat back at them,"Hey you think this is easy - why don't you buffoons give it a shot?")
-conspicuous	obvious (Among the tall trees and flower fields, the building seemed out of place with its ...,col concrete and angular steel exterior.)
 supercilious	arrogant (Nelly fet the Quiz Bowl director acted ... towards the underclassmen; really she fumed, must he act so preternaturally omniscient each time he intones some obscure fact)
-dogmatic	opinionated (Bryan is ... in his belief that the earth is flat, claiming that all pictures of a spherical earth are computer generated)
-excoriate	criticize harshly (Entrusted with the prototye to his company's latest smartphone, Larry, during a late night karaoke bout, let the prototype slip into the hands of a rival company -- the next day Larry was ..., then fired.)
-mollify	soothe (In the morning, Harriat was unable to ...Harry, if he happened to become angry, unless he had his cup of coffee)
 besmirch	dishonor (The prince's distasteful choice of words ...not only his own name, but the reputation of the entire royal family.)
-conflate	mix together (In her recent book, the author ... several genres -- the detective story, the teen thriller and the vampire romance - to create a memorable read)
 begrudge	envy (Sitting all alone in his room, Harvey ... the happiness of the other children playing outside his window)
-probity	integrity (The ideal politician would have the ...to lead, but reality gravely falls short of the ideal of morally upright leaders)
-jaundice	bias (Shelly was .. Towards Olivia; though the two had once been best friends, Olivia had become class president, prom queen, and to make matters worse, the girlfriend of the one boy Shelly liked)
 besiege	harass (After discovering a priceless artifact in her backyard, Jane was ...by phone calls, emails, and reporters all trying to buy, hold or see the rare piece of history)
-construe	interpret (The author's inability to take aside on the issue was .. By both his opponents and supporters as a sign of weakness)
 boast about	express something that they have done or that they own, they talk about it very proudly, in a way that other people may find irritating or offensive
 quip	witty remark (in one of the most famous .. About classical music, Mark Twain said: Wagner's music is better than it sounds)
-desiccated	lacking vitality (Few novelists over 80 are able to produce anything more than ...works - boring shadows of former books.)
-zeitgeist	spirit of the times (Each decade has it own ...-the 1990's was a prosperous time in which the promise of the American Dream never seemed more palpable)
 vaunted	boasted about(For years, Mark talked up his Ping Pong game, yet when he entered the office tournament, his much .. Skills suddenly failed him and he lost all three games he played)
-bridle	restrain (New curfew laws have ...people's tendency to go out at night)
-lionize	celebrate (Students in the US learn to ...Jefferson, Franklin, and Washington because they are the founding fathers of the nation)
-promulgate	officially make known (The president wanted to ...the success of the treaty negotiations, but had to wait until Congress formally approved the agreement)
 aesthete	appreciator of beauty (A true ..., Marty would spend hours at the Guggenheim Museum, staring at the same Picasso)
-unconscionable	unreasonable (The lawyer's demands were so ... that rather than pay an exorbitant sum or submit himself to any other inconveniences, the defendant decided to find a new lawyer)
-moot	irrelevant (Since the Board just terminated Steve as the CEO, the finance committee's opinion of his marketing plan for next year is now ..)
 implacable	unable to be calmed
 aboveboard	honest (The mayor, despite his avunular face plastered about the city, was hardly ... - some concluded that it was his ingratiating smile that allowed him to engage in corrupt behaviour and get away with it)
-apposite	appropriate (For a writer with such quick wit, Jonathan Swift has a rather .. Name)
 behoove	be one's duty (The teacher looked down at the student and said, It would ... you to be in class on time and complete your homework so that you don't repeat freshman English for a third straight year)
-goad	aggressively urge on (Doug did not want to enter the race, but Jim, through a steady stream of taunts, ... him into signing up for it)
 fastidious	fussy (Whitney is ... about her shoes, arranging them on a shelf in a specific order, each pair evenly spaced)
-circumscribe	restrict with limit (Their tour of South America was... so that they saw only popular destinations and avoided the dangerous parts of cities)
-factitious	artifical (The defendant's story was largely ... and did not accord with eyewitness testimonies)
-convivial	friendly and lively (The wedding reception was ... ; friends who hadn't seen each other for ages drank and ate together before heading to the dance floor.)
 ignoble	dishonorable (In the 1920s, The world series was rigged -- an .. .act which baseball took decades to recover from)
 irritable	become annoy very easily
 peevish	irritable (Our office manager is ..., so the rest of us tip-toe around him, hoping not to set off another one of his fits)
-eponym	derived from a name (Alexandria, Egypt is an .. Because it is named after the Alexander the Great)
 clumsy	heavyhanded
 maladroit	clumsy (As a child she was quite .. But as an adult, she has become an adept dancer)
-redress	correct unfairness (Barry's ... for forgetting his wife's birthday two years in a row was surprising her with a trip to Tahiti)
-glean	collect (Herb has given us no formal statement about his background, but from various hints, I have ... that he grew up in difficult circumstances)
-malapropism	confusing similar words (Whenever I looked glum, my mother would offer to share an amusing antidote wit me - an endearing ... of anecdote that never failed to cheer me up)
 unprepossessing	unremarkable (World leaders coming to meet Gandhi would expect a towering sage, and often would be surprised by the ... little man dressed only in a loincloth and shawl)
 schadenfreude	joy in others' suffering (From his warm apartment window, Stanley reveled in .. As he laughed at the figures below, huddled together in the artic chill)
 facetious	humorous (... behaviour will not be tolerated during sex education class, it's time for all of you to treat these matters like mature adults)
-abrogate	overturn a law (As part of the agreement between the labor union and the company, the worker .. Their right to strike for four years in exchange for better health insurance)
 sycophant	flatterer (The CEO was unaware of the damaging consequences of his choices, largely because he surrounded himself with ... who would never dare criticize him.)
 ostentatious	showy (Matt wanted to buy stone lions for front of the house, but Cynthia convinced him that such a display would be too .. For a modest house in an unassuming neighborhood)
-facile	lacking depth (Many news shows provide .. Explanations to complex politics, so I prefer to read in-depth reporting of the New York Times)
-stem	limit growth (To .. The tide of applications, the prestigious Ivy requires that each applicant score at least 330 on the revised GRE)
-maudlin	overly emotional (Just as those who were alive during the 70s are mortified that they once cavorted about in bellbottoms, many who lived during the 80s are aghast at the ... pop songs they used to enjoy - really, just what exactly is a total eclipse of the heart?)
-byzantine	overly complex (Getting a drive's license is not simply a matter of taking a test, the regulations and procedures are so ... that many have found themselves at the mercy of the department of Motor vehicles)
 snide	indirect mocking (The chairman interpreted Taylor's question about promotions as a .. Remark, but in all innocence Taylor was trying to figure out the company's process)
-brook	put up with (While she was at the chalkboard, the teacher did not ... any form of talking - even a tiny peep resulted in afternoon detention)
-immutable	not changeable (Taxes are one of the ... laws of the land, so there is no use arguing about paying them)
 mendicant	beggar (Tolsoy was an arisocrat but he strove to understand the Christianity of the Russian peasnt by wandering among them as a ..)
-concomitant	accompanying (... with his desire for nature was a desire for the culture and energy of a big city)
-ineffable	cant be put in words (While art critics can occasionally pinpoint a work's greatness, much of why a piece captures our imaginations is completely ...
-pedestrian	lacking imagination (while Nan was always engaged in philosophical speculation, her brother was occupied with far more ... concerns: how to earn a salary and run a household)
-respite	pause for work (Every afternoon, the small company has a respite in which workers play football or board games)
 myopic	shortsighted (The company ultimately went out of business because the ... managers couldn't predict the changes in their industry)
 lascivious	perverted (Lolita is a challenging novel for many, not necessarily because of the elevated prose style but because of the depravity of the main character, Humbert Humbert, who, as an old, .. Man, fall in lowve with a girl)
-unscrupulous	unethical (In the courtroom, the lawyer was .. , using every manner of deceit and manipulation to secure a victory for himself)
-incongruous	lacking harmony (the vast economic inequality of modern society is .. With America's ideals.
 inanity	silliness
 insolent	rude
-recrimination	mutual attacks (The two brothers sat and cried, pointing fingers and making elaborate .. Of the others' guilt
-amalgam	mixture (the bland's music was an .. Of hihphop, flamenco and jazz, blening the three styles with suprising results)
-sartorial	relating to clothes (Monte was astute at navigating the world of finance, ...ly, however, he was found wanting - he typically would attempt to complement his beige tie with a gray suit and white pants)
 frenzied	foolhardy (Wherever the bowl haircut teen idon went his legions of screaming fans ran through the street ..., hoping for a glance at his boyish face)
 amok	frenzied
 garrulous	talkative
-expurgate	censor (The censor .. Every reference to sex and and drugs, converting the rapper's raunchy flow into a series of bleeps)
 infatuated	possessed with an intense but short-lived passion or admiration for someone.
 besotted	very infatuated
-genteel	refined (A live string quarter would provide a more .. Air to the wedding than would a folk singer)
 indigent	poor
 scintillating	brilliant
-circumvent	get out of duty
 vacuous	lacking intelligence
-mournful	sorrowful
-elegiac	mournful (Few can listen to the ... opening bars of the Moonlight sonata without feeling the urge to cry)
-sanguin	cheerful (with the prospect of having to learn 3,000 words during the course of the summer, Paul was anything but ...)
-vanquish	defeat thoroughly (for years, Argentina would dominate in World Cup qualifying matches, only to be ... by one of the European countries during the late stages of the tournament)
 bow to	to do what someone else wants you to do, usually unwillingly
 kowtow	bow to (Paul ... to his boss so often the boss herself became nauseated by his sycophancy)
 fell	evil (For fans of the Harry Potters, the ... Lord Voldermort who terrorized poor Harry for seven lengthy installments has finally been vanquishedly by the forces of good - unless, that is, JK Rowling decides to come out of retirement.)
 rile	annoy (dan is usually calm and balanced but it takes only one intense glare from Sabrina to .. Him)
 viracious	not live directly (The advent of twitter is a celebrity stalker's dream, as he or she can - through hundreds of intimate tweets - ... live the life of a famous person.)
-anomalous	not normal (According to those who do not believe in climate change, the extreme weather over the last five years is simply ... - daily temperatures should return to their old averages, they believe)
-incense	make furious (When Herb bought football tickets for a game on the day of their wedding anniversary, Jill was ...)
-melee	wild fight (After enduring daily taunts about my name, I became enraged and pummeled the schoolyard bully and his sycophantic friend in a brutal ...)
 cupidity	greed for money (Some believe people that amassing as much wealth as possible is the meaning to life - yet they often realize that .. Brings anything but happiness)
 callow	inexperienced (Both Los Angeles and New York are known for ... out of towners hoping to make it big)
-ponderous	moving slowly (Landen with 20 kilograms of college text boooks, the freshman move .. across the campus)
-veneer	disguising layer (Mark Twain referred to the Victorian Period in America as the Gilded Age, implying the ample moral corruption that lay beneath a mere ... of respectability)
 haughty	arrogant (The ... manager didn't believe that any of his subordinates could ever have an insight as brilliant his own.)
-ephemeral	short-lived (The lifespan of a mayfly is ..., lasting from a few hours to a couple of days)
 timorous	shy
-peruse	read closely (Instead of ... important documents, people all too often rush to the bottom of the page and plaster their signatures at the bottom.)
 holier-than-thou	charaterized by an attitude of moral superiority
-gerrymander	manipulate vots (years ago, savvy politicians had ... the city center to ensure their re-election)
 sanctimonious	holier-than-thou (Even during the quiet sanctity of evening prayer, she held her chin high, a ... sneer forming on her face as she eyed those who were attending church for the first time)
-rarefied	refined (Jack's vulgar jokes were not so successful in the ... environment of college professors)
-malady	illness (The town was struck by a ... throughout the winter that left most people sick in bed for two weeks)
-amorphous	shapeless (His study plan for the GRE was at best ..., he would do questions from random pages in any one of seven test prep books)
-phantasmagorical	illusive (those suffered from malaria fal into a feverish sleep, their world a whirligig of...; if they recover, they are unsure of what actually took place and what was simply a product of their febrile imaginations)
-anodyne	that which soothes (Muzak, which is played in department stores, is intended to be an ... but is often so cheesy and over the top that customers become irritated)
-culminate	reach high point (Beethoven's musical genius ... in the 9th Symphony, which many consider his greatest work)
-burgeon	grow rapidly (China's housing market is ..., but some predict that the growth is merely, a bubble and will burst much like the US real estate bubble of 2008)
-imbroglio	confusing situation (The chef cook-off featured one gourmand who had the unfortunate distinction of mixing the wrong broths, creating an .. That diners would not soon forget)
-rapprochement	reconciliation
-acme	highest point (The new Cessna airplanes will be the .. Of comfort, offering reclining seats and ample legroon)
 hoary	ancient (Most workout gurus are young, fit people, whereas most yoga gurus are ... men with long white beards)
 tawdry	cheap, showy (Carol expected to find New York city magical, the way so many movies had portrayed it, but she was surprised how often... displays took the place of genuine elegance)
-ascendancy	dominant position (the ... of the Carishad water polo team is clear - they have a decade of championships behind them)
 lampoon	poke fun at (Mark Twain understood that ... a bad idea with humor was the most effective criticism)
-versatile	able to change easily
-protean	versatile
 plucky	courageous
-inclement	lacking mercy (the judge, ... as always gave the prisoner, despite all the tears, a full sentence)
 impulsive	having the power of or activity driving or impelling
 capricious	impulsive
-impugn	call into question (Though many initially tried to ... Darwin's theory, in scientific circles today, the idea is taken as truth)
-snub	reject bluntly
-discursive	tangential
-blunt	insensitive
-brusquely	bluntly
-pittance	small amount (Vinny's uncle beamed smugly about how he'd offered his nephew fifty dollars for his Harvard tuition; even twice the amount would have been a mere pittance)
-hedge	limit a statement (when asked why he had decided to buy millions of share at the very moment the tech companies stock soared, the CEO hedged, mentioning something vague about gut instinct)
-wax	increase gradually (her enthusiasm for the diva's new album only waxed with each song, by the end of the album, it was her favourite CD yet.)
-flounder	struggle
 insipid	dull, bland
 mettlesome	courageous
 brooding	worried
 sullen	brooding
 vulgar	trivial
 ribald	comically vulgar
-peripatetic	travelling on foot
 alacrity	eager willingness
 humdrum	lacking excitement
 remoseful	feeling sad and guilty
 contrite	remorseful
 impetuous	rash
 confound	utterly confuse
-magisterial	domineering
-dearth	shortage
 yearn	asprie, crave
 pine	yearn for
 asperity	harshness of manner
-inflammatory	controversial
-flush	abundant
-opulence	wealth
-impregnable	indestructible
 diabolical	wicked
 destitute	poor
 con artist	a person who deceives others
-reproach	criticize
-antedate	precede
 erudite	scholarly
 deception	subterfuge
 artless	without deception
@@ -415,88 +283,37 @@ despot	tyrant
 loath	reluctant
 derogative	insulting
 obstinate	stubborn
-taciturn	quiet
 fecund	mentally productive
 vituperate	scold hashly
 aplomb	coolness under strain
 phlegmatic	not showing emotion
-unadorned	plain and simple, with little or no make up/ decoration
-austere	unadorned
 martinet	disciplinarian
-tender	offer up formally. The government was loath to tender more money in the fear that it might set off inflation
 effrontery	cheeky behaviour
 urbane	sophisticated
 philistine	hater of culture
-indict	accuse formally
-inkling	vague sense
-deleterious	harmful
-surfeit	excessive amount
-tumult	chaos, confusion
-hobble	hold back
-quandary	uncertainty
 imprudent	not wise
-esoteric	understood by few
-genial	aggreable
-wanting	lacking. She did not think her vocabulary was (blank), yet there were so many words that inevitably she found a few she didn't know
 penurious	poor
-ameliorate	improve. Three cups of tea tells the story of western man who hopes to blank poverty and the lack of education in afghanistan
-approbatory	showing approval. Although it might not be her best work, Hunter's new novel has received generally approbatory reviews.
-bereft	sad because of loss
-disabuse	lead one from error. As a child, I was quickly (blank) of the notion that Santa Claus was a rotund benefactor of infinite largess
-forthcoming	easily available. The president announced that the senators were about to reach a compromise and that he was eager to read (blank) details of the bill
 boorish	ill-mannered
 intimidate	threaten
 cow	intimidate
 vehement	intensely emotional
-collusion	secret cooperation
 self-effacing	modest. The most admirable teachers and respected leaders are those who are (blank), directing attention and praise to their students and workers
 consummate	masterful. Tyler was (blank) musician: he was able to play the guitar, harmonica, and the drum at the same time
-vie	compete for
 warlike	belligerent
 bellicose	warlike
-tout	advertise strongly
-replete	fully stocked
-quixotic	wildly impractical. Example: for every thousand startups with quixotic plans to be the next big name in ecommere, only a handful ever become profitable
-rescind	cancel official
-complicit	taking part in
 rash	softheaded
 foolhardy	rash
-pampered	given special treatment that makes you feel as comfortable as possible or gives you whatever you want
-cosseted	overly pampered
-incriminate	to make someone seem guilty, especially of a crime
-espionage	spying
-sterling	excellent, valuable
 reflex	a physical reaction to something that you cannot control
-flee	escape by running away
-prevail	to get control or influence
-infiltrate	to secretly become part of a group in order to get information or to influence the way that group thinks or behaves
-armistice	a formal agreement between two countries or groups at war to stop fighting for a particular time, especially to talk about possible peace
-legitimate	conforming to the law or to rules.
-tangential	(of a subject or activity) different from or not directly connected with the one you are talking about or doing
-ballot	vote
 pliantiff	someone who makes a legal complaint against someone else in court
-hinder	to limit the ability of someone to do something
-stymie	hinder
-inadvertent	unintentional
-irresolute	uncertain how to act
 bristle	react angrily
-enormity	great wickedness. Example: The (blank) of Pol Pot's regime is hard to capture in words -- within months hundreds of thousands of cambodians lost their lives.
 browbeat	boss around bully. Example: During the interrogation, the suspect was browbeaten into signing a false confession.
-presentiment	sense of the future
-bromide	unoriginal remark
-credence	belief
 grouch	.n, .v a person who often complains
 curmudgeon	grouch. (Eg: Since Uncle Mike was the family (blank), each thanksgiving he was plied with copious amount of wine, in the hope that he would become less grouchy)
 paternalistic	making decisions for other people rather than letting them take responsibility for their own lives
-gubernatorial	relating to a state governor or the office of state governor
 congenital	(of a disease or physical abnormality) present from birth
-creed	a set of beliefs that influences the way you live
 anathema	something that is strongly disliked or disapproved of
 desperado	someone who is willing to do things that involve risk or danger, often criminal things
-hypocrisy	a situation in which someone pretends to believe something that they do not really believe, or that is the opposite of what they do or say at another time
 ordain	to officially make someone a priest or other religious leader
-vitriolic	hash in tone
-ostensible	appearing or claiming to be one thing when it is really something else
 innocuous	completely harmless
 deceit	keep the truth hidden
 domineering	bossy
@@ -504,21 +321,13 @@ imperious	domineering. Eg. Children are .. With each other before they learn tha
 conniving	conspiring to do bad
 stalwart	dependable
 abjure	give up
-exonerate	free from blame. Eg: the document clearly indicated that Nick was out of the state at the time of the crime and so served to ... him of any charges
 fledging	inexperienced
 exalt	praise highly. Eg: the teenage ... the rock star, covering their bedrooms with posters of him.
-provident	planning ahead
-defiant	proudly refusing to obey authority
-obstreperous	noisily defiant
 prosaic	dull
-inundate	flood
 exasperate	annoy
 eminent	highly respected
 voracious	very hungry
-boon	helpful thing
-tempered	moderated in effect
 ingenuity	cleverness
-truculence	tendency to fight
 resignation	accepting the unpleasant
 solicitous	anxious to please
 capitulate	surrender
@@ -529,184 +338,78 @@ apathetic	uncaring
 complaisance	willingness to please others by being polite and fitting in with their plans
 hauter	extreme pride
 miscreant	lawbreaker
-proscribe	ban
 impecunious	lacking money
-imponderable	difficult to assess
 peculiarity	the quality of being strange or unusual, or an unusual characteristic or habit
 idiosyncrasy	peculiarity
-punctilious	overly precise
 percipient	perceptive
-chastise	scold
-encumber	hold back
 irascible	easily angered
-juxtapose	place side by side
-ascribe	attribute
-unflappable	cool under pressure
-patent	glaringly obvious
 retiring	shy
-untenable	indefensible. (Example: with the combination of Kepler's brillian theories and Galileo's telescopic observations, the old geocentric theory became (blank) to most of the educated people in Europe.)
-complacent	contented to a fault
-assuage	make less severe
 pundit	expert
-mellifluous	sweet-sounding
-moribund	about to die
-inviolate	sacred
-eclectic	having a variety
-pecuniary	relating to money
-maxim	short saying
 firebrand	troublemaker
-malfeasance	misconduct
-involved	complicated
-prolific	productive
-serendipity	luck
-exacerbate	make worse
-blunder	a serious mistake, usually caused by not taking care or thinking
 gaffe	social blunder
 ethereal	extremely delicate
-retaliatory	avengeful
-reprisal	retaliatory action (Eg: The Old Testament doctrine of an eye for an eye is not the kind of retailiation practiced in war, rather, an arm, a leg, and both ears are the ... for the smallest scratch)
 officious	meddlesome
-vacillate	waver
-baleful	threatening
-subterfuge	deceit. For example, Finally deciding to abandon all ...., Arthur revealed to Cindy everything about his secret affair over the past two years."
-verisimilitude	appearance of truth
-presumptuous	overly forward
 emulate	imitate
-cede	give up control
 flippant	not showing respect
-aberrant	abnormal
 credulity	tendency to believe
-fuse	to join together physically
-coalesce	fuse
-cardinal	most important
-juggernaut	unstoppable force
-dispassionate	objective
 scornful	look down sb
 contemptuous	scornful
-preemptive	done first
-tirade	angry speech
-immaterial	irrelevant
-entice	tempt
-elicit	call forth
-squelch	suppress
-copious	abundant
-morph	change dramatically
-upheaval	a great change
-catalysm	violent upheaval
-unforthcoming	not cooperative
-rudimentary	basic
-inimitable	without equal
-fickle	change unpredictably
-refute	disprove
 patronize	treat condescendingly
-elusive	hard to pin down, to describe, find, achieve, or remember
 scrupulous	using extreme care
-taper off	to become gradually smaller or less frequent
-attenuate	taper off
-chimera	illusion
-denouement	resolution of a story
-precarious	dangerous
 sagacious	wise
-perfunctory	done routinely
 dovetail	fit together tightly
-apothegm	short saying
-conflagration	large fire
 sardonic	mocking
-inure	hardern
-incessant	not stopping
+inure	v. to accustom or become accustomed to something, especially something unpleasant or difficult
 unimpeachable	blameless
-rebuke	critize severely
-lacerate	distress deeply
-nadir	lowest point
 puissant	powerful
 tribulation	suffering
-disenfranchise	deprive of votes
 smug	self-satisfied
-deride	put down
-stealthy	quiet and careful in order not to be seen or heard
-surreptitious	stealthy
+deride	v. treat or speak of with contempt
 dolorous	sorrowful
-trite	lacking originality
-dispatch	speed, efficiency
 affable	likeable
 uncanny	strange, unsetting
-disparate	fundamentally different
 anemic	lacking energy
-belligerent	eager to fight
-machinate	scheme
-unpropitious	unlikely to be successful
 concede	admit wrongdoing
 spendthrift	wasteful with money
 precipitate	hasty
-halcyon	peaceful
 tempestuous	intensely emotional
-malodorous	stinky
 fawn	flatter extremely
 noisome	foul-smelling
-dilapidated	run down
-ostracize	exclude
-histrionic	over theartrical
-treacherous	involving betrayal
-conciliate	make peace with
 avarice	greed
-diatribe	verbal attack
 weary	tiresome
 lethargic	weary
 witty	using words in a clever and funny way:
 epigram	witty saying
 illustrious	famous
-perpetuate	make happen indefinitely
 clemency	mercy
-vindictive	seeking revenge
-telling	significant
 enmity	hate
-adjudicate	judge
-holy	related to religion or a god
-consecrate	make holy
 endemic	native
-moment	importance
 apprehension	anxiety
-celerity	quickness
 malinger	avoid work
 patriotic	showing love for your country and being proud of it
 jingoist	overly patriotic
 grotesque	strange and unpleasant, especially in a silly or slightly frightening way
 antic	grotesque
 dog	pursue
-subtlety	a small but important detail
-nuance	subtlety
 weepy	feeling likely to cry
 morose	gloomy
 lachrymose	weepy
 antipathy	hatred
-buttress	support
 dismay	feeling of unhappiness and disapointment
 chargin	dismay
 nettlesome	annoying
-admonish	warn
 squander	waste
 trickery	wangle
 artific	trickery
-corollary	consequence
-inchoate	not fully formed
-telltail	revealing
-debunk	prove to be false
 ebullient	enthusiastic
-pertinent	revelant
 aesthetic	relate to beauty
 outcast	a person who has been rejected by society or a social group.
 pariah	outcast
-colossal	extremely large
-prevalent	worldwide spread
-haphazard	unorganized
 creditable	good but not great
 steadfast	unwavering
 placate	to stop someone from feeling angry:
 aphorism	a short clever saying that is intended to express a general truth
 badger	pester
-decorum	proper conduct
-transient	short-lasting
-equivocate	speak vaguely
 dictatorial	extremely bossy
 commendable	deserving praise
 laudable	praiseworthy
@@ -718,21 +421,322 @@ snub	insult someone by not giving them any attention or treating them as they ar
 prone to do	likely to suffer from an illness or show a particular negative characteristic:
 toss off the most pointed barbs	deploy the harshest insults
 rhetorical	intended to seem important or influence people:
-discourse	written or spoken communication or debate.
+clemency	kindness when giving a punishment
+wanton	(of something bad, such as damage, cruelty, waste) extreme and showing no care at all
+toil over	To work continually, diligently, and strenuously to complete something
+ambivalent	having two opposing feelings at the same time, or being uncertain about how you feel:
+messiah	a leader who is believed to have the power to solve the world's problems
+Reverential	caused by, or full of respect and admiration
+splurge on	v. spend a lot of money on buying goods esp. expensive one
+manifold	adj. many and different types
+distill	v. extract the most essential meaning/aspect
+scrumptious	extremely appetizing or delicious
+effervescent	bubbly
+cornucopia	abundant supply
+profusion	abundance
+hodgepodge	mixture
+compound	make more intense
+amply	fully (The boat was amply supplied for its year at sea)
+antiquated	old
+iconoclastic	defying tradition
+nonchalant	appearing unconcerned
+impeccable	flawless
+meteoric	very fast
+asteroid	is a minor planet of the inner Solar System
+ceres	is the largest object in the asteroid belt between the orbits of Mars and Jupiter
+dab	press against (something) lightly with a piece of absorbent material in order to clean or dry it.
+smear	coat or mark (something) messily or carelessly with a greasy or sticky substance
+delicate	fragile
+glut	excessive supply (the Internet offers such a ...of news related stories that many find it difficult to know which story to read first.)
+gelatinous	substances or mixtures are wet and sticky
+flammable	chemicals, gases, cloth, or other things catch fire and burn easily.
+pithy	concise yet expressive (I enjoy reading the Daodejing for its ..and insightful prose, it always give me something to think about)
+plodding	slow-moving (Charlie may seem to run at a ...pace, but he is an ultramarathoner, meaning he runs distances of up to 100 miles, and can run for ten hours at a stretch)
+immure	confine (The modern supermarket experience makes many feel claustrophobic, as they are ... in walls upon walls of products)
+conflate	mix together (In her recent book, the author ... several genres -- the detective story, the teen thriller and the vampire romance - to create a memorable read)
+circumscribe	restrict with limit (Their tour of South America was... so that they saw only popular destinations and avoided the dangerous parts of cities)
+sartorial	relating to clothes (Monte was astute at navigating the world of finance, ...ly, however, he was found wanting - he typically would attempt to complement his beige tie with a gray suit and white pants)
+expurgate	censor (The censor .. Every reference to sex and and drugs, converting the rapper's raunchy flow into a series of bleeps)
+genteel	refined (A live string quarter would provide a more .. Air to the wedding than would a folk singer)
+ponderous	moving slowly (Landen with 20 kilograms of college text boooks, the freshman move .. across the campus)
+veneer	disguising layer (Mark Twain referred to the Victorian Period in America as the Gilded Age, implying the ample moral corruption that lay beneath a mere ... of respectability)
+ephemeral	short-lived (The lifespan of a mayfly is ..., lasting from a few hours to a couple of days)
+pittance	small amount (Vinny's uncle beamed smugly about how he'd offered his nephew fifty dollars for his Harvard tuition; even twice the amount would have been a mere pittance)
+magisterial	domineering
+dearth	shortage
+opulence	wealth
+impregnable	indestructible
+unadorned	plain and simple, with little or no make up/ decoration
+austere	unadorned
+hinder	to limit the ability of someone to do something
+stymie	hinder
+obstreperous	noisily defiant
+boon	helpful thing
+imponderable	difficult to assess
+juxtapose	place side by side
+unflappable	cool under pressure
+mellifluous	sweet-sounding
+inviolate	sacred
+eclectic	having a variety
+pecuniary	relating to money
+fuse	to join together physically
+coalesce	fuse
+juggernaut	unstoppable force
+denouement	resolution of a story
+dispatch	speed, efficiency
+disparate	fundamentally different
+malodorous	stinky
+dilapidated	run down
+histrionic	over theartrical
+celerity	quickness
+subtlety	a small but important detail
+nuance	subtlety
+inchoate	not fully formed
+transient	short-lasting
+unseasoning	not matured or developed by growth or passage of time
+wreaking havoc	n. used to describe the destructive or chaotic effects of something or someone
+embark on	pv. start something new
+hitherto	adv. until now
+vault out of	 v. quickly exit or escape a situation or place by jumping over it, often implying the use of hands or a pole for support
+gin up	v. stir up or generate some level of enthusiasm or support for something
+intrude	to come or go in without permission or welcome
+heyday	pinnacle
+bemoan	An expression of grief, suffering, or sadness.
+thwart	v. To prevent; to halt; to cause to fail; to foil; to frustrate.
+impending	about to happen
+animosity	extreme hostility (The governor's animosity toward his rival was only inflamed when the latter spread false lies regarding the governor's first term)
+meticulous	detail oriented
+jubilant	overjoyed
+corroborate	confirm (Her claim that frog populations were falling precipitously in Central America was ... by locals)
+unassailable	immune to attack
+unruly	noisy, uncontrollable
+intermittent	occuring on and off
+transitory	short-lasting
+undermine	erode the foundation
+deteriorate	become progressively worse
+appalling	causing shock or dismay; horrific.
+inevitable	certain to happen, unavoidable
+hegemony	dominance (Until the Spanish Amada was defeated in 1587, Spain had ...over the seas, controlling waters stretching as far as the Americas)
+arrogate	seize without authority (Arriving at the small town, the outlaw ..the privileges of a lord, asking the frightened citizens to provide foo, drink and entertainment)
+exhort	encourage (Nelson's parent ..him to study medicine, urging him to choose a respectable profession, intransigent, Nelson left home to become a grffiti artist)
+objurgate	scold severely (The manager spent an hour ... the employee in the hopes that he would not make these mistakes again)
+strife	strong disagreement or fighting (Money is a major cause of ... in many marriages. )
+broadside	verbal attack (Political ...are usually strongest in the weeks leading up to a national election)
+internecine	marked by internal strife (The guerilla group, which had become so powerful as to own the state police, was finally destroyed by an ...conflict)
+atavism	throwback (Much of modern art movement was an ...to a style of art found only in small villages through Africa and South America)
+junta	group seizing power (As dangerous of a threat as North Korea is, some analysts believe that were a .. Suddenly to gain power, it could be even more unpredictable and bellicose than the current leadership)
+mollify	soothe (In the morning, Harriat was unable to ...Harry, if he happened to become angry, unless he had his cup of coffee)
+zeitgeist	spirit of the times (Each decade has it own ...-the 1990's was a prosperous time in which the promise of the American Dream never seemed more palpable)
+lionize	celebrate (Students in the US learn to ...Jefferson, Franklin, and Washington because they are the founding fathers of the nation)
+goad	aggressively urge on (Doug did not want to enter the race, but Jim, through a steady stream of taunts, ... him into signing up for it)
+respite	pause for work (Every afternoon, the small company has a respite in which workers play football or board games)
+vanquish	defeat thoroughly (for years, Argentina would dominate in World Cup qualifying matches, only to be ... by one of the European countries during the late stages of the tournament)
+anomalous	not normal (According to those who do not believe in climate change, the extreme weather over the last five years is simply ... - daily temperatures should return to their old averages, they believe)
+melee	wild fight (After enduring daily taunts about my name, I became enraged and pummeled the schoolyard bully and his sycophantic friend in a brutal ...)
+gerrymander	manipulate votes (years ago, savvy politicians had ... the city center to ensure their re-election)
+malady	illness (The town was struck by a ... throughout the winter that left most people sick in bed for two weeks)
+amorphous	shapeless (His study plan for the GRE was at best ..., he would do questions from random pages in any one of seven test prep books)
+phantasmagorical	illusive (those suffered from malaria fal into a feverish sleep, their world a whirligig of...; if they recover, they are unsure of what actually took place and what was simply a product of their febrile imaginations)
+rapprochement	reconciliation
+acme	highest point (The new Cessna airplanes will be the .. Of comfort, offering reclining seats and ample legroon)
+flounder	struggle
+peripatetic	travelling on foot
+tender	offer up formally. The government was loath to tender more money in the fear that it might set off inflation
+bereft	sad because of loss
+forthcoming	easily available. The president announced that the senators were about to reach a compromise and that he was eager to read (blank) details of the bill
+collusion	secret cooperation
+vie	compete for
+tout	advertise strongly
+rescind	cancel official
+complicit	taking part in
+espionage	spying
+flee	escape by running away
+prevail	to get control or influence
+infiltrate	to secretly become part of a group in order to get information or to influence the way that group thinks or behaves
+armistice	a formal agreement between two countries or groups at war to stop fighting for a particular time, especially to talk about possible peace
+legitimate	conforming to the law or to rules.
+ballot	vote
+enormity	great wickedness. Example: The (blank) of Pol Pot's regime is hard to capture in words -- within months hundreds of thousands of cambodians lost their lives.
+presentiment	sense of the future
+gubernatorial	relating to a state governor or the office of state governor
+hypocrisy	a situation in which someone pretends to believe something that they do not really believe, or that is the opposite of what they do or say at another time
+tempered	moderated in effect
+truculence	tendency to fight
+chastise	scold
+encumber	hold back
+moribund	about to die
+maxim	short saying
+serendipity	luck
+exacerbate	make worse
+blunder	a serious mistake, usually caused by not taking care or thinking
+retaliatory	avengeful
+reprisal	retaliatory action (Eg: The Old Testament doctrine of an eye for an eye is not the kind of retailiation practiced in war, rather, an arm, a leg, and both ears are the ... for the smallest scratch)
+vacillate	waver
+baleful	threatening
+subterfuge	deceit. For example, Finally deciding to abandon all ...., Arthur revealed to Cindy everything about his secret affair over the past two years."
+preemptive	done first
+precarious	dangerous
+perfunctory	done routinely
+conflagration	large fire
+incessant	not stopping
+disenfranchise	deprive of votes
+stealthy	quiet and careful in order not to be seen or heard
+surreptitious	stealthy
+halcyon	peaceful
+treacherous	involving betrayal
+conciliate	make peace with
+perpetuate	make happen indefinitely
+vindictive	seeking revenge
+admonish	warn
+corollary	consequence
+telltail	revealing
+encroach	to take control or possession of something in a gradual way and often without being noticed
+contemporary	existing or happening now
+entail	v. to make something necessary
+constitute	v. to be a part of (local tax funding rose over 10 million pounds by 2018, ....ing an increased share)
+expound on	pv. explain in detail
+hinge on	pv. to depend on
+quintessential	adj. representing the most perfect or most typical example of something
+akin to	adj.  ~ similar/like to
+uphold	v. conserve or defend a principal or law
+outsmart	v. to obtain advantage over someony by using your intelligence
+stem from	pv. start to developp as the result of something
+extrinsic	adj. not part of essential nature of someone or something
+intrinsic	adj. belonging  naturally, essential
+galvanize	v. shock or excite someone into taking action
+resort to	phrasal v.  you do not want to do because you cannot find any other way of achieving something
+instill	v. gradually but firmly establish (an idea or attitude) in a person's mind
+curb	v.n. restrain or control something
+nudge	v. gently tell someone to do without forcing them
+compel	v. force | oblige to do sth
+hindrance	one that creates difficulties
+exert	v. use authority,influence to make sth happen | make an effort
+budge	make or cause to make the slightest movement
+deterrence	the practice of dissuading bad behavior through the threat of significant punishment
+stringent	(of regulations, requirements, or conditions) strict, precise, and exacting
+utter	complete
+Realm	Region, area
+hefty	Large in size, height, quantity
+fortify	to strengthen
+languish	become weak
+preempt	take the place of
+primacy	of greatest importance
+betray	reveal (with gold medal at stake, the gymnast awaited his turn, his quivering lip betraying his intense emotions)
+afford	give opportunity for
+forthright	honest in speaking
+arduous	requiring great effort
+improvident	not careful
+hound	pursue relentlessly
+elude	fail to be grasped
+savvy	well-informed
+spartan	unconcerned with comfort
+pragmatic	practical
+intimation	indirect suggestion
+inarticulate	not speaking clearly
+evasive	avoiding commitment
+unyielding	completely unwilling to change a decision
+check	hold back from doing
+futile	pointless
+indifference	apathy
+adamant	unyielding
+resolve	determine
+mesmerize	to hold completely the attention or interest
+hypnotize	mesmerize
+articulate	(adj) having or showing the ability to speak fluently and coherently
+divergent	conformity to the law or to rules
+legitimacy	ability to be defended with logic or justification; validity.
+supersede	take the place of
+concur	agree
+keystone habits	small changes or habits that people introduce into their routines that unintentionally carry over into other aspects of their lives
+get the hang of it	begin to understand or realize how to do it
+red-herring	something, especially a clue, that is or is intended to be misleading or distracting.
+demoralized	having lost confidence or hope; disheartened.
+incumbent	necessary (Middle managers at times make important decisions, but real responsibility for the financial well-being of the corporation is ultimately ...on the CEO)
+espouse	support a cause (As a college student, Charlie ... Marxism, growing his beard out and railing against the evils of the free market)
+untoward	inconvenient (Some professors find teaching ... as having to prepare for lectures and conduct office hours prevents them from focusing on their research)
+litany	long account (Mr. Rogers spoke to a Senate committee and did not give a ...of reasons to keep funding the program, but instead, appealed to the basic human decency of all present)
+disenchanted	disappointed with
+mockery	the sardonic action
+checkered	disreputable (one by one, the presidential candidates dropped out of the race, their respective .. Past - from embezzlement to infidelity - sabotaging their campaigns)
+trenchant	incisive (Jill presented a rather superficial treatment of sales in Asia, but her ...analysis of sales in Europe inspired a number of insights into how to proceed in that market)
+straying	mislead
+umbrage	offense (Since he was so in love with her, he took .. At her comments, even though she had only meant to gently tease him)
+superfluous	more than necessary (How can we hope to stay open if we don't eliminate all ... spending , like catered meetings and free acupuncture Tuesday?)
+cogent	convincing (A ... argument will change the minds of even the most skeptical audience)
+balk	refuse to accept (The students were willing to clean up the broken glass, but when the teacher asked them to mop the entire floor, they...citing reasons why they needed to leave.)
+semblance	misleading appearance (While the banker maintained a ...of respectability in public, those who knew him well were familiar with his many crimes)
+stance	a way of thinking about something
+utterance	statement
+opinionated	have very strong opinions and refuse to accept that they may be wrong
+dispensation	exemption (Since her father is a billionaire, she is give .. From many of the school's policies)
+fraternity	a group of people who have the same job or interest
+dogmatic	opinionated (Bryan is ... in his belief that the earth is flat, claiming that all pictures of a spherical earth are computer generated)
+excoriate	criticize harshly (Entrusted with the prototye to his company's latest smartphone, Larry, during a late night karaoke bout, let the prototype slip into the hands of a rival company -- the next day Larry was ..., then fired.)
+probity	integrity (The ideal politician would have the ...to lead, but reality gravely falls short of the ideal of morally upright leaders)
+jaundice	bias (Shelly was .. Towards Olivia; though the two had once been best friends, Olivia had become class president, prom queen, and to make matters worse, the girlfriend of the one boy Shelly liked)
+construe	interpret (The author's inability to take aside on the issue was .. By both his opponents and supporters as a sign of weakness)
+desiccated	lacking vitality (Few novelists over 80 are able to produce anything more than ...works - boring shadows of former books.)
+bridle	restrain (New curfew laws have ...people's tendency to go out at night)
+promulgate	officially make known (The president wanted to ...the success of the treaty negotiations, but had to wait until Congress formally approved the agreement)
+unconscionable	unreasonable (The lawyer's demands were so ... that rather than pay an exorbitant sum or submit himself to any other inconveniences, the defendant decided to find a new lawyer)
+moot	irrelevant (Since the Board just terminated Steve as the CEO, the finance committee's opinion of his marketing plan for next year is now ..)
+apposite	appropriate (For a writer with such quick wit, Jonathan Swift has a rather .. Name)
+redress	correct unfairness (Barry's ... for forgetting his wife's birthday two years in a row was surprising her with a trip to Tahiti)
+glean	collect (Herb has given us no formal statement about his background, but from various hints, I have ... that he grew up in difficult circumstances)
+malapropism	confusing similar words (Whenever I looked glum, my mother would offer to share an amusing antidote wit me - an endearing ... of anecdote that never failed to cheer me up)
+abrogate	overturn a law (As part of the agreement between the labor union and the company, the worker .. Their right to strike for four years in exchange for better health insurance)
+facile	lacking depth (Many news shows provide .. Explanations to complex politics, so I prefer to read in-depth reporting of the New York Times)
+stem	limit growth (To .. The tide of applications, the prestigious Ivy requires that each applicant score at least 330 on the revised GRE)
+concomitant	accompanying (... with his desire for nature was a desire for the culture and energy of a big city)
+pedestrian	lacking imagination (while Nan was always engaged in philosophical speculation, her brother was occupied with far more ... concerns: how to earn a salary and run a household)
+recrimination	mutual attacks (The two brothers sat and cried, pointing fingers and making elaborate .. Of the others' guilt
+circumvent	get out of duty
+incense	make furious (When Herb bought football tickets for a game on the day of their wedding anniversary, Jill was ...)
+culminate	reach high point (Beethoven's musical genius ... in the 9th Symphony, which many consider his greatest work)
+imbroglio	confusing situation (The chef cook-off featured one gourmand who had the unfortunate distinction of mixing the wrong broths, creating an .. That diners would not soon forget)
+inclement	lacking mercy (the judge, ... as always gave the prisoner, despite all the tears, a full sentence)
+impugn	call into question (Though many initially tried to ... Darwin's theory, in scientific circles today, the idea is taken as truth)
+snub	reject bluntly
+discursive	tangential
+blunt	insensitive
+brusquely	bluntly
+hedge	limit a statement (when asked why he had decided to buy millions of share at the very moment the tech companies stock soared, the CEO hedged, mentioning something vague about gut instinct)
+reproach	criticize
+indict	accuse formally
+deleterious	harmful
+hobble	hold back
+genial	aggreable
+wanting	lacking. She did not think her vocabulary was (blank), yet there were so many words that inevitably she found a few she didn't know
+approbatory	showing approval. Although it might not be her best work, Hunter's new novel has received generally approbatory reviews.
+disabuse	lead one from error. As a child, I was quickly (blank) of the notion that Santa Claus was a rotund benefactor of infinite largess
+incriminate	to make someone seem guilty, especially of a crime
+inadvertent	unintentional
+irresolute	uncertain how to act
+bromide	unoriginal remark
+credence	belief
+vitriolic	hash in tone
+untenable	indefensible. (Example: with the combination of Kepler's brillian theories and Galileo's telescopic observations, the old geocentric theory became (blank) to most of the educated people in Europe.)
+complacent	contented to a fault
+assuage	make less severe
+cardinal	most important
+dispassionate	objective
+immaterial	irrelevant
+elicit	call forth
+squelch	suppress
+catalysm	violent upheaval
+unforthcoming	not cooperative
+rudimentary	basic
+refute	disprove
+rebuke	critize severely
+lacerate	distress deeply
+telling	significant
+adjudicate	judge
+moment	importance
+buttress	support
+debunk	prove to be false
 partiality	the fact of unfairly preferring or approving of something
 condemn	to criticize strongly for moral reason
 appeasement	the act of giving the opposing side in an argument or war an advantage that they have demanded, in order to prevent further disagreement :
-clemency	kindness when giving a punishment
-encroach	to take control or possession of something in a gradual way and often without being noticed
-unseasoning	not matured or developed by growth or passage of time
-contemporary	existing or happening now
-didacticism	Didacticism is a term that refers to a particular philosophy in art and literature that emphasizes the idea that different forms of art and literature ought to convey information and instructions, along with pleasure and entertainment.
-wanton	(of something bad, such as damage, cruelty, waste) extreme and showing no care at all
-toil over	To work continually, diligently, and strenuously to complete something
 table	to delay discussion of a subject
-upswing	an increase or improvement
-persistent	lasting for long time or difficult to get rid of
-ambivalent	having two opposing feelings at the same time, or being uncertain about how you feel:
-hush	a sudden calm, silent
-messiah	a leader who is believed to have the power to solve the world's problems
-Reverential	caused by, or full of respect and admiration
+hog	n. a pig esp. one allowed to grow large so that it can be used as food
+colossal	extremely large
