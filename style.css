@@ -167,6 +167,10 @@ button {
   margin: 25px;
 }
 
+h6 {
+  font-size: medium;
+}
+
 .title {
   padding: 10px 10px 0 10px;
   text-align: center;
