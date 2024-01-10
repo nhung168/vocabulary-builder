@@ -65,10 +65,10 @@ ul > a {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
-.flip-card:hover .flip-card-inner {
+/*.flip-card:hover .flip-card-inner {
   transform: rotateY(180deg);
   transition-duration: 5s;
-}
+}*/
 
 .flip-card-front, .flip-card-back {
   position: absolute;
@@ -105,6 +105,10 @@ ul > a {
   right: 0;
 }
 
+button {
+  border-color:transparent;
+  background-color:transparent
+}
 /* Style for Vocabulary page */
 
 .ygParent{
@@ -118,4 +122,171 @@ ul > a {
 .playable {  
 	cursor:pointer;
 	font-size:20px;
+}
+
+/*Card Setup*/
+.at-layout-vertical {
+  display: flex;
+  flex-direction: column;
+}
+.at-layout-container {
+  flex: auto;
+}
+
+.at-table-fix {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.at-table-fix.awesome-card{
+  font-size: 10pt; 
+}
+
+.awesome-card.container {
+  display: -webkit-flex;
+  -webkit-flex-wrap: wrap;
+  -webkit-justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.awesome-card.paper-card {
+  display: flex;
+  flex: 1 0 auto;
+  min-width: 230px;
+  max-width: 100%;
+  width: calc(100%/4);
+}
+
+.card-content {
+  padding-top: 80px;
+  color: #cecece;
+  border: 1px #cecece;
+  margin: 25px;
+}
+
+.title {
+  padding: 10px 10px 0 10px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 18px;
+  color: black;
+}
+
+.card-content:hover{
+  box-shadow:rgb(0 0 0/40%) 0 8px 16px 0;
+  z-index: 10;
+}
+
+.paper-container{
+  width: 100%;
+  font-family: 'Lato', san-serif;
+  position: relative;
+}
+
+.paper-card{
+  min-width: 100%
+  width: 100%
+}
+
+.layer1 {
+  color:white;
+  text-decoration:none;
+}
+
+a:-webkit-any-link {
+  color: whitesmoke ;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+p:-webkit-any-link {
+  color: whitesmoke ;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.description {
+  color: whitesmoke;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.layer1 img {
+  width: 100%;
+  display: block;
+  opacity: 1;
+  -webkit-transition: opacity 1s ease;
+  -moz-transition: opacity 1s ease;
+  -ms-transition: opacity 1s ease;
+  -o-transition: opacity 1s ease;
+  transition: opacity 1s ease;
+}
+
+.paper-card:hover .layer1{
+  opacity:0.7;
+  -webkit-transition: opacity 0.2s ease;
+  -moz-transition: opacity 0.2s ease;
+  -ms-transition: opacity 0.2s ease;
+  -o-transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease;
+}
+
+ .layer2 {
+  background-color:rgba(0,0,0,0.3);
+  position:absolute;
+  bottom:0;
+  overflow:hidden;
+  max-height: 0;
+  height: 100%;
+  width: 100%;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease;
+}
+
+.layer2-onload {
+  max-height: 300px;
+  min-height: 100%;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease;
+}
+
+.layer2 div h6 a p {
+  min-width: 100%;
+  text-align: center;
+  opacity:0.8;
+  color:whitesmoke;
+  -webkit-transition: opacity 0.2s ease;
+  -moz-transition: opacity 0.2s ease;
+  -ms-transition: opacity 0.2s ease;
+  -o-transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease;
+}
+
+
+
+.layer2 a:hover {
+  opacity:1;
+  -webkit-transition: opacity 0.2s ease;
+  -moz-transition: opacity 0.2s ease;
+  -ms-transition: opacity 0.2s ease;
+  -o-transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease;
+}
+
+.paper-card:hover .layer2 {
+  max-height: 200px;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease;
 }

@@ -33,8 +33,8 @@
   </div>
 </div>
 
-<button class = "previous" onclick="previous()"><img width="100" height="100" src="https://img.icons8.com/flat-round/64/circled-left-2--v1.png" alt="circled-left-2--v1"/></button>
-<button class = "next" onclick="next()"><img width="100" height="100" src="https://img.icons8.com/flat-round/64/circled-right-2--v1.png" alt="circled-right-2--v1"/></button>
+<button class = "previous" onclick="previous()"><img width="100" height="100" src="../../img/backward.png" alt="circled-left-2--v1"/></button>
+<button class = "next" onclick="next()"><img width="100" height="100" src="../../img/forward.png" alt="end"/></button>
 </section>
 </body>
 
@@ -75,6 +75,7 @@ function previous() {
 
 document.getElementById("cardInner").addEventListener("click",()=>{
   const output = document.getElementById("word").innerHTML;
+  document.getElementById("cardInner").style.transform = "rotateY(180deg)";
   console.log(output);
   flipCard(output);
 })
