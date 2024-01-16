@@ -24,7 +24,11 @@
       <h1 id="word">Let's practice</h1>
     </div>
     <div class="flip-card-back" id="back">
-      <div class="def" id="definition">test</div>
+      <div class="def" id="definition">
+        <p>
+          test
+        </p>
+      </div>
       </div>
     </div>
   </div>
@@ -34,7 +38,7 @@
 <button class = "next" onclick="next()"><img width="100" height="100" src="/vocabulary-builder/img/forward.png" alt="end"/></button>
 </section>
 </body>
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://unpkg.com/whatwg-fetch@3.6.2/dist/fetch.umd.js"></script>
 <script>
 
@@ -78,4 +82,54 @@ document.getElementById("cardInner").addEventListener("click",()=>{
 </script>
 <script async src="https://youglish.com/public/emb/widget.js" charset="utf-8"></script>
 
+<script>
+  // 3. This function creates a widget after the API code downloads.
+  var widget;
+  function onYouglishAPIReady(){
+    widget = new YG.Widget("widget-1", {
+      components:72,
+      events:{
+        'onFetchDone': onFetchDone
+      }
+    });
+  }
+
+  var curQuery;
+  function onFetchDone(event){
+    curQuery = event.query; 
+  }
+  
+  //lets make the words clickable:
+  function allClickable(ele) {
+      function getText(obj) {
+          return obj.textContent ? obj.textContent : obj.innerText;
+      }
+
+      ele.contents().each(function () {
+          if (this.nodeType === 3){
+              $(this).replaceWith(getText(this).replace(/\b(\w+)\b/g, '<span class="yg">$1</span>'));
+          }
+          else allClickable($(this));
+      });
+  };
+  
+  allClickable($('.content'));
+  
+  //show/hide widget on click:
+  var curSelected;
+  $('.yg').click(function(){
+    if (curSelected) $(curSelected).removeClass("highlight");
+    if (curSelected === this){
+      $('#widget-1').hide();
+      widget.pause();
+      curSelected = null;
+    }
+    else {
+      $('#widget-1').show();
+      widget.fetch($(this).html());
+      curSelected = this;
+      $(this).addClass("highlight");
+    }
+  });
+</script>
 </html>
