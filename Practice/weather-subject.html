@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="/vocabulary-builder/style.css">
+<head>
+</head>
+<body>
+	
+<h1>Learning Vocabulary</h1>
+<header class="header-10">
+    <div class="container">
+      <ul class="pull-left">
+        <a href="/vocabulary-builder/index.html">Flash Card</a>
+        <a href="/vocabulary-builder/list.html">My Dictionary</a></li>
+        <a href="/vocabulary-builder/Data.html">Practice</a>
+      </ul>    
+    </div>
+</header>
+
+</header>
+<section>
+<div class="flip-card" id="card">
+  <div class="flip-card-inner" id="cardInner">
+    <div class="flip-card-front" id="front">
+      <h1 id="word">Let's practice</h1>
+    </div>
+    <div class="flip-card-back" id="back">
+      <div class="def" id="definition">test</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button class = "previous" onclick="previous()"><img width="100" height="100" src="/vocabulary-builder/img/backward.png" alt="circled-left-2--v1"/></button>
+<button class = "next" onclick="next()"><img width="100" height="100" src="/vocabulary-builder/img/forward.png" alt="end"/></button>
+</section>
+</body>
+
+<script src="https://unpkg.com/whatwg-fetch@3.6.2/dist/fetch.umd.js"></script>
+<script>
+
+  // read list from txt file
+let words = []; // declare the variable outside the block
+
+fetch('weather-subject.txt')
+  .then(response => response.text())
+  .then(text => {
+    var row = text.replace(/\r/g, "").split('\n');
+    row.forEach(line => {
+      var lineWords = line.split('\t');
+      words.push(...lineWords); // modify the variable inside the block
+    });
+  })
+  .catch(error => console.error(error));
+
+  let index = 0;
+// switch to next
+function next() {
+  index = (index + 2) % words.length;
+  document.getElementById("word").innerHTML = words[index];
+  document.getElementById("definition").innerHTML = words[index+1];
+  document.getElementById("cardInner").style.transform = "";
+  console.log(words[index+1])
+}
+// switch to previous
+function previous() {
+  index = (index - 2 + words.length) % words.length;
+  document.getElementById("word").innerHTML = words[index];
+  document.getElementById("definition").innerHTML = words[index+1]; 
+  document.getElementById("cardInner").style.transform = "";
+}
+// log result from next and previous
+
+document.getElementById("cardInner").addEventListener("click",()=>{
+  const output = document.getElementById("word").innerHTML;
+  document.getElementById("cardInner").style.transform = "rotateY(180deg)";
+  console.log(output);
+})
+</script>
+<script async src="https://youglish.com/public/emb/widget.js" charset="utf-8"></script>
+
+</html>
