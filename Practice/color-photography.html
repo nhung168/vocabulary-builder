@@ -41,7 +41,7 @@
   // read list from txt file
 let words = []; // declare the variable outside the block
 
-fetch('work.txt')
+fetch('color-photography.txt')
   .then(response => response.text())
   .then(text => {
     var row = text.replace(/\r/g, "").split('\n');
