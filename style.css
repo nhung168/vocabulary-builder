@@ -1,88 +1,142 @@
+/**----General Styles----**/
+body {
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+  background-color: #f5f5f5;
+  padding-top: 80px; /* To prevent content from being hidden behind the fixed header */
+}
+
+h1, h6, p {
+  margin: 0;
+  padding: 0.5em 0;
+}
+
+a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 /**----Header----**/
 .header-10 {
   position: fixed;
-  top:0;
+  top: 0;
   z-index: 100;
   width: 100%;
-  padding-top: 0;
-  padding-bottom: 0;
-  height: 80px;
   background: #233240;
   color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
-ul > a {
-  padding: 29px 20px 27px;
-  font-size: 25px;
-  font-weight: normal;
-  color: #7f8c8d;
+.header-10 .container {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.header-10 ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.header-10 ul a {
+  padding: 0 15px;
+  font-size: 18px;
   font-weight: 600;
   color: #ffffff;
-  text-decoration: solid ;
-}
-.container { /*use for card as well*/ 
   display: flex;
-	flex-wrap: wrap;
-	justify-content: right;
-	width: 100%;
-	margin: 20px 0 80px;
+  align-items: center;
+  height: 80px;
+  box-sizing: border-box;
 }
+
+.header-10 ul a:hover {
+  background-color: #1a2733;
+}
+
+/**----Responsive Header----**/
 @media (max-width: 767px) {
-  header {
-    padding-left: 20px;
-    padding-right: 20px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+  .header-10 {
+    padding: 0 10px;
+    height: 60px;
+  }
+
+  .header-10 ul a {
+    padding: 0 10px;
+    font-size: 16px;
+    height: 60px;
   }
 }
 
-.pull-left {
-  float: none !important;
+/**----Container----**/
+.container, .awesome-card.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Center elements for better alignment */
+  width: 100%;
+  margin: 0px;
+  box-sizing: border-box;
 }
 
-/**----body----**/
-.def {
-  margin: 20px;
-  color:blue;
-  font-size: x-large;
+@media (max-width: 767px) {
+  .container, .awesome-card.container {
+    margin: 0px;
+  }
 }
 
+/**----Flip Card----**/
 .flip-card {
   background-color: transparent;
-  margin:15%;
-  width: 45%;
-  height:max-content;
+  width: 300px;
+  height: 200px;
   perspective: 1000px;
+  margin: 40px auto;
 }
+
+@media (max-width: 767px) {
+  .flip-card {
+    width: 90%;
+    height: 180px;
+    margin: 20px auto;
+  }
+}
+
 .flip-card-inner {
   position: relative;
   width: 100%;
   height: 100%;
   text-align: center;
-  transition: transform 1s;
+  transition: transform 0.6s;
   transform-style: preserve-3d;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  border-radius: 10px;
 }
-
-/*.flip-card:hover .flip-card-inner {
-  transform: rotateY(180deg);
-  transition-duration: 5s;
-}*/
 
 .flip-card-front, .flip-card-back {
   position: absolute;
   width: 100%;
   height: 100%;
   -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-
+          backface-visibility: hidden;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .flip-card-front {
-  padding:30%;
   background-color: #797ef6;
-  color: whitesmoke;
+  color: #ffffff;
 }
 
 .flip-card-back {
@@ -91,44 +145,79 @@ ul > a {
   transform: rotateY(180deg);
 }
 
-/* Style for the Previous button */
+.flip-card-inner.rotate {
+  transform: rotateY(180deg);
+}
+
+/**----Buttons----**/
+.previous, .next {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 50px;
+  height: 50px;
+}
+
+.previous img, .next img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 .previous {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+  left: 10px;
 }
 
-/* Style for the Next button */
 .next {
-  position: absolute;
-  bottom: 0;
-  right: 0;
+  right: 10px;
 }
 
-button {
-  border-color:transparent;
-  background-color:transparent
-}
-/* Style for Vocabulary page */
+@media (max-width: 767px) {
+  .previous, .next {
+    width: 40px;
+    height: 40px;
+  }
 
-.ygParent{
-	position:fixed;
-	top: 10%;
-	left: 30%;
-	width:340px;
-	display:none;
+  .previous img, .next img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/**----Definitions----**/
+.def {
+  margin: 20px;
+  color: #1e90ff;
+  font-size: 1.2em;
+  text-align: center;
+}
+
+/**----Vocabulary Page Styles----**/
+.ygParent {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 340px;
+  display: none;
 }
 
 .playable {  
-	cursor:pointer;
-	font-size:20px;
+  cursor: pointer;
+  font-size: 1.2em;
 }
 
-/*Card Setup*/
+/**----Card Layout----**/
 .at-layout-vertical {
   display: flex;
   flex-direction: column;
 }
+
 .at-layout-container {
   flex: auto;
 }
@@ -139,14 +228,11 @@ button {
   width: 100%;
 }
 
-.at-table-fix.awesome-card{
-  font-size: 10pt; 
+.at-table-fix.awesome-card {
+  font-size: 1em; 
 }
 
 .awesome-card.container {
-  display: -webkit-flex;
-  -webkit-flex-wrap: wrap;
-  -webkit-justify-content: center;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -154,143 +240,150 @@ button {
 
 .awesome-card.paper-card {
   display: flex;
-  flex: 1 0 auto;
-  min-width: 230px;
+  flex: 1 1 230px; /* Allow cards to shrink on smaller screens */
   max-width: 100%;
-  width: calc(100%/4);
+  width: calc(100% / 2 - 40px); /* Two cards per row with margin */
+  margin: 10px;
 }
 
+@media (max-width: 767px) {
+  .awesome-card.paper-card {
+    width: 100%;
+    max-width: 100%;
+    margin: 10px 0;
+  }
+}
+
+/**----Card Content----**/
 .card-content {
-  padding-top: 80px;
+  padding: 20px;
   color: #cecece;
-  border: 1px #cecece;
+  border: 1px solid #cecece;
   margin: 25px;
+  background-color: #fff;
+  border-radius: 8px;
+  transition: box-shadow 0.3s ease;
 }
 
-h6 {
-  font-size: xx-large;
-}
-
-.title {
-  padding: 10px 10px 0 10px;
-  text-align: center;
-  font-weight: 500;
-  font-size: 18px;
-  color: black;
-}
-
-.card-content:hover{
-  box-shadow:rgb(0 0 0/40%) 0 8px 16px 0;
+.card-content:hover {
+  box-shadow: 0 8px 16px rgba(0,0,0,0.4);
   z-index: 10;
 }
 
-.paper-container{
-  width: 100%;
-  font-family: 'Lato', san-serif;
-  position: relative;
+/**----Typography----**/
+h6 {
+  font-size: 1.5em;
 }
 
-.paper-card{
-  min-width: 100%
-  width: 100%
-}
-
-.layer1 {
-  color:white;
-  text-decoration:none;
-}
-
-a:-webkit-any-link {
-  color: whitesmoke ;
-  cursor: pointer;
-  text-decoration: underline;
-}
-
-p:-webkit-any-link {
-  color: whitesmoke ;
-  cursor: pointer;
-  text-decoration: underline;
+.title {
+  padding: 10px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 1.2em;
+  color: #000;
 }
 
 .description {
-  color: whitesmoke;
-  font-size: 16px;
+  color: #555555;
+  font-size: 1em;
   font-weight: 300;
 }
 
+/**----Image Layers----**/
 .layer1 img {
   width: 100%;
   display: block;
   opacity: 1;
-  -webkit-transition: opacity 1s ease;
-  -moz-transition: opacity 1s ease;
-  -ms-transition: opacity 1s ease;
-  -o-transition: opacity 1s ease;
   transition: opacity 1s ease;
 }
 
-.paper-card:hover .layer1{
-  opacity:0.7;
-  -webkit-transition: opacity 0.2s ease;
-  -moz-transition: opacity 0.2s ease;
-  -ms-transition: opacity 0.2s ease;
-  -o-transition: opacity 0.2s ease;
+.paper-card:hover .layer1 {
+  opacity: 0.7;
   transition: opacity 0.2s ease;
 }
 
- .layer2 {
-  background-color:rgba(0,0,0,0.3);
-  position:absolute;
-  bottom:0;
-  overflow:hidden;
+.layer2 {
+  background-color: rgba(0, 0, 0, 0.3);
+  position: absolute;
+  bottom: 0;
+  overflow: hidden;
   max-height: 0;
-  height: 100%;
   width: 100%;
-  -webkit-transition: all 1s ease;
-  -moz-transition: all 1s ease;
-  -ms-transition: all 1s ease;
-  -o-transition: all 1s ease;
+  height: 100%;
   transition: all 1s ease;
 }
 
 .layer2-onload {
   max-height: 300px;
-  min-height: 100%;
-  -webkit-transition: all 1s ease;
-  -moz-transition: all 1s ease;
-  -ms-transition: all 1s ease;
-  -o-transition: all 1s ease;
   transition: all 1s ease;
 }
 
 .layer2 div h6 a p {
   min-width: 100%;
   text-align: center;
-  opacity:0.8;
-  color:whitesmoke;
-  -webkit-transition: opacity 0.2s ease;
-  -moz-transition: opacity 0.2s ease;
-  -ms-transition: opacity 0.2s ease;
-  -o-transition: opacity 0.2s ease;
+  opacity: 0.8;
+  color: #ffffff;
   transition: opacity 0.2s ease;
 }
 
-
-
 .layer2 a:hover {
-  opacity:1;
-  -webkit-transition: opacity 0.2s ease;
-  -moz-transition: opacity 0.2s ease;
-  -ms-transition: opacity 0.2s ease;
-  -o-transition: opacity 0.2s ease;
+  opacity: 1;
   transition: opacity 0.2s ease;
 }
 
 .paper-card:hover .layer2 {
   max-height: 200px;
-  -webkit-transition: all 1s ease;
-  -moz-transition: all 1s ease;
-  -ms-transition: all 1s ease;
-  -o-transition: all 1s ease;
   transition: all 1s ease;
+}
+
+/**----Responsive Enhancements----**/
+@media (max-width: 575px) {
+  .flip-card {
+    width: 100%;
+    height: 180px;
+    margin: 20px 0;
+  }
+
+  .header-10 ul a {
+    font-size: 14px;
+    padding: 0 8px;
+  }
+
+  .def {
+    font-size: 1em;
+  }
+
+  h1 {
+    font-size: 1.5em;
+    padding: 10px;
+  }
+
+  .previous, .next {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 991px) {
+  .flip-card {
+    width: 80%;
+    height: 220px;
+    margin: 30px auto;
+  }
+
+  .awesome-card.paper-card {
+    width: calc(50% - 40px); /* Two cards per row */
+  }
+}
+
+@media (min-width: 992px) {
+  .flip-card {
+    width: 300px;
+    height: 200px;
+    margin: 40px auto;
+  }
+
+  .awesome-card.paper-card {
+    width: calc(25% - 40px); /* Four cards per row */
+  }
 }
