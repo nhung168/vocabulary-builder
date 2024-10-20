@@ -102,4 +102,56 @@ var widget;
 </script>
 <script async src="https://youglish.com/public/emb/widget.js" charset="utf-8"></script>
 
+<script>
+    // Swipe Detection Variables
+    let touchStartX = 0;
+    let touchStartY = 0;
+    const swipeThreshold = 50; // Minimum swipe distance in px
+
+    const card = document.getElementById("card");
+
+    // Prevent default scrolling when swiping on the card
+    card.addEventListener('touchmove', function(event) {
+      event.preventDefault();
+    }, { passive: false });
+
+    // Touch Start
+    card.addEventListener("touchstart", function(evt) {
+      const touch = evt.changedTouches[0];
+      touchStartX = touch.screenX;
+      touchStartY = touch.screenY;
+    }, false);
+
+    // Touch End
+    card.addEventListener("touchend", function(evt) {
+      const touch = evt.changedTouches[0];
+      const deltaX = touch.screenX - touchStartX;
+      const deltaY = touch.screenY - touchStartY;
+
+      // Check if the swipe is predominantly horizontal
+      if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        if (Math.abs(deltaX) > swipeThreshold) {
+          if (deltaX < 0) {
+            // Swipe Left
+            next();
+          } else {
+            // Swipe Right
+            previous();
+          }
+        }
+      }
+      // Reset values
+      touchStartX = 0;
+      touchStartY = 0;
+    }, false);
+
+    // Initialize card if words are already loaded
+    // (In case 'lib.txt' loads very quickly)
+    document.addEventListener("DOMContentLoaded", () => {
+      if (words.length >= 2) {
+        updateCard();
+      }
+    });
+
+</script>
 </html>
