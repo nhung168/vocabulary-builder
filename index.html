@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="style.css">
 <head>
+
+  <link rel="stylesheet" href="style.css">
+  <title>Learning Vocabulary</title>
 </head>
 <body>
 	
-<h1>Learning Vocabulary</h1>
 <header class="header-10">
     <div class="container">
       <ul class="pull-left">
         <a href="index.html">Flash Card</a>
-        <a href="list.html">Vocabulary List</a></li>
+        <a href="list.html">My Dictionary</a>
+        <a href="Data.html">Practice</a>
       </ul>    
     </div>
 </header>
 
 </header>
 <section>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <div class="flip-card" id="card">
   <div class="flip-card-inner" id="cardInner">
     <div class="flip-card-front" id="front">
-      <h1 id="word"></h1>
+      <h1 id="word">Welcome to my Vocab Lab<br>Click Arrow to start</h1>
     </div>
     <div class="flip-card-back" id="back">
       <div class="def" id="definition">test</div>
@@ -33,8 +36,8 @@
   </div>
 </div>
 
-<button class = "previous" onclick="previous()"><img width="100" height="100" src="https://img.icons8.com/flat-round/64/circled-left-2--v1.png" alt="circled-left-2--v1"/></button>
-<button class = "next" onclick="next()"><img width="100" height="100" src="https://img.icons8.com/flat-round/64/circled-right-2--v1.png" alt="circled-right-2--v1"/></button>
+<button class = "previous" onclick="previous()"><img width="100" height="100" src="/vocabulary-builder/img/backward.png" alt="circled-left-2--v1"/></button>
+<button class = "next" onclick="next()"><img width="100" height="100" src="/vocabulary-builder/img/forward.png" alt="end"/></button>
 </section>
 </body>
 
@@ -75,6 +78,7 @@ function previous() {
 
 document.getElementById("cardInner").addEventListener("click",()=>{
   const output = document.getElementById("word").innerHTML;
+  document.getElementById("cardInner").style.transform = "rotateY(180deg)";
   console.log(output);
   flipCard(output);
 })
@@ -89,7 +93,10 @@ var widget;
       <!-- Wait for YG library to be loaded -->
       function onYouglishAPIReady(output) {
         <!-- retrieve the widget object-->
-        widget = YG.getWidget("yg-widget-0");
+        widget = YG.getWidget("yg-widget-0",{
+          width: 640,
+          components:8192, //search box & caption 
+        });
         <!-- use the API...-->
         widget.search(output);
       }
@@ -97,4 +104,56 @@ var widget;
 </script>
 <script async src="https://youglish.com/public/emb/widget.js" charset="utf-8"></script>
 
+<script>
+    // Swipe Detection Variables
+    let touchStartX = 0;
+    let touchStartY = 0;
+    const swipeThreshold = 50; // Minimum swipe distance in px
+
+    const card = document.getElementById("card");
+
+    // Prevent default scrolling when swiping on the card
+    card.addEventListener('touchmove', function(event) {
+      event.preventDefault();
+    }, { passive: false });
+
+    // Touch Start
+    card.addEventListener("touchstart", function(evt) {
+      const touch = evt.changedTouches[0];
+      touchStartX = touch.screenX;
+      touchStartY = touch.screenY;
+    }, false);
+
+    // Touch End
+    card.addEventListener("touchend", function(evt) {
+      const touch = evt.changedTouches[0];
+      const deltaX = touch.screenX - touchStartX;
+      const deltaY = touch.screenY - touchStartY;
+
+      // Check if the swipe is predominantly horizontal
+      if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        if (Math.abs(deltaX) > swipeThreshold) {
+          if (deltaX < 0) {
+            // Swipe Left
+            next();
+          } else {
+            // Swipe Right
+            previous();
+          }
+        }
+      }
+      // Reset values
+      touchStartX = 0;
+      touchStartY = 0;
+    }, false);
+
+    // Initialize card if words are already loaded
+    // (In case 'lib.txt' loads very quickly)
+    document.addEventListener("DOMContentLoaded", () => {
+      if (words.length >= 2) {
+        updateCard();
+      }
+    });
+
+</script>
 </html>
