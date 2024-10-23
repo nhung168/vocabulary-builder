@@ -160,14 +160,14 @@ button {
   position: absolute;
   bottom: 10px;
   left: 10px;
-  size: 0px;
+  size: 30%;
 }
 
 .end {
   position: absolute;
   bottom: 10px;
   left: 10px;
-  size:0px
+  size:30%
 }
 
 }
@@ -211,14 +211,14 @@ button {
   position: absolute;
   bottom: 10px;
   left: 10px;
-  size:0px
+  size:30%
 }
 
 .end {
   position: absolute;
   bottom: 10px;
   left: 10px;
-  size:0px
+  size:30%
 }
 
 
