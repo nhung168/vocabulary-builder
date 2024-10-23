@@ -160,12 +160,14 @@ button {
   position: absolute;
   bottom: 10px;
   left: 10px;
+  size: 0px;
 }
 
 .end {
   position: absolute;
   bottom: 10px;
   left: 10px;
+  size:0px
 }
 
 }
@@ -209,12 +211,14 @@ button {
   position: absolute;
   bottom: 10px;
   left: 10px;
+  size:0px
 }
 
 .end {
   position: absolute;
   bottom: 10px;
   left: 10px;
+  size:0px
 }
 
 
