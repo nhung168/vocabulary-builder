@@ -157,17 +157,11 @@ button {
 }
 
 .previous {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  size: 30%;
+  display: none;
 }
 
-.end {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  size:30%
+.next {
+  display: none;
 }
 
 }
@@ -208,17 +202,11 @@ button {
 }
 
 .previous {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  size:30%
+  display: none;
 }
 
-.end {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  size:30%
+.next {
+  display: none;
 }
 
 
@@ -251,7 +239,7 @@ h1{
   left: 10px;
 }
 
-.end {
+.next {
   position: absolute;
   bottom: 10px;
   left: 10px;
