@@ -101,7 +101,7 @@ ul > a {
 
 /* Style for the Next button */
 .next {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   right: 0;
 }
@@ -129,7 +129,7 @@ button {
   }
   
   .flip-card{
-    max-width: 200px;
+    max-width: 300px;
     text-align: center;
     justify-content: center;
     ;
@@ -143,12 +143,12 @@ button {
 
 
 .flip-card-back{
-  max-width: 300px;
+  max-width: 100%;
   margin-left:-40%
 }
 
 .flip-card-inner{
-  padding: auto;;
+  padding: 0;
 }
 
 .def{
@@ -242,7 +242,7 @@ h1{
 .next {
   position: absolute;
   bottom: 10px;
-  left: 10px;
+  right: 0px;
 }
 
 }
