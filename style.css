@@ -17,7 +17,7 @@ body{
 }
 
 h1 {
-  display: flex;
+  display: contents;
   justify-content:center;
 }
 
@@ -72,22 +72,21 @@ ul > a {
 
 .flip-card-front, .flip-card-back {
   position: absolute;
-  width: 100%;
-  height: 100%;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  border-radius: 5%;
-
 }
 
 .flip-card-front {
   padding:50%;
+  margin:20%;
   background-color: #797ef6;
   color: whitesmoke;
+  border-radius: 5%;
 }
 
 .flip-card-back {
-  background-color: dodgerblue;
+  margin:20%;
+  background-color: transparent;
   color: white;
   transform: rotateY(180deg);
 }
@@ -219,8 +218,8 @@ button {
   }
   
   .flip-card-back{
-    width: 900px;
-    margin-left:-70%
+    width: 150%;
+    margin-left:-80%
   }
 
 
