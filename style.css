@@ -150,11 +150,15 @@ button {
 }
 
 .previous {
-  display: none;
+  bottom:auto;
+  left:0;
+  opacity: 30%;
 }
 
 .next {
-  display: none;
+  bottom: auto;
+  right:0;
+  opacity: 30%;
 }
 
 }
@@ -184,11 +188,15 @@ button {
 }
 
 .previous {
-  display: none;
+  top: calc(10%);
+  left: 0;
+  opacity: 30%;
 }
 
 .next {
-  display: none;
+  top:calc(10%);
+  right:0;
+  opacity: 30%;
 }
 
 
