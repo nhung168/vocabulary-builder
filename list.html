@@ -38,7 +38,7 @@ fetch('lib.txt')
       var lineWords = line.split('\t');
       var row = document.createElement("tr");
       for (let i = 0; i<lineWords.length ; i++){
-        if(i % 2 ==0){
+        if(i % 3 ==0){
             var cell1 = document.createElement("td");
             cell1.setAttribute("id",i);
             cell1.setAttribute("class","playable")
@@ -48,6 +48,9 @@ fetch('lib.txt')
             cell2.setAttribute("id",i+1);
             cell2.innerHTML = lineWords[i+1];
             row.appendChild(cell2)
+            cell3.setAttribute("id","lang");
+            cell3.innerHTML = lineWords[i+2];
+            row.appendChild(cell3)            
         }
       };
       table.appendChild(row);
@@ -65,7 +68,9 @@ fetch('lib.txt')
     $('body').on('click', '.playable', function(event){
         if (widget){
             var text = $(this).html();
-            widget.search(text, "english");
+            var i = $(this).attr("id")
+            var lang = document.getElementById(i+2)
+            widget.search(text, lang);
              $(".ygParent").show();
         }
         else {

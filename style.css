@@ -104,6 +104,10 @@ ul > a {
   right: 0;
 }
 
+.lang{
+  display: none;
+}
+
 button {
   border-color:transparent;
   background-color:transparent
