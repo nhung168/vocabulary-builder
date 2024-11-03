@@ -163,11 +163,9 @@ var widget;
       touchStartY = 0;
     }, false);
 
-    // Initialize card if words are already loaded
-    // (In case 'lib.txt' loads very quickly)
+
     document.addEventListener("DOMContentLoaded", () => {
       if (words.length >= 2) {
-        updateCard();
       }
     });
 
