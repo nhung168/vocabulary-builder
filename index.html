@@ -113,9 +113,20 @@ var widget;
     // Swipe Detection Variables
     let touchStartX = 0;
     let touchStartY = 0;
-    const swipeThreshold = 50; // Minimum swipe distance in px
+    
 
     const card = document.getElementById("card");
+    const cardback = document.getElementById("back").offsetWidth;
+    const cardfront = document.getElementById("front").offsetWidth;
+    console.log("back width:",cardback,"front width:",cardfront);
+    
+    let swipeThreshold;
+    if (cardback < cardfront){
+      swipeThreshold = cardback -10 // Minimum swipe distance in px
+    }else{
+      swipeThreshold = cardfront - 10
+    }
+    
 
     // Prevent default scrolling when swiping on the card
     card.addEventListener('touchmove', function(event) {
