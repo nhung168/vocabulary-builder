@@ -1,774 +1,783 @@
  	 	
 por favor	please	spanish
 你叫什么名字？	what is your name	chinese
-chiropractic	"a form of alternative medicine that focuses on the diagnosis and treatment of mechanical disorders of the musculoskeletal system, especially the spine, through manual manipulation"	english
-judiciously	adv. in a way has or shows reason and good judgment in making decision	english
-in retrospect	looking back on the past	english
-leeway	a freedom to act within certain limits	english
-intricacy	a detail that is part of something complicated	english
-gratification	"n. pleasure or satisfaction, or something which provides this"	english
-dip into	"v.Using or spending a portion of something, typically money, that is meant to be saved or reserved"	english
-rejuvenate	v. to make someone look or young and energetic again	english
-rave about	v. to speak or write about something with great enthusiasm	english
-buzz	n. excitement or hype surrounding something	english
-plead with	v. to earnestly and desperately request or beg for something	english
-relent	v. to do something you had refused to do before	english
-ample	adj. enough or more than enough	english
-fleeting	adj. brief or quick	english
-feast	"a large, special meal, often for many people, to celebrate someone or something"	english
-props	objects or items used on stage or in a performance to enhance the setting or portray a character	english
-holograms	"an image made with a laser beam, in which the objects shown look like they have depth rather than appearing flat and can seem to move"	english
-pyrotechnics	"a show of great skill, especially by a musician or someone giving a speech:"	english
-lo and behold	adv. something that you say when you tell someone about something surprising that happened	english
-stark contrast	a clear and noticeable difference	english
-volunteer gig	a short-term volunteering opportunity or job	english
-pump for	pv. excited and ready for something	english
-ate it up	pv. enthusiastic ejoyed and appreciated	english
-acquisition	"n. the act of obtaining or beginning to have something, or something obtain"	english
-leg up	n. an advantage or head start	english
-adjacent to	adj. ~ next to 	english
-innate	"adj. natural, original (+ ability) "	english
-hone	"v. refine or perfect (often for skill, capacity, experience)"	english
-impunity	n. freedom from punishment	english
-Repercussions	"n.  the usually bad effect of an event, action, or decision"	english
-plunge	v. fall / to become lower in value very quickly	english
-exponential	adj. dramatic (increase)	english
-perturb	disturb	english
-appreciable	noticeable	english
-avert	prevent	english
-suppress	"prevent the development, action, or expression of (a feeling, impulse, idea, etc.); restrain."	english
-tractable	"easily managed (compared to middle school students, who have an untamed wildness about them, high school students are somewhat more..)"	english
-flux	"n.  quandary (Ever since Elvira resigned as the head of marketing, evrerything about our sale strategy has been in state of ..)"	english
-prognostication	"prediction (When the Senator was asked about where the negotiations would lead, he said that any guess he could make would be an unreliable ...)"	english
-buck	resist (The profits at our firm .. The general downturn that affected the real estate industry)	english
-apotheosis	"height of development (as difficult as it is to imagine, the ..of Mark Zuckerberg's career, many believe is yet to come.)"	english
-burgeon	"grow rapidly (China's housing market is ..., but some predict that the growth is merely, a bubble and will burst much like the US real estate bubble of 2008)"	english
-flush	abundant	english
-antedate	precede	english
-surfeit	excessive amount	english
-quandary	uncertainty	english
-ameliorate	improve. Three cups of tea tells the story of western man who hopes to blank poverty and the lack of education in afghanistan	english
-replete	fully stocked	english
-provident	planning ahead	english
-inundate	flood	english
-ascribe	attribute	english
-patent	glaringly obvious	english
-prolific	productive	english
-presumptuous	overly forward	english
-cede	give up control	english
-aberrant	abnormal	english
-entice	tempt	english
-copious	abundant	english
-morph	change dramatically	english
-upheaval	a great change	english
-inimitable	without equal	english
-fickle	change unpredictably	english
-taper off	to become gradually smaller or less frequent	english
-attenuate	taper off	english
-nadir	lowest point	english
-upswing	an increase or improvement	english
-persistent	lasting for long time or difficult to get rid of	english
-imprint	v. to make a surface by pressing sth into it for fix sth firmly in the memory	english
-permeate	v. to spread through something and be present in every part of it	english
-contagious	adj.  spread from one person or organism to another	english
-imbide	absorb ideas (Plato .. Socrates' teaching to such an extent that he was able to write volumes of work that he directly attributed)	english
-opaque	tough to understand	english
-arbitrary	random	english
-subsistence farming	"that provides enough food for the farmer and their family to live on, but not enough for them to sell"	english
-clich�	betray a lack of origins	english
-tatalizing	tormenting or teasing with the sight or promise of something unobtainable.	english
-oblique	"difficult to understand (Mr Golding delivered an... warning, talking of the danger of sudden action.)"	english
-pentameter	is a poetic meter	english
-strata	"a level or class to which people are assigned according to their social status, education, or income."	english
-surmise	suppose that something is true without having evidence to confirm it	english
-sediment	matter that settles to the bottom of a liquid; dregs	english
-convoluted	extremely complex and difficult to follow	english
-abstruse	incomprehensible (Physics textbooks can seem so ...to the uninitiated that readers feel as though they are looking at hieroglyphics)	english
-graft	corruption (In countries with rampant ..getting a driver's license can require no more than paying an official)	english
-invective	"abusive language (The internet has unleashed the ...in many of us, many people post stinging criticism on the comment section)"	english
-poignant	"emotionally touching (After the Montagues and Capulets discover the dead bodies of Romeo and Juliet, in the play's most ..moment, the two griefstricken families agree to end their feud once and for all)"	english
-lugubrious	"overly sad (at the funeral, ...song filled the small church)"	english
-hackneyed	cliché (Cheryl rolled her eyes when she heard the lecturer's ...advice to be true to yourself	english
-proselytize	"attempt to convert (Lise loves her Mac but says little about it; by contrast, Jake will ..., interrogating anyone with an Android about why she didn't purchase an iPhone)"	english
-arcane	obscure (Most college franternities are known for ...rituals that those hoping to join the fraternity must learn)	english
-maudlin	"overly emotional (Just as those who were alive during the 70s are mortified that they once cavorted about in bellbottoms, many who lived during the 80s are aghast at the ... pop songs they used to enjoy - really, just what exactly is a total eclipse of the heart?)"	english
-byzantine	"overly complex (Getting a drive's license is not simply a matter of taking a test, the regulations and procedures are so ... that many have found themselves at the mercy of the department of Motor vehicles)"	english
-brook	"put up with (While she was at the chalkboard, the teacher did not ... any form of talking - even a tiny peep resulted in afternoon detention)"	english
-immutable	"not changeable (Taxes are one of the ... laws of the land, so there is no use arguing about paying them)"	english
-ineffable	"cant be put in words (While art critics can occasionally pinpoint a work's greatness, much of why a piece captures our imaginations is completely ..."	english
-unscrupulous	"unethical (In the courtroom, the lawyer was .. , using every manner of deceit and manipulation to secure a victory for himself)"	english
-incongruous	lacking harmony (the vast economic inequality of modern society is .. With America's ideals.	english
-amalgam	"mixture (the bland's music was an .. Of hihphop, flamenco and jazz, blening the three styles with suprising results)"	english
-mournful	sorrowful	english
-elegiac	mournful (Few can listen to the ... opening bars of the Moonlight sonata without feeling the urge to cry)	english
-sanguin	"cheerful (with the prospect of having to learn 3,000 words during the course of the summer, Paul was anything but ...)"	english
-peruse	"read closely (Instead of ... important documents, people all too often rush to the bottom of the page and plaster their signatures at the bottom.)"	english
-anodyne	"that which soothes (Muzak, which is played in department stores, is intended to be an ... but is often so cheesy and over the top that customers become irritated)"	english
-versatile	able to change easily	english
-protean	versatile	english
-wax	"increase gradually (her enthusiasm for the diva's new album only waxed with each song, by the end of the album, it was her favourite CD yet.)"	english
-inflammatory	controversial	english
-inkling	vague sense	english
-tumult	"chaos, confusion"	english
-esoteric	understood by few	english
-quixotic	"wildly impractical. Example: for every thousand startups with quixotic plans to be the next big name in ecommere, only a handful ever become profitable"	english
-pampered	given special treatment that makes you feel as comfortable as possible or gives you whatever you want	english
-cosseted	overly pampered	english
-sterling	"excellent, valuable"	english
-tangential	(of a subject or activity) different from or not directly connected with the one you are talking about or doing	english
-creed	a set of beliefs that influences the way you live	english
-ostensible	appearing or claiming to be one thing when it is really something else	english
-exonerate	free from blame. Eg: the document clearly indicated that Nick was out of the state at the time of the crime and so served to ... him of any charges	english
-defiant	proudly refusing to obey authority	english
-proscribe	ban	english
-punctilious	overly precise	english
-malfeasance	misconduct	english
-involved	complicated	english
-verisimilitude	appearance of truth	english
-tirade	angry speech	english
-elusive	"hard to pin down, to describe, find, achieve, or remember"	english
-chimera	illusion	english
-apothegm	short saying	english
-trite	lacking originality	english
-belligerent	eager to fight	english
-machinate	scheme	english
-unpropitious	unlikely to be successful	english
-ostracize	exclude	english
-diatribe	verbal attack	english
-holy	related to religion or a god	english
-consecrate	make holy	english
-pertinent	revelant	english
-decorum	proper conduct	english
-equivocate	speak vaguely	english
-discourse	written or spoken communication or debate.	english
-didacticism	"Didacticism is a term that refers to a particular philosophy in art and literature that emphasizes the idea that different forms of art and literature ought to convey information and instructions, along with pleasure and entertainment."	english
-nectar	a sugar-rich liquid produced by plants	english
-secrete	produce and discharge (a substance)	english
-ubiquitous	adj. found or existing everywhere	english
-Fruition	The state of being real	english
-universal	"of, affecting, or done by all people or things in the world or in a particular group; applicable to all cases."	english
-interior	n. of something is the inside part of it	english
-confine	prison	english
-conspicuous	"obvious (Among the tall trees and flower fields, the building seemed out of place with its ...,col concrete and angular steel exterior.)"	english
-factitious	artifical (The defendant's story was largely ... and did not accord with eyewitness testimonies)	english
-convivial	friendly and lively (The wedding reception was ... ; friends who hadn't seen each other for ages drank and ate together before heading to the dance floor.)	english
-eponym	"derived from a name (Alexandria, Egypt is an .. Because it is named after the Alexander the Great)"	english
-rarefied	refined (Jack's vulgar jokes were not so successful in the ... environment of college professors)	english
-ascendancy	dominant position (the ... of the Carishad water polo team is clear - they have a decade of championships behind them)	english
-taciturn	quiet	english
-prevalent	worldwide spread	english
-haphazard	unorganized	english
-hush	"a sudden calm, silent"	english
-courteous	nice and showing respect        	english
-bashful	feeling embarrassed due to modesty	english
-Vocation	"(n) any trade, profession, or occupation; a sense of fitness or special calling for one's work"	english
-chivalrous	"marked by honor, courtesy, and courage"	english
-yammer	to whine or complain	english
-assiduously	with great care	english
-debonair	"sophisticated, charming"	english
-contemptuous	scornful	english
-lament	a passionate expression of grief or sorrow	english
-demean	"insult (at first the soccer players bantered back and forth, but as soon as one of the players became ...)"	english
-avid	"enthusiastice, keen"	english
-miser	one who is cheap	english
-disingenuous	pretending to be honest	english
-affluent	wealthy	english
-accolade	"high praise (Jean Paul-Sartre was not a fan of ... and such, he refused to accept the Nobel Prize for Literature in 1964)"	english
-indecorous	impolite	english
-dissipate	squander	english
-autocratic	tyrannical	english
-discreet	careful	english
-exemplar	model	english
-gratify	give (someone) pleasure or satisfaction.	english
-inferior	lower in rank	english
-manifestation	"an event, action, or object that clearly shows or embodies something, especially a theory or an abstract idea."	english
-bulldog	a person noted for courageous or stubborn tenacity	english
-reckless	doing something dangerous and not worrying about the risks and the possible results	english
-speculate	to guess possible answers to a question when you do not have enough information to be certain	english
-apostate	"rejector of faith (An ...of the Republican Party, Sheldon has yet to become affiliated with any party and dubs himself as an independence)"	english
-macabre	gruesome (Edgar Allen Poe was considered the master of the ...: his stories vividly describe the moment leading up to - and often those moments after - a grisly death.)	english
-craven	"cowardly (Though the man could have at least alerted the police, he crouched ...in the corner as the old woman was mugged)"	english
-fractious	"irritable (We rarely invite my ...Uncle Nino over for dinner, he always complains about the food, and usually launches into a tirade on some touchy subject)"	english
-dissemble	"act deceitfully (To get close to the senator, the assassin ...his intentions, convincing many people that he was a reporter for a well-known newspaper)"	english
-panache	"distinctive style (Jim with his typical ...came to the wedding reception with a top hat, a cane, and a long cape covered in sequins)"	english
-hector	"bully (The boss's ...ing manner put off many employees, some of whom quit as soon as they found new jobs)"	english
-untrammeled	not limit (The whole notion of living ...inspired the American Revolution and was enshrined in the Declaration of Independence and the Constitution)	english
-sybarite	"lover of luxury (Despite the fact that he'd maxed out fifteen credit cards, Max was still a ...at heart)"	english
-saboteur	a person who deliberately damages or destroys things such as machines	english
-timid	showing a lack of courage or confidence	english
-cocoon	"the covering made of soft, smooth threads that surrounds and protects particular insects during the pupa stage as they develop into adult form"	english
-deranged	corrupt	english
-dignity	the state or quality of being worthy of honor or respect.	english
-cretin	"stupid, imbecile"	english
-dumbbell	foolish	english
-muttonhead	a person lacking intelligence	english
-prick	"vulgar, obsolete"	english
-superstition	"belief in things that are not real or possible, for example magic."	english
-nitwit	stupid and silly	english
-contrition	remorse (Those who show ..during their prison terms - especially when under review by a parole board - often get shortened sentences)	english
-staunch	"dependable (No longer a ...supporter of Anarchism, Terry now sometimes questions whether society would be better off withot defined hierachies)"	english
-incisive	acute	english
-wanton	"showing no limits (Due to ..behavior and crude language, the drunk man was thrown out of the bar and asked to never return)"	english
-panegyric	"formal praise (Dave asked Andrew to do just a simple toast, but Andrew launched into a full ..., enumeratiing a complete list of Dave achievements and admirable qualities)"	english
-dabbler	"someone who takes a slight and not very serious interest in a subject, or tries a particular activity for a short period"	english
-dilettante	"dabbler (Fred has no formal medical training, while he likes to claim authority on medical issues, he is little more than a ...)"	english
-gumption	"resourcefulness (Wallace Stegner lamented the lack of ..in the US during the sixties, claiming that no young person knew the value of work)"	english
-errant	"used to describe someone who behaves recklessly or who is irresponsible. For example, ""The errant driver caused a multi-car accident on the freeway"""	english
-gregarious	"sociable (Often we think that great leaders are those who are gregarious, always in the middle of a large group of people, yet, as Mahatma Gandhi and many others have shown us, leaders can also be introverted)"	english
-pollyannaish	"overly optimistic (Even in the midst of a lousy sales quarter, Debbie remained ...,never losing her shrill voice and wide smile, even when prospective customers hung up on her)"	english
-ersatz	"fake (The car dealer's ...laughter was immediately followed by a price quote, one that Shelly found highly inflated)"	english
-acerbic	"harsh (Most movie critics are ..towards summer blockbusters, often refering to them as garbage)"	english
-jejune	"immature (Although many top chefs have secured culinary foam's popularity in haute cuisine, Waters criticizes it for being ...and unfilling)"	english
-temerity	fearless daring (No child has the ..to go in the rundown house at the end of the street and see if it is haunted)	english
-vilify	"speak ill of (Todd was noble after the divorce, choosing to say only complimentary things abot Barbara, but Barbara did not hesitate to ..Todd)"	english
-choleric	"easily angered (while a brilliant lecturer, Mr. Dawson came across as..and unapproachable -- very rarely did students come to his office hours)"	english
-obdurate	stubborn (no number of pleas and bribes would get him to change his ...attitude)	english
-magnanimous	"likely to forgive (He was a great sportman, in defeat he was complementary and in victory he was ..)"	english
-pontificate	"speak pompously (The vice-president would often ...about economic theory, as if no oneelse in the room were qualified to speak on the topic)"	english
-raconteur	"storyteller (Jude is entertaining, but he is no .., beyond the handful of amusing stories he has memorized he has absolutely no spontaneous story-telling ability)"	english
-perspicacious	"very insightful (Many modern observers regard Eisenhower as .., particularly in his accurate prediction of the growth of the military.)"	english
-grumpy	bad tempered and irritable	english
-bilious	"grumpy (Rex was ..all morning, and his face would only take on a look of contentedness when he'd had his morning cup of coffee)"	english
-unstinting	"very generous (Helen is ...with her time, often spending hours at the house of a sick friend)"	english
-stoop to	a posture in which the head and shoulders are habitually bent forward.	english
-deign	stoop to (The master of the house never .. To answer questions from the servants)	english
-guffaw	"laugh loudly (Whenever the jester fell to the ground in mock pain, the king .., exposing his yellow, fang-like teeth.)"	english
-cadeverous	corpse-like (Some actors take challenging roles in which they have to lose so much weight that they appear ...)	english
-intrepid	fearless (Captain Ahab was an ..captain whose reckless and fearless style ultimately leads to his downfall)	english
-claustrophobia	extreme or irrational fear of confined places	english
-pugnacious	"combative (The comedian told one flat joke after another, and when the audience started booing, he ... spat back at them,""Hey you think this is easy - why don't you buffoons give it a shot?"")"	english
-supercilious	"arrogant (Nelly fet the Quiz Bowl director acted ... towards the underclassmen; really she fumed, must he act so preternaturally omniscient each time he intones some obscure fact)"	english
-besmirch	"dishonor (The prince's distasteful choice of words ...not only his own name, but the reputation of the entire royal family.)"	english
-begrudge	"envy (Sitting all alone in his room, Harvey ... the happiness of the other children playing outside his window)"	english
-besiege	"harass (After discovering a priceless artifact in her backyard, Jane was ...by phone calls, emails, and reporters all trying to buy, hold or see the rare piece of history)"	english
-boast about	"express something that they have done or that they own, they talk about it very proudly, in a way that other people may find irritating or offensive"	english
-quip	"witty remark (in one of the most famous .. About classical music, Mark Twain said: Wagner's music is better than it sounds)"	english
-vaunted	"boasted about(For years, Mark talked up his Ping Pong game, yet when he entered the office tournament, his much .. Skills suddenly failed him and he lost all three games he played)"	english
-aesthete	"appreciator of beauty (A true ..., Marty would spend hours at the Guggenheim Museum, staring at the same Picasso)"	english
-implacable	unable to be calmed	english
-aboveboard	"honest (The mayor, despite his avunular face plastered about the city, was hardly ... - some concluded that it was his ingratiating smile that allowed him to engage in corrupt behaviour and get away with it)"	english
-behoove	"be one's duty (The teacher looked down at the student and said, It would ... you to be in class on time and complete your homework so that you don't repeat freshman English for a third straight year)"	english
-fastidious	"fussy (Whitney is ... about her shoes, arranging them on a shelf in a specific order, each pair evenly spaced)"	english
-ignoble	"dishonorable (In the 1920s, The world series was rigged -- an .. .act which baseball took decades to recover from)"	english
-irritable	become annoy very easily	english
-peevish	"irritable (Our office manager is ..., so the rest of us tip-toe around him, hoping not to set off another one of his fits)"	english
-clumsy	heavyhanded	english
-maladroit	"clumsy (As a child she was quite .. But as an adult, she has become an adept dancer)"	english
-unprepossessing	"unremarkable (World leaders coming to meet Gandhi would expect a towering sage, and often would be surprised by the ... little man dressed only in a loincloth and shawl)"	english
-schadenfreude	"joy in others' suffering (From his warm apartment window, Stanley reveled in .. As he laughed at the figures below, huddled together in the artic chill)"	english
-facetious	"humorous (... behaviour will not be tolerated during sex education class, it's time for all of you to treat these matters like mature adults)"	english
-sycophant	"flatterer (The CEO was unaware of the damaging consequences of his choices, largely because he surrounded himself with ... who would never dare criticize him.)"	english
-ostentatious	"showy (Matt wanted to buy stone lions for front of the house, but Cynthia convinced him that such a display would be too .. For a modest house in an unassuming neighborhood)"	english
-snide	"indirect mocking (The chairman interpreted Taylor's question about promotions as a .. Remark, but in all innocence Taylor was trying to figure out the company's process)"	english
-mendicant	beggar (Tolsoy was an arisocrat but he strove to understand the Christianity of the Russian peasnt by wandering among them as a ..)	english
-myopic	shortsighted (The company ultimately went out of business because the ... managers couldn't predict the changes in their industry)	english
-lascivious	"perverted (Lolita is a challenging novel for many, not necessarily because of the elevated prose style but because of the depravity of the main character, Humbert Humbert, who, as an old, .. Man, fall in lowve with a girl)"	english
-inanity	silliness	english
-insolent	rude	english
-frenzied	"foolhardy (Wherever the bowl haircut teen idon went his legions of screaming fans ran through the street ..., hoping for a glance at his boyish face)"	english
-amok	frenzied	english
-garrulous	talkative	english
-infatuated	possessed with an intense but short-lived passion or admiration for someone.	english
-besotted	very infatuated	english
-indigent	poor	english
-scintillating	brilliant	english
-vacuous	lacking intelligence	english
-bow to	"to do what someone else wants you to do, usually unwillingly"	english
-kowtow	bow to (Paul ... to his boss so often the boss herself became nauseated by his sycophancy)	english
-fell	"evil (For fans of the Harry Potters, the ... Lord Voldermort who terrorized poor Harry for seven lengthy installments has finally been vanquishedly by the forces of good - unless, that is, JK Rowling decides to come out of retirement.)"	english
-rile	annoy (dan is usually calm and balanced but it takes only one intense glare from Sabrina to .. Him)	english
-viracious	"not live directly (The advent of twitter is a celebrity stalker's dream, as he or she can - through hundreds of intimate tweets - ... live the life of a famous person.)"	english
-cupidity	greed for money (Some believe people that amassing as much wealth as possible is the meaning to life - yet they often realize that .. Brings anything but happiness)	english
-callow	inexperienced (Both Los Angeles and New York are known for ... out of towners hoping to make it big)	english
-haughty	arrogant (The ... manager didn't believe that any of his subordinates could ever have an insight as brilliant his own.)	english
-timorous	shy	english
-holier-than-thou	charaterized by an attitude of moral superiority	english
-sanctimonious	"holier-than-thou (Even during the quiet sanctity of evening prayer, she held her chin high, a ... sneer forming on her face as she eyed those who were attending church for the first time)"	english
-hoary	"ancient (Most workout gurus are young, fit people, whereas most yoga gurus are ... men with long white beards)"	english
-tawdry	"cheap, showy (Carol expected to find New York city magical, the way so many movies had portrayed it, but she was surprised how often... displays took the place of genuine elegance)"	english
-lampoon	poke fun at (Mark Twain understood that ... a bad idea with humor was the most effective criticism)	english
-plucky	courageous	english
-impulsive	having the power of or activity driving or impelling	english
-capricious	impulsive	english
-insipid	"dull, bland"	english
-mettlesome	courageous	english
-brooding	worried	english
-sullen	brooding	english
-vulgar	trivial	english
-ribald	comically vulgar	english
-alacrity	eager willingness	english
-humdrum	lacking excitement	english
-remoseful	feeling sad and guilty	english
-contrite	remorseful	english
-impetuous	rash	english
-confound	utterly confuse	english
-yearn	"asprie, crave"	english
-pine	yearn for	english
-asperity	harshness of manner	english
-diabolical	wicked	english
-destitute	poor	english
-con artist	a person who deceives others	english
-erudite	scholarly	english
-deception	subterfuge	english
-artless	without deception	english
-despot	tyrant	english
-loath	reluctant	english
-derogative	insulting	english
-obstinate	stubborn	english
-fecund	mentally productive	english
-vituperate	scold hashly	english
-aplomb	coolness under strain	english
-phlegmatic	not showing emotion	english
-martinet	disciplinarian	english
-effrontery	cheeky behaviour	english
-urbane	sophisticated	english
-philistine	hater of culture	english
-imprudent	not wise	english
-penurious	poor	english
-boorish	ill-mannered	english
-intimidate	threaten	english
-cow	intimidate	english
-vehement	intensely emotional	english
-self-effacing	"modest. The most admirable teachers and respected leaders are those who are (blank), directing attention and praise to their students and workers"	english
-consummate	"masterful. Tyler was (blank) musician: he was able to play the guitar, harmonica, and the drum at the same time"	english
-warlike	belligerent	english
-bellicose	warlike	english
-rash	softheaded	english
-foolhardy	rash	english
-reflex	a physical reaction to something that you cannot control	english
-pliantiff	someone who makes a legal complaint against someone else in court	english
-bristle	react angrily	english
-browbeat	"boss around bully. Example: During the interrogation, the suspect was browbeaten into signing a false confession."	english
-grouch	".n, .v a person who often complains"	english
-curmudgeon	"grouch. (Eg: Since Uncle Mike was the family (blank), each thanksgiving he was plied with copious amount of wine, in the hope that he would become less grouchy)"	english
-paternalistic	making decisions for other people rather than letting them take responsibility for their own lives	english
-congenital	(of a disease or physical abnormality) present from birth	english
-anathema	something that is strongly disliked or disapproved of	english
-desperado	"someone who is willing to do things that involve risk or danger, often criminal things"	english
-ordain	to officially make someone a priest or other religious leader	english
-innocuous	completely harmless	english
-deceit	keep the truth hidden	english
-domineering	bossy	english
-imperious	domineering. Eg. Children are .. With each other before they learn that earning someone's respect is better than demanding	english
-conniving	conspiring to do bad	english
-stalwart	dependable	english
-abjure	give up	english
-fledging	inexperienced	english
-exalt	"praise highly. Eg: the teenage ... the rock star, covering their bedrooms with posters of him."	english
-prosaic	dull	english
-exasperate	annoy	english
-eminent	highly respected	english
-voracious	very hungry	english
-ingenuity	cleverness	english
-resignation	accepting the unpleasant	english
-solicitous	anxious to please	english
-capitulate	surrender	english
-hubris	excessive pride	english
-pompous	arrogant	english
-grandiloquent	pompous	english
-apathetic	uncaring	english
-complaisance	willingness to please others by being polite and fitting in with their plans	english
-hauter	extreme pride	english
-miscreant	lawbreaker	english
-impecunious	lacking money	english
-peculiarity	"the quality of being strange or unusual, or an unusual characteristic or habit"	english
-idiosyncrasy	peculiarity	english
-percipient	perceptive	english
-irascible	easily angered	english
-retiring	shy	english
-pundit	expert	english
-firebrand	troublemaker	english
-gaffe	social blunder	english
-ethereal	extremely delicate	english
-officious	meddlesome	english
-emulate	imitate	english
-flippant	not showing respect	english
-credulity	tendency to believe	english
-scornful	look down sb	english
-contemptuous	scornful	english
-patronize	treat condescendingly	english
-scrupulous	using extreme care	english
-sagacious	wise	english
-dovetail	fit together tightly	english
-sardonic	mocking	english
-inure	"v. to accustom or become accustomed to something, especially something unpleasant or difficult"	english
-unimpeachable	blameless	english
-puissant	powerful	english
-tribulation	suffering	english
-smug	self-satisfied	english
-deride	v. treat or speak of with contempt	english
-dolorous	sorrowful	english
-affable	likeable	english
-uncanny	"strange, unsetting"	english
-anemic	lacking energy	english
-concede	admit wrongdoing	english
-spendthrift	wasteful with money	english
-precipitate	hasty	english
-tempestuous	intensely emotional	english
-fawn	flatter extremely	english
-noisome	foul-smelling	english
-avarice	greed	english
-weary	tiresome	english
-lethargic	weary	english
-witty	using words in a clever and funny way:	english
-epigram	witty saying	english
-illustrious	famous	english
-clemency	mercy	english
-enmity	hate	english
-endemic	native	english
-apprehension	anxiety	english
-malinger	avoid work	english
-patriotic	showing love for your country and being proud of it	english
-jingoist	overly patriotic	english
-grotesque	"strange and unpleasant, especially in a silly or slightly frightening way"	english
-antic	grotesque	english
-dog	pursue	english
-weepy	feeling likely to cry	english
-morose	gloomy	english
-lachrymose	weepy	english
-antipathy	hatred	english
-dismay	feeling of unhappiness and disapointment	english
-chargin	dismay	english
-nettlesome	annoying	english
-squander	waste	english
-trickery	wangle	english
-artific	trickery	english
-ebullient	enthusiastic	english
-aesthetic	relate to beauty	english
-outcast	a person who has been rejected by society or a social group.	english
-pariah	outcast	english
-creditable	good but not great	english
-steadfast	unwavering	english
-placate	to stop someone from feeling angry:	english
-aphorism	a short clever saying that is intended to express a general truth	english
-badger	pester	english
-dictatorial	extremely bossy	english
-commendable	deserving praise	english
-laudable	praiseworthy	english
-benigh	harmless	english
-hoodwink	deceive	english
-swindle	dupe	english
-cerebral	brainy	english
-snub	insult someone by not giving them any attention or treating them as they are not important	english
-prone to do	likely to suffer from an illness or show a particular negative characteristic:	english
-toss off the most pointed barbs	deploy the harshest insults	english
-rhetorical	intended to seem important or influence people:	english
-clemency	kindness when giving a punishment	english
-wanton	"(of something bad, such as damage, cruelty, waste) extreme and showing no care at all"	english
-toil over	"To work continually, diligently, and strenuously to complete something"	english
-ambivalent	"having two opposing feelings at the same time, or being uncertain about how you feel:"	english
-messiah	a leader who is believed to have the power to solve the world's problems	english
-Reverential	"caused by, or full of respect and admiration"	english
-splurge on	v. spend a lot of money on buying goods esp. expensive one	english
-manifold	adj. many and different types	english
-distill	v. extract the most essential meaning/aspect	english
-scrumptious	extremely appetizing or delicious	english
-effervescent	bubbly	english
-cornucopia	abundant supply	english
-profusion	abundance	english
-hodgepodge	mixture	english
-compound	make more intense	english
-amply	fully (The boat was amply supplied for its year at sea)	english
-antiquated	old	english
-iconoclastic	defying tradition	english
-nonchalant	appearing unconcerned	english
-impeccable	flawless	english
-meteoric	very fast	english
-asteroid	is a minor planet of the inner Solar System	english
-ceres	is the largest object in the asteroid belt between the orbits of Mars and Jupiter	english
-dab	press against (something) lightly with a piece of absorbent material in order to clean or dry it.	english
-smear	coat or mark (something) messily or carelessly with a greasy or sticky substance	english
-delicate	fragile	english
-glut	excessive supply (the Internet offers such a ...of news related stories that many find it difficult to know which story to read first.)	english
-gelatinous	substances or mixtures are wet and sticky	english
-flammable	"chemicals, gases, cloth, or other things catch fire and burn easily."	english
-pithy	"concise yet expressive (I enjoy reading the Daodejing for its ..and insightful prose, it always give me something to think about)"	english
-plodding	"slow-moving (Charlie may seem to run at a ...pace, but he is an ultramarathoner, meaning he runs distances of up to 100 miles, and can run for ten hours at a stretch)"	english
-immure	"confine (The modern supermarket experience makes many feel claustrophobic, as they are ... in walls upon walls of products)"	english
-conflate	"mix together (In her recent book, the author ... several genres -- the detective story, the teen thriller and the vampire romance - to create a memorable read)"	english
-circumscribe	restrict with limit (Their tour of South America was... so that they saw only popular destinations and avoided the dangerous parts of cities)	english
-sartorial	"relating to clothes (Monte was astute at navigating the world of finance, ...ly, however, he was found wanting - he typically would attempt to complement his beige tie with a gray suit and white pants)"	english
-expurgate	"censor (The censor .. Every reference to sex and and drugs, converting the rapper's raunchy flow into a series of bleeps)"	english
-genteel	refined (A live string quarter would provide a more .. Air to the wedding than would a folk singer)	english
-ponderous	"moving slowly (Landen with 20 kilograms of college text boooks, the freshman move .. across the campus)"	english
-veneer	"disguising layer (Mark Twain referred to the Victorian Period in America as the Gilded Age, implying the ample moral corruption that lay beneath a mere ... of respectability)"	english
-ephemeral	"short-lived (The lifespan of a mayfly is ..., lasting from a few hours to a couple of days)"	english
-pittance	small amount (Vinny's uncle beamed smugly about how he'd offered his nephew fifty dollars for his Harvard tuition; even twice the amount would have been a mere pittance)	english
-magisterial	domineering	english
-dearth	shortage	english
-opulence	wealth	english
-impregnable	indestructible	english
-unadorned	"plain and simple, with little or no make up/ decoration"	english
-austere	unadorned	english
-hinder	to limit the ability of someone to do something	english
-stymie	hinder	english
-obstreperous	noisily defiant	english
-boon	helpful thing	english
-imponderable	difficult to assess	english
-juxtapose	place side by side	english
-unflappable	cool under pressure	english
-mellifluous	sweet-sounding	english
-inviolate	sacred	english
-eclectic	having a variety	english
-pecuniary	relating to money	english
-fuse	to join together physically	english
-coalesce	fuse	english
-juggernaut	unstoppable force	english
-denouement	resolution of a story	english
-dispatch	"speed, efficiency"	english
-disparate	fundamentally different	english
-malodorous	stinky	english
-dilapidated	run down	english
-histrionic	over theartrical	english
-celerity	quickness	english
-subtlety	a small but important detail	english
-nuance	subtlety	english
-inchoate	not fully formed	english
-transient	short-lasting	english
-unseasoning	not matured or developed by growth or passage of time	english
-wreaking havoc	n. used to describe the destructive or chaotic effects of something or someone	english
-embark on	pv. start something new	english
-hitherto	adv. until now	english
-vault out of	" v. quickly exit or escape a situation or place by jumping over it, often implying the use of hands or a pole for support"	english
-gin up	v. stir up or generate some level of enthusiasm or support for something	english
-intrude	to come or go in without permission or welcome	english
-heyday	pinnacle	english
-bemoan	"An expression of grief, suffering, or sadness."	english
-thwart	v. To prevent; to halt; to cause to fail; to foil; to frustrate.	english
-impending	about to happen	english
-animosity	extreme hostility (The governor's animosity toward his rival was only inflamed when the latter spread false lies regarding the governor's first term)	english
-meticulous	detail oriented	english
-jubilant	overjoyed	english
-corroborate	confirm (Her claim that frog populations were falling precipitously in Central America was ... by locals)	english
-unassailable	immune to attack	english
-unruly	"noisy, uncontrollable"	english
-intermittent	occuring on and off	english
-transitory	short-lasting	english
-undermine	erode the foundation	english
-deteriorate	become progressively worse	english
-appalling	causing shock or dismay; horrific.	english
-inevitable	"certain to happen, unavoidable"	english
-hegemony	"dominance (Until the Spanish Amada was defeated in 1587, Spain had ...over the seas, controlling waters stretching as far as the Americas)"	english
-arrogate	"seize without authority (Arriving at the small town, the outlaw ..the privileges of a lord, asking the frightened citizens to provide foo, drink and entertainment)"	english
-exhort	"encourage (Nelson's parent ..him to study medicine, urging him to choose a respectable profession, intransigent, Nelson left home to become a grffiti artist)"	english
-objurgate	scold severely (The manager spent an hour ... the employee in the hopes that he would not make these mistakes again)	english
-strife	strong disagreement or fighting (Money is a major cause of ... in many marriages. )	english
-broadside	verbal attack (Political ...are usually strongest in the weeks leading up to a national election)	english
-internecine	"marked by internal strife (The guerilla group, which had become so powerful as to own the state police, was finally destroyed by an ...conflict)"	english
-atavism	throwback (Much of modern art movement was an ...to a style of art found only in small villages through Africa and South America)	english
-junta	"group seizing power (As dangerous of a threat as North Korea is, some analysts believe that were a .. Suddenly to gain power, it could be even more unpredictable and bellicose than the current leadership)"	english
-mollify	"soothe (In the morning, Harriat was unable to ...Harry, if he happened to become angry, unless he had his cup of coffee)"	english
-zeitgeist	spirit of the times (Each decade has it own ...-the 1990's was a prosperous time in which the promise of the American Dream never seemed more palpable)	english
-lionize	"celebrate (Students in the US learn to ...Jefferson, Franklin, and Washington because they are the founding fathers of the nation)"	english
-goad	"aggressively urge on (Doug did not want to enter the race, but Jim, through a steady stream of taunts, ... him into signing up for it)"	english
-respite	"pause for work (Every afternoon, the small company has a respite in which workers play football or board games)"	english
-vanquish	"defeat thoroughly (for years, Argentina would dominate in World Cup qualifying matches, only to be ... by one of the European countries during the late stages of the tournament)"	english
-anomalous	"not normal (According to those who do not believe in climate change, the extreme weather over the last five years is simply ... - daily temperatures should return to their old averages, they believe)"	english
-melee	"wild fight (After enduring daily taunts about my name, I became enraged and pummeled the schoolyard bully and his sycophantic friend in a brutal ...)"	english
-gerrymander	"manipulate votes (years ago, savvy politicians had ... the city center to ensure their re-election)"	english
-malady	illness (The town was struck by a ... throughout the winter that left most people sick in bed for two weeks)	english
-amorphous	"shapeless (His study plan for the GRE was at best ..., he would do questions from random pages in any one of seven test prep books)"	english
-phantasmagorical	"illusive (those suffered from malaria fal into a feverish sleep, their world a whirligig of...; if they recover, they are unsure of what actually took place and what was simply a product of their febrile imaginations)"	english
-rapprochement	reconciliation	english
-acme	"highest point (The new Cessna airplanes will be the .. Of comfort, offering reclining seats and ample legroon)"	english
-flounder	struggle	english
-peripatetic	travelling on foot	english
-tender	offer up formally. The government was loath to tender more money in the fear that it might set off inflation	english
-bereft	sad because of loss	english
-forthcoming	easily available. The president announced that the senators were about to reach a compromise and that he was eager to read (blank) details of the bill	english
-collusion	secret cooperation	english
-vie	compete for	english
-tout	advertise strongly	english
-rescind	cancel official	english
-complicit	taking part in	english
-espionage	spying	english
-flee	escape by running away	english
-prevail	to get control or influence	english
-infiltrate	to secretly become part of a group in order to get information or to influence the way that group thinks or behaves	english
-armistice	"a formal agreement between two countries or groups at war to stop fighting for a particular time, especially to talk about possible peace"	english
-legitimate	conforming to the law or to rules.	english
-ballot	vote	english
-enormity	great wickedness. Example: The (blank) of Pol Pot's regime is hard to capture in words -- within months hundreds of thousands of cambodians lost their lives.	english
-presentiment	sense of the future	english
-gubernatorial	relating to a state governor or the office of state governor	english
-hypocrisy	"a situation in which someone pretends to believe something that they do not really believe, or that is the opposite of what they do or say at another time"	english
-tempered	moderated in effect	english
-truculence	tendency to fight	english
-chastise	scold	english
-encumber	hold back	english
-moribund	about to die	english
-maxim	short saying	english
-serendipity	luck	english
-exacerbate	make worse	english
-blunder	"a serious mistake, usually caused by not taking care or thinking"	english
-retaliatory	avengeful	english
-reprisal	"retaliatory action (Eg: The Old Testament doctrine of an eye for an eye is not the kind of retailiation practiced in war, rather, an arm, a leg, and both ears are the ... for the smallest scratch)"	english
-vacillate	waver	english
-baleful	threatening	english
-subterfuge	"deceit. For example, Finally deciding to abandon all ...., Arthur revealed to Cindy everything about his secret affair over the past two years."""	english
-preemptive	done first	english
-precarious	dangerous	english
-perfunctory	done routinely	english
-conflagration	large fire	english
-incessant	not stopping	english
-disenfranchise	deprive of votes	english
-stealthy	quiet and careful in order not to be seen or heard	english
-surreptitious	stealthy	english
-halcyon	peaceful	english
-treacherous	involving betrayal	english
-conciliate	make peace with	english
-perpetuate	make happen indefinitely	english
-vindictive	seeking revenge	english
-admonish	warn	english
-corollary	consequence	english
-telltail	revealing	english
-encroach	to take control or possession of something in a gradual way and often without being noticed	english
-contemporary	existing or happening now	english
-entail	v. to make something necessary	english
-constitute	"v. to be a part of (local tax funding rose over 10 million pounds by 2018, ....ing an increased share)"	english
-expound on	pv. explain in detail	english
-hinge on	pv. to depend on	english
-quintessential	adj. representing the most perfect or most typical example of something	english
-akin to	adj.  ~ similar/like to	english
-uphold	v. conserve or defend a principal or law	english
-outsmart	v. to obtain advantage over someony by using your intelligence	english
-stem from	pv. start to developp as the result of something	english
-extrinsic	adj. not part of essential nature of someone or something	english
-intrinsic	"adj. belonging  naturally, essential"	english
-galvanize	v. shock or excite someone into taking action	english
-resort to	phrasal v.  you do not want to do because you cannot find any other way of achieving something	english
-instill	v. gradually but firmly establish (an idea or attitude) in a person's mind	english
-curb	v.n. restrain or control something	english
-nudge	v. gently tell someone to do without forcing them	english
-compel	v. force | oblige to do sth	english
-hindrance	one that creates difficulties	english
-exert	"v. use authority,influence to make sth happen | make an effort"	english
-budge	make or cause to make the slightest movement	english
-deterrence	the practice of dissuading bad behavior through the threat of significant punishment	english
-stringent	"(of regulations, requirements, or conditions) strict, precise, and exacting"	english
-utter	complete	english
-Realm	"Region, area"	english
-hefty	"Large in size, height, quantity"	english
-fortify	to strengthen	english
-languish	become weak	english
-preempt	take the place of	english
-primacy	of greatest importance	english
-betray	"reveal (with gold medal at stake, the gymnast awaited his turn, his quivering lip betraying his intense emotions)"	english
-afford	give opportunity for	english
-forthright	honest in speaking	english
-arduous	requiring great effort	english
-improvident	not careful	english
-hound	pursue relentlessly	english
-elude	fail to be grasped	english
-savvy	well-informed	english
-spartan	unconcerned with comfort	english
-pragmatic	practical	english
-intimation	indirect suggestion	english
-inarticulate	not speaking clearly	english
-evasive	avoiding commitment	english
-unyielding	completely unwilling to change a decision	english
-check	hold back from doing	english
-futile	pointless	english
-indifference	apathy	english
-adamant	unyielding	english
-resolve	determine	english
-mesmerize	to hold completely the attention or interest	english
-hypnotize	mesmerize	english
-articulate	(adj) having or showing the ability to speak fluently and coherently	english
-divergent	conformity to the law or to rules	english
-legitimacy	ability to be defended with logic or justification; validity.	english
-supersede	take the place of	english
-concur	agree	english
-keystone habits	small changes or habits that people introduce into their routines that unintentionally carry over into other aspects of their lives	english
-get the hang of it	begin to understand or realize how to do it	english
-red-herring	"something, especially a clue, that is or is intended to be misleading or distracting."	english
-demoralized	having lost confidence or hope; disheartened.	english
-incumbent	"necessary (Middle managers at times make important decisions, but real responsibility for the financial well-being of the corporation is ultimately ...on the CEO)"	english
-espouse	"support a cause (As a college student, Charlie ... Marxism, growing his beard out and railing against the evils of the free market)"	english
-untoward	inconvenient (Some professors find teaching ... as having to prepare for lectures and conduct office hours prevents them from focusing on their research)	english
-litany	"long account (Mr. Rogers spoke to a Senate committee and did not give a ...of reasons to keep funding the program, but instead, appealed to the basic human decency of all present)"	english
-disenchanted	disappointed with	english
-mockery	the sardonic action	english
-checkered	"disreputable (one by one, the presidential candidates dropped out of the race, their respective .. Past - from embezzlement to infidelity - sabotaging their campaigns)"	english
-trenchant	"incisive (Jill presented a rather superficial treatment of sales in Asia, but her ...analysis of sales in Europe inspired a number of insights into how to proceed in that market)"	english
-straying	mislead	english
-umbrage	"offense (Since he was so in love with her, he took .. At her comments, even though she had only meant to gently tease him)"	english
-superfluous	"more than necessary (How can we hope to stay open if we don't eliminate all ... spending , like catered meetings and free acupuncture Tuesday?)"	english
-cogent	convincing (A ... argument will change the minds of even the most skeptical audience)	english
-balk	"refuse to accept (The students were willing to clean up the broken glass, but when the teacher asked them to mop the entire floor, they...citing reasons why they needed to leave.)"	english
-semblance	"misleading appearance (While the banker maintained a ...of respectability in public, those who knew him well were familiar with his many crimes)"	english
-stance	a way of thinking about something	english
-utterance	statement	english
-opinionated	have very strong opinions and refuse to accept that they may be wrong	english
-dispensation	"exemption (Since her father is a billionaire, she is give .. From many of the school's policies)"	english
-fraternity	a group of people who have the same job or interest	english
-dogmatic	"opinionated (Bryan is ... in his belief that the earth is flat, claiming that all pictures of a spherical earth are computer generated)"	english
-excoriate	"criticize harshly (Entrusted with the prototye to his company's latest smartphone, Larry, during a late night karaoke bout, let the prototype slip into the hands of a rival company -- the next day Larry was ..., then fired.)"	english
-probity	"integrity (The ideal politician would have the ...to lead, but reality gravely falls short of the ideal of morally upright leaders)"	english
-jaundice	"bias (Shelly was .. Towards Olivia; though the two had once been best friends, Olivia had become class president, prom queen, and to make matters worse, the girlfriend of the one boy Shelly liked)"	english
-construe	interpret (The author's inability to take aside on the issue was .. By both his opponents and supporters as a sign of weakness)	english
-desiccated	lacking vitality (Few novelists over 80 are able to produce anything more than ...works - boring shadows of former books.)	english
-bridle	restrain (New curfew laws have ...people's tendency to go out at night)	english
-promulgate	"officially make known (The president wanted to ...the success of the treaty negotiations, but had to wait until Congress formally approved the agreement)"	english
-unconscionable	"unreasonable (The lawyer's demands were so ... that rather than pay an exorbitant sum or submit himself to any other inconveniences, the defendant decided to find a new lawyer)"	english
-moot	"irrelevant (Since the Board just terminated Steve as the CEO, the finance committee's opinion of his marketing plan for next year is now ..)"	english
-apposite	"appropriate (For a writer with such quick wit, Jonathan Swift has a rather .. Name)"	english
-redress	correct unfairness (Barry's ... for forgetting his wife's birthday two years in a row was surprising her with a trip to Tahiti)	english
-glean	"collect (Herb has given us no formal statement about his background, but from various hints, I have ... that he grew up in difficult circumstances)"	english
-malapropism	"confusing similar words (Whenever I looked glum, my mother would offer to share an amusing antidote wit me - an endearing ... of anecdote that never failed to cheer me up)"	english
-abrogate	"overturn a law (As part of the agreement between the labor union and the company, the worker .. Their right to strike for four years in exchange for better health insurance)"	english
-facile	"lacking depth (Many news shows provide .. Explanations to complex politics, so I prefer to read in-depth reporting of the New York Times)"	english
-stem	"limit growth (To .. The tide of applications, the prestigious Ivy requires that each applicant score at least 330 on the revised GRE)"	english
-concomitant	accompanying (... with his desire for nature was a desire for the culture and energy of a big city)	english
-pedestrian	"lacking imagination (while Nan was always engaged in philosophical speculation, her brother was occupied with far more ... concerns: how to earn a salary and run a household)"	english
-recrimination	"mutual attacks (The two brothers sat and cried, pointing fingers and making elaborate .. Of the others' guilt"	english
-circumvent	get out of duty	english
-incense	"make furious (When Herb bought football tickets for a game on the day of their wedding anniversary, Jill was ...)"	english
-culminate	"reach high point (Beethoven's musical genius ... in the 9th Symphony, which many consider his greatest work)"	english
-imbroglio	"confusing situation (The chef cook-off featured one gourmand who had the unfortunate distinction of mixing the wrong broths, creating an .. That diners would not soon forget)"	english
-inclement	"lacking mercy (the judge, ... as always gave the prisoner, despite all the tears, a full sentence)"	english
-impugn	"call into question (Though many initially tried to ... Darwin's theory, in scientific circles today, the idea is taken as truth)"	english
-snub	reject bluntly	english
-discursive	tangential	english
-blunt	insensitive	english
-brusquely	bluntly	english
-hedge	"limit a statement (when asked why he had decided to buy millions of share at the very moment the tech companies stock soared, the CEO hedged, mentioning something vague about gut instinct)"	english
-reproach	criticize	english
-indict	accuse formally	english
-deleterious	harmful	english
-hobble	hold back	english
-genial	aggreable	english
-wanting	"lacking. She did not think her vocabulary was (blank), yet there were so many words that inevitably she found a few she didn't know"	english
-approbatory	"showing approval. Although it might not be her best work, Hunter's new novel has received generally approbatory reviews."	english
-disabuse	"lead one from error. As a child, I was quickly (blank) of the notion that Santa Claus was a rotund benefactor of infinite largess"	english
-incriminate	"to make someone seem guilty, especially of a crime"	english
-inadvertent	unintentional	english
-irresolute	uncertain how to act	english
-bromide	unoriginal remark	english
-credence	belief	english
-vitriolic	hash in tone	english
-untenable	"indefensible. (Example: with the combination of Kepler's brillian theories and Galileo's telescopic observations, the old geocentric theory became (blank) to most of the educated people in Europe.)"	english
-complacent	contented to a fault	english
-assuage	make less severe	english
-cardinal	most important	english
-dispassionate	objective	english
-immaterial	irrelevant	english
-elicit	call forth	english
-squelch	suppress	english
-catalysm	violent upheaval	english
-unforthcoming	not cooperative	english
-rudimentary	basic	english
-refute	disprove	english
-rebuke	critize severely	english
-lacerate	distress deeply	english
-telling	significant	english
-adjudicate	judge	english
-moment	importance	english
-buttress	support	english
-debunk	prove to be false	english
-partiality	the fact of unfairly preferring or approving of something	english
-condemn	to criticize strongly for moral reason	english
-appeasement	"the act of giving the opposing side in an argument or war an advantage that they have demanded, in order to prevent further disagreement :"	english
-table	to delay discussion of a subject	english
-hog	n. a pig esp. one allowed to grow large so that it can be used as food	english
+吃饭	Eat a meal	chinese
+睡觉	Go to sleep	chinese
+看电影	Watch a movie	chinese
+上班	go to work	chinese
+打电话	Make a phone call	chinese
+买东西	Go shopping	chinese
+开车	Drive a car	chinese
+下雨	It's raining	chinese
+喝茶	Drink tea	chinese
 colossal	extremely large	english
+hog	n. a pig esp. one allowed to grow large so that it can be used as food	english
+table	to delay discussion of a subject	english
+appeasement	the act of giving the opposing side in an argument or war an advantage that they have demanded, in order to prevent further disagreement :	english
+condemn	to criticize strongly for moral reason	english
+partiality	the fact of unfairly preferring or approving of something	english
+debunk	prove to be false	english
+buttress	support	english
+moment	importance	english
+adjudicate	judge	english
+telling	significant	english
+lacerate	distress deeply	english
+rebuke	critize severely	english
+refute	disprove	english
+rudimentary	basic	english
+unforthcoming	not cooperative	english
+catalysm	violent upheaval	english
+squelch	suppress	english
+elicit	call forth	english
+immaterial	irrelevant	english
+dispassionate	objective	english
+cardinal	most important	english
+assuage	make less severe	english
+complacent	contented to a fault	english
+untenable	indefensible. (Example: with the combination of Kepler's brillian theories and Galileo's telescopic observations, the old geocentric theory became (blank) to most of the educated people in Europe.)	english
+vitriolic	hash in tone	english
+credence	belief	english
+bromide	unoriginal remark	english
+irresolute	uncertain how to act	english
+inadvertent	unintentional	english
+incriminate	to make someone seem guilty, especially of a crime	english
+disabuse	lead one from error. As a child, I was quickly (blank) of the notion that Santa Claus was a rotund benefactor of infinite largess	english
+approbatory	showing approval. Although it might not be her best work, Hunter's new novel has received generally approbatory reviews.	english
+wanting	lacking. She did not think her vocabulary was (blank), yet there were so many words that inevitably she found a few she didn't know	english
+genial	aggreable	english
+hobble	hold back	english
+deleterious	harmful	english
+indict	accuse formally	english
+reproach	criticize	english
+hedge	limit a statement (when asked why he had decided to buy millions of share at the very moment the tech companies stock soared, the CEO hedged, mentioning something vague about gut instinct)	english
+brusquely	bluntly	english
+blunt	insensitive	english
+discursive	tangential	english
+snub	reject bluntly	english
+impugn	call into question (Though many initially tried to ... Darwin's theory, in scientific circles today, the idea is taken as truth)	english
+inclement	lacking mercy (the judge, ... as always gave the prisoner, despite all the tears, a full sentence)	english
+imbroglio	confusing situation (The chef cook-off featured one gourmand who had the unfortunate distinction of mixing the wrong broths, creating an .. That diners would not soon forget)	english
+culminate	reach high point (Beethoven's musical genius ... in the 9th Symphony, which many consider his greatest work)	english
+incense	make furious (When Herb bought football tickets for a game on the day of their wedding anniversary, Jill was ...)	english
+circumvent	get out of duty	english
+recrimination	mutual attacks (The two brothers sat and cried, pointing fingers and making elaborate .. Of the others' guilt	english
+pedestrian	lacking imagination (while Nan was always engaged in philosophical speculation, her brother was occupied with far more ... concerns: how to earn a salary and run a household)	english
+concomitant	accompanying (... with his desire for nature was a desire for the culture and energy of a big city)	english
+stem	limit growth (To .. The tide of applications, the prestigious Ivy requires that each applicant score at least 330 on the revised GRE)	english
+facile	lacking depth (Many news shows provide .. Explanations to complex politics, so I prefer to read in-depth reporting of the New York Times)	english
+abrogate	overturn a law (As part of the agreement between the labor union and the company, the worker .. Their right to strike for four years in exchange for better health insurance)	english
+malapropism	confusing similar words (Whenever I looked glum, my mother would offer to share an amusing antidote wit me - an endearing ... of anecdote that never failed to cheer me up)	english
+glean	collect (Herb has given us no formal statement about his background, but from various hints, I have ... that he grew up in difficult circumstances)	english
+redress	correct unfairness (Barry's ... for forgetting his wife's birthday two years in a row was surprising her with a trip to Tahiti)	english
+apposite	appropriate (For a writer with such quick wit, Jonathan Swift has a rather .. Name)	english
+moot	irrelevant (Since the Board just terminated Steve as the CEO, the finance committee's opinion of his marketing plan for next year is now ..)	english
+unconscionable	unreasonable (The lawyer's demands were so ... that rather than pay an exorbitant sum or submit himself to any other inconveniences, the defendant decided to find a new lawyer)	english
+promulgate	officially make known (The president wanted to ...the success of the treaty negotiations, but had to wait until Congress formally approved the agreement)	english
+bridle	restrain (New curfew laws have ...people's tendency to go out at night)	english
+desiccated	lacking vitality (Few novelists over 80 are able to produce anything more than ...works - boring shadows of former books.)	english
+construe	interpret (The author's inability to take aside on the issue was .. By both his opponents and supporters as a sign of weakness)	english
+jaundice	bias (Shelly was .. Towards Olivia; though the two had once been best friends, Olivia had become class president, prom queen, and to make matters worse, the girlfriend of the one boy Shelly liked)	english
+probity	integrity (The ideal politician would have the ...to lead, but reality gravely falls short of the ideal of morally upright leaders)	english
+excoriate	criticize harshly (Entrusted with the prototye to his company's latest smartphone, Larry, during a late night karaoke bout, let the prototype slip into the hands of a rival company -- the next day Larry was ..., then fired.)	english
+dogmatic	opinionated (Bryan is ... in his belief that the earth is flat, claiming that all pictures of a spherical earth are computer generated)	english
+fraternity	a group of people who have the same job or interest	english
+dispensation	exemption (Since her father is a billionaire, she is give .. From many of the school's policies)	english
+opinionated	have very strong opinions and refuse to accept that they may be wrong	english
+utterance	statement	english
+stance	a way of thinking about something	english
+semblance	misleading appearance (While the banker maintained a ...of respectability in public, those who knew him well were familiar with his many crimes)	english
+balk	refuse to accept (The students were willing to clean up the broken glass, but when the teacher asked them to mop the entire floor, they...citing reasons why they needed to leave.)	english
+cogent	convincing (A ... argument will change the minds of even the most skeptical audience)	english
+superfluous	more than necessary (How can we hope to stay open if we don't eliminate all ... spending , like catered meetings and free acupuncture Tuesday?)	english
+umbrage	offense (Since he was so in love with her, he took .. At her comments, even though she had only meant to gently tease him)	english
+straying	mislead	english
+trenchant	incisive (Jill presented a rather superficial treatment of sales in Asia, but her ...analysis of sales in Europe inspired a number of insights into how to proceed in that market)	english
+checkered	disreputable (one by one, the presidential candidates dropped out of the race, their respective .. Past - from embezzlement to infidelity - sabotaging their campaigns)	english
+mockery	the sardonic action	english
+disenchanted	disappointed with	english
+litany	long account (Mr. Rogers spoke to a Senate committee and did not give a ...of reasons to keep funding the program, but instead, appealed to the basic human decency of all present)	english
+untoward	inconvenient (Some professors find teaching ... as having to prepare for lectures and conduct office hours prevents them from focusing on their research)	english
+espouse	support a cause (As a college student, Charlie ... Marxism, growing his beard out and railing against the evils of the free market)	english
+incumbent	necessary (Middle managers at times make important decisions, but real responsibility for the financial well-being of the corporation is ultimately ...on the CEO)	english
+demoralized	having lost confidence or hope; disheartened.	english
+red-herring	something, especially a clue, that is or is intended to be misleading or distracting.	english
+get the hang of it	begin to understand or realize how to do it	english
+keystone habits	small changes or habits that people introduce into their routines that unintentionally carry over into other aspects of their lives	english
+concur	agree	english
+supersede	take the place of	english
+legitimacy	ability to be defended with logic or justification; validity.	english
+divergent	conformity to the law or to rules	english
+articulate	(adj) having or showing the ability to speak fluently and coherently	english
+hypnotize	mesmerize	english
+mesmerize	to hold completely the attention or interest	english
+resolve	determine	english
+adamant	unyielding	english
+indifference	apathy	english
+futile	pointless	english
+check	hold back from doing	english
+unyielding	completely unwilling to change a decision	english
+evasive	avoiding commitment	english
+inarticulate	not speaking clearly	english
+intimation	indirect suggestion	english
+pragmatic	practical	english
+spartan	unconcerned with comfort	english
+savvy	well-informed	english
+elude	fail to be grasped	english
+hound	pursue relentlessly	english
+improvident	not careful	english
+arduous	requiring great effort	english
+forthright	honest in speaking	english
+afford	give opportunity for	english
+betray	reveal (with gold medal at stake, the gymnast awaited his turn, his quivering lip betraying his intense emotions)	english
+primacy	of greatest importance	english
+preempt	take the place of	english
+languish	become weak	english
+fortify	to strengthen	english
+hefty	Large in size, height, quantity	english
+Realm	Region, area	english
+utter	complete	english
+stringent	(of regulations, requirements, or conditions) strict, precise, and exacting	english
+deterrence	the practice of dissuading bad behavior through the threat of significant punishment	english
+budge	make or cause to make the slightest movement	english
+exert	v. use authority,influence to make sth happen | make an effort	english
+hindrance	one that creates difficulties	english
+compel	v. force | oblige to do sth	english
+nudge	v. gently tell someone to do without forcing them	english
+curb	v.n. restrain or control something	english
+instill	v. gradually but firmly establish (an idea or attitude) in a person's mind	english
+resort to	phrasal v.  you do not want to do because you cannot find any other way of achieving something	english
+galvanize	v. shock or excite someone into taking action	english
+intrinsic	adj. belonging  naturally, essential	english
+extrinsic	adj. not part of essential nature of someone or something	english
+stem from	pv. start to developp as the result of something	english
+outsmart	v. to obtain advantage over someony by using your intelligence	english
+uphold	v. conserve or defend a principal or law	english
+akin to	adj.  ~ similar/like to	english
+quintessential	adj. representing the most perfect or most typical example of something	english
+hinge on	pv. to depend on	english
+expound on	pv. explain in detail	english
+constitute	v. to be a part of (local tax funding rose over 10 million pounds by 2018, ....ing an increased share)	english
+entail	v. to make something necessary	english
+contemporary	existing or happening now	english
+encroach	to take control or possession of something in a gradual way and often without being noticed	english
+telltail	revealing	english
+corollary	consequence	english
+admonish	warn	english
+vindictive	seeking revenge	english
+perpetuate	make happen indefinitely	english
+conciliate	make peace with	english
+treacherous	involving betrayal	english
+halcyon	peaceful	english
+surreptitious	stealthy	english
+stealthy	quiet and careful in order not to be seen or heard	english
+disenfranchise	deprive of votes	english
+incessant	not stopping	english
+conflagration	large fire	english
+perfunctory	done routinely	english
+precarious	dangerous	english
+preemptive	done first	english
+subterfuge	deceit. For example, Finally deciding to abandon all ...., Arthur revealed to Cindy everything about his secret affair over the past two years.	english
+baleful	threatening	english
+vacillate	waver	english
+reprisal	retaliatory action (Eg: The Old Testament doctrine of an eye for an eye is not the kind of retailiation practiced in war, rather, an arm, a leg, and both ears are the ... for the smallest scratch)	english
+retaliatory	avengeful	english
+blunder	a serious mistake, usually caused by not taking care or thinking	english
+exacerbate	make worse	english
+serendipity	luck	english
+maxim	short saying	english
+moribund	about to die	english
+encumber	hold back	english
+chastise	scold	english
+truculence	tendency to fight	english
+tempered	moderated in effect	english
+hypocrisy	a situation in which someone pretends to believe something that they do not really believe, or that is the opposite of what they do or say at another time	english
+gubernatorial	relating to a state governor or the office of state governor	english
+presentiment	sense of the future	english
+enormity	great wickedness. Example: The (blank) of Pol Pot's regime is hard to capture in words -- within months hundreds of thousands of cambodians lost their lives.	english
+ballot	vote	english
+legitimate	conforming to the law or to rules.	english
+armistice	a formal agreement between two countries or groups at war to stop fighting for a particular time, especially to talk about possible peace	english
+infiltrate	to secretly become part of a group in order to get information or to influence the way that group thinks or behaves	english
+prevail	to get control or influence	english
+flee	escape by running away	english
+espionage	spying	english
+complicit	taking part in	english
+rescind	cancel official	english
+tout	advertise strongly	english
+vie	compete for	english
+collusion	secret cooperation	english
+forthcoming	easily available. The president announced that the senators were about to reach a compromise and that he was eager to read (blank) details of the bill	english
+bereft	sad because of loss	english
+tender	offer up formally. The government was loath to tender more money in the fear that it might set off inflation	english
+peripatetic	travelling on foot	english
+flounder	struggle	english
+acme	highest point (The new Cessna airplanes will be the .. Of comfort, offering reclining seats and ample legroon)	english
+rapprochement	reconciliation	english
+phantasmagorical	illusive (those suffered from malaria fal into a feverish sleep, their world a whirligig of...; if they recover, they are unsure of what actually took place and what was simply a product of their febrile imaginations)	english
+amorphous	shapeless (His study plan for the GRE was at best ..., he would do questions from random pages in any one of seven test prep books)	english
+malady	illness (The town was struck by a ... throughout the winter that left most people sick in bed for two weeks)	english
+gerrymander	manipulate votes (years ago, savvy politicians had ... the city center to ensure their re-election)	english
+melee	wild fight (After enduring daily taunts about my name, I became enraged and pummeled the schoolyard bully and his sycophantic friend in a brutal ...)	english
+anomalous	not normal (According to those who do not believe in climate change, the extreme weather over the last five years is simply ... - daily temperatures should return to their old averages, they believe)	english
+vanquish	defeat thoroughly (for years, Argentina would dominate in World Cup qualifying matches, only to be ... by one of the European countries during the late stages of the tournament)	english
+respite	pause for work (Every afternoon, the small company has a respite in which workers play football or board games)	english
+goad	aggressively urge on (Doug did not want to enter the race, but Jim, through a steady stream of taunts, ... him into signing up for it)	english
+lionize	celebrate (Students in the US learn to ...Jefferson, Franklin, and Washington because they are the founding fathers of the nation)	english
+zeitgeist	spirit of the times (Each decade has it own ...-the 1990's was a prosperous time in which the promise of the American Dream never seemed more palpable)	english
+mollify	soothe (In the morning, Harriat was unable to ...Harry, if he happened to become angry, unless he had his cup of coffee)	english
+junta	group seizing power (As dangerous of a threat as North Korea is, some analysts believe that were a .. Suddenly to gain power, it could be even more unpredictable and bellicose than the current leadership)	english
+atavism	throwback (Much of modern art movement was an ...to a style of art found only in small villages through Africa and South America)	english
+internecine	marked by internal strife (The guerilla group, which had become so powerful as to own the state police, was finally destroyed by an ...conflict)	english
+broadside	verbal attack (Political ...are usually strongest in the weeks leading up to a national election)	english
+strife	strong disagreement or fighting (Money is a major cause of ... in many marriages. )	english
+objurgate	scold severely (The manager spent an hour ... the employee in the hopes that he would not make these mistakes again)	english
+exhort	encourage (Nelson's parent ..him to study medicine, urging him to choose a respectable profession, intransigent, Nelson left home to become a grffiti artist)	english
+arrogate	seize without authority (Arriving at the small town, the outlaw ..the privileges of a lord, asking the frightened citizens to provide foo, drink and entertainment)	english
+hegemony	dominance (Until the Spanish Amada was defeated in 1587, Spain had ...over the seas, controlling waters stretching as far as the Americas)	english
+inevitable	certain to happen, unavoidable	english
+appalling	causing shock or dismay; horrific.	english
+deteriorate	become progressively worse	english
+undermine	erode the foundation	english
+transitory	short-lasting	english
+intermittent	occuring on and off	english
+unruly	noisy, uncontrollable	english
+unassailable	immune to attack	english
+corroborate	confirm (Her claim that frog populations were falling precipitously in Central America was ... by locals)	english
+jubilant	overjoyed	english
+meticulous	detail oriented	english
+animosity	extreme hostility (The governor's animosity toward his rival was only inflamed when the latter spread false lies regarding the governor's first term)	english
+impending	about to happen	english
+thwart	v. To prevent; to halt; to cause to fail; to foil; to frustrate.	english
+bemoan	An expression of grief, suffering, or sadness.	english
+heyday	pinnacle	english
+intrude	to come or go in without permission or welcome	english
+gin up	v. stir up or generate some level of enthusiasm or support for something	english
+vault out of	 v. quickly exit or escape a situation or place by jumping over it, often implying the use of hands or a pole for support	english
+hitherto	adv. until now	english
+embark on	pv. start something new	english
+wreaking havoc	n. used to describe the destructive or chaotic effects of something or someone	english
+unseasoning	not matured or developed by growth or passage of time	english
+transient	short-lasting	english
+inchoate	not fully formed	english
+nuance	subtlety	english
+subtlety	a small but important detail	english
+celerity	quickness	english
+histrionic	over theartrical	english
+dilapidated	run down	english
+malodorous	stinky	english
+disparate	fundamentally different	english
+dispatch	speed, efficiency	english
+denouement	resolution of a story	english
+juggernaut	unstoppable force	english
+coalesce	fuse	english
+fuse	to join together physically	english
+pecuniary	relating to money	english
+eclectic	having a variety	english
+inviolate	sacred	english
+mellifluous	sweet-sounding	english
+unflappable	cool under pressure	english
+juxtapose	place side by side	english
+imponderable	difficult to assess	english
+boon	helpful thing	english
+obstreperous	noisily defiant	english
+stymie	hinder	english
+hinder	to limit the ability of someone to do something	english
+austere	unadorned	english
+unadorned	plain and simple, with little or no make up/ decoration	english
+impregnable	indestructible	english
+opulence	wealth	english
+dearth	shortage	english
+magisterial	domineering	english
+pittance	small amount (Vinny's uncle beamed smugly about how he'd offered his nephew fifty dollars for his Harvard tuition; even twice the amount would have been a mere pittance)	english
+ephemeral	short-lived (The lifespan of a mayfly is ..., lasting from a few hours to a couple of days)	english
+veneer	disguising layer (Mark Twain referred to the Victorian Period in America as the Gilded Age, implying the ample moral corruption that lay beneath a mere ... of respectability)	english
+ponderous	moving slowly (Landen with 20 kilograms of college text boooks, the freshman move .. across the campus)	english
+genteel	refined (A live string quarter would provide a more .. Air to the wedding than would a folk singer)	english
+expurgate	censor (The censor .. Every reference to sex and and drugs, converting the rapper's raunchy flow into a series of bleeps)	english
+sartorial	relating to clothes (Monte was astute at navigating the world of finance, ...ly, however, he was found wanting - he typically would attempt to complement his beige tie with a gray suit and white pants)	english
+circumscribe	restrict with limit (Their tour of South America was... so that they saw only popular destinations and avoided the dangerous parts of cities)	english
+conflate	mix together (In her recent book, the author ... several genres -- the detective story, the teen thriller and the vampire romance - to create a memorable read)	english
+immure	confine (The modern supermarket experience makes many feel claustrophobic, as they are ... in walls upon walls of products)	english
+plodding	slow-moving (Charlie may seem to run at a ...pace, but he is an ultramarathoner, meaning he runs distances of up to 100 miles, and can run for ten hours at a stretch)	english
+pithy	concise yet expressive (I enjoy reading the Daodejing for its ..and insightful prose, it always give me something to think about)	english
+flammable	chemicals, gases, cloth, or other things catch fire and burn easily.	english
+gelatinous	substances or mixtures are wet and sticky	english
+glut	excessive supply (the Internet offers such a ...of news related stories that many find it difficult to know which story to read first.)	english
+delicate	fragile	english
+smear	coat or mark (something) messily or carelessly with a greasy or sticky substance	english
+dab	press against (something) lightly with a piece of absorbent material in order to clean or dry it.	english
+ceres	is the largest object in the asteroid belt between the orbits of Mars and Jupiter	english
+asteroid	is a minor planet of the inner Solar System	english
+meteoric	very fast	english
+impeccable	flawless	english
+nonchalant	appearing unconcerned	english
+iconoclastic	defying tradition	english
+antiquated	old	english
+amply	fully (The boat was amply supplied for its year at sea)	english
+compound	make more intense	english
+hodgepodge	mixture	english
+profusion	abundance	english
+cornucopia	abundant supply	english
+effervescent	bubbly	english
+scrumptious	extremely appetizing or delicious	english
+distill	v. extract the most essential meaning/aspect	english
+manifold	adj. many and different types	english
+splurge on	v. spend a lot of money on buying goods esp. expensive one	english
+Reverential	caused by, or full of respect and admiration	english
+messiah	a leader who is believed to have the power to solve the world's problems	english
+ambivalent	having two opposing feelings at the same time, or being uncertain about how you feel:	english
+toil over	To work continually, diligently, and strenuously to complete something	english
+wanton	(of something bad, such as damage, cruelty, waste) extreme and showing no care at all	english
+clemency	kindness when giving a punishment	english
+rhetorical	intended to seem important or influence people:	english
+toss off the most pointed barbs	deploy the harshest insults	english
+prone to do	likely to suffer from an illness or show a particular negative characteristic:	english
+snub	insult someone by not giving them any attention or treating them as they are not important	english
+cerebral	brainy	english
+swindle	dupe	english
+hoodwink	deceive	english
+benigh	harmless	english
+laudable	praiseworthy	english
+commendable	deserving praise	english
+dictatorial	extremely bossy	english
+badger	pester	english
+aphorism	a short clever saying that is intended to express a general truth	english
+placate	to stop someone from feeling angry:	english
+steadfast	unwavering	english
+creditable	good but not great	english
+pariah	outcast	english
+outcast	a person who has been rejected by society or a social group.	english
+aesthetic	relate to beauty	english
+ebullient	enthusiastic	english
+artific	trickery	english
+trickery	wangle	english
+squander	waste	english
+nettlesome	annoying	english
+chargin	dismay	english
+dismay	feeling of unhappiness and disapointment	english
+antipathy	hatred	english
+lachrymose	weepy	english
+morose	gloomy	english
+weepy	feeling likely to cry	english
+dog	pursue	english
+antic	grotesque	english
+grotesque	strange and unpleasant, especially in a silly or slightly frightening way	english
+jingoist	overly patriotic	english
+patriotic	showing love for your country and being proud of it	english
+malinger	avoid work	english
+apprehension	anxiety	english
+endemic	native	english
+enmity	hate	english
+clemency	mercy	english
+illustrious	famous	english
+epigram	witty saying	english
+witty	using words in a clever and funny way:	english
+lethargic	weary	english
+weary	tiresome	english
+avarice	greed	english
+noisome	foul-smelling	english
+fawn	flatter extremely	english
+tempestuous	intensely emotional	english
+precipitate	hasty	english
+spendthrift	wasteful with money	english
+concede	admit wrongdoing	english
+anemic	lacking energy	english
+uncanny	strange, unsetting	english
+affable	likeable	english
+dolorous	sorrowful	english
+deride	v. treat or speak of with contempt	english
+smug	self-satisfied	english
+tribulation	suffering	english
+puissant	powerful	english
+unimpeachable	blameless	english
+inure	v. to accustom or become accustomed to something, especially something unpleasant or difficult	english
+sardonic	mocking	english
+dovetail	fit together tightly	english
+sagacious	wise	english
+scrupulous	using extreme care	english
+patronize	treat condescendingly	english
+contemptuous	scornful	english
+scornful	look down sb	english
+credulity	tendency to believe	english
+flippant	not showing respect	english
+emulate	imitate	english
+officious	meddlesome	english
+ethereal	extremely delicate	english
+gaffe	social blunder	english
+firebrand	troublemaker	english
+pundit	expert	english
+retiring	shy	english
+irascible	easily angered	english
+percipient	perceptive	english
+idiosyncrasy	peculiarity	english
+peculiarity	the quality of being strange or unusual, or an unusual characteristic or habit	english
+impecunious	lacking money	english
+miscreant	lawbreaker	english
+hauter	extreme pride	english
+complaisance	willingness to please others by being polite and fitting in with their plans	english
+apathetic	uncaring	english
+grandiloquent	pompous	english
+pompous	arrogant	english
+hubris	excessive pride	english
+capitulate	surrender	english
+solicitous	anxious to please	english
+resignation	accepting the unpleasant	english
+ingenuity	cleverness	english
+voracious	very hungry	english
+eminent	highly respected	english
+exasperate	annoy	english
+prosaic	dull	english
+exalt	praise highly. Eg: the teenage ... the rock star, covering their bedrooms with posters of him.	english
+fledging	inexperienced	english
+abjure	give up	english
+stalwart	dependable	english
+conniving	conspiring to do bad	english
+imperious	domineering. Eg. Children are .. With each other before they learn that earning someone's respect is better than demanding	english
+domineering	bossy	english
+deceit	keep the truth hidden	english
+innocuous	completely harmless	english
+ordain	to officially make someone a priest or other religious leader	english
+desperado	someone who is willing to do things that involve risk or danger, often criminal things	english
+anathema	something that is strongly disliked or disapproved of	english
+congenital	(of a disease or physical abnormality) present from birth	english
+paternalistic	making decisions for other people rather than letting them take responsibility for their own lives	english
+curmudgeon	grouch. (Eg: Since Uncle Mike was the family (blank), each thanksgiving he was plied with copious amount of wine, in the hope that he would become less grouchy)	english
+grouch	.n, .v a person who often complains	english
+browbeat	boss around bully. Example: During the interrogation, the suspect was browbeaten into signing a false confession.	english
+bristle	react angrily	english
+pliantiff	someone who makes a legal complaint against someone else in court	english
+reflex	a physical reaction to something that you cannot control	english
+foolhardy	rash	english
+rash	softheaded	english
+bellicose	warlike	english
+warlike	belligerent	english
+consummate	masterful. Tyler was (blank) musician: he was able to play the guitar, harmonica, and the drum at the same time	english
+self-effacing	modest. The most admirable teachers and respected leaders are those who are (blank), directing attention and praise to their students and workers	english
+vehement	intensely emotional	english
+cow	intimidate	english
+intimidate	threaten	english
+boorish	ill-mannered	english
+penurious	poor	english
+imprudent	not wise	english
+philistine	hater of culture	english
+urbane	sophisticated	english
+effrontery	cheeky behaviour	english
+martinet	disciplinarian	english
+phlegmatic	not showing emotion	english
+aplomb	coolness under strain	english
+vituperate	scold hashly	english
+fecund	mentally productive	english
+obstinate	stubborn	english
+derogative	insulting	english
+loath	reluctant	english
+despot	tyrant	english
+artless	without deception	english
+deception	subterfuge	english
+erudite	scholarly	english
+con artist	a person who deceives others	english
+destitute	poor	english
+diabolical	wicked	english
+asperity	harshness of manner	english
+pine	yearn for	english
+yearn	asprie, crave	english
+confound	utterly confuse	english
+impetuous	rash	english
+contrite	remorseful	english
+remoseful	feeling sad and guilty	english
+humdrum	lacking excitement	english
+alacrity	eager willingness	english
+ribald	comically vulgar	english
+vulgar	trivial	english
+sullen	brooding	english
+brooding	worried	english
+mettlesome	courageous	english
+insipid	dull, bland	english
+capricious	impulsive	english
+impulsive	having the power of or activity driving or impelling	english
+plucky	courageous	english
+lampoon	poke fun at (Mark Twain understood that ... a bad idea with humor was the most effective criticism)	english
+tawdry	cheap, showy (Carol expected to find New York city magical, the way so many movies had portrayed it, but she was surprised how often... displays took the place of genuine elegance)	english
+hoary	ancient (Most workout gurus are young, fit people, whereas most yoga gurus are ... men with long white beards)	english
+sanctimonious	holier-than-thou (Even during the quiet sanctity of evening prayer, she held her chin high, a ... sneer forming on her face as she eyed those who were attending church for the first time)	english
+holier-than-thou	charaterized by an attitude of moral superiority	english
+timorous	shy	english
+haughty	arrogant (The ... manager didn't believe that any of his subordinates could ever have an insight as brilliant his own.)	english
+callow	inexperienced (Both Los Angeles and New York are known for ... out of towners hoping to make it big)	english
+cupidity	greed for money (Some believe people that amassing as much wealth as possible is the meaning to life - yet they often realize that .. Brings anything but happiness)	english
+viracious	not live directly (The advent of twitter is a celebrity stalker's dream, as he or she can - through hundreds of intimate tweets - ... live the life of a famous person.)	english
+rile	annoy (dan is usually calm and balanced but it takes only one intense glare from Sabrina to .. Him)	english
+fell	evil (For fans of the Harry Potters, the ... Lord Voldermort who terrorized poor Harry for seven lengthy installments has finally been vanquishedly by the forces of good - unless, that is, JK Rowling decides to come out of retirement.)	english
+kowtow	bow to (Paul ... to his boss so often the boss herself became nauseated by his sycophancy)	english
+bow to	to do what someone else wants you to do, usually unwillingly	english
+vacuous	lacking intelligence	english
+scintillating	brilliant	english
+indigent	poor	english
+besotted	very infatuated	english
+infatuated	possessed with an intense but short-lived passion or admiration for someone.	english
+garrulous	talkative	english
+amok	frenzied	english
+frenzied	foolhardy (Wherever the bowl haircut teen idon went his legions of screaming fans ran through the street ..., hoping for a glance at his boyish face)	english
+insolent	rude	english
+inanity	silliness	english
+lascivious	perverted (Lolita is a challenging novel for many, not necessarily because of the elevated prose style but because of the depravity of the main character, Humbert Humbert, who, as an old, .. Man, fall in lowve with a girl)	english
+myopic	shortsighted (The company ultimately went out of business because the ... managers couldn't predict the changes in their industry)	english
+mendicant	beggar (Tolsoy was an arisocrat but he strove to understand the Christianity of the Russian peasnt by wandering among them as a ..)	english
+snide	indirect mocking (The chairman interpreted Taylor's question about promotions as a .. Remark, but in all innocence Taylor was trying to figure out the company's process)	english
+ostentatious	showy (Matt wanted to buy stone lions for front of the house, but Cynthia convinced him that such a display would be too .. For a modest house in an unassuming neighborhood)	english
+sycophant	flatterer (The CEO was unaware of the damaging consequences of his choices, largely because he surrounded himself with ... who would never dare criticize him.)	english
+facetious	humorous (... behaviour will not be tolerated during sex education class, it's time for all of you to treat these matters like mature adults)	english
+schadenfreude	joy in others' suffering (From his warm apartment window, Stanley reveled in .. As he laughed at the figures below, huddled together in the artic chill)	english
+unprepossessing	unremarkable (World leaders coming to meet Gandhi would expect a towering sage, and often would be surprised by the ... little man dressed only in a loincloth and shawl)	english
+maladroit	clumsy (As a child she was quite .. But as an adult, she has become an adept dancer)	english
+clumsy	heavyhanded	english
+peevish	irritable (Our office manager is ..., so the rest of us tip-toe around him, hoping not to set off another one of his fits)	english
+irritable	become annoy very easily	english
+ignoble	dishonorable (In the 1920s, The world series was rigged -- an .. .act which baseball took decades to recover from)	english
+fastidious	fussy (Whitney is ... about her shoes, arranging them on a shelf in a specific order, each pair evenly spaced)	english
+behoove	be one's duty (The teacher looked down at the student and said, It would ... you to be in class on time and complete your homework so that you don't repeat freshman English for a third straight year)	english
+aboveboard	honest (The mayor, despite his avunular face plastered about the city, was hardly ... - some concluded that it was his ingratiating smile that allowed him to engage in corrupt behaviour and get away with it)	english
+implacable	unable to be calmed	english
+aesthete	appreciator of beauty (A true ..., Marty would spend hours at the Guggenheim Museum, staring at the same Picasso)	english
+vaunted	boasted about(For years, Mark talked up his Ping Pong game, yet when he entered the office tournament, his much .. Skills suddenly failed him and he lost all three games he played)	english
+quip	witty remark (in one of the most famous .. About classical music, Mark Twain said: Wagner's music is better than it sounds)	english
+boast about	express something that they have done or that they own, they talk about it very proudly, in a way that other people may find irritating or offensive	english
+besiege	harass (After discovering a priceless artifact in her backyard, Jane was ...by phone calls, emails, and reporters all trying to buy, hold or see the rare piece of history)	english
+begrudge	envy (Sitting all alone in his room, Harvey ... the happiness of the other children playing outside his window)	english
+besmirch	dishonor (The prince's distasteful choice of words ...not only his own name, but the reputation of the entire royal family.)	english
+supercilious	arrogant (Nelly fet the Quiz Bowl director acted ... towards the underclassmen; really she fumed, must he act so preternaturally omniscient each time he intones some obscure fact)	english
+pugnacious	combative (The comedian told one flat joke after another, and when the audience started booing, he ... spat back at them,Hey you think this is easy - why don't you buffoons give it a shot?)	english
+claustrophobia	extreme or irrational fear of confined places	english
+intrepid	fearless (Captain Ahab was an ..captain whose reckless and fearless style ultimately leads to his downfall)	english
+cadeverous	corpse-like (Some actors take challenging roles in which they have to lose so much weight that they appear ...)	english
+guffaw	laugh loudly (Whenever the jester fell to the ground in mock pain, the king .., exposing his yellow, fang-like teeth.)	english
+deign	stoop to (The master of the house never .. To answer questions from the servants)	english
+stoop to	a posture in which the head and shoulders are habitually bent forward.	english
+unstinting	very generous (Helen is ...with her time, often spending hours at the house of a sick friend)	english
+bilious	grumpy (Rex was ..all morning, and his face would only take on a look of contentedness when he'd had his morning cup of coffee)	english
+grumpy	bad tempered and irritable	english
+perspicacious	very insightful (Many modern observers regard Eisenhower as .., particularly in his accurate prediction of the growth of the military.)	english
+raconteur	storyteller (Jude is entertaining, but he is no .., beyond the handful of amusing stories he has memorized he has absolutely no spontaneous story-telling ability)	english
+pontificate	speak pompously (The vice-president would often ...about economic theory, as if no oneelse in the room were qualified to speak on the topic)	english
+magnanimous	likely to forgive (He was a great sportman, in defeat he was complementary and in victory he was ..)	english
+obdurate	stubborn (no number of pleas and bribes would get him to change his ...attitude)	english
+choleric	easily angered (while a brilliant lecturer, Mr. Dawson came across as..and unapproachable -- very rarely did students come to his office hours)	english
+vilify	speak ill of (Todd was noble after the divorce, choosing to say only complimentary things abot Barbara, but Barbara did not hesitate to ..Todd)	english
+temerity	fearless daring (No child has the ..to go in the rundown house at the end of the street and see if it is haunted)	english
+jejune	immature (Although many top chefs have secured culinary foam's popularity in haute cuisine, Waters criticizes it for being ...and unfilling)	english
+acerbic	harsh (Most movie critics are ..towards summer blockbusters, often refering to them as garbage)	english
+ersatz	fake (The car dealer's ...laughter was immediately followed by a price quote, one that Shelly found highly inflated)	english
+pollyannaish	overly optimistic (Even in the midst of a lousy sales quarter, Debbie remained ...,never losing her shrill voice and wide smile, even when prospective customers hung up on her)	english
+gregarious	sociable (Often we think that great leaders are those who are gregarious, always in the middle of a large group of people, yet, as Mahatma Gandhi and many others have shown us, leaders can also be introverted)	english
+errant	used to describe someone who behaves recklessly or who is irresponsible. For example, The errant driver caused a multi-car accident on the freeway	english
+gumption	resourcefulness (Wallace Stegner lamented the lack of ..in the US during the sixties, claiming that no young person knew the value of work)	english
+dilettante	dabbler (Fred has no formal medical training, while he likes to claim authority on medical issues, he is little more than a ...)	english
+dabbler	someone who takes a slight and not very serious interest in a subject, or tries a particular activity for a short period	english
+panegyric	formal praise (Dave asked Andrew to do just a simple toast, but Andrew launched into a full ..., enumeratiing a complete list of Dave achievements and admirable qualities)	english
+wanton	showing no limits (Due to ..behavior and crude language, the drunk man was thrown out of the bar and asked to never return)	english
+incisive	acute	english
+staunch	dependable (No longer a ...supporter of Anarchism, Terry now sometimes questions whether society would be better off withot defined hierachies)	english
+contrition	remorse (Those who show ..during their prison terms - especially when under review by a parole board - often get shortened sentences)	english
+nitwit	stupid and silly	english
+superstition	belief in things that are not real or possible, for example magic.	english
+prick	vulgar, obsolete	english
+muttonhead	a person lacking intelligence	english
+dumbbell	foolish	english
+cretin	stupid, imbecile	english
+dignity	the state or quality of being worthy of honor or respect.	english
+deranged	corrupt	english
+cocoon	the covering made of soft, smooth threads that surrounds and protects particular insects during the pupa stage as they develop into adult form	english
+timid	showing a lack of courage or confidence	english
+saboteur	a person who deliberately damages or destroys things such as machines	english
+sybarite	lover of luxury (Despite the fact that he'd maxed out fifteen credit cards, Max was still a ...at heart)	english
+untrammeled	not limit (The whole notion of living ...inspired the American Revolution and was enshrined in the Declaration of Independence and the Constitution)	english
+hector	bully (The boss's ...ing manner put off many employees, some of whom quit as soon as they found new jobs)	english
+panache	distinctive style (Jim with his typical ...came to the wedding reception with a top hat, a cane, and a long cape covered in sequins)	english
+dissemble	act deceitfully (To get close to the senator, the assassin ...his intentions, convincing many people that he was a reporter for a well-known newspaper)	english
+fractious	irritable (We rarely invite my ...Uncle Nino over for dinner, he always complains about the food, and usually launches into a tirade on some touchy subject)	english
+craven	cowardly (Though the man could have at least alerted the police, he crouched ...in the corner as the old woman was mugged)	english
+macabre	gruesome (Edgar Allen Poe was considered the master of the ...: his stories vividly describe the moment leading up to - and often those moments after - a grisly death.)	english
+apostate	rejector of faith (An ...of the Republican Party, Sheldon has yet to become affiliated with any party and dubs himself as an independence)	english
+speculate	to guess possible answers to a question when you do not have enough information to be certain	english
+reckless	doing something dangerous and not worrying about the risks and the possible results	english
+bulldog	a person noted for courageous or stubborn tenacity	english
+manifestation	an event, action, or object that clearly shows or embodies something, especially a theory or an abstract idea.	english
+inferior	lower in rank	english
+gratify	give (someone) pleasure or satisfaction.	english
+exemplar	model	english
+discreet	careful	english
+autocratic	tyrannical	english
+dissipate	squander	english
+indecorous	impolite	english
+accolade	high praise (Jean Paul-Sartre was not a fan of ... and such, he refused to accept the Nobel Prize for Literature in 1964)	english
+affluent	wealthy	english
+disingenuous	pretending to be honest	english
+miser	one who is cheap	english
+avid	enthusiastice, keen	english
+demean	insult (at first the soccer players bantered back and forth, but as soon as one of the players became ...)	english
+lament	a passionate expression of grief or sorrow	english
+contemptuous	scornful	english
+debonair	sophisticated, charming	english
+assiduously	with great care	english
+yammer	to whine or complain	english
+chivalrous	marked by honor, courtesy, and courage	english
+Vocation	(n) any trade, profession, or occupation; a sense of fitness or special calling for one's work	english
+bashful	feeling embarrassed due to modesty	english
+courteous	nice and showing respect        	english
+hush	a sudden calm, silent	english
+haphazard	unorganized	english
+prevalent	worldwide spread	english
+taciturn	quiet	english
+ascendancy	dominant position (the ... of the Carishad water polo team is clear - they have a decade of championships behind them)	english
+rarefied	refined (Jack's vulgar jokes were not so successful in the ... environment of college professors)	english
+eponym	derived from a name (Alexandria, Egypt is an .. Because it is named after the Alexander the Great)	english
+convivial	friendly and lively (The wedding reception was ... ; friends who hadn't seen each other for ages drank and ate together before heading to the dance floor.)	english
+factitious	artifical (The defendant's story was largely ... and did not accord with eyewitness testimonies)	english
+conspicuous	obvious (Among the tall trees and flower fields, the building seemed out of place with its ...,col concrete and angular steel exterior.)	english
+confine	prison	english
+interior	n. of something is the inside part of it	english
+universal	of, affecting, or done by all people or things in the world or in a particular group; applicable to all cases.	english
+Fruition	The state of being real	english
+ubiquitous	adj. found or existing everywhere	english
+secrete	produce and discharge (a substance)	english
+nectar	a sugar-rich liquid produced by plants	english
+didacticism	Didacticism is a term that refers to a particular philosophy in art and literature that emphasizes the idea that different forms of art and literature ought to convey information and instructions, along with pleasure and entertainment.	english
+discourse	written or spoken communication or debate.	english
+equivocate	speak vaguely	english
+decorum	proper conduct	english
+pertinent	revelant	english
+consecrate	make holy	english
+holy	related to religion or a god	english
+diatribe	verbal attack	english
+ostracize	exclude	english
+unpropitious	unlikely to be successful	english
+machinate	scheme	english
+belligerent	eager to fight	english
+trite	lacking originality	english
+apothegm	short saying	english
+chimera	illusion	english
+elusive	hard to pin down, to describe, find, achieve, or remember	english
+tirade	angry speech	english
+verisimilitude	appearance of truth	english
+involved	complicated	english
+malfeasance	misconduct	english
+punctilious	overly precise	english
+proscribe	ban	english
+defiant	proudly refusing to obey authority	english
+exonerate	free from blame. Eg: the document clearly indicated that Nick was out of the state at the time of the crime and so served to ... him of any charges	english
+ostensible	appearing or claiming to be one thing when it is really something else	english
+creed	a set of beliefs that influences the way you live	english
+tangential	(of a subject or activity) different from or not directly connected with the one you are talking about or doing	english
+sterling	excellent, valuable	english
+cosseted	overly pampered	english
+pampered	given special treatment that makes you feel as comfortable as possible or gives you whatever you want	english
+quixotic	wildly impractical. Example: for every thousand startups with quixotic plans to be the next big name in ecommere, only a handful ever become profitable	english
+esoteric	understood by few	english
+tumult	chaos, confusion	english
+inkling	vague sense	english
+inflammatory	controversial	english
+wax	increase gradually (her enthusiasm for the diva's new album only waxed with each song, by the end of the album, it was her favourite CD yet.)	english
+protean	versatile	english
+versatile	able to change easily	english
+anodyne	that which soothes (Muzak, which is played in department stores, is intended to be an ... but is often so cheesy and over the top that customers become irritated)	english
+peruse	read closely (Instead of ... important documents, people all too often rush to the bottom of the page and plaster their signatures at the bottom.)	english
+sanguin	cheerful (with the prospect of having to learn 3,000 words during the course of the summer, Paul was anything but ...)	english
+elegiac	mournful (Few can listen to the ... opening bars of the Moonlight sonata without feeling the urge to cry)	english
+mournful	sorrowful	english
+amalgam	mixture (the bland's music was an .. Of hihphop, flamenco and jazz, blening the three styles with suprising results)	english
+incongruous	lacking harmony (the vast economic inequality of modern society is .. With America's ideals.	english
+unscrupulous	unethical (In the courtroom, the lawyer was .. , using every manner of deceit and manipulation to secure a victory for himself)	english
+ineffable	cant be put in words (While art critics can occasionally pinpoint a work's greatness, much of why a piece captures our imaginations is completely ...	english
+immutable	not changeable (Taxes are one of the ... laws of the land, so there is no use arguing about paying them)	english
+brook	put up with (While she was at the chalkboard, the teacher did not ... any form of talking - even a tiny peep resulted in afternoon detention)	english
+byzantine	overly complex (Getting a drive's license is not simply a matter of taking a test, the regulations and procedures are so ... that many have found themselves at the mercy of the department of Motor vehicles)	english
+maudlin	overly emotional (Just as those who were alive during the 70s are mortified that they once cavorted about in bellbottoms, many who lived during the 80s are aghast at the ... pop songs they used to enjoy - really, just what exactly is a total eclipse of the heart?)	english
+arcane	obscure (Most college franternities are known for ...rituals that those hoping to join the fraternity must learn)	english
+proselytize	attempt to convert (Lise loves her Mac but says little about it; by contrast, Jake will ..., interrogating anyone with an Android about why she didn't purchase an iPhone)	english
+hackneyed	cliché (Cheryl rolled her eyes when she heard the lecturer's ...advice to be true to yourself	english
+lugubrious	overly sad (at the funeral, ...song filled the small church)	english
+poignant	emotionally touching (After the Montagues and Capulets discover the dead bodies of Romeo and Juliet, in the play's most ..moment, the two griefstricken families agree to end their feud once and for all)	english
+invective	abusive language (The internet has unleashed the ...in many of us, many people post stinging criticism on the comment section)	english
+graft	corruption (In countries with rampant ..getting a driver's license can require no more than paying an official)	english
+abstruse	incomprehensible (Physics textbooks can seem so ...to the uninitiated that readers feel as though they are looking at hieroglyphics)	english
+convoluted	extremely complex and difficult to follow	english
+sediment	matter that settles to the bottom of a liquid; dregs	english
+surmise	suppose that something is true without having evidence to confirm it	english
+strata	a level or class to which people are assigned according to their social status, education, or income.	english
+pentameter	is a poetic meter	english
+oblique	difficult to understand (Mr Golding delivered an... warning, talking of the danger of sudden action.)	english
+tatalizing	tormenting or teasing with the sight or promise of something unobtainable.	english
+clich�	betray a lack of origins	english
+subsistence farming	that provides enough food for the farmer and their family to live on, but not enough for them to sell	english
+arbitrary	random	english
+opaque	tough to understand	english
+imbide	absorb ideas (Plato .. Socrates' teaching to such an extent that he was able to write volumes of work that he directly attributed)	english
+contagious	adj.  spread from one person or organism to another	english
+permeate	v. to spread through something and be present in every part of it	english
+imprint	v. to make a surface by pressing sth into it for fix sth firmly in the memory	english
+persistent	lasting for long time or difficult to get rid of	english
+upswing	an increase or improvement	english
+nadir	lowest point	english
+attenuate	taper off	english
+taper off	to become gradually smaller or less frequent	english
+fickle	change unpredictably	english
+inimitable	without equal	english
+upheaval	a great change	english
+morph	change dramatically	english
+copious	abundant	english
+entice	tempt	english
+aberrant	abnormal	english
+cede	give up control	english
+presumptuous	overly forward	english
+prolific	productive	english
+patent	glaringly obvious	english
+ascribe	attribute	english
+inundate	flood	english
+provident	planning ahead	english
+replete	fully stocked	english
+ameliorate	improve. Three cups of tea tells the story of western man who hopes to blank poverty and the lack of education in afghanistan	english
+quandary	uncertainty	english
+surfeit	excessive amount	english
+antedate	precede	english
+flush	abundant	english
+burgeon	grow rapidly (China's housing market is ..., but some predict that the growth is merely, a bubble and will burst much like the US real estate bubble of 2008)	english
+apotheosis	height of development (as difficult as it is to imagine, the ..of Mark Zuckerberg's career, many believe is yet to come.)	english
+buck	resist (The profits at our firm .. The general downturn that affected the real estate industry)	english
+prognostication	prediction (When the Senator was asked about where the negotiations would lead, he said that any guess he could make would be an unreliable ...)	english
+flux	n.  quandary (Ever since Elvira resigned as the head of marketing, evrerything about our sale strategy has been in state of ..)	english
+tractable	easily managed (compared to middle school students, who have an untamed wildness about them, high school students are somewhat more..)	english
+suppress	prevent the development, action, or expression of (a feeling, impulse, idea, etc.); restrain.	english
+avert	prevent	english
+appreciable	noticeable	english
+perturb	disturb	english
+exponential	adj. dramatic (increase)	english
+plunge	v. fall / to become lower in value very quickly	english
+Repercussions	n.  the usually bad effect of an event, action, or decision	english
+impunity	n. freedom from punishment	english
+hone	v. refine or perfect (often for skill, capacity, experience)	english
+innate	adj. natural, original (+ ability) 	english
+adjacent to	adj. ~ next to 	english
+leg up	n. an advantage or head start	english
+acquisition	n. the act of obtaining or beginning to have something, or something obtain	english
+ate it up	pv. enthusiastic ejoyed and appreciated	english
+pump for	pv. excited and ready for something	english
+volunteer gig	a short-term volunteering opportunity or job	english
+stark contrast	a clear and noticeable difference	english
+lo and behold	adv. something that you say when you tell someone about something surprising that happened	english
+pyrotechnics	a show of great skill, especially by a musician or someone giving a speech:	english
+holograms	an image made with a laser beam, in which the objects shown look like they have depth rather than appearing flat and can seem to move	english
+props	objects or items used on stage or in a performance to enhance the setting or portray a character	english
+feast	a large, special meal, often for many people, to celebrate someone or something	english
+fleeting	adj. brief or quick	english
+ample	adj. enough or more than enough	english
+relent	v. to do something you had refused to do before	english
+plead with	v. to earnestly and desperately request or beg for something	english
+buzz	n. excitement or hype surrounding something	english
+rave about	v. to speak or write about something with great enthusiasm	english
+rejuvenate	v. to make someone look or young and energetic again	english
+dip into	v.Using or spending a portion of something, typically money, that is meant to be saved or reserved	english
+gratification	n. pleasure or satisfaction, or something which provides this	english
+intricacy	a detail that is part of something complicated	english
+leeway	a freedom to act within certain limits	english
+in retrospect	looking back on the past	english
+judiciously	adv. in a way has or shows reason and good judgment in making decision	english
+chiropractic	a form of alternative medicine that focuses on the diagnosis and treatment of mechanical disorders of the musculoskeletal system, especially the spine, through manual manipulation	english
