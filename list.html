@@ -68,9 +68,9 @@ fetch('lib.txt')
     
     $('body').on('click', '.playable', function(event){
         if (widget){
-            var text = $(this).html();
-            var i = $(this).attr("id").value;
-            var lang = document.getElementById(i+2);
+            const text = $(this).html();
+            const i = $(this).attr("id");
+            const lang = $(this).next().next().html();
             widget.fetch(text, lang);
              $(".ygParent").show();
         }
