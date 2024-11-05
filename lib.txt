@@ -1,15 +1,24 @@
  	 	
-por favor	please	spanish
-你叫什么名字？	what is your name	chinese
-吃饭	Eat a meal	chinese
-睡觉	Go to sleep	chinese
-看电影	Watch a movie	chinese
-上班	go to work	chinese
-打电话	Make a phone call	chinese
-买东西	Go shopping	chinese
-开车	Drive a car	chinese
-下雨	It's raining	chinese
-喝茶	Drink tea	chinese
+吃饭	Eat a meal (chī fàn)	Chinese
+睡觉	Go to sleep (shuì jiào)	Chinese
+看电影	Watch a movie (kàn diàn yǐng)	Chinese
+上班	Go to work (shàng bān)	Chinese
+打电话	Make a phone call (dǎ diàn huà)	Chinese
+做作业	Do homework (zuò zuò yè)	Chinese
+买东西	Go shopping (mǎi dōng xi)	Chinese
+开车	Drive a car (kāi chē)	Chinese
+下雨	It's raining (xià yǔ)	Chinese
+喝茶	Drink tea (hē chá)	Chinese
+吃早餐	Eat breakfast (chī zǎo cān)	Chinese
+喝咖啡	Drink coffee (hē kā fēi)	Chinese
+看书	Read a book (kàn shū)	Chinese
+写信	Write a letter (xiě xìn)	Chinese
+听音乐	Listen to music (tīng yīn yuè)	Chinese
+运动	Exercise (yùn dòng)	Chinese
+学习	Study (xué xí)	Chinese
+旅游	Travel (lǚ yóu)	Chinese
+买票	Buy a ticket (mǎi piào)	Chinese
+打扫	Clean up (dǎ sǎo)	Chinese
 colossal	extremely large	english
 hog	n. a pig esp. one allowed to grow large so that it can be used as food	english
 table	to delay discussion of a subject	english

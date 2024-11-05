@@ -29,10 +29,7 @@
       <div class="def" id="definition">test</div>
       <div class="lang" id ="language"></div>
       <div>
-      <a  id="yg-widget-0" class="youglish-widget" data-components="243" 
-      data-bkg-color="FFFFFF" data-link-color="337AB7" data-ttl-color="555555" data-cap-color="6495BF" 
-      data-marker-color="FFFF00" data-cap-size="40" data-toggle-ui="0"  
-      data-scroll="inner" href="https://youglish.com">Visit YouGlish.com</a>
+      <a  id="yg-widget-0" class="youglish-widget" href="https://youglish.com">Visit YouGlish.com</a>
       </div>
     </div>
   </div>
@@ -98,14 +95,17 @@ var widget;
       <!-- Wait for YG library to be loaded -->
       function onYouglishAPIReady(output,lang) {
         <!-- retrieve the widget object-->
-        widget = YG.getWidget("yg-widget-0",{
-          width: 640,
-          components:8192, //search box & caption 
-        });
+        widget = YG.getWidget("yg-widget-0");
         <!-- use the API...-->
         widget.fetch(output,lang);
       }
-
+      function onCaptionConsumed(event){
+        if (++views < 3)
+          widget.replay();
+        else 
+          if (curTrack < totalTracks)  
+            widget.next();
+      }
 </script>
 <script async src="https://youglish.com/public/emb/widget.js" charset="utf-8"></script>
 
