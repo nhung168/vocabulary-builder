@@ -1,24 +1,24 @@
  	 	
-这件衣服多少钱？	How much is this piece of clothing? (Zhè jiàn yī fú duō shǎo qián?)	Chinese
-我可以试穿吗？	Can I try it on? (Wǒ kě yǐ shì chuān ma?)	Chinese
-你们有其他颜色吗？	Do you have other colors? (Nǐ men yǒu qí tā yán sè ma?)	Chinese
-这双鞋子有我的尺码吗？	Do these shoes come in my size? (Zhè shuāng xié zi yǒu wǒ de chǐ mǎ ma?)	Chinese
-你们接受信用卡吗？	Do you accept credit cards? (Nǐ men jiē shòu xìn yòng kǎ ma?)	Chinese
-这件衣服有折扣吗？	Is there a discount on this clothing? (Zhè jiàn yī fú yǒu zhé kòu ma?)	Chinese
-我可以退货吗？	Can I return this? (Wǒ kě yǐ tuì huò ma?)	Chinese
-你们有会员卡吗？	Do you have a membership card? (Nǐ men yǒu huì yuán kǎ ma?)	Chinese
-这是什么材料做的？	What is this made of? (Zhè shì shén me cái liào zuò de?)	Chinese
-你们有更便宜的吗？	Do you have something cheaper? (Nǐ men yǒu gèng pián yí de ma?)	Chinese
-我可以用支付宝付款吗？	Can I pay with Alipay? (Wǒ kě yǐ yòng zhī fù bǎo fù kuǎn ma?)	Chinese
-你们有礼品包装服务吗？	Do you offer gift wrapping services? (Nǐ men yǒu lǐ pǐn bāo zhuāng fú wù ma?)	Chinese
-这件衣服有其他尺码吗？	Does this clothing come in other sizes? (Zhè jiàn yī fú yǒu qí tā chǐ mǎ ma?)	Chinese
-你们有新款吗？	Do you have new arrivals? (Nǐ men yǒu xīn kuǎn ma?)	Chinese
-这件衣服适合我吗？	Does this clothing suit me? (Zhè jiàn yī fú shì hé wǒ ma?)	Chinese
-你们有打折活动吗？	Do you have any sales? (Nǐ men yǒu dǎ zhé huó dòng ma?)	Chinese
-你们有这件衣服的库存吗？	Do you have this clothing in stock? (Nǐ men yǒu zhè jiàn yī fú de kù cún ma?)	Chinese
-你们有这双鞋子的库存吗？	Do you have these shoes in stock? (Nǐ men yǒu zhè shuāng xié zi de kù cún ma?)	Chinese
-你们有这款包包的库存吗？	Do you have this bag in stock? (Nǐ men yǒu zhè kuǎn bāo bāo de kù cún ma?)	Chinese
-你们有这款手表的库存吗？	Do you have this watch in stock? (Nǐ men yǒu zhè kuǎn shǒu biǎo de kù cún ma?)	Chinese
+买东西	Go shopping (mǎi dōng xi)	Chinese
+试穿衣服	Try on clothes (shì chuān yī fú)	Chinese
+退货	Return goods (tuì huò)	Chinese
+打折	Discount (dǎ zhé)	Chinese
+会员卡	Membership card (huì yuán kǎ)	Chinese
+信用卡	Credit card (xìn yòng kǎ)	Chinese
+现金	Cash (xiàn jīn)	Chinese
+支付宝	Alipay (zhī fù bǎo)	Chinese
+礼品包装	Gift wrapping (lǐ pǐn bāo zhuāng)	Chinese
+购物车	Shopping cart (gòu wù chē)	Chinese
+购物袋	Shopping bag (gòu wù dài)	Chinese
+价格标签	Price tag (jià gé biāo qiān)	Chinese
+试衣间	Fitting room (shì yī jiān)	Chinese
+购物中心	Shopping mall (gòu wù zhōng xīn)	Chinese
+促销活动	Promotional event (cù xiāo huó dòng)	Chinese
+购物清单	Shopping list (gòu wù qīng dān)	Chinese
+退换货	Exchange goods (tuì huàn huò)	Chinese
+购物网站	Shopping website (gòu wù wǎng zhàn)	Chinese
+购物体验	Shopping experience (gòu wù tǐ yàn)	Chinese
+购物狂	Shopaholic (gòu wù kuáng)	Chinese
 吃饭	Eat a meal (chī fàn)	Chinese
 睡觉	Go to sleep (shuì jiào)	Chinese
 看电影	Watch a movie (kàn diàn yǐng)	Chinese
@@ -40,6 +40,7 @@
 买票	Buy a ticket (mǎi piào)	Chinese
 打扫	Clean up (dǎ sǎo)	Chinese
 temper tantrums	unpleasant and disruptive behaviours of children	english
+buttok	bottom (human body)	english
 colossal	extremely large	english
 hog	n. a pig esp. one allowed to grow large so that it can be used as food	english
 table	to delay discussion of a subject	english
