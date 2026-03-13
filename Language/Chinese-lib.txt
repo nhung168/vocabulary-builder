@@ -1,24 +1,45 @@
  	 	
-客厅	Phòng khách – kètīng	Chinese
-卧室	Phòng ngủ – wòshì	Chinese
-厨房	Nhà bếp – chúfáng	Chinese
-房间	Phòng – fángjiān	Chinese
+客厅	Living room – kètīng	Chinese
+卧室	Bedroom – wòshì	Chinese
+厨房	Kitchen – chúfáng	Chinese
+房间	Room – fángjiān	Chinese
 沙发	Sofa – shāfā	Chinese
-桌子	Bàn – zhuōzi	Chinese
-椅子	Ghế – yǐzi	Chinese
-打扫	Dọn dẹp – dǎsǎo	Chinese
-擦窗户	Lau cửa sổ – cā chuānghù	Chinese
-擦桌子	Lau bàn – cā zhuōzi	Chinese
-灯	Đèn – dēng	Chinese
-地板	Sàn nhà – dìbǎn	Chinese
-窗帘	Rèm cửa – chuānglián	Chinese
-墙	Tường – qiáng	Chinese
-门	Cửa – mén	Chinese
-电视	Tivi – diànshì	Chinese
-空调	Máy lạnh – kōngtiáo	Chinese
-洗衣机	Máy giặt – xǐyījī	Chinese
-冰箱	Tủ lạnh – bīngxiāng	Chinese
-地毯	Thảm – dìtǎn	Chinese
+桌子	Table – zhuōzi	Chinese
+椅子	Chair – yǐzi	Chinese
+打扫	Clean / tidy up – dǎsǎo	Chinese
+擦窗户	Wipe the window – cā chuānghù	Chinese
+擦桌子	Wipe the table – cā zhuōzi	Chinese
+灯	Lamp / light – dēng	Chinese
+地板	Floor – dìbǎn	Chinese
+窗帘	Curtain – chuānglián	Chinese
+墙	Wall – qiáng	Chinese
+门	Door – mén	Chinese
+电视	Television – diànshì	Chinese
+空调	Air conditioner – kōngtiáo	Chinese
+洗衣机	Washing machine – xǐyījī	Chinese
+冰箱	Refrigerator – bīngxiāng	Chinese
+地毯	Carpet – dìtǎn	Chinese
+
+时间	Time – shíjiān	Chinese
+今天	Today – jīntiān	Chinese
+明天	Tomorrow – míngtiān	Chinese
+昨天	Yesterday – zuótiān	Chinese
+早上	Morning – zǎoshang	Chinese
+中午	Noon – zhōngwǔ	Chinese
+下午	Afternoon – xiàwǔ	Chinese
+晚上	Evening / night – wǎnshang	Chinese
+春天	Spring – chūntiān	Chinese
+夏天	Summer – xiàtiān	Chinese
+秋天	Autumn – qiūtiān	Chinese
+冬天	Winter – dōngtiān	Chinese
+天气	Weather – tiānqì	Chinese
+晴天	Sunny – qíngtiān	Chinese
+下雨	Rainy – xiàyǔ	Chinese
+刮风	Windy – guāfēng	Chinese
+下雪	Snowy – xiàxuě	Chinese
+热	Hot – rè	Chinese
+冷	Cold – lěng	Chinese
+温暖	Warm – wēnnuǎn	Chinese
 买东西	Go shopping (mǎi dōng xi)	Chinese
 试穿衣服	Try on clothes (shì chuān yī fú)	Chinese
 退货	Return goods (tuì huò)	Chinese
