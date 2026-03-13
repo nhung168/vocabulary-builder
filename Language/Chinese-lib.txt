@@ -1,0 +1,60 @@
+ 	 	
+客厅	Phòng khách – kètīng	Chinese
+卧室	Phòng ngủ – wòshì	Chinese
+厨房	Nhà bếp – chúfáng	Chinese
+房间	Phòng – fángjiān	Chinese
+沙发	Sofa – shāfā	Chinese
+桌子	Bàn – zhuōzi	Chinese
+椅子	Ghế – yǐzi	Chinese
+打扫	Dọn dẹp – dǎsǎo	Chinese
+擦窗户	Lau cửa sổ – cā chuānghù	Chinese
+擦桌子	Lau bàn – cā zhuōzi	Chinese
+灯	Đèn – dēng	Chinese
+地板	Sàn nhà – dìbǎn	Chinese
+窗帘	Rèm cửa – chuānglián	Chinese
+墙	Tường – qiáng	Chinese
+门	Cửa – mén	Chinese
+电视	Tivi – diànshì	Chinese
+空调	Máy lạnh – kōngtiáo	Chinese
+洗衣机	Máy giặt – xǐyījī	Chinese
+冰箱	Tủ lạnh – bīngxiāng	Chinese
+地毯	Thảm – dìtǎn	Chinese
+买东西	Go shopping (mǎi dōng xi)	Chinese
+试穿衣服	Try on clothes (shì chuān yī fú)	Chinese
+退货	Return goods (tuì huò)	Chinese
+打折	Discount (dǎ zhé)	Chinese
+会员卡	Membership card (huì yuán kǎ)	Chinese
+信用卡	Credit card (xìn yòng kǎ)	Chinese
+现金	Cash (xiàn jīn)	Chinese
+支付宝	Alipay (zhī fù bǎo)	Chinese
+礼品包装	Gift wrapping (lǐ pǐn bāo zhuāng)	Chinese
+购物车	Shopping cart (gòu wù chē)	Chinese
+购物袋	Shopping bag (gòu wù dài)	Chinese
+价格标签	Price tag (jià gé biāo qiān)	Chinese
+试衣间	Fitting room (shì yī jiān)	Chinese
+购物中心	Shopping mall (gòu wù zhōng xīn)	Chinese
+促销活动	Promotional event (cù xiāo huó dòng)	Chinese
+购物清单	Shopping list (gòu wù qīng dān)	Chinese
+退换货	Exchange goods (tuì huàn huò)	Chinese
+购物网站	Shopping website (gòu wù wǎng zhàn)	Chinese
+购物体验	Shopping experience (gòu wù tǐ yàn)	Chinese
+购物狂	Shopaholic (gòu wù kuáng)	Chinese
+吃饭	Eat a meal (chī fàn)	Chinese
+睡觉	Go to sleep (shuì jiào)	Chinese
+看电影	Watch a movie (kàn diàn yǐng)	Chinese
+上班	Go to work (shàng bān)	Chinese
+打电话	Make a phone call (dǎ diàn huà)	Chinese
+做作业	Do homework (zuò zuò yè)	Chinese
+买东西	Go shopping (mǎi dōng xi)	Chinese
+开车	Drive a car (kāi chē)	Chinese
+下雨	It's raining (xià yǔ)	Chinese
+喝茶	Drink tea (hē chá)	Chinese
+吃早餐	Eat breakfast (chī zǎo cān)	Chinese
+喝咖啡	Drink coffee (hē kā fēi)	Chinese
+看书	Read a book (kàn shū)	Chinese
+写信	Write a letter (xiě xìn)	Chinese
+听音乐	Listen to music (tīng yīn yuè)	Chinese
+运动	Exercise (yùn dòng)	Chinese
+学习	Study (xué xí)	Chinese
+旅游	Travel (lǚ yóu)	Chinese
+买票	Buy a ticket (mǎi piào)	Chinese

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <link rel="stylesheet" href="../style.css">
+  <title>Learning Vocabulary</title>
+</head>
+<body>
+	
+<header class="header-10">
+    <div class="container">
+      <ul class="pull-left">
+        <a href="../index.html">Flash Card</a>
+        <a href="../list.html">My Dictionary</a>
+        <a href="../Data.html">Practice</a>
+      </ul>    
+    </div>
+</header>
+
+</header>
+<section>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<div class="flip-card" id="card">
+  <div class="flip-card-inner" id="cardInner">
+    <div class="flip-card-front" id="front">
+      <h1 id="word">Welcome to my Vocab Lab<br>Click Arrow to start</h1>
+    </div>
+    <div class="flip-card-back" id="back">
+      <div class="def" id="definition">test</div>
+      <div class="lang" id ="language"></div>
+      <div>
+      <a  id="yg-widget-0" class="youglish-widget" href="https://youglish.com">Visit YouGlish.com</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button class = "previous" onclick="previous()"><img width="50" height="50" src="../img/backward.png" alt="circled-left-2--v1"/></button>
+<button class = "next" onclick="next()"><img width="50" height="50" src="../img/forward.png" alt="end"/></button>
+</section>
+</body>
+
+<script src="https://unpkg.com/whatwg-fetch@3.6.2/dist/fetch.umd.js"></script>
+<script>
+
+  // read list from txt file
+let words = []; // declare the variable outside the block
+
+fetch('English-lib.txt')
+  .then(response => response.text())
+  .then(text => {
+    var row = text.replace(/\r/g, "").split('\n');
+    row.forEach(line => {
+      var lineWords = line.split('\t');
+      words.push(...lineWords); // modify the variable inside the block
+    });
+  })
+  .catch(error => console.error(error));
+
+  let index = 0;
+// switch to next
+function next() {
+  index = (index + 3) % words.length;
+  document.getElementById("word").innerHTML = words[index];
+  document.getElementById("definition").innerHTML = words[index+1];
+  document.getElementById("language").innerHTML=words[index+2];
+  document.getElementById("cardInner").style.transform = "";
+  console.log(words[index+1])
+}
+// switch to previous
+function previous() {
+  index = (index - 3 + words.length) % words.length;
+  document.getElementById("word").innerHTML = words[index];
+  document.getElementById("definition").innerHTML = words[index+1];
+  document.getElementById("language").innerHTML=words[index+2] 
+  document.getElementById("cardInner").style.transform = "";
+}
+// log result from next and previous
+
+document.getElementById("cardInner").addEventListener("click",()=>{
+  const output = document.getElementById("word").innerHTML;
+  const lang = document.getElementById("language").innerHTML;
+  document.getElementById("cardInner").style.transform = "rotateY(180deg)";
+  console.log(output,lang);
+  flipCard(output,lang);
+})
+
+// flip card
+function flipCard(output,lang){
+      var youglish = document.getElementById("yg-widget-0")
+      onYouglishAPIReady(output,lang)
+}
+
+var widget;
+      <!-- Wait for YG library to be loaded -->
+      function onYouglishAPIReady(output,lang) {
+        <!-- retrieve the widget object-->
+        widget = YG.getWidget("yg-widget-0");
+        <!-- use the API...-->
+        widget.fetch(output,lang);
+      }
+      function onCaptionConsumed(event){
+        if (++views < 3)
+          widget.replay();
+        else 
+          if (curTrack < totalTracks)  
+            widget.next();
+      }
+</script>
+<script async src="https://youglish.com/public/emb/widget.js" charset="utf-8"></script>
+
+<script>
+    // Swipe Detection Variables
+    let touchStartX = 0;
+    let touchStartY = 0;
+    
+
+    const card = document.getElementById("card");
+    const cardback = document.getElementById("back").offsetWidth;
+    const cardfront = document.getElementById("front").offsetWidth;
+    console.log("back width:",cardback,"front width:",cardfront);
+    
+    let swipeThreshold;
+    if (cardback < cardfront){
+      swipeThreshold = cardback -30 // Minimum swipe distance in px
+    }else{
+      swipeThreshold = cardfront - 30
+    }
+    
+
+    // Prevent default scrolling when swiping on the card
+    card.addEventListener('touchmove', function(event) {
+      event.preventDefault();
+    }, { passive: false });
+
+    // Touch Start
+    card.addEventListener("touchstart", function(evt) {
+      const touch = evt.changedTouches[0];
+      touchStartX = touch.screenX;
+      touchStartY = touch.screenY;
+    }, false);
+
+    // Touch End
+    card.addEventListener("touchend", function(evt) {
+      const touch = evt.changedTouches[0];
+      const deltaX = touch.screenX - touchStartX;
+      const deltaY = touch.screenY - touchStartY;
+
+      // Check if the swipe is predominantly horizontal
+      if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        if (Math.abs(deltaX) > swipeThreshold) {
+          if (deltaX < 0) {
+            // Swipe Left
+            next();
+          } else {
+            // Swipe Right
+            previous();
+          }
+        }
+      }
+      // Reset values
+      touchStartX = 0;
+      touchStartY = 0;
+    }, false);
+
+
+    document.addEventListener("DOMContentLoaded", () => {
+      if (words.length >= 2) {
+      }
+    });
+
+</script>
+</html>
