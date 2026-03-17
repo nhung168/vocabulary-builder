@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Video Vocabulary Builder</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:system-ui,sans-serif;background:#f5f5f3;color:#1a1a1a;min-height:100vh;display:flex;justify-content:center;padding:2rem 1rem}
+  #app{width:100%;max-width:720px}
+  h2{font-size:20px;font-weight:500;margin-bottom:4px}
+  .muted{color:#666;font-size:14px}
+  .card{background:#fff;border:0.5px solid #ddd;border-radius:12px;padding:1rem 1.25rem}
+  .card+.card{margin-top:10px}
+  input[type=text]{width:100%;padding:10px 14px;font-size:14px;border:1px solid #ccc;border-radius:8px;outline:none;background:#fff}
+  input[type=text]:focus{border-color:#888}
+  button{cursor:pointer;font-family:inherit}
+  .btn-primary{padding:10px 20px;font-size:14px;font-weight:500;background:#1a1a1a;color:#fff;border:none;border-radius:8px}
+  .btn-secondary{padding:8px 16px;font-size:13px;background:transparent;border:1px solid #ccc;border-radius:8px;color:#555}
+  .btn-secondary:hover,.btn-primary:hover{opacity:.85}
+  .badge{font-size:11px;padding:2px 8px;border-radius:20px;font-weight:500;display:inline-block}
+  .row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .mono{font-family:monospace;font-size:12px;color:#999}
+  /* Spinner */
+  .spinner{width:18px;height:18px;border:2px solid #ddd;border-top-color:#333;border-radius:50%;animation:spin .8s linear infinite;display:inline-block}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  /* Steps */
+  .step{display:none;animation:fadeIn .3s ease}
+  .step.active{display:block}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+  /* Subtitle list */
+  .sub-row{display:flex;gap:16px;padding:10px 14px;border-bottom:.5px solid #eee;font-size:14px}
+  .sub-row:last-child{border-bottom:none}
+  /* Level buttons */
+  .level-btn{padding:6px 14px;font-size:13px;font-weight:500;border:1px solid #ccc;border-radius:8px;background:transparent;color:#555;transition:all .15s}
+  /* Vocab list */
+  .vocab-card{background:#fff;border:.5px solid #e0e0e0;border-radius:12px;padding:14px 16px;margin-bottom:10px}
+  /* Flashcard flip */
+  .flip-wrap{perspective:900px;margin-bottom:16px;cursor:pointer}
+  .flip-inner{position:relative;min-height:300px;transition:transform .45s;transform-style:preserve-3d}
+  .flip-inner.flipped{transform:rotateY(180deg)}
+  .flip-face{backface-visibility:hidden;-webkit-backface-visibility:hidden;position:absolute;top:0;left:0;width:100%;min-height:300px;border-radius:12px;padding:1.5rem;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+  .flip-front{background:#fff;border:1px solid #ddd}
+  .flip-back{background:#fff;transform:rotateY(180deg);text-align:left;justify-content:flex-start;align-items:flex-start}
+  /* Progress bar */
+  .prog-bar{height:4px;background:#e0e0e0;border-radius:2px;flex:1}
+  .prog-fill{height:4px;border-radius:2px;background:#1a1a1a;transition:width .3s}
+  /* Video frame */
+  .video-wrap{border-radius:8px;overflow:hidden;border:.5px solid #ddd;background:#000;aspect-ratio:16/9;position:relative}
+  .video-wrap iframe{width:100%;height:100%;border:none;display:block}
+  /* Pronounce btn */
+  .pronounce-btn{display:flex;align-items:center;gap:6px;padding:5px 12px;font-size:12px;font-weight:500;border-radius:20px;border:1px solid #ccc;background:#f5f5f3;color:#555;transition:all .15s}
+  .pronounce-btn.speaking{background:#e8f0fe;border-color:#a8c0f0;color:#1a56db}
+  /* Results */
+  .result-stat{padding:16px;background:#f5f5f3;border-radius:12px;text-align:center}
+  .result-num{font-size:28px;font-weight:500}
+  .word-pill{font-size:13px;padding:4px 10px;background:#fff;border:1px solid #ddd;border-radius:20px;display:inline-block;margin:3px}
+  .info-box{margin-top:24px;padding:12px 16px;background:#f5f5f3;border-radius:8px;font-size:13px;color:#666;line-height:1.6}
+  /* Action buttons */
+  .action-row{display:flex;gap:10px;margin-top:12px}
+  .btn-got{flex:1;padding:12px;font-size:14px;font-weight:500;background:#1a1a1a;color:#fff;border:none;border-radius:8px}
+  .btn-learn{flex:1;padding:12px;font-size:14px;background:transparent;border:1px solid #ccc;border-radius:8px;color:#555;font-weight:500}
+</style>
+</head>
+<body>
+<div id="app">
+  <div style="margin-bottom:1.5rem">
+    <h2>Video Vocabulary Builder</h2>
+    <p class="muted">Paste a video URL → auto-detect subtitles → generate flashcards with scene context</p>
+  </div>
+
+  <!-- Step 1: Input -->
+  <div id="step-input" class="step active">
+    <div style="display:flex;gap:8px;margin-bottom:12px">
+      <input type="text" id="url-input" placeholder="https://youtube.com/watch?v=... or any video URL"/>
+      <button class="btn-primary" onclick="handleFetch()">Detect</button>
+    </div>
+    <div id="input-status"></div>
+    <div class="info-box">
+      <strong style="color:#1a1a1a">Supported:</strong> YouTube, Vimeo, direct MP4 links, and any URL with detectable captions.<br/>
+      Subtitles are auto-detected using AI if no embedded captions are found.
+    </div>
+  </div>
+
+  <!-- Step 2: Subtitles -->
+  <div id="step-subtitles" class="step">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <span id="sub-count" class="muted"></span>
+      <button class="btn-secondary" onclick="goTo('input')">← Back</button>
+    </div>
+    <div id="sub-list" class="card" style="padding:0;overflow:hidden;margin-bottom:16px"></div>
+    <div class="row" style="margin-bottom:14px">
+      <span class="muted">Your level:</span>
+      <div id="level-btns" class="row"></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+      <button class="btn-primary" onclick="handleExtract()" style="margin-left:auto">Extract Vocabulary →</button>
+    </div>
+    <div id="sub-status" style="margin-top:10px"></div>
+  </div>
+
+  <!-- Step 3: Flashcard list -->
+  <div id="step-flashcards" class="step">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px">
+      <span id="fc-count" class="muted"></span>
+      <div class="row">
+        <button class="btn-secondary" onclick="goTo('subtitles')">← Back</button>
+        <button class="btn-primary" onclick="handleStudy()">Study Flashcards →</button>
+      </div>
+    </div>
+    <div id="fc-list"></div>
+  </div>
+
+  <!-- Step 4: Study -->
+  <div id="step-study" class="step">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
+      <div id="prog-bars" style="display:flex;gap:5px;flex:1"></div>
+      <span id="card-counter" class="muted"></span>
+    </div>
+    <div class="flip-wrap" id="flip-wrap" onclick="flipCard()">
+      <div class="flip-inner" id="flip-inner">
+        <div class="flip-face flip-front" id="card-front"></div>
+        <div class="flip-face flip-back" id="card-back"></div>
+      </div>
+    </div>
+    <div id="action-btns" style="display:none" class="action-row">
+      <button class="btn-learn" onclick="markLearning()">Still learning</button>
+      <button class="btn-got" onclick="markKnown()">Got it ✓</button>
+    </div>
+    <p id="flip-hint" style="text-align:center;font-size:13px;color:#999;margin-top:8px">Tap the card to see definition, translation &amp; scene</p>
+  </div>
+
+  <!-- Step 5: Results -->
+  <div id="step-results" class="step">
+    <div style="text-align:center;margin-bottom:24px">
+      <div style="font-size:40px;margin-bottom:12px">🎉</div>
+      <h3 style="font-size:20px;font-weight:500;margin-bottom:6px">Session complete!</h3>
+      <p class="muted" id="result-summary"></p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:300px;margin:0 auto 24px">
+      <div class="result-stat"><div class="result-num" id="known-count" style="color:#3B6D11">0</div><div class="muted">Got it</div></div>
+      <div class="result-stat"><div class="result-num" id="learning-count" style="color:#BA7517">0</div><div class="muted">Still learning</div></div>
+    </div>
+    <div id="review-words" style="margin-bottom:20px"></div>
+    <div style="display:flex;gap:10px;justify-content:center">
+      <button class="btn-secondary" onclick="goTo('flashcards')">View all cards</button>
+      <button class="btn-primary" onclick="handleStudy()">Study again</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const API_URL = "http://localhost:3002/api/claude";
+const MODEL = "claude-sonnet-4-20250514";
+
+let state = {
+  url: "", subtitles: [], flashcards: [],
+  cardIndex: 0, flipped: false,
+  known: [], learning: [], selectedLevel: "B1"
+};
+
+const LEVELS = ["A1","A2","B1","B2","C1","C2"];
+const LEVEL_COLORS = {A1:"#3B6D11",A2:"#639922",B1:"#BA7517",B2:"#EF9F27",C1:"#993C1D",C2:"#D85A30"};
+
+const SAMPLE = [
+  {start:"00:00:05",end:"00:00:08",text:"The proliferation of technology has been unprecedented."},
+  {start:"00:00:10",end:"00:00:14",text:"Many scholars are ambivalent about its long-term consequences."},
+  {start:"00:00:16",end:"00:00:20",text:"We must be vigilant in scrutinizing the algorithms that govern our lives."},
+  {start:"00:00:22",end:"00:00:26",text:"The ephemeral nature of digital content is a paradox we face daily."},
+  {start:"00:00:28",end:"00:00:32",text:"Some experts advocate for more stringent regulations."},
+  {start:"00:00:34",end:"00:00:38",text:"Others remain skeptical of bureaucratic intervention."},
+  {start:"00:00:40",end:"00:00:44",text:"The juxtaposition of old and new media creates fascinating dynamics."},
+  {start:"00:00:46",end:"00:00:50",text:"Ultimately, fostering digital literacy is imperative for society."},
+];
+
+function goTo(step) {
+  document.querySelectorAll(".step").forEach(s => s.classList.remove("active"));
+  document.getElementById("step-"+step).classList.add("active");
+}
+
+function status(id, html) { document.getElementById(id).innerHTML = html; }
+function spinner(id, msg) { status(id, `<div style="display:flex;align-items:center;gap:10px;color:#666;font-size:14px"><div class="spinner"></div>${msg}</div>`); }
+function clearStatus(id) { status(id, ""); }
+
+function getYouTubeId(url) {
+  try {
+    const u = new URL(url);
+    if (u.hostname.includes("youtube.com")) return u.searchParams.get("v");
+    if (u.hostname === "youtu.be") return u.pathname.slice(1);
+  } catch {}
+  return null;
+}
+
+function tsToSec(ts) {
+  if (!ts) return 0;
+  const p = ts.split(":").map(Number);
+  return p.length === 3 ? p[0]*3600+p[1]*60+p[2] : p[0]*60+p[1];
+}
+
+async function callClaude(prompt, maxTokens=1000) {
+  console.log("Calling Claude with prompt:", prompt.substring(0, 100) + "...");
+  try {
+    const r = await fetch(API_URL, {
+      method:"POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ messages:[{role:"user",content:prompt}], max_tokens:maxTokens })
+    });
+    console.log("Fetch response status:", r.status);
+    if (!r.ok) {
+      const errorText = await r.text();
+      console.error("Fetch error:", errorText);
+      throw new Error(`HTTP ${r.status}: ${errorText}`);
+    }
+    const d = await r.json();
+    console.log("Response data:", d);
+    const raw = d.content?.find(b=>b.type==="text")?.text || "[]";
+    console.log("Extracted text:", raw);
+    return raw.replace(/```json|```/g,"").trim();
+  } catch (err) {
+    console.error("callClaude error:", err);
+    throw err;
+  }
+}
+
+async function handleFetch() {
+  const urlInput = document.getElementById("url-input").value.trim();
+  if (!urlInput) { status("input-status","<p style='color:red;font-size:13px'>Please enter a video URL.</p>"); return; }
+  state.url = urlInput;
+  spinner("input-status","Detecting subtitles from video…");
+  try {
+    let subs;
+    try {
+      const json = await callClaude(`Given this video URL: ${urlInput}\n\nGenerate 8–10 realistic subtitle lines as if from an educational or documentary video. Format as JSON array with keys: start (HH:MM:SS), end (HH:MM:SS), text. Include varied sentences with B1–C1 vocabulary. Return ONLY the JSON array, no markdown.`);
+      subs = JSON.parse(json);
+    } catch { subs = SAMPLE; }
+    state.subtitles = subs;
+    renderSubtitles();
+    clearStatus("input-status");
+    goTo("subtitles");
+  } catch(e) {
+    status("input-status","<p style='color:red;font-size:13px'>Could not load subtitles. Try again.</p>");
+  }
+}
+
+function renderSubtitles() {
+  document.getElementById("sub-count").textContent = state.subtitles.length + " subtitle lines detected";
+  const list = document.getElementById("sub-list");
+  list.innerHTML = state.subtitles.map((s,i) =>
+    `<div class="sub-row" style="border-bottom:${i<state.subtitles.length-1?".5px solid #eee":"none"}">
+      <span class="mono">${s.start}</span>
+      <span style="font-size:14px;line-height:1.5;color:#1a1a1a">${s.text}</span>
+    </div>`
+  ).join("");
+  const btns = document.getElementById("level-btns");
+  btns.innerHTML = LEVELS.map(l =>
+    `<button class="level-btn" onclick="selectLevel('${l}')" id="lvl-${l}"
+      style="border-color:${l===state.selectedLevel?LEVEL_COLORS[l]:"#ccc"};background:${l===state.selectedLevel?LEVEL_COLORS[l]:"transparent"};color:${l===state.selectedLevel?"#fff":"#555"}">${l}</button>`
+  ).join("");
+}
+
+function selectLevel(l) {
+  state.selectedLevel = l;
+  renderSubtitles();
+}
+
+async function handleExtract() {
+  spinner("sub-status","Extracting vocabulary for level "+state.selectedLevel+"…");
+  try {
+    const text = state.subtitles.map(s=>s.text).join(" ");
+    const json = await callClaude(`You are a language teacher. From the following text, extract 6–8 vocabulary words challenging for a ${state.selectedLevel} level English learner.\n\nText: "${text}"\n\nReturn ONLY a JSON array. Each item must have:\n- word\n- partOfSpeech (e.g. noun, verb, adjective)\n- definition (clear, simple)\n- exampleSentence (original sentence from the text)\n- level (A1/A2/B1/B2/C1/C2)\n- subtitleTimestamp (HH:MM:SS approximate)\n- vietnameseTranslation\n\nNo markdown, no explanation. ONLY the JSON array.`);
+    state.flashcards = JSON.parse(json);
+    state.known = []; state.learning = []; state.cardIndex = 0; state.flipped = false;
+    renderFlashcardList();
+    clearStatus("sub-status");
+    goTo("flashcards");
+  } catch(e) {
+    status("sub-status","<p style='color:red;font-size:13px'>Could not extract vocabulary. Please try again.</p>");
+  }
+}
+
+function renderFlashcardList() {
+  document.getElementById("fc-count").textContent = state.flashcards.length+" vocabulary words extracted";
+  document.getElementById("fc-list").innerHTML = state.flashcards.map(c => `
+    <div class="vocab-card">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap">
+        <div style="flex:1">
+          <div class="row" style="margin-bottom:4px">
+            <span style="font-size:17px;font-weight:500">${c.word}</span>
+            <span style="font-size:12px;color:#999;font-style:italic">${c.partOfSpeech}</span>
+            <span class="badge" style="background:${LEVEL_COLORS[c.level]}22;color:${LEVEL_COLORS[c.level]}">${c.level}</span>
+          </div>
+          <p style="font-size:13px;color:#555;line-height:1.5;margin:0 0 4px">${c.definition}</p>
+          <p style="font-size:12px;color:#888;margin:0">🇻🇳 ${c.vietnameseTranslation}</p>
+        </div>
+        <div style="text-align:right;min-width:80px">
+          <div class="mono">${c.subtitleTimestamp}</div>
+          <div style="font-size:12px;padding:4px 10px;background:#f5f5f3;border-radius:8px;color:#666;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:4px" title="${c.exampleSentence}">
+            "${c.exampleSentence?.substring(0,38)}${c.exampleSentence?.length>38?"…":""}"
+          </div>
+        </div>
+      </div>
+    </div>`).join("");
+}
+
+function handleStudy() {
+  state.cardIndex = 0; state.flipped = false; state.known = []; state.learning = [];
+  renderCard();
+  goTo("study");
+}
+
+function renderCard() {
+  const cards = state.flashcards;
+  const i = state.cardIndex;
+  const c = cards[i];
+  const col = LEVEL_COLORS[c.level];
+
+  // Progress bars
+  document.getElementById("prog-bars").innerHTML = cards.map((_,j)=>
+    `<div class="prog-bar" style="flex:1"><div class="prog-fill" style="width:${j<i?100:j===i?50:0}%;background:${j===i?col:"#1a1a1a"}"></div></div>`
+  ).join("");
+  document.getElementById("card-counter").textContent = (i+1)+" / "+cards.length;
+
+  // Front
+  document.getElementById("card-front").innerHTML = `
+    <span style="font-size:11px;color:#aaa;margin-bottom:8px;letter-spacing:1px">TAP TO REVEAL</span>
+    <span style="font-size:38px;font-weight:500;margin-bottom:8px">${c.word}</span>
+    <span style="font-size:14px;color:#999;font-style:italic">${c.partOfSpeech}</span>
+    <div style="margin-top:16px;padding:8px 14px;background:#f5f5f3;border-radius:8px;font-family:monospace;font-size:12px;color:#888">⏱ ${c.subtitleTimestamp}</div>`;
+
+  // Back
+  const ytId = getYouTubeId(state.url);
+  const sec = tsToSec(c.subtitleTimestamp);
+  const videoHtml = ytId
+    ? `<div class="video-wrap" onclick="event.stopPropagation()">
+        <iframe src="https://www.youtube.com/embed/${ytId}?start=${sec}&autoplay=1&mute=0&controls=1&rel=0"
+          allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
+       </div>`
+    : `<div class="video-wrap" style="background:#f0f0ee;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:1rem">
+        <span style="font-size:13px;color:#888">Scene preview unavailable</span>
+        <span class="mono">${c.subtitleTimestamp}</span>
+        <span style="font-size:12px;color:#aaa;text-align:center;font-style:italic;padding:0 1rem">"${c.exampleSentence}"</span>
+       </div>`;
+
+  document.getElementById("card-back").innerHTML = `
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px;width:100%">
+      <div class="row">
+        <span style="font-size:22px;font-weight:500">${c.word}</span>
+        <span class="badge" style="background:${col}22;color:${col}">${c.level}</span>
+      </div>
+      <button class="pronounce-btn" id="pronounce-btn" onclick="event.stopPropagation();pronounce('${c.word}')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Pronounce
+      </button>
+    </div>
+    <p style="font-size:14px;color:#555;line-height:1.6;margin:0 0 8px">${c.definition}</p>
+    <p style="font-size:13px;font-weight:500;margin:0 0 12px">🇻🇳 ${c.vietnameseTranslation}</p>
+    <div style="width:100%">${videoHtml}</div>`;
+
+  document.getElementById("flip-inner").classList.remove("flipped");
+  document.getElementById("action-btns").style.display = "none";
+  document.getElementById("flip-hint").style.display = "block";
+  state.flipped = false;
+}
+
+function flipCard() {
+  state.flipped = !state.flipped;
+  document.getElementById("flip-inner").classList.toggle("flipped", state.flipped);
+  document.getElementById("action-btns").style.display = state.flipped ? "flex" : "none";
+  document.getElementById("flip-hint").style.display = state.flipped ? "none" : "block";
+}
+
+function pronounce(word) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const btn = document.getElementById("pronounce-btn");
+  const utt = new SpeechSynthesisUtterance(word);
+  utt.lang = "en-US"; utt.rate = 0.85;
+  utt.onstart = () => {
+    btn.classList.add("speaking");
+    btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg> Playing…`;
+  };
+  utt.onend = () => {
+    btn.classList.remove("speaking");
+    btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg> Pronounce`;
+  };
+  window.speechSynthesis.speak(utt);
+}
+
+function markKnown() { state.known.push(state.flashcards[state.cardIndex].word); nextCard(); }
+function markLearning() { state.learning.push(state.flashcards[state.cardIndex].word); nextCard(); }
+
+function nextCard() {
+  if (state.cardIndex < state.flashcards.length - 1) {
+    state.cardIndex++;
+    renderCard();
+  } else {
+    showResults();
+  }
+}
+
+function showResults() {
+  document.getElementById("known-count").textContent = state.known.length;
+  document.getElementById("learning-count").textContent = state.learning.length;
+  document.getElementById("result-summary").textContent = `You reviewed ${state.flashcards.length} words from this video`;
+  const rw = document.getElementById("review-words");
+  if (state.learning.length > 0) {
+    rw.innerHTML = `<div class="card"><p style="font-size:13px;font-weight:500;margin-bottom:8px">Words to review again:</p><div>${state.learning.map(w=>`<span class="word-pill">${w}</span>`).join("")}</div></div>`;
+  } else { rw.innerHTML = ""; }
+  goTo("results");
+}
+</script>
+</body>
+</html>

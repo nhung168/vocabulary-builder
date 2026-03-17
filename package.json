@@ -1,0 +1,28 @@
+{
+  "name": "vocabulary-builder",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "proxy_server.js",
+  "scripts": {
+    "start": "node proxy_server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nhung168/vocabulary-builder.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nhung168/vocabulary-builder/issues"
+  },
+  "homepage": "https://github.com/nhung168/vocabulary-builder#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^4.22.1",
+    "node-fetch": "^3.3.2"
+  }
+}
