@@ -7,11 +7,11 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:system-ui,sans-serif;background:#f5f4f0;color:#1a1a1a;min-height:100vh;display:flex;justify-content:center;padding:2rem 1rem}
-#app{width:100%;max-width:760px}
+#app{width:100%;max-width:900px}
 h2{font-size:20px;font-weight:500}
 .muted{color:#777;font-size:13px}
-input[type=text]{font-family:inherit;font-size:14px;border:1px solid #d0d0d0;border-radius:8px;background:#fff;outline:none;color:#1a1a1a;padding:10px 14px}
-input[type=text]:focus{border-color:#888}
+input[type=text],textarea{font-family:inherit;font-size:14px;border:1px solid #d0d0d0;border-radius:8px;background:#fff;outline:none;color:#1a1a1a;padding:10px 14px}
+input[type=text]:focus,textarea:focus{border-color:#888}
 button{cursor:pointer;font-family:inherit;font-size:14px}
 .btn{padding:9px 18px;border-radius:8px;font-weight:500;border:none}
 .btn-dark{background:#1a1a1a;color:#fff}
@@ -25,7 +25,7 @@ button{cursor:pointer;font-family:inherit;font-size:14px}
 .tag{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;font-size:13px;background:#e8e6e0;color:#333;margin:3px}
 .tag button{background:none;border:none;color:#888;font-size:16px;line-height:1;padding:0;cursor:pointer}
 .mono{font-family:monospace;font-size:11px;color:#999}
-.spinner{width:15px;height:15px;border:2px solid #ddd;border-top-color:#555;border-radius:50%;animation:spin .7s linear infinite;display:inline-block;vertical-align:middle}
+.spinner{width:15px;height:15px;border:2px solid #ddd;border-top-color:#555;border-radius:50%;animation:spin .7s linear infinite;display:inline-block;vertical-align:middle;margin-right:8px}
 @keyframes spin{to{transform:rotate(360deg)}}
 .step-nav{display:flex;margin-bottom:2rem}
 .step-dot{display:flex;align-items:center;gap:6px;font-size:13px;color:#bbb}
@@ -34,78 +34,41 @@ button{cursor:pointer;font-family:inherit;font-size:14px}
 .step-dot.done .num{background:#1a1a1a;border-color:#1a1a1a;color:#fff}
 .step-dot.active .num{border-color:#1a1a1a;color:#1a1a1a}
 .step-line{flex:1;height:1px;background:#e0e0e0;margin:0 8px;align-self:center}
-.status-row{display:flex;align-items:center;gap:8px;font-size:13px;color:#555;margin-top:10px}
-.dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;background:#e0e0e0}
-.dot.spinning{background:#f5a623;animation:pulse .6s infinite alternate}
-.dot.ok{background:#27ae60}.dot.fail{background:#e74c3c}
-@keyframes pulse{to{opacity:.3}}
 .sub-line{padding:8px 14px;border-bottom:.5px solid #f0f0f0;font-size:13px;display:flex;gap:12px;cursor:pointer;transition:background .1s}
 .sub-line:last-child{border-bottom:none}
 .sub-line:hover{background:#fafaf8}
 .sub-line.hi{background:#fffbe6}
 .sub-line .ts{font-family:monospace;font-size:11px;color:#bbb;min-width:48px;flex-shrink:0;padding-top:2px}
-.word-zone{border:1px dashed #ccc;border-radius:10px;padding:12px 14px;min-height:60px;background:#fafaf8;font-size:14px;line-height:2.2}
-.word-zone .w{cursor:pointer;border-radius:3px;padding:1px 0;transition:background .1s}
-.word-zone .w:hover{background:#ffe9a0}
-.word-zone .w.sel{background:#ffd640;border-radius:4px;padding:1px 3px}
-.flip-wrap{perspective:900px;cursor:pointer;margin-bottom:14px}
-.flip-inner{position:relative;transition:transform .45s;transform-style:preserve-3d;min-height:320px}
-.flip-inner.flipped{transform:rotateY(180deg)}
-.flip-face{backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:12px;padding:1.5rem;position:absolute;top:0;left:0;width:100%;min-height:320px;display:flex;flex-direction:column}
-.flip-front{background:#fff;border:1px solid #e0e0e0;align-items:center;justify-content:center;text-align:center}
-.flip-back{background:#fff;transform:rotateY(180deg);border:2px solid #1a1a1a}
-.video-wrap{border-radius:8px;overflow:hidden;background:#111;aspect-ratio:16/9;width:100%}
-.video-wrap iframe{width:100%;height:100%;border:none;display:block}
+.word-zone{border:1px dashed #ccc;border-radius:10px;padding:14px;min-height:80px;background:#fafaf8;font-size:15px;line-height:2.4;user-select:none;-webkit-user-select:none;cursor:crosshair}
+.w,.cjk{display:inline;cursor:crosshair;border-radius:3px;padding:2px 1px;transition:background .08s}
+.w:hover,.cjk:hover{background:#ffe9a0}
+.w.sel,.cjk.sel{background:#ffd640;border-radius:4px;padding:2px 3px;font-weight:500}
+.w.preview,.cjk.preview{background:#fff0a0;border-radius:4px}
+.pick-hint{font-size:12px;color:#aaa;margin-bottom:8px;display:flex;gap:16px;flex-wrap:wrap}
+.pick-hint b{color:#666}
+.card-layout{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+.card-left{display:flex;flex-direction:column;gap:12px}
+.card-right{border-radius:8px;overflow:hidden;background:#111;aspect-ratio:16/9}
+.card-right iframe{width:100%;height:100%;border:none;display:block}
+@media(max-width:680px){.card-layout{grid-template-columns:1fr}}
 .pron-btn{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;font-size:12px;border-radius:20px;border:1px solid #ccc;background:#f5f4f0;color:#555;cursor:pointer;transition:all .15s}
 .pron-btn.speaking{background:#e8f0fe;border-color:#9ab0f0;color:#2a56db}
 .result-stat{text-align:center;padding:16px;background:#f5f4f0;border-radius:12px}
 .lbl{font-size:11px;font-weight:500;letter-spacing:.8px;color:#aaa;margin-bottom:6px;text-transform:uppercase}
-.info{padding:12px 14px;background:#f0ede8;border-radius:8px;font-size:13px;color:#666;line-height:1.7;margin-top:12px}
-.err{padding:12px 14px;background:#fdf3f3;border:.5px solid #f5c6c6;border-radius:8px;font-size:13px;color:#c0392b;line-height:1.7;margin-top:10px}
-#step-3{position:relative}
-#study-view{display:flex;flex-direction:column;position:relative;z-index:1}
-/* act-btns: overlay left/right on small phones, right column on desktop */
-#act-btns{display:none;position:absolute;left:12px;right:12px;bottom:12px;gap:12px;justify-content:space-between;z-index:9999;pointer-events:none}
-#act-btns .btn{pointer-events:auto;width:48%}
-#results{position:relative;z-index:2}
-
-@media(max-width:420px){
-  /* iPhone 12 / small phones: show buttons as left/right bottom overlay */
-  #act-btns{left:12px;right:12px;bottom:12px;position:absolute;flex-direction:row}
-  #act-btns .btn{width:48%}
-}
-
-@media(min-width:700px){
-  /* tablet / desktop: column on right side of card */
-  #study-view{flex-direction:row;gap:16px;align-items:flex-start}
-  #study-view .flip-wrap{flex:1}
-  #act-btns{position:absolute;right:12px;top:120px;left:auto;bottom:auto;width:140px;flex-direction:column;pointer-events:auto}
-  #act-btns .btn{width:100%}
-}
-
-@media(min-width:900px){
-  #act-btns{width:160px;right:16px;top:140px}
-}
-
-@media(min-width:1200px){
-  /* larger desktops keep right column */
-  #act-btns{right:18px}
-}
-
-@media(min-width:1920px){
-  /* 1920x1080 and wider */
-  #act-btns{width:200px;right:20px;top:160px;gap:12px}
-  #act-btns button{font-size:16px;padding:14px 20px}
-}
+.info-box{padding:12px 14px;border-radius:8px;font-size:13px;line-height:1.7;margin-top:12px}
+.info{background:#f0ede8;color:#666}
+.err{background:#fdf3f3;border:.5px solid #f5c6c6;color:#c0392b;margin-top:10px}
+.tabs{display:flex;border:.5px solid #e0e0e0;border-radius:8px;overflow:hidden;margin-bottom:12px}
+.tab{flex:1;padding:8px;font-size:13px;border:none;background:#f5f4f0;color:#666;cursor:pointer;font-family:inherit}
+.tab.active{background:#1a1a1a;color:#fff;font-weight:500}
 </style>
 </head>
 <body>
 <div id="app">
   <div style="margin-bottom:1.5rem">
     <h2>Video Vocabulary Builder</h2>
-    <p class="muted" style="margin-top:3px">Paste a YouTube link → extract subtitles → pick words → study flashcards</p>
+    <p class="muted" style="margin-top:3px">Extract subtitles → pick words or phrases → study flashcards with scene video</p>
   </div>
-
   <div class="step-nav">
     <div class="step-dot active" id="nav1"><div class="num">1</div><span>Video</span></div>
     <div class="step-line"></div>
@@ -116,15 +79,45 @@ button{cursor:pointer;font-family:inherit;font-size:14px}
 
   <!-- STEP 1 -->
   <div id="step-1" class="step active">
-    <div style="display:flex;gap:8px;margin-bottom:8px">
-      <input type="text" id="url-input" placeholder="https://youtube.com/watch?v=..." style="flex:1" onkeydown="if(event.key==='Enter')fetchSubs()"/>
-      <button class="btn btn-dark" id="fetch-btn" onclick="fetchSubs()">Extract</button>
+    <div class="tabs">
+      <button class="tab active" id="tab-auto" onclick="switchTab('auto')">Auto-fetch</button>
+      <button class="tab" id="tab-paste" onclick="switchTab('paste')">Paste transcript</button>
     </div>
-    <div id="fetch-status"></div>
-    <div id="fetch-err"></div>
-    <div class="info">
-      Works with any YouTube video that has captions enabled.<br/>
-      Try: <a href="#" onclick="document.getElementById('url-input').value='https://www.youtube.com/watch?v=NngM_qdDMm8';return false" style="color:#555">Economics Explained Fast</a> · TED Talks · BBC Learning English · Kurzgesagt
+    <div id="panel-auto">
+      <div style="display:flex;gap:8px;margin-bottom:8px">
+        <input type="text" id="url-input" placeholder="https://youtube.com/watch?v=..." style="flex:1" onkeydown="if(event.key==='Enter')fetchSubs()"/>
+        <button class="btn btn-dark" id="fetch-btn" onclick="fetchSubs()">Extract</button>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+        <div style="font-size:12px;color:#666">Endpoint:</div>
+        <div style="font-size:13px;color:#444">Using public transcript API</div>
+      </div>
+      <div id="fetch-status"></div>
+      <div id="fetch-err"></div>
+      <div id="raw-debug" style="display:none;margin-top:10px"><div class="lbl">Upstream response (raw)</div><pre id="raw-pre" style="max-height:220px;overflow:auto;padding:10px;background:#fff;border:1px solid #eee;border-radius:8px;font-size:12px;color:#222"></pre></div>
+      <div class="info-box info">
+        Uses a free public transcript server. If it fails, use the Paste tab.<br/>
+        Try: <a href="#" onclick="setUrl('https://www.youtube.com/watch?v=NngM_qdDMm8');return false" style="color:#555">Economics Explained</a> ·
+        <a href="#" onclick="setUrl('https://www.youtube.com/watch?v=arj7oStGLkU');return false" style="color:#555">TED: Tim Urban</a>
+      </div>
+      <div id="manual-paste" style="display:none;margin-top:12px">
+        <div style="margin-bottom:6px" class="lbl">Or paste transcript / subtitles</div>
+        <textarea id="manual-transcript" placeholder="Paste full transcript or SRT text here" style="width:100%;min-height:120px;padding:10px;border:1px solid #ddd;border-radius:8px"></textarea>
+        <div style="display:flex;justify-content:flex-end;margin-top:8px;gap:8px">
+          <button class="btn btn-ghost" onclick="document.getElementById('manual-paste').style.display='none'">Cancel</button>
+          <button class="btn btn-dark" onclick="useManualTranscript()">Use Transcript →</button>
+        </div>
+      </div>
+    </div>
+    <div id="panel-paste" style="display:none">
+      <input type="text" id="paste-url" placeholder="YouTube URL (optional — for video embed)" style="width:100%;margin-bottom:8px"/>
+      <textarea id="paste-text" rows="10" style="width:100%;resize:vertical;font-size:13px;line-height:1.6"
+        placeholder="Paste transcript here — supports YouTube transcript panel, NoteGPT, timestamped or plain text, Chinese/mixed language."></textarea>
+      <button class="btn btn-dark" style="margin-top:8px" onclick="parsePasted()">Use This Transcript →</button>
+      <div id="paste-err"></div>
+      <div class="info-box info" style="margin-top:10px">
+        <strong style="color:#444">Get YouTube transcript:</strong> open video → click ··· → Show transcript → select all → copy
+      </div>
     </div>
   </div>
 
@@ -137,8 +130,12 @@ button{cursor:pointer;font-family:inherit;font-size:14px}
     <div id="vid-preview" style="display:none;border-radius:10px;overflow:hidden;background:#111;aspect-ratio:16/9;margin-bottom:12px">
       <iframe id="vp-frame" src="" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;border:none;display:block"></iframe>
     </div>
-    <div style="background:#fff;border:.5px solid #e0e0e0;border-radius:12px;max-height:280px;overflow-y:auto;margin-bottom:14px" id="script-panel"></div>
-    <div class="lbl">Click any word to add to your list</div>
+    <div style="background:#fff;border:.5px solid #e0e0e0;border-radius:12px;max-height:260px;overflow-y:auto;margin-bottom:14px" id="script-panel"></div>
+    <div class="pick-hint">
+      <span>👆 <b>Click</b> — select a single word</span>
+      <span>↔ <b>Click &amp; drag</b> — select a phrase</span>
+      <span>🔁 <b>Click selected</b> — deselect</span>
+    </div>
     <div class="word-zone" id="word-picker"></div>
     <div style="margin-top:12px">
       <div class="lbl">Selected (<span id="sel-count">0</span>)</div>
@@ -152,28 +149,40 @@ button{cursor:pointer;font-family:inherit;font-size:14px}
   <!-- STEP 3 -->
   <div id="step-3" class="step">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px">
-      <div>
-        <div class="lbl" style="margin-bottom:2px">Flashcards</div>
-        <span id="card-ctr" class="muted"></span>
-      </div>
+      <div><div class="lbl" style="margin-bottom:2px">Flashcards</div><span id="card-ctr" class="muted"></span></div>
       <div style="display:flex;gap:8px">
         <button class="btn btn-ghost" onclick="goStep(2)">← Edit</button>
         <button class="btn btn-ghost" id="view-btn" onclick="toggleView()">List view</button>
       </div>
     </div>
-    <div id="prog" style="display:flex;gap:4px;margin-bottom:14px"></div>
+    <div id="prog" style="display:flex;gap:4px;margin-bottom:16px"></div>
     <div id="study-view">
-      <div class="flip-wrap" onclick="flipCard()">
-        <div class="flip-inner" id="flip-inner">
-          <div class="flip-face flip-front" id="cf"></div>
-          <div class="flip-face flip-back" id="cb"></div>
+      <div id="front-card" style="background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:2rem;text-align:center;cursor:pointer;margin-bottom:14px" onclick="flipToBack()">
+        <span style="font-size:11px;color:#ccc;letter-spacing:1px;display:block;margin-bottom:14px">TAP TO REVEAL</span>
+        <div id="cf-word" style="font-size:44px;font-weight:500;margin-bottom:10px"></div>
+        <div id="cf-ts" style="display:inline-block;padding:5px 14px;background:#f5f4f0;border-radius:8px;font-family:monospace;font-size:12px;color:#999"></div>
+      </div>
+      <div id="back-card" style="display:none;background:#fff;border:2px solid #1a1a1a;border-radius:12px;padding:1.25rem;margin-bottom:14px">
+        <div class="card-layout">
+          <div class="card-left">
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+              <span id="cb-word" style="font-size:22px;font-weight:500"></span>
+              <button class="pron-btn" id="pb" onclick="speak()">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                Pronounce
+              </button>
+            </div>
+            <div id="cb-sentence" style="padding:8px 12px;background:#f5f4f0;border-radius:8px;border-left:3px solid #ccc;font-size:13px;color:#555;line-height:1.7;font-style:italic"></div>
+            <div id="cb-ts" style="font-family:monospace;font-size:11px;color:#bbb"></div>
+            <div style="display:flex;gap:10px;margin-top:4px">
+              <button class="btn btn-ghost" style="flex:1;padding:11px" onclick="markL()">Still learning</button>
+              <button class="btn btn-dark" style="flex:1;padding:11px" onclick="markK()">Got it ✓</button>
+            </div>
+          </div>
+          <div class="card-right" id="cb-video"></div>
         </div>
       </div>
-      <div id="act-btns" style="display:none">
-        <button class="btn btn-ghost" style="padding:12px" onclick="markL()">Still learning</button>
-        <button class="btn btn-dark" style="padding:12px" onclick="markK()">Got it ✓</button>
-      </div>
-      <p id="flip-hint" style="text-align:center;font-size:13px;color:#bbb;margin-top:8px">Tap card to flip</p>
+      <p id="flip-hint" style="text-align:center;font-size:13px;color:#bbb;margin-top:4px">Tap card to reveal scene</p>
     </div>
     <div id="list-view" style="display:none"></div>
     <div id="results" style="display:none;text-align:center;padding-top:4px">
@@ -194,10 +203,26 @@ button{cursor:pointer;font-family:inherit;font-size:14px}
 </div>
 
 <script>
-const SOCIAL_KEYS = ["76m4Akhvj5kZNX", "uVFu9hf4mbX1GS"]; // primary, fallback
-const S = {url:"",ytId:null,subs:[],selected:[],cards:[],idx:0,flipped:false,known:[],learning:[],view:"study"};
-let LAST_CLICK = null; // {seg, ti} last clicked token for shift-range selection
+/* ── Global state ── */
+const S={url:"",ytId:null,subs:[],cards:[],idx:0,known:[],learning:[],view:"study",showBack:false};
 
+const PUBLIC_ENDPOINT = 'https://youtube-transcript-api-tau-one.vercel.app/transcript';
+
+// Phrase selection state — all global, no closures
+let allToks=[];          // flat array of all selectable token DOM elements
+const phrases=[];        // committed selections: [{word,ts,sentence,lo,hi}]
+let dragActive=false;
+let dragStartIdx=-1;
+let dragEndIdx=-1;
+
+/* ── Helpers ── */
+function setUrl(u){document.getElementById("url-input").value=u;}
+function switchTab(t){
+  document.getElementById("tab-auto").classList.toggle("active",t==="auto");
+  document.getElementById("tab-paste").classList.toggle("active",t==="paste");
+  document.getElementById("panel-auto").style.display=t==="auto"?"block":"none";
+  document.getElementById("panel-paste").style.display=t==="paste"?"block":"none";
+}
 function goStep(n){
   document.querySelectorAll(".step").forEach(e=>e.classList.remove("active"));
   document.getElementById("step-"+n).classList.add("active");
@@ -207,316 +232,386 @@ function goStep(n){
     e.classList.toggle("active",i===n);
   });
 }
-
 function getYtId(url){
   try{
     const u=new URL(url);
-    if(u.hostname.includes("youtube.com")) return u.searchParams.get("v");
-    if(u.hostname==="youtu.be") return u.pathname.slice(1);
-  }catch{}
-  return null;
+    if(u.hostname.includes("youtube.com"))return u.searchParams.get("v");
+    if(u.hostname==="youtu.be")return u.pathname.slice(1).split("?")[0];
+  }catch{}return null;
 }
-
 function sec2ts(s){
   s=Math.floor(+s||0);
   const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),ss=s%60;
-  return h?`${h}:${String(m).padStart(2,"0")}:${String(ss).padStart(2,"0")}`:`${m}:${String(ss).padStart(2,"0")}`;
+  return h?`${h}:${pad(m)}:${pad(ss)}`:`${m}:${pad(ss)}`;
 }
-
+function pad(n){return String(n).padStart(2,"0");}
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
 
-function setStatus(html){ document.getElementById("fetch-status").innerHTML = html; }
-function setErr(html){ document.getElementById("fetch-err").innerHTML = html; }
+/* ── Tokeniser: English words + CJK characters ── */
+function tokenise(text){
+  const tokens=[];
+  const re=/(\s+)|([，。！？、：；""''【】《》\u3000]+)|([\u4e00-\u9fff\u3400-\u4dbf\uf900-\ufaff\u3040-\u309f\u30a0-\u30ff\uac00-\ud7af])|([a-zA-Z0-9''\-]+)|([^\s])/g;
+  let m;
+  while((m=re.exec(text))!==null){
+    if(m[1])tokens.push({type:"space",val:m[0]});
+    else if(m[2])tokens.push({type:"punct",val:m[0]});
+    else if(m[3])tokens.push({type:"cjk",val:m[0]});
+    else if(m[4])tokens.push({type:"word",val:m[0]});
+    else tokens.push({type:"punct",val:m[0]});
+  }
+  return tokens;
+}
 
-/* ── Fetch transcript via SocialKit ── */
+/* ── Step 1: Auto-fetch ── */
 async function fetchSubs(){
-  const url = document.getElementById("url-input").value.trim();
-  if(!url){ setErr(`<p style="color:#c0392b;font-size:13px;margin-top:6px">Please enter a YouTube URL.</p>`); return; }
-  const id = getYtId(url);
-  if(!id){ setErr(`<p style="color:#c0392b;font-size:13px;margin-top:6px">⚠ Only YouTube URLs are supported.</p>`); return; }
+  const url=document.getElementById("url-input").value.trim();
+  if(!url){showErr("fetch-err","Please enter a YouTube URL.");return;}
+  const id=getYtId(url);
+  if(!id){showErr("fetch-err","Only YouTube URLs are supported.");return;}
+  S.ytId=id; S.url=url;
+  document.getElementById("fetch-err").innerHTML="";
+  document.getElementById("fetch-btn").disabled=true;
+  document.getElementById("fetch-status").innerHTML=
+    `<div style="display:flex;align-items:center;font-size:13px;color:#666;margin-top:8px"><div class="spinner"></div>Fetching transcript…</div>`;
+  try{
+    // Post to the public transcript API only
+    const rr = await fetch(PUBLIC_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url:`https://www.youtube.com/watch?v=${id}`})});
+    const j = await rr.json().catch(()=>null);
+    const r = rr;
+    let subs=[];
+    if(Array.isArray(j.segments)&&j.segments.length){
+      subs=j.segments.map(x=>({start:+x.start||0,dur:+x.duration||2,text:(x.text||"").trim()})).filter(x=>x.text);
+    }else if(j.transcript){
+      subs=splitIntoSegments(j.transcript);
+    }
+    // Basic sanity checks: sometimes upstream returns an encoded/invalid transcript string
+    const looksBad = (j && typeof j.transcript==='string' && (j.transcript.length<40 || /0:\{/.test(j.transcript) || /1:null/.test(j.transcript)));
+    if(looksBad){
+      // Show diagnostic raw response and suggest paste fallback
+      showRawResponse(j);
+      document.getElementById("fetch-status").innerHTML="";
+      document.getElementById('manual-paste').style.display='block';
+      throw new Error('Upstream returned unexpected transcript format');
+    }
+    if(!subs.length)throw new Error("No content returned");
+    document.getElementById("fetch-status").innerHTML=
+      `<div style="font-size:13px;color:#27ae60;margin-top:6px;font-weight:500">✓ ${subs.length} segments extracted</div>`;
+    S.subs=subs;
+    setTimeout(()=>{document.getElementById("fetch-status").innerHTML="";renderStep2();goStep(2);},600);
+  }catch(e){
+    document.getElementById("fetch-status").innerHTML="";
+    document.getElementById("fetch-err").innerHTML = `<div class="info-box err">Auto-fetch failed: ${esc(e.message)}<div style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end">
+        <button class="btn btn-ghost" onclick="openOnYouTube()">Open video</button>
+        <button class="btn btn-ghost" onclick="tryEmbedNoCookie()">Try nocookie embed</button>
+        <button class="btn btn-dark" onclick="showManualPaste()">Paste transcript</button>
+      </div></div>`;
+    // Reveal manual paste area as a quick fallback
+    document.getElementById('manual-paste').style.display='block';
+  }
+  document.getElementById("fetch-btn").disabled=false;
+}
 
-  S.ytId = id; S.url = url;
-  setErr("");
-  document.getElementById("fetch-btn").disabled = true;
-  setStatus(`<div class="status-row"><div class="dot spinning" id="sd"></div><span id="st">Fetching transcript…</span></div>`);
-
-  // SocialKit API — try each key (primary then fallback). If direct requests fail (CORS), try via allorigins proxy.
-  const ytUrl = `https://www.youtube.com/watch?v=${id}`;
-
-  let subs = null;
-
-  // Attempt 1: try direct fetch with each API key
-  for (const key of SOCIAL_KEYS) {
-    const apiUrl = `https://api.socialkit.dev/youtube/transcript?access_key=${key}&url=${encodeURIComponent(ytUrl)}`;
-    try {
-      const r = await fetch(apiUrl, { signal: AbortSignal.timeout(12000) });
-      if (r.ok) {
-        const j = await r.json();
-        if (j.success && j.data?.transcriptSegments?.length) {
-          subs = parseSK(j.data.transcriptSegments);
-          break;
+/* ── Step 1: Paste ── */
+function parsePasted(){
+  const raw=document.getElementById("paste-text").value.trim();
+  const urlVal=document.getElementById("paste-url").value.trim();
+  if(!raw){showErr("paste-err","Please paste some transcript text.");return;}
+  S.ytId=urlVal?getYtId(urlVal):null;
+  S.url=urlVal||"";
+  const lines=raw.split("\n").map(l=>l.trim()).filter(Boolean);
+  const subs=[];
+  const tsRe=/^\[?(\d+):(\d{2})(?::(\d{2}))?\]?\s*/;
+  const hasTs=lines.some(l=>tsRe.test(l));
+  if(hasTs){
+    let i=0;
+    while(i<lines.length){
+      const m=lines[i].match(tsRe);
+      if(m){
+        const start=m[3]?(+m[1])*3600+(+m[2])*60+(+m[3]):(+m[1])*60+(+m[2]);
+        const text=lines[i].replace(tsRe,"").trim();
+        if(text){
+          subs.push({start,dur:2,text});
+        }else if(i+1<lines.length){
+          i++;
+          subs.push({start,dur:2,text:lines[i]});
         }
       }
-    } catch (e) { /* try next key or proxy later */ }
-  }
-
-  // Attempt 2: if direct failed (likely CORS), try via allorigins proxy for each key
-  if (!subs) {
-    for (const key of SOCIAL_KEYS) {
-      const apiUrl = `https://api.socialkit.dev/youtube/transcript?access_key=${key}&url=${encodeURIComponent(ytUrl)}`;
-      try {
-        const proxied = `https://api.allorigins.win/get?url=${encodeURIComponent(apiUrl)}`;
-        const r = await fetch(proxied, { signal: AbortSignal.timeout(14000) });
-        if (r.ok) {
-          const wrapper = await r.json();
-          const j = JSON.parse(wrapper.contents || "{}");
-          if (j.success && j.data?.transcriptSegments?.length) {
-            subs = parseSK(j.data.transcriptSegments);
-            break;
-          }
-        }
-      } catch (e) { /* try next key */ }
+      i++;
     }
+  }else{
+    subs.push(...splitIntoSegments(lines.join(" ")));
   }
-
-  document.getElementById("fetch-btn").disabled = false;
-
-  if(!subs || !subs.length){
-    setStatus("");
-    setErr(`<div class="err">
-      <strong>Could not fetch transcript.</strong><br/>
-      • The video may not have captions enabled<br/>
-      • Your API credits may be exhausted — check at <a href="https://socialkit.dev" target="_blank" style="color:#888">socialkit.dev</a><br/>
-      • Try again in a moment<br/><br/>
-      Confirmed working: <a href="#" onclick="document.getElementById('url-input').value='https://www.youtube.com/watch?v=NngM_qdDMm8';return false" style="color:#555">Economics Explained Fast ↗</a>
-    </div>`);
-    return;
-  }
-
-  document.getElementById("sd").className = "dot ok";
-  document.getElementById("st").innerHTML = `<span style="color:#27ae60;font-weight:500">✓ ${subs.length} segments extracted</span>`;
-  setTimeout(()=>{ setStatus(""); S.subs=subs; renderStep2(); goStep(2); }, 600);
+  for(let k=0;k<subs.length-1;k++)subs[k].dur=Math.max(1,subs[k+1].start-subs[k].start);
+  if(!subs.length){showErr("paste-err","Could not parse transcript.");return;}
+  document.getElementById("paste-err").innerHTML="";
+  S.subs=subs;
+  renderStep2();
+  goStep(2);
 }
 
-function parseSK(segs){
-  return segs.map(x=>({
-    start: parseFloat(x.start||0),
-    dur:   parseFloat(x.duration||2),
-    text:  (x.text||"").replace(/\n/g," ").trim()
-  })).filter(x=>x.text);
+function splitIntoSegments(text){
+  const words=text.split(/\s+/).filter(Boolean);
+  const subs=[];let i=0,t=0;
+  while(i<words.length){subs.push({start:t,dur:3,text:words.slice(i,i+10).join(" ")});i+=10;t+=3;}
+  return subs;
+}
+function showErr(id,msg){document.getElementById(id).innerHTML=`<div class="info-box err">${esc(msg)}</div>`;}
+
+function showRawResponse(obj){
+  try{document.getElementById('raw-pre').textContent = JSON.stringify(obj,null,2);}catch(e){document.getElementById('raw-pre').textContent=String(obj);}  
+  document.getElementById('raw-debug').style.display='block';
+  console.warn('Upstream raw response:', obj);
 }
 
-/* ── Step 2 ── */
+/* ── Manual paste helpers (fallback when auto-fetch fails) ── */
+function showManualPaste(){document.getElementById('manual-paste').style.display='block';document.getElementById('manual-transcript').focus();}
+function useManualTranscript(){
+  const raw=document.getElementById('manual-transcript').value.trim();
+  if(!raw){showErr('fetch-err','Please paste the transcript into the box.');return;}
+  // Simple split: lines -> if timestamp-like lines exist try to parse, else chunk by sentences
+  const lines=raw.split('\n').map(l=>l.trim()).filter(Boolean);
+  const tsRe=/^\[?(\d+):(\d{2})(?::(\d{2}))?\]?\s*/;
+  const subs=[];
+  if(lines.some(l=>tsRe.test(l))){
+    let i=0;
+    while(i<lines.length){
+      const m=lines[i].match(tsRe);
+      if(m){
+        const start=m[3]?(+m[1])*3600+(+m[2])*60+(+m[3]):(+m[1])*60+(+m[2]);
+        let text=lines[i].replace(tsRe,'').trim();
+        if(!text && i+1<lines.length){i++; text=lines[i];}
+        subs.push({start,dur:2,text});
+      }
+      i++;
+    }
+  }else{
+    // fallback: chunk by sentences/approximate groups
+    const txt=lines.join(' ');
+    const parts=txt.split(/(?<=[.?!])\s+/);
+    let t=0;
+    for(const p of parts){ if(p.trim()){subs.push({start:t,dur:Math.max(2,Math.ceil(p.split(/\s+/).length/3)),text:p.trim()}); t+=3;} }
+  }
+  if(!subs.length){showErr('fetch-err','Could not parse pasted transcript.');return;}
+  for(let k=0;k<subs.length-1;k++)subs[k].dur=Math.max(1,subs[k+1].start-subs[k].start);
+  S.subs=subs; document.getElementById('fetch-err').innerHTML=''; document.getElementById('manual-paste').style.display='none';
+  renderStep2(); goStep(2);
+}
+
+// Fallback helpers for embedding / opening video when embed fails (Error 153 etc.)
+function openOnYouTube(){
+  const u = S.ytId?`https://www.youtube.com/watch?v=${S.ytId}`:(document.getElementById('url-input').value||S.url||'');
+  if(u) window.open(u,'_blank');
+}
+function tryEmbedNoCookie(){
+  if(!S.ytId){ showErr('fetch-err','No video ID available to embed.'); return; }
+  document.getElementById('vp-frame').src = `https://www.youtube-nocookie.com/embed/${S.ytId}?controls=1&rel=0&playsinline=1`;
+  document.getElementById('vid-preview').style.display='block';
+}
+
+/* ── Step 2: Render ── */
 function renderStep2(){
-  document.getElementById("vp-frame").src = `https://www.youtube.com/embed/${S.ytId}?controls=1&rel=0`;
-  document.getElementById("vid-preview").style.display = "block";
-  document.getElementById("sub-meta").textContent = `${S.subs.length} subtitle segments`;
-  document.getElementById("script-panel").innerHTML = S.subs.map((s,i)=>
+  // Reset selection state for new video
+  phrases.length=0;
+  allToks=[];
+  if(S.ytId){
+    document.getElementById("vp-frame").src=`https://www.youtube-nocookie.com/embed/${S.ytId}?controls=1&rel=0&playsinline=1`;
+    document.getElementById("vid-preview").style.display="block";
+  }else{
+    document.getElementById("vid-preview").style.display="none";
+  }
+  document.getElementById("sub-meta").textContent=`${S.subs.length} segments`;
+  document.getElementById("script-panel").innerHTML=S.subs.map((s,i)=>
     `<div class="sub-line" id="sl${i}" onclick="seekTo(${s.start})">
-      <span class="ts">${sec2ts(s.start)}</span>
-      <span>${esc(s.text)}</span>
+      <span class="ts">${sec2ts(s.start)}</span><span>${esc(s.text)}</span>
     </div>`).join("");
   renderPicker();
 }
 
+/* ── Word picker ── */
 function renderPicker(){
-  // Build selectable tokens per subtitle segment
-  const wrap = [];
-  S.subs.forEach((s, segIdx)=>{
-    const text = s.text;
-    const isCJK = /[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}]/u.test(text);
-    if(isCJK){
-      // Chinese/Japanese: split into characters (selectable)
-      const chars = Array.from(text);
-      let ti = 0;
-      chars.forEach(ch=>{
-        if(/\s/.test(ch)){ wrap.push(ch); return; }
-        const selected = S.selected.some(sel=>sel.seg===segIdx && sel.startTi<=ti && sel.endTi>=ti);
-        wrap.push(`<span class="w${selected?" sel":""}" data-seg="${segIdx}" data-ti="${ti}" data-ts="${s.start}" data-s="${encodeURIComponent(s.text)}" onclick="toggleW(this,event)">${esc(ch)}</span>`);
-        ti++;
-      });
-      wrap.push(' ');
-    } else {
-      // Non-CJK: split by whitespace and keep only word tokens selectable
-      const parts = text.split(/(\s+)/);
-      let ti = 0;
-      parts.forEach(tok=>{
-        if(/^\s+$/.test(tok)){ wrap.push(tok); return; }
-        const clean = tok.replace(/[^\p{L}'’-]/gu,"");
-        if(!clean) { wrap.push(esc(tok)); return; }
-        const selected = S.selected.some(sel=>sel.seg===segIdx && sel.startTi<=ti && sel.endTi>=ti);
-        wrap.push(`<span class="w${selected?" sel":""}" data-seg="${segIdx}" data-ti="${ti}" data-ts="${s.start}" data-s="${encodeURIComponent(s.text)}" onclick="toggleW(this,event)">${esc(tok)}</span>`);
-        ti++;
-      });
-      wrap.push(' ');
-    }
+  const picker=document.getElementById("word-picker");
+  let html="";
+  S.subs.forEach((seg,si)=>{
+    tokenise(seg.text).forEach((tok,ti)=>{
+      if(tok.type==="space"){html+=" ";return;}
+      if(tok.type==="punct"){html+=`<span>${esc(tok.val)}</span>`;return;}
+      const cls=tok.type==="cjk"?"cjk":"w";
+      html+=`<span class="${cls}" data-si="${si}" data-ti="${ti}" data-word="${esc(tok.val)}" data-ts="${seg.start}" data-sen="${esc(seg.text)}">${esc(tok.val)}</span>`;
+    });
+    html+=` <span style="color:#ddd;font-size:11px">|</span> `;
   });
-  document.getElementById("word-picker").innerHTML = wrap.join("");
+  picker.innerHTML=html;
+
+  // Build flat token array for index-based selection
+  allToks=[...picker.querySelectorAll(".w,.cjk")];
+
+  // Re-apply highlights for existing phrases
+  applyHighlights();
+
+  // Attach drag events via event delegation on the container
+  picker.onmousedown=pickerDown;
+  picker.onmousemove=pickerMove;
+  document.onmouseup=pickerUp;
 }
 
-function toggleW(el,event){
-  const seg = Number(el.dataset.seg);
-  const ti = Number(el.dataset.ti);
-  const ts = +el.dataset.ts;
-  const sentence = decodeURIComponent(el.dataset.s);
+function applyHighlights(){
+  // Clear all highlight classes
+  allToks.forEach(t=>t.classList.remove("sel","preview"));
+  // Mark committed phrases
+  phrases.forEach(p=>{
+    for(let i=p.lo;i<=p.hi;i++) allToks[i]?.classList.add("sel");
+  });
+  // Mark live drag preview
+  if(dragActive&&dragStartIdx>=0&&dragEndIdx>=0){
+    const lo=Math.min(dragStartIdx,dragEndIdx),hi=Math.max(dragStartIdx,dragEndIdx);
+    for(let i=lo;i<=hi;i++) allToks[i]?.classList.add("preview");
+  }
+}
 
-  // Shift-click: select range from LAST_CLICK to current if same segment
-  if(event && event.shiftKey && LAST_CLICK && LAST_CLICK.seg===seg){
-    const a = Math.min(LAST_CLICK.ti, ti), b = Math.max(LAST_CLICK.ti, ti);
-    const exists = S.selected.findIndex(s=>s.seg===seg && s.startTi===a && s.endTi===b);
-    if(exists>=0){ S.selected.splice(exists,1); }
-    else { S.selected.push({word:null,ts,sentence,seg,startTi:a,endTi:b}); }
-    LAST_CLICK = {seg,ti};
-    renderPicker(); renderTags();
-    document.getElementById("make-btn").disabled = S.selected.length===0;
-    return;
+function tokIdx(el){return allToks.indexOf(el);}
+function nearestTok(e){return e.target.closest(".w,.cjk");}
+
+function pickerDown(e){
+  const el=nearestTok(e);
+  if(!el)return;
+  e.preventDefault();
+  dragActive=true;
+  dragStartIdx=tokIdx(el);
+  dragEndIdx=dragStartIdx;
+  applyHighlights();
+}
+
+function pickerMove(e){
+  if(!dragActive)return;
+  const el=nearestTok(e);
+  if(!el)return;
+  const idx=tokIdx(el);
+  if(idx<0||idx===dragEndIdx)return;
+  dragEndIdx=idx;
+  applyHighlights();
+}
+
+function pickerUp(e){
+  if(!dragActive)return;
+  dragActive=false;
+  if(dragStartIdx<0){dragStartIdx=-1;dragEndIdx=-1;return;}
+
+  const lo=Math.min(dragStartIdx,dragEndIdx);
+  const hi=Math.max(dragStartIdx,dragEndIdx);
+  dragStartIdx=-1; dragEndIdx=-1;
+
+  // Toggle: if exact same range exists, remove it
+  const existing=phrases.findIndex(p=>p.lo===lo&&p.hi===hi);
+  if(existing>=0){
+    phrases.splice(existing,1);
+  }else{
+    const word=allToks.slice(lo,hi+1).map(t=>t.dataset.word).join(lo===hi?" ":" ");
+    const first=allToks[lo];
+    phrases.push({word,ts:+first.dataset.ts,sentence:first.dataset.sen,lo,hi});
   }
 
-  // Normal click: toggle single token selection
-  const found = S.selected.findIndex(s=>s.seg===seg && s.startTi<=ti && s.endTi>=ti);
-  if(found>=0){ S.selected.splice(found,1); }
-  else { S.selected.push({word:null,ts,sentence,seg,startTi:ti,endTi:ti}); }
-  LAST_CLICK = {seg,ti};
-  renderPicker(); renderTags();
-  document.getElementById("make-btn").disabled = S.selected.length===0;
+  applyHighlights();
+  syncTags();
 }
 
-function renderTags(){
-  document.getElementById("sel-count").textContent = S.selected.length;
-  document.getElementById("sel-tags").innerHTML = S.selected.map((s,idx)=>{
-    const seg = s.seg; const start = s.startTi; const end = s.endTi;
-    const segText = S.subs[seg]?.text || '';
-    const isCJK = /[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}]/u.test(segText);
-    let label = '';
-    if(isCJK){
-      const chars = Array.from(segText).filter(c=>!/\s/.test(c));
-      label = chars.slice(start,end+1).join('');
-    } else {
-      const parts = segText.split(/(\s+)/).filter(p=>!/^\s+$/.test(p));
-      label = parts.slice(start,end+1).join(' ');
-    }
-    const id = `sel-${seg}-${start}-${end}`;
-    return `<span class="tag">${esc(label)}<button onclick="removeW('${id}')">×</button></span>`;
-  }).join("");
+function syncTags(){
+  const sel=document.getElementById("sel-tags");
+  sel.innerHTML=phrases.map((p,i)=>
+    `<span class="tag">${esc(p.word)}<button onclick="removePhrase(${i})">×</button></span>`).join("");
+  document.getElementById("sel-count").textContent=phrases.length;
+  document.getElementById("make-btn").disabled=phrases.length===0;
 }
-function removeW(id){
-  const m = id.match(/^sel-(\d+)-(\d+)-(\d+)$/);
-  if(!m) return;
-  const seg = Number(m[1]), start=Number(m[2]), end=Number(m[3]);
-  S.selected = S.selected.filter(s=>!(s.seg===seg && s.startTi===start && s.endTi===end));
-  renderPicker(); renderTags();
-  document.getElementById("make-btn").disabled = S.selected.length===0;
+
+function removePhrase(i){
+  phrases.splice(i,1);
+  applyHighlights();
+  syncTags();
 }
+
 function seekTo(sec){
-  document.getElementById("vp-frame").src = `https://www.youtube.com/embed/${S.ytId}?start=${Math.floor(sec)}&autoplay=1&controls=1&rel=0`;
+  if(!S.ytId)return;
+  document.getElementById("vp-frame").src=`https://www.youtube-nocookie.com/embed/${S.ytId}?start=${Math.floor(sec)}&autoplay=1&controls=1&rel=0&playsinline=1`;
   document.querySelectorAll(".sub-line").forEach(e=>e.classList.remove("hi"));
-  const i = S.subs.findIndex(s=>s.start===sec);
-  if(i>=0){ const el=document.getElementById("sl"+i); el?.classList.add("hi"); el?.scrollIntoView({block:"nearest",behavior:"smooth"}); }
+  const i=S.subs.findIndex(s=>s.start===sec);
+  if(i>=0){const el=document.getElementById("sl"+i);el?.classList.add("hi");el?.scrollIntoView({block:"nearest",behavior:"smooth"});}
 }
 
 /* ── Step 3 ── */
 function makeCards(){
-  // Build cards from selections, reconstructing visible word from token ranges
-  S.cards = S.selected.map(sel=>{
-    const seg = sel.seg;
-    const segText = S.subs[seg]?.text || '';
-    const isCJK = /[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}]/u.test(segText);
-    let label = '';
-    if(isCJK){
-      const chars = Array.from(segText).filter(c=>!/\s/.test(c));
-      label = chars.slice(sel.startTi, sel.endTi+1).join('');
-    } else {
-      const parts = segText.split(/(\s+)/).filter(p=>!/^\s+$/.test(p));
-      label = parts.slice(sel.startTi, sel.endTi+1).join(' ');
-    }
-    return {word: label, ts: sel.ts, sentence: sel.sentence, seg: sel.seg, startTi: sel.startTi, endTi: sel.endTi};
-  });
-  S.idx=0; S.known=[]; S.learning=[]; S.view="study";
+  S.cards=phrases.map(p=>({word:p.word,ts:p.ts,sentence:p.sentence}));
+  if(!S.cards.length)return;
+  S.idx=0;S.known=[];S.learning=[];S.view="study";S.showBack=false;
   document.getElementById("results").style.display="none";
   document.getElementById("study-view").style.display="block";
   document.getElementById("list-view").style.display="none";
   document.getElementById("prog").style.display="flex";
   document.getElementById("view-btn").textContent="List view";
-  renderCard(); goStep(3);
+  renderCard();goStep(3);
 }
 
 function renderProg(){
-  document.getElementById("prog").innerHTML = S.cards.map((_,i)=>{
-    const c = i<S.idx?"#1a1a1a":i===S.idx?"#888":"#ddd";
+  document.getElementById("prog").innerHTML=S.cards.map((_,i)=>{
+    const c=i<S.idx?"#1a1a1a":i===S.idx?"#888":"#ddd";
     return `<div style="flex:1;height:3px;border-radius:2px;background:${c};transition:background .3s"></div>`;
   }).join("");
-  document.getElementById("card-ctr").textContent = `${S.idx+1} / ${S.cards.length}`;
+  document.getElementById("card-ctr").textContent=`${S.idx+1} / ${S.cards.length}`;
 }
 
 function renderCard(){
-  const c = S.cards[S.idx];
-  document.getElementById("cf").innerHTML = `
-    <span style="font-size:11px;color:#ccc;letter-spacing:1px;margin-bottom:14px">TAP TO FLIP</span>
-    <span style="font-size:40px;font-weight:500;margin-bottom:8px">${esc(c.word)}</span>
-    <div style="margin-top:14px;padding:6px 14px;background:#f5f4f0;border-radius:8px;font-family:monospace;font-size:12px;color:#999">⏱ ${sec2ts(c.ts)}</div>`;
-
-  const sec = Math.floor(c.ts);
-  const vid = `<div class="video-wrap" onclick="event.stopPropagation()">
-    <iframe src="https://www.youtube.com/embed/${S.ytId}?start=${sec}&autoplay=1&controls=1&rel=0&mute=0"
-      allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
-  </div>`;
-
-  document.getElementById("cb").innerHTML = `
-    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px">
-      <span style="font-size:24px;font-weight:500">${esc(c.word)}</span>
-      <button class="pron-btn" id="pb" onclick="event.stopPropagation();speak('${esc(c.word)}')">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        Pronounce
-      </button>
-    </div>
-    <div style="padding:8px 12px;background:#f5f4f0;border-radius:8px;border-left:3px solid #ccc;margin-bottom:12px;font-size:13px;color:#555;line-height:1.6;font-style:italic">"${esc(c.sentence)}"</div>
-    ${vid}`;
-
-  document.getElementById("flip-inner").classList.remove("flipped");
-  document.getElementById("act-btns").style.display = "none";
-  document.getElementById("flip-hint").style.display = "block";
-  S.flipped = false;
+  const c=S.cards[S.idx];
+  S.showBack=false;
+  document.getElementById("cf-word").textContent=c.word;
+  document.getElementById("cf-ts").textContent="⏱ "+sec2ts(c.ts);
+  document.getElementById("front-card").style.display="block";
+  document.getElementById("back-card").style.display="none";
+  document.getElementById("flip-hint").style.display="block";
   renderProg();
 }
 
-function flipCard(){
-  S.flipped = !S.flipped;
-  document.getElementById("flip-inner").classList.toggle("flipped", S.flipped);
-  const ab = document.getElementById("act-btns");
-  ab.style.display = S.flipped ? "flex" : "none";
-  document.getElementById("flip-hint").style.display = S.flipped ? "none" : "block";
+function flipToBack(){
+  if(S.showBack)return;
+  S.showBack=true;
+  const c=S.cards[S.idx];
+  document.getElementById("cb-word").textContent=c.word;
+  document.getElementById("cb-sentence").textContent=`"${c.sentence}"`;
+  document.getElementById("cb-ts").textContent="⏱ "+sec2ts(c.ts);
+  const sec=Math.floor(c.ts);
+  document.getElementById("cb-video").innerHTML=S.ytId
+    ?`<iframe src="https://www.youtube-nocookie.com/embed/${S.ytId}?start=${sec}&autoplay=1&controls=1&rel=0&mute=0&playsinline=1" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>`
+    :`<div style="height:160px;display:flex;align-items:center;justify-content:center;background:#f5f4f0;border-radius:8px;font-size:13px;color:#aaa">No video</div>`;
+  document.getElementById("front-card").style.display="none";
+  document.getElementById("back-card").style.display="block";
+  document.getElementById("flip-hint").style.display="none";
 }
 
-function speak(w){
-  if(!window.speechSynthesis) return;
+function speak(){
+  const word=S.cards[S.idx]?.word;
+  if(!word||!window.speechSynthesis)return;
   window.speechSynthesis.cancel();
-  const btn = document.getElementById("pb");
-  const u = new SpeechSynthesisUtterance(w); u.lang="en-US"; u.rate=0.85;
-  u.onstart = ()=>{ btn.classList.add("speaking"); btn.innerHTML=`<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg> Playing…`; };
-  u.onend = ()=>{ btn.classList.remove("speaking"); btn.innerHTML=`<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg> Pronounce`; };
+  const btn=document.getElementById("pb");
+  const u=new SpeechSynthesisUtterance(word);u.lang="en-US";u.rate=0.85;
+  u.onstart=()=>{btn.classList.add("speaking");btn.innerHTML=`<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg> Playing…`;};
+  u.onend=()=>{btn.classList.remove("speaking");btn.innerHTML=`<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg> Pronounce`;};
   window.speechSynthesis.speak(u);
 }
 
-function markK(){ S.known.push(S.cards[S.idx].word); nextCard(); }
-function markL(){ S.learning.push(S.cards[S.idx].word); nextCard(); }
-function nextCard(){ S.idx < S.cards.length-1 ? (S.idx++, renderCard()) : showResults(); }
+function markK(){S.known.push(S.cards[S.idx].word);nextCard();}
+function markL(){S.learning.push(S.cards[S.idx].word);nextCard();}
+function nextCard(){S.idx<S.cards.length-1?(S.idx++,renderCard()):showResults();}
 
 function showResults(){
   document.getElementById("study-view").style.display="none";
-  document.getElementById("act-btns").style.display="none";
-  document.getElementById("flip-hint").style.display="none";
   document.getElementById("prog").style.display="none";
   document.getElementById("results").style.display="block";
-  document.getElementById("r-k").textContent = S.known.length;
-  document.getElementById("r-l").textContent = S.learning.length;
-  document.getElementById("r-sum").textContent = `Studied ${S.cards.length} words`;
-  document.getElementById("r-words").innerHTML = S.learning.length
-    ? `<div class="card" style="text-align:left"><p style="font-size:13px;font-weight:500;margin-bottom:8px">Review again:</p>${S.learning.map(w=>`<span style="font-size:13px;padding:4px 10px;background:#f5f4f0;border-radius:20px;display:inline-block;margin:3px">${esc(w)}</span>`).join("")}</div>`
-    : "";
+  document.getElementById("r-k").textContent=S.known.length;
+  document.getElementById("r-l").textContent=S.learning.length;
+  document.getElementById("r-sum").textContent=`Studied ${S.cards.length} words/phrases`;
+  document.getElementById("r-words").innerHTML=S.learning.length
+    ?`<div class="card" style="text-align:left"><p style="font-size:13px;font-weight:500;margin-bottom:8px">Review again:</p>${S.learning.map(w=>`<span style="font-size:13px;padding:4px 10px;background:#f5f4f0;border-radius:20px;display:inline-block;margin:3px">${esc(w)}</span>`).join("")}</div>`:"";
 }
 
 function restart(){
-  S.idx=0; S.known=[]; S.learning=[];
+  S.idx=0;S.known=[];S.learning=[];S.showBack=false;
   document.getElementById("results").style.display="none";
   document.getElementById("study-view").style.display="block";
   document.getElementById("prog").style.display="flex";
@@ -524,13 +619,13 @@ function restart(){
 }
 
 function toggleView(){
-  S.view = S.view==="study" ? "list" : "study";
-  const isStudy = S.view==="study";
-  document.getElementById("study-view").style.display = isStudy ? "block" : "none";
-  document.getElementById("list-view").style.display = isStudy ? "none" : "block";
-  document.getElementById("view-btn").textContent = isStudy ? "List view" : "Study view";
+  S.view=S.view==="study"?"list":"study";
+  const isStudy=S.view==="study";
+  document.getElementById("study-view").style.display=isStudy?"block":"none";
+  document.getElementById("list-view").style.display=isStudy?"none":"block";
+  document.getElementById("view-btn").textContent=isStudy?"List view":"Study view";
   if(!isStudy){
-    document.getElementById("list-view").innerHTML = S.cards.map((c,i)=>`
+    document.getElementById("list-view").innerHTML=S.cards.map((c,i)=>`
       <div class="card" style="margin-bottom:10px">
         <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
           <div><span style="font-size:17px;font-weight:500;margin-right:8px">${esc(c.word)}</span><span class="mono">${sec2ts(c.ts)}</span></div>
@@ -540,7 +635,7 @@ function toggleView(){
       </div>`).join("");
   }
 }
-function jumpTo(i){ S.idx=i; toggleView(); renderCard(); }
+function jumpTo(i){S.idx=i;toggleView();renderCard();}
 </script>
 </body>
 </html>
