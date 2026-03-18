@@ -62,6 +62,41 @@ button{cursor:pointer;font-family:inherit;font-size:14px}
 .lbl{font-size:11px;font-weight:500;letter-spacing:.8px;color:#aaa;margin-bottom:6px;text-transform:uppercase}
 .info{padding:12px 14px;background:#f0ede8;border-radius:8px;font-size:13px;color:#666;line-height:1.7;margin-top:12px}
 .err{padding:12px 14px;background:#fdf3f3;border:.5px solid #f5c6c6;border-radius:8px;font-size:13px;color:#c0392b;line-height:1.7;margin-top:10px}
+#step-3{position:relative}
+#study-view{display:flex;flex-direction:column;position:relative;z-index:1}
+/* act-btns: overlay left/right on small phones, right column on desktop */
+#act-btns{display:none;position:absolute;left:12px;right:12px;bottom:12px;gap:12px;justify-content:space-between;z-index:9999;pointer-events:none}
+#act-btns .btn{pointer-events:auto;width:48%}
+#results{position:relative;z-index:2}
+
+@media(max-width:420px){
+  /* iPhone 12 / small phones: show buttons as left/right bottom overlay */
+  #act-btns{left:12px;right:12px;bottom:12px;position:absolute;flex-direction:row}
+  #act-btns .btn{width:48%}
+}
+
+@media(min-width:700px){
+  /* tablet / desktop: column on right side of card */
+  #study-view{flex-direction:row;gap:16px;align-items:flex-start}
+  #study-view .flip-wrap{flex:1}
+  #act-btns{position:absolute;right:12px;top:120px;left:auto;bottom:auto;width:140px;flex-direction:column;pointer-events:auto}
+  #act-btns .btn{width:100%}
+}
+
+@media(min-width:900px){
+  #act-btns{width:160px;right:16px;top:140px}
+}
+
+@media(min-width:1200px){
+  /* larger desktops keep right column */
+  #act-btns{right:18px}
+}
+
+@media(min-width:1920px){
+  /* 1920x1080 and wider */
+  #act-btns{width:200px;right:20px;top:160px;gap:12px}
+  #act-btns button{font-size:16px;padding:14px 20px}
+}
 </style>
 </head>
 <body>
@@ -134,9 +169,9 @@ button{cursor:pointer;font-family:inherit;font-size:14px}
           <div class="flip-face flip-back" id="cb"></div>
         </div>
       </div>
-      <div id="act-btns" style="display:none;gap:10px">
-        <button class="btn btn-ghost" style="flex:1;padding:12px" onclick="markL()">Still learning</button>
-        <button class="btn btn-dark" style="flex:1;padding:12px" onclick="markK()">Got it ✓</button>
+      <div id="act-btns" style="display:none">
+        <button class="btn btn-ghost" style="padding:12px" onclick="markL()">Still learning</button>
+        <button class="btn btn-dark" style="padding:12px" onclick="markK()">Got it ✓</button>
       </div>
       <p id="flip-hint" style="text-align:center;font-size:13px;color:#bbb;margin-top:8px">Tap card to flip</p>
     </div>
@@ -159,8 +194,9 @@ button{cursor:pointer;font-family:inherit;font-size:14px}
 </div>
 
 <script>
-const SK_KEY = "76m4Akhvj5kZNX";
+const SOCIAL_KEYS = ["76m4Akhvj5kZNX", "uVFu9hf4mbX1GS"]; // primary, fallback
 const S = {url:"",ytId:null,subs:[],selected:[],cards:[],idx:0,flipped:false,known:[],learning:[],view:"study"};
+let LAST_CLICK = null; // {seg, ti} last clicked token for shift-range selection
 
 function goStep(n){
   document.querySelectorAll(".step").forEach(e=>e.classList.remove("active"));
@@ -204,37 +240,43 @@ async function fetchSubs(){
   document.getElementById("fetch-btn").disabled = true;
   setStatus(`<div class="status-row"><div class="dot spinning" id="sd"></div><span id="st">Fetching transcript…</span></div>`);
 
-  // SocialKit API — direct (works when running as a saved .html file)
-  // In the artifact preview CORS blocks direct calls, so we also try via allorigins proxy
+  // SocialKit API — try each key (primary then fallback). If direct requests fail (CORS), try via allorigins proxy.
   const ytUrl = `https://www.youtube.com/watch?v=${id}`;
-  const apiUrl = `https://api.socialkit.dev/youtube/transcript?access_key=${SK_KEY}&url=${encodeURIComponent(ytUrl)}`;
 
   let subs = null;
 
-  // Attempt 1: direct fetch (works in browser when saved locally)
-  try {
-    const r = await fetch(apiUrl, {signal: AbortSignal.timeout(12000)});
-    if(r.ok){
-      const j = await r.json();
-      if(j.success && j.data?.transcriptSegments?.length){
-        subs = parseSK(j.data.transcriptSegments);
-      }
-    }
-  } catch(e){ /* CORS blocked in sandboxed iframe — try proxy */ }
-
-  // Attempt 2: via allorigins proxy (works inside sandboxed iframe / Claude artifact)
-  if(!subs){
+  // Attempt 1: try direct fetch with each API key
+  for (const key of SOCIAL_KEYS) {
+    const apiUrl = `https://api.socialkit.dev/youtube/transcript?access_key=${key}&url=${encodeURIComponent(ytUrl)}`;
     try {
-      const proxied = `https://api.allorigins.win/get?url=${encodeURIComponent(apiUrl)}`;
-      const r = await fetch(proxied, {signal: AbortSignal.timeout(14000)});
-      if(r.ok){
-        const wrapper = await r.json();
-        const j = JSON.parse(wrapper.contents || "{}");
-        if(j.success && j.data?.transcriptSegments?.length){
+      const r = await fetch(apiUrl, { signal: AbortSignal.timeout(12000) });
+      if (r.ok) {
+        const j = await r.json();
+        if (j.success && j.data?.transcriptSegments?.length) {
           subs = parseSK(j.data.transcriptSegments);
+          break;
         }
       }
-    } catch(e){ /* proxy also failed */ }
+    } catch (e) { /* try next key or proxy later */ }
+  }
+
+  // Attempt 2: if direct failed (likely CORS), try via allorigins proxy for each key
+  if (!subs) {
+    for (const key of SOCIAL_KEYS) {
+      const apiUrl = `https://api.socialkit.dev/youtube/transcript?access_key=${key}&url=${encodeURIComponent(ytUrl)}`;
+      try {
+        const proxied = `https://api.allorigins.win/get?url=${encodeURIComponent(apiUrl)}`;
+        const r = await fetch(proxied, { signal: AbortSignal.timeout(14000) });
+        if (r.ok) {
+          const wrapper = await r.json();
+          const j = JSON.parse(wrapper.contents || "{}");
+          if (j.success && j.data?.transcriptSegments?.length) {
+            subs = parseSK(j.data.transcriptSegments);
+            break;
+          }
+        }
+      } catch (e) { /* try next key */ }
+    }
   }
 
   document.getElementById("fetch-btn").disabled = false;
@@ -278,31 +320,90 @@ function renderStep2(){
 }
 
 function renderPicker(){
-  const sel = new Set(S.selected.map(x=>x.word));
-  document.getElementById("word-picker").innerHTML = S.subs.map(s=>{
-    return s.text.split(/(\s+)/).map(tok=>{
-      if(/^\s+$/.test(tok)) return " ";
-      const clean = tok.replace(/[^a-zA-Z''-]/g,"").toLowerCase();
-      if(clean.length < 3) return `<span>${esc(tok)}</span>`;
-      return `<span class="w${sel.has(clean)?" sel":""}" data-w="${esc(clean)}" data-ts="${s.start}" data-s="${encodeURIComponent(s.text)}" onclick="toggleW(this)">${esc(tok)}</span>`;
-    }).join("");
-  }).join(" ");
+  // Build selectable tokens per subtitle segment
+  const wrap = [];
+  S.subs.forEach((s, segIdx)=>{
+    const text = s.text;
+    const isCJK = /[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}]/u.test(text);
+    if(isCJK){
+      // Chinese/Japanese: split into characters (selectable)
+      const chars = Array.from(text);
+      let ti = 0;
+      chars.forEach(ch=>{
+        if(/\s/.test(ch)){ wrap.push(ch); return; }
+        const selected = S.selected.some(sel=>sel.seg===segIdx && sel.startTi<=ti && sel.endTi>=ti);
+        wrap.push(`<span class="w${selected?" sel":""}" data-seg="${segIdx}" data-ti="${ti}" data-ts="${s.start}" data-s="${encodeURIComponent(s.text)}" onclick="toggleW(this,event)">${esc(ch)}</span>`);
+        ti++;
+      });
+      wrap.push(' ');
+    } else {
+      // Non-CJK: split by whitespace and keep only word tokens selectable
+      const parts = text.split(/(\s+)/);
+      let ti = 0;
+      parts.forEach(tok=>{
+        if(/^\s+$/.test(tok)){ wrap.push(tok); return; }
+        const clean = tok.replace(/[^\p{L}'’-]/gu,"");
+        if(!clean) { wrap.push(esc(tok)); return; }
+        const selected = S.selected.some(sel=>sel.seg===segIdx && sel.startTi<=ti && sel.endTi>=ti);
+        wrap.push(`<span class="w${selected?" sel":""}" data-seg="${segIdx}" data-ti="${ti}" data-ts="${s.start}" data-s="${encodeURIComponent(s.text)}" onclick="toggleW(this,event)">${esc(tok)}</span>`);
+        ti++;
+      });
+      wrap.push(' ');
+    }
+  });
+  document.getElementById("word-picker").innerHTML = wrap.join("");
 }
 
-function toggleW(el){
-  const w=el.dataset.w, ts=+el.dataset.ts, sentence=decodeURIComponent(el.dataset.s);
-  const i=S.selected.findIndex(x=>x.word===w);
-  i>=0 ? S.selected.splice(i,1) : S.selected.push({word:w,ts,sentence});
+function toggleW(el,event){
+  const seg = Number(el.dataset.seg);
+  const ti = Number(el.dataset.ti);
+  const ts = +el.dataset.ts;
+  const sentence = decodeURIComponent(el.dataset.s);
+
+  // Shift-click: select range from LAST_CLICK to current if same segment
+  if(event && event.shiftKey && LAST_CLICK && LAST_CLICK.seg===seg){
+    const a = Math.min(LAST_CLICK.ti, ti), b = Math.max(LAST_CLICK.ti, ti);
+    const exists = S.selected.findIndex(s=>s.seg===seg && s.startTi===a && s.endTi===b);
+    if(exists>=0){ S.selected.splice(exists,1); }
+    else { S.selected.push({word:null,ts,sentence,seg,startTi:a,endTi:b}); }
+    LAST_CLICK = {seg,ti};
+    renderPicker(); renderTags();
+    document.getElementById("make-btn").disabled = S.selected.length===0;
+    return;
+  }
+
+  // Normal click: toggle single token selection
+  const found = S.selected.findIndex(s=>s.seg===seg && s.startTi<=ti && s.endTi>=ti);
+  if(found>=0){ S.selected.splice(found,1); }
+  else { S.selected.push({word:null,ts,sentence,seg,startTi:ti,endTi:ti}); }
+  LAST_CLICK = {seg,ti};
   renderPicker(); renderTags();
   document.getElementById("make-btn").disabled = S.selected.length===0;
 }
+
 function renderTags(){
   document.getElementById("sel-count").textContent = S.selected.length;
-  document.getElementById("sel-tags").innerHTML = S.selected.map(s=>
-    `<span class="tag">${esc(s.word)}<button onclick="removeW('${esc(s.word)}')">×</button></span>`).join("");
+  document.getElementById("sel-tags").innerHTML = S.selected.map((s,idx)=>{
+    const seg = s.seg; const start = s.startTi; const end = s.endTi;
+    const segText = S.subs[seg]?.text || '';
+    const isCJK = /[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}]/u.test(segText);
+    let label = '';
+    if(isCJK){
+      const chars = Array.from(segText).filter(c=>!/\s/.test(c));
+      label = chars.slice(start,end+1).join('');
+    } else {
+      const parts = segText.split(/(\s+)/).filter(p=>!/^\s+$/.test(p));
+      label = parts.slice(start,end+1).join(' ');
+    }
+    const id = `sel-${seg}-${start}-${end}`;
+    return `<span class="tag">${esc(label)}<button onclick="removeW('${id}')">×</button></span>`;
+  }).join("");
 }
-function removeW(w){
-  S.selected = S.selected.filter(x=>x.word!==w);
+function removeW(id){
+  const m = id.match(/^sel-(\d+)-(\d+)-(\d+)$/);
+  if(!m) return;
+  const seg = Number(m[1]), start=Number(m[2]), end=Number(m[3]);
+  S.selected = S.selected.filter(s=>!(s.seg===seg && s.startTi===start && s.endTi===end));
   renderPicker(); renderTags();
   document.getElementById("make-btn").disabled = S.selected.length===0;
 }
@@ -315,7 +416,22 @@ function seekTo(sec){
 
 /* ── Step 3 ── */
 function makeCards(){
-  S.cards=S.selected.map(x=>({...x})); S.idx=0; S.known=[]; S.learning=[]; S.view="study";
+  // Build cards from selections, reconstructing visible word from token ranges
+  S.cards = S.selected.map(sel=>{
+    const seg = sel.seg;
+    const segText = S.subs[seg]?.text || '';
+    const isCJK = /[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}]/u.test(segText);
+    let label = '';
+    if(isCJK){
+      const chars = Array.from(segText).filter(c=>!/\s/.test(c));
+      label = chars.slice(sel.startTi, sel.endTi+1).join('');
+    } else {
+      const parts = segText.split(/(\s+)/).filter(p=>!/^\s+$/.test(p));
+      label = parts.slice(sel.startTi, sel.endTi+1).join(' ');
+    }
+    return {word: label, ts: sel.ts, sentence: sel.sentence, seg: sel.seg, startTi: sel.startTi, endTi: sel.endTi};
+  });
+  S.idx=0; S.known=[]; S.learning=[]; S.view="study";
   document.getElementById("results").style.display="none";
   document.getElementById("study-view").style.display="block";
   document.getElementById("list-view").style.display="none";
@@ -367,7 +483,7 @@ function flipCard(){
   S.flipped = !S.flipped;
   document.getElementById("flip-inner").classList.toggle("flipped", S.flipped);
   const ab = document.getElementById("act-btns");
-  ab.style.cssText = S.flipped ? "display:flex;gap:10px" : "display:none";
+  ab.style.display = S.flipped ? "flex" : "none";
   document.getElementById("flip-hint").style.display = S.flipped ? "none" : "block";
 }
 
