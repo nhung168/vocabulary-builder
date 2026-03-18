@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -82,6 +81,7 @@ button{cursor:pointer;font-family:inherit;font-size:14px}
     <div class="tabs">
       <button class="tab active" id="tab-auto" onclick="switchTab('auto')">Auto-fetch</button>
       <button class="tab" id="tab-paste" onclick="switchTab('paste')">Paste transcript</button>
+      <button class="tab" id="tab-upload" onclick="switchTab('upload')">Upload SRT</button>
     </div>
     <div id="panel-auto">
       <div style="display:flex;gap:8px;margin-bottom:8px">
@@ -118,6 +118,22 @@ button{cursor:pointer;font-family:inherit;font-size:14px}
       <div class="info-box info" style="margin-top:10px">
         <strong style="color:#444">Get YouTube transcript:</strong> open video → click ··· → Show transcript → select all → copy
       </div>
+    </div>
+    <div id="panel-upload" style="display:none">
+      <div style="margin-bottom:8px" class="lbl">Upload SRT (supports dual subs with '---' separator)</div>
+      <input type="file" id="srt-file" accept=".srt" style="display:block;margin-bottom:8px" />
+      <div style="margin-bottom:8px;color:#666;font-size:13px">Example block:
+        <pre style="display:inline;background:transparent;border:none;padding:0;margin-left:6px">283
+00:13:04,500 --> 00:13:05,733
+记得一定要支持我
+--- Hãy nhớ ủng hộ tôi nhé!</pre>
+      </div>
+      <div style="display:flex;justify-content:flex-end;gap:8px">
+        <button class="btn btn-ghost" onclick="document.getElementById('srt-file').value='';switchTab('auto')">Cancel</button>
+        <button class="btn btn-dark" onclick="processSrtUpload()">Upload & Use →</button>
+      </div>
+      <div id="srt-err"></div>
+      <div class="info-box info" style="margin-top:10px">SRT parser supports blocks with two subtitle lines separated by '---'. If no '---' present, first subtitle line is used as primary text.</div>
     </div>
   </div>
 
@@ -167,10 +183,13 @@ button{cursor:pointer;font-family:inherit;font-size:14px}
           <div class="card-left">
             <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
               <span id="cb-word" style="font-size:22px;font-weight:500"></span>
-              <button class="pron-btn" id="pb" onclick="speak()">
+              <div style="display:flex;align-items:center;gap:8px">
+                <button class="pron-btn" id="pb" onclick="speak()">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                 Pronounce
               </button>
+                <button class="btn btn-ghost" id="save-lib-btn" onclick="saveToLib()" style="font-size:12px;padding:6px 10px">Save</button>
+              </div>
             </div>
             <div id="cb-sentence" style="padding:8px 12px;background:#f5f4f0;border-radius:8px;border-left:3px solid #ccc;font-size:13px;color:#555;line-height:1.7;font-style:italic"></div>
             <div id="cb-ts" style="font-family:monospace;font-size:11px;color:#bbb"></div>
@@ -220,8 +239,10 @@ function setUrl(u){document.getElementById("url-input").value=u;}
 function switchTab(t){
   document.getElementById("tab-auto").classList.toggle("active",t==="auto");
   document.getElementById("tab-paste").classList.toggle("active",t==="paste");
+  const upBtn = document.getElementById('tab-upload'); if(upBtn) upBtn.classList.toggle('active', t==='upload');
   document.getElementById("panel-auto").style.display=t==="auto"?"block":"none";
   document.getElementById("panel-paste").style.display=t==="paste"?"block":"none";
+  const pu = document.getElementById('panel-upload'); if(pu) pu.style.display = t==='upload'?'block':'none';
 }
 function goStep(n){
   document.querySelectorAll(".step").forEach(e=>e.classList.remove("active"));
@@ -397,6 +418,57 @@ function useManualTranscript(){
   renderStep2(); goStep(2);
 }
 
+/* ── SRT upload handling ── */
+function parseSrtText(txt){
+  // Split into blocks separated by blank lines
+  const blocks = txt.split(/\r?\n\s*\r?\n/).map(b=>b.trim()).filter(Boolean);
+  const segs = [];
+  for(const b of blocks){
+    const lines = b.split(/\r?\n/).map(l=>l.trim()).filter(Boolean);
+    if(lines.length<2) continue;
+    // timestamp line is usually second line or second element
+    let timeLine = null; let contentLines = [];
+    if(/-->/.test(lines[1])){ timeLine = lines[1]; contentLines = lines.slice(2);} else if(/-->/.test(lines[0])){ timeLine = lines[0]; contentLines = lines.slice(1);} else { continue; }
+    const m = timeLine.match(/(\d{2}):(\d{2}):(\d{2}),(\d{1,3})\s*-->\s*(\d{2}):(\d{2}):(\d{2}),(\d{1,3})/);
+    if(!m) continue;
+    const start = (+m[1])*3600 + (+m[2])*60 + (+m[3]) + (+m[4])/1000;
+    const end = (+m[5])*3600 + (+m[6])*60 + (+m[7]) + (+m[8])/1000;
+    const dur = Math.max(1, end - start);
+    // join content lines; support '---' separator for dual subs
+    const joined = contentLines.join(' \n ');
+    let primary = joined; let trans = '';
+    if(joined.indexOf('---')!==-1){
+      const parts = joined.split(/---+/).map(s=>s.trim()).filter(Boolean);
+      primary = parts[0]||'';
+      trans = parts.slice(1).join(' --- ');
+    } else if(contentLines.length>=2){
+      // if two lines, take first as primary and second as translation
+      primary = contentLines[0]; trans = contentLines.slice(1).join(' ');
+    }
+    const sentence = trans?`${primary} — ${trans}`:primary;
+    segs.push({start: Math.round(start), dur: Math.round(dur), text: primary, trans: trans, sentence: sentence});
+  }
+  return segs;
+}
+
+function processSrtUpload(){
+  const f = document.getElementById('srt-file').files[0];
+  if(!f){ document.getElementById('srt-err').innerHTML=`<div class="info-box err">Please choose an SRT file.</div>`; return; }
+  const reader = new FileReader();
+  reader.onload = function(e){
+    const txt = String(e.target.result || '');
+    const segs = parseSrtText(txt);
+    if(!segs.length){ document.getElementById('srt-err').innerHTML=`<div class="info-box err">Could not parse SRT file.</div>`; return; }
+    // ensure sentence field exists for older code paths
+    segs.forEach(s=>{ if(!s.sentence) s.sentence = s.trans?`${s.text} — ${s.trans}`:s.text; });
+    S.subs = segs;
+    document.getElementById('srt-err').innerHTML='';
+    renderStep2(); goStep(2);
+  };
+  reader.onerror = function(){ document.getElementById('srt-err').innerHTML=`<div class="info-box err">Failed to read file.</div>`; };
+  reader.readAsText(f, 'utf-8');
+}
+
 // Fallback helpers for embedding / opening video when embed fails (Error 153 etc.)
 function openOnYouTube(){
   const u = S.ytId?`https://www.youtube.com/watch?v=${S.ytId}`:(document.getElementById('url-input').value||S.url||'');
@@ -422,7 +494,7 @@ function renderStep2(){
   document.getElementById("sub-meta").textContent=`${S.subs.length} segments`;
   document.getElementById("script-panel").innerHTML=S.subs.map((s,i)=>
     `<div class="sub-line" id="sl${i}" onclick="seekTo(${s.start})">
-      <span class="ts">${sec2ts(s.start)}</span><span>${esc(s.text)}</span>
+      <span class="ts">${sec2ts(s.start)}</span><span>${esc(s.sentence||s.text)}</span>
     </div>`).join("");
   renderPicker();
 }
@@ -436,7 +508,7 @@ function renderPicker(){
       if(tok.type==="space"){html+=" ";return;}
       if(tok.type==="punct"){html+=`<span>${esc(tok.val)}</span>`;return;}
       const cls=tok.type==="cjk"?"cjk":"w";
-      html+=`<span class="${cls}" data-si="${si}" data-ti="${ti}" data-word="${esc(tok.val)}" data-ts="${seg.start}" data-sen="${esc(seg.text)}">${esc(tok.val)}</span>`;
+      html+=`<span class="${cls}" data-si="${si}" data-ti="${ti}" data-word="${esc(tok.val)}" data-ts="${seg.start}" data-sen="${esc(seg.sentence||seg.text)}">${esc(tok.val)}</span>`;
     });
     html+=` <span style="color:#ddd;font-size:11px">|</span> `;
   });
@@ -595,6 +667,42 @@ function speak(){
   window.speechSynthesis.speak(u);
 }
 
+// Find translation for current card (from S.subs if available)
+function findTranslationForCard(card){
+  if(!card) return '';
+  // try to find the subs segment matching the card.ts
+  const seg = S.subs && S.subs.find(s=>Math.abs((s.start||0) - (card.ts||0))<=2);
+  if(seg){ if(seg.trans) return seg.trans; // explicit translation field
+    // if sentence contains '—' we assume secondary part is translation
+    const m = (seg.sentence||'').split(/---|—/).map(p=>p.trim()).filter(Boolean);
+    if(m.length>=2) return m.slice(1).join(' — ');
+  }
+  // fallback: if card.sentence contains separator
+  const mm = (card.sentence||'').split(/---|—/).map(p=>p.trim()).filter(Boolean);
+  if(mm.length>=2) return mm.slice(1).join(' — ');
+  return '';
+}
+
+// Save current card (word + translation) to local lib.txt via small server
+async function saveToLib(){
+  const c = S.cards[S.idx];
+  if(!c) return alert('No card selected');
+  const trans = findTranslationForCard(c);
+  if(!trans){ if(!confirm('No translation found for this card. Save without translation?')) return; }
+  const payload = { word: c.word, trans };
+  try{
+    const r = await fetch('http://localhost:4000/add',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    const j = await r.json().catch(()=>({ok:false}));
+    if(r.ok && j.ok){
+      if(j.skipped) alert('Already present in lib.txt'); else alert('Saved to lib.txt');
+    }else{
+      alert('Save failed: '+(j.msg||r.statusText));
+    }
+  }catch(err){
+    alert('Could not reach save server on http://localhost:4000 — start it with: cd server/save_lib && npm install && node server.js');
+  }
+}
+
 function markK(){S.known.push(S.cards[S.idx].word);nextCard();}
 function markL(){S.learning.push(S.cards[S.idx].word);nextCard();}
 function nextCard(){S.idx<S.cards.length-1?(S.idx++,renderCard()):showResults();}
@@ -636,6 +744,44 @@ function toggleView(){
   }
 }
 function jumpTo(i){S.idx=i;toggleView();renderCard();}
+</script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
 </script>
 </body>
 </html>
