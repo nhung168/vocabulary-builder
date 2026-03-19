@@ -228,7 +228,7 @@ The economy is about choices.
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                   Pronounce
                 </button>
-                <button class="btn btn-ghost" onclick="saveToLib()" style="font-size:12px;padding:6px 10px">Save</button>
+                <button class="btn btn-ghost" id="save-lib-btn" onclick="saveToLib()" style="font-size:12px;padding:6px 10px" title="Save to lib.txt on GitHub">Save to lib</button>
               </div>
             </div>
             <!-- Dual sentence block -->
@@ -738,15 +738,45 @@ function speak(){
   u.onend=()=>{btn.classList.remove("speaking");btn.innerHTML=`<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg> Pronounce`;};
   window.speechSynthesis.speak(u);
 }
-async function saveToLib(){
-  const c=S.cards[S.idx];if(!c)return;
-  const payload={word:c.word,trans:c.trans||""};
-  try{
-    const r=await fetch("http://localhost:4000/add",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
-    const j=await r.json().catch(()=>({ok:false}));
-    if(r.ok&&j.ok){alert(j.skipped?"Already in lib.txt":"Saved to lib.txt");}
-    else alert("Save failed: "+(j.msg||r.statusText));
-  }catch{alert("Could not reach save server on localhost:4000");}
+// ── Cloudflare Worker endpoint (no token in browser) ──
+const WORKER_URL    = 'https://d1-template.nhung168.workers.dev/';
+const DEFAULT_LANGUAGE = 'Chinese'; // Change to your primary language
+
+async function saveToLib() {
+  const c = S.cards[S.idx];
+  if (!c) return;
+
+  if (WORKER_URL.includes('YOUR_WORKER')) {
+    alert('Please set WORKER_URL to your Cloudflare Worker address.');
+    return;
+  }
+
+  const btn  = document.getElementById('save-lib-btn');
+  const orig = btn.textContent;
+  btn.textContent = '…';
+  btn.disabled = true;
+
+  try {
+    const word       = c.word.trim();
+    const definition = (c.trans ? c.trans : c.sentence).trim();
+    const language   = DEFAULT_LANGUAGE;
+
+    const r = await fetch(`${WORKER_URL}/save`, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ word, definition, language })
+    });
+    const j = await r.json();
+    if (!r.ok) throw new Error(j.error || `HTTP ${r.status}`);
+
+    btn.textContent = j.skipped ? '✓ already in lib' : '✓ saved!';
+    setTimeout(() => { btn.textContent = orig; btn.disabled = false; }, 2500);
+
+  } catch(e) {
+    btn.textContent = '✗ error';
+    btn.disabled = false;
+    alert('Save failed: ' + e.message);
+  }
 }
 function markK(){S.known.push(S.cards[S.idx].word);nextCard();}
 function markL(){S.learning.push(S.cards[S.idx].word);nextCard();}
