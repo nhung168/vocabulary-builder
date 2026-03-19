@@ -108,6 +108,7 @@ button{cursor:pointer;font-family:inherit;font-size:14px}
       </div>
       <div id="fetch-status"></div>
       <div id="fetch-err"></div>
+
       <div id="manual-paste" style="display:none;margin-top:12px">
         <div style="margin-bottom:6px" class="lbl">Or paste transcript / subtitles</div>
         <textarea id="manual-transcript" placeholder="Paste full transcript or SRT text here" style="width:100%;min-height:120px;padding:10px;border:1px solid #ddd;border-radius:8px"></textarea>
@@ -117,7 +118,7 @@ button{cursor:pointer;font-family:inherit;font-size:14px}
         </div>
       </div>
       <div class="info-box info">
-        Uses a free public transcript server. If it fails, use the Paste tab.<br/>
+        Tries multiple sources automatically until one succeeds.<br/>
         Try: <a href="#" onclick="setUrl('https://www.youtube.com/watch?v=NngM_qdDMm8');return false" style="color:#555">Economics Explained</a> ·
         <a href="#" onclick="setUrl('https://www.youtube.com/watch?v=arj7oStGLkU');return false" style="color:#555">TED: Tim Urban</a>
       </div>
@@ -266,7 +267,74 @@ The economy is about choices.
 
 <script>
 const S={url:"",ytId:null,subs:[],cards:[],idx:0,known:[],learning:[],view:"study",showBack:false,hasDual:false};
-const PUBLIC_ENDPOINT='https://youtube-transcript-api-tau-one.vercel.app/transcript';
+// ── Hardcoded API keys ──
+const API_KEYS = {
+  socialkit: ['76m4Akhvj5kZNX', 'uVFu9hf4mbX1GS'],
+  supadata:  ['sd_4afa8eed0a0c7565d25865444f10de4d']
+};
+
+// ── API sources (waterfall order) ──
+// Each key-based source tries all available keys before failing
+const SOURCES = [
+  {
+    id: 'socialkit',
+    name: 'SocialKit',
+    needsKey: true,
+    fetch: async (id, keys) => {
+      let lastErr = '';
+      for (const key of keys) {
+        try {
+          const url = `https://api.socialkit.dev/youtube/transcript?access_key=${encodeURIComponent(key)}&url=${encodeURIComponent('https://www.youtube.com/watch?v='+id)}`;
+          const r = await fetch(url);
+          const j = await r.json();
+          if (!j.success) { lastErr = j.message || `HTTP ${r.status}`; continue; }
+          const segs = j.data?.transcriptSegments || [];
+          if (!segs.length) { lastErr = 'empty'; continue; }
+          return segs.map(x => ({ start: +x.start||0, dur: +x.duration||2, text: (x.text||'').trim(), trans: '' })).filter(x=>x.text);
+        } catch(e) { lastErr = e.message || 'failed'; }
+      }
+      throw new Error(lastErr || 'all keys failed');
+    }
+  },
+  {
+    id: 'supadata',
+    name: 'Supadata',
+    needsKey: true,
+    fetch: async (id, keys) => {
+      let lastErr = '';
+      for (const key of keys) {
+        try {
+          const r = await fetch(`https://api.supadata.ai/v1/youtube/transcript?videoId=${id}`, {
+            headers: { 'x-api-key': key }
+          });
+          const j = await r.json();
+          if (!r.ok) { lastErr = j.message || `HTTP ${r.status}`; continue; }
+          const content = Array.isArray(j.content) ? j.content : [];
+          if (!content.length) { lastErr = 'empty'; continue; }
+          return content.map(x => ({ start: (x.offset||0)/1000, dur: (x.duration||2000)/1000, text: (x.text||'').trim(), trans: '' })).filter(x=>x.text);
+        } catch(e) { lastErr = e.message || 'failed'; }
+      }
+      throw new Error(lastErr || 'all keys failed');
+    }
+  },
+  {
+    id: 'tau',
+    name: 'Public API',
+    needsKey: false,
+    fetch: async (id) => {
+      const r = await fetch('https://youtube-transcript-api-tau-one.vercel.app/transcript', {
+        method: 'POST', headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ url: `https://www.youtube.com/watch?v=${id}` })
+      });
+      const j = await r.json();
+      if (!r.ok) throw new Error(j.detail || j.error || `HTTP ${r.status}`);
+      if (Array.isArray(j.segments) && j.segments.length)
+        return j.segments.map(x => ({ start: +x.start||0, dur: +x.duration||2, text: (x.text||'').trim(), trans: '' })).filter(x=>x.text);
+      if (j.transcript) return splitIntoSegments(j.transcript);
+      throw new Error('No content');
+    }
+  }
+];
 let allToks=[], dragActive=false, dragStartIdx=-1, dragEndIdx=-1;
 const phrases=[];
 
@@ -306,35 +374,72 @@ function tokenise(text){
   return tokens;
 }
 
-/* ── Step 1: auto-fetch ── */
+function toggleApiKeys(){} // removed — keys are hardcoded
+
+/* ── Step 1: auto-fetch with waterfall ── */
 async function fetchSubs(){
   const url=document.getElementById("url-input").value.trim();
   if(!url){showErr("fetch-err","Please enter a YouTube URL.");return;}
   const id=getYtId(url);
   if(!id){showErr("fetch-err","Only YouTube URLs are supported.");return;}
-  S.ytId=id;S.url=url;
+  S.ytId=id; S.url=url;
   document.getElementById("fetch-err").innerHTML="";
   document.getElementById("fetch-btn").disabled=true;
-  document.getElementById("fetch-status").innerHTML=`<div style="display:flex;align-items:center;font-size:13px;color:#666;margin-top:8px"><div class="spinner"></div>Fetching transcript…</div>`;
-  try{
-    const r=await fetch(PUBLIC_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({url:`https://www.youtube.com/watch?v=${id}`})});
-    const j=await r.json().catch(()=>({}));
-    let subs=[];
-    if(Array.isArray(j.segments)&&j.segments.length){
-      subs=j.segments.map(x=>({start:+x.start||0,dur:+x.duration||2,text:(x.text||"").trim(),trans:""})).filter(x=>x.text);
-    }else if(j.transcript){
-      subs=splitIntoSegments(j.transcript);
-    }
-    if(!subs.length)throw new Error("No content returned");
-    S.subs=subs;S.hasDual=false;
-    document.getElementById("fetch-status").innerHTML=`<div style="font-size:13px;color:#27ae60;margin-top:6px;font-weight:500">✓ ${subs.length} segments extracted</div>`;
-    setTimeout(()=>{document.getElementById("fetch-status").innerHTML="";renderStep2();goStep(2);},600);
-  }catch(e){
-    document.getElementById("fetch-status").innerHTML="";
-    document.getElementById("fetch-err").innerHTML=`<div class="info-box err">Auto-fetch failed: ${esc(e.message)}<div style="margin-top:8px"><button class="btn btn-dark" onclick="document.getElementById('manual-paste').style.display='block'">Paste transcript</button></div></div>`;
-    document.getElementById("manual-paste").style.display="block";
+
+  // Build active source list: skip key-based sources if no keys configured
+  const queue = SOURCES.filter(s => !s.needsKey || (API_KEYS[s.id]?.length > 0));
+
+  // Render waterfall UI
+  const rows = queue.map((s,i) =>
+    `<div style="display:flex;align-items:center;gap:8px;padding:5px 0;font-size:13px">
+      <div id="sd${i}" style="width:8px;height:8px;border-radius:50%;background:#e0e0e0;flex-shrink:0;transition:background .2s"></div>
+      <span id="st${i}" style="color:#888">${s.name}${API_KEYS[s.id]?.length>1?' ('+API_KEYS[s.id].length+' keys)':''}</span>
+    </div>`).join('');
+  document.getElementById("fetch-status").innerHTML =
+    `<div style="padding:10px 12px;background:#fff;border:.5px solid #e0e0e0;border-radius:8px;margin-top:8px">${rows}</div>`;
+
+  function setRow(i, status, msg){
+    const dot = document.getElementById('sd'+i);
+    const txt = document.getElementById('st'+i);
+    if(!dot||!txt) return;
+    const colors = { wait:'#e0e0e0', try:'#f5a623', ok:'#27ae60', fail:'#e74c3c' };
+    dot.style.background = colors[status] || '#e0e0e0';
+    dot.style.animation = status==='try' ? 'spin .7s linear infinite' : '';
+    if(msg) txt.innerHTML = `<span style="font-weight:500;color:#333">${queue[i].name}</span> <span style="color:${status==='ok'?'#27ae60':'#e74c3c'};font-size:12px">${msg}</span>`;
   }
+
+  let subs = null;
+  for(let i=0; i<queue.length; i++){
+    const src = queue[i];
+    setRow(i,'try','');
+    try{
+      subs = await src.fetch(id, API_KEYS[src.id] || []);
+      if(subs && subs.length >= 3){
+        setRow(i,'ok',`✓ ${subs.length} segments`);
+        break;
+      } else {
+        setRow(i,'fail','✗ empty response');
+        subs = null;
+      }
+    }catch(e){
+      setRow(i,'fail',`✗ ${e.message||'failed'}`);
+      subs = null;
+    }
+  }
+
   document.getElementById("fetch-btn").disabled=false;
+
+  if(!subs || !subs.length){
+    document.getElementById("fetch-err").innerHTML=`<div class="info-box err" style="margin-top:8px">
+      All sources failed. Add API keys above for better results, or
+      <button class="btn btn-dark" style="margin-left:8px;padding:6px 12px;font-size:13px" onclick="document.getElementById('manual-paste').style.display='block'">paste transcript manually</button>
+    </div>`;
+    document.getElementById("manual-paste").style.display="block";
+    return;
+  }
+
+  S.subs=subs; S.hasDual=false;
+  setTimeout(()=>{document.getElementById("fetch-status").innerHTML="";renderStep2();goStep(2);},800);
 }
 
 /* ── paste ── */
