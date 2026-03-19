@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -33,11 +34,18 @@ button{cursor:pointer;font-family:inherit;font-size:14px}
 .step-dot.done .num{background:#1a1a1a;border-color:#1a1a1a;color:#fff}
 .step-dot.active .num{border-color:#1a1a1a;color:#1a1a1a}
 .step-line{flex:1;height:1px;background:#e0e0e0;margin:0 8px;align-self:center}
-.sub-line{padding:8px 14px;border-bottom:.5px solid #f0f0f0;font-size:13px;display:flex;gap:12px;cursor:pointer;transition:background .1s}
+
+/* Script panel — dual language */
+.sub-line{padding:8px 14px;border-bottom:.5px solid #f0f0f0;display:flex;gap:12px;cursor:pointer;transition:background .1s}
 .sub-line:last-child{border-bottom:none}
 .sub-line:hover{background:#fafaf8}
 .sub-line.hi{background:#fffbe6}
-.sub-line .ts{font-family:monospace;font-size:11px;color:#bbb;min-width:48px;flex-shrink:0;padding-top:2px}
+.sub-line .ts{font-family:monospace;font-size:11px;color:#bbb;min-width:48px;flex-shrink:0;padding-top:3px}
+.sub-line .sub-content{display:flex;flex-direction:column;gap:2px;flex:1}
+.sub-primary{font-size:13px;color:#1a1a1a;line-height:1.5}
+.sub-trans{font-size:12px;color:#aaa;line-height:1.4;font-style:italic}
+
+/* Word picker */
 .word-zone{border:1px dashed #ccc;border-radius:10px;padding:14px;min-height:80px;background:#fafaf8;font-size:15px;line-height:2.4;user-select:none;-webkit-user-select:none;cursor:crosshair}
 .w,.cjk{display:inline;cursor:crosshair;border-radius:3px;padding:2px 1px;transition:background .08s}
 .w:hover,.cjk:hover{background:#ffe9a0}
@@ -45,11 +53,19 @@ button{cursor:pointer;font-family:inherit;font-size:14px}
 .w.preview,.cjk.preview{background:#fff0a0;border-radius:4px}
 .pick-hint{font-size:12px;color:#aaa;margin-bottom:8px;display:flex;gap:16px;flex-wrap:wrap}
 .pick-hint b{color:#666}
+
+/* Flashcard layout */
 .card-layout{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
 .card-left{display:flex;flex-direction:column;gap:12px}
 .card-right{border-radius:8px;overflow:hidden;background:#111;aspect-ratio:16/9}
 .card-right iframe{width:100%;height:100%;border:none;display:block}
 @media(max-width:680px){.card-layout{grid-template-columns:1fr}}
+
+/* Dual sentence display on flashcard back */
+.sentence-block{padding:8px 12px;background:#f5f4f0;border-radius:8px;border-left:3px solid #ccc}
+.sentence-primary{font-size:13px;color:#555;line-height:1.7;font-style:italic}
+.sentence-trans{font-size:12px;color:#999;line-height:1.6;margin-top:4px;padding-top:4px;border-top:.5px solid #e8e8e8}
+
 .pron-btn{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;font-size:12px;border-radius:20px;border:1px solid #ccc;background:#f5f4f0;color:#555;cursor:pointer;transition:all .15s}
 .pron-btn.speaking{background:#e8f0fe;border-color:#9ab0f0;color:#2a56db}
 .result-stat{text-align:center;padding:16px;background:#f5f4f0;border-radius:12px}
@@ -83,23 +99,15 @@ button{cursor:pointer;font-family:inherit;font-size:14px}
       <button class="tab" id="tab-paste" onclick="switchTab('paste')">Paste transcript</button>
       <button class="tab" id="tab-upload" onclick="switchTab('upload')">Upload SRT</button>
     </div>
+
+    <!-- Auto -->
     <div id="panel-auto">
       <div style="display:flex;gap:8px;margin-bottom:8px">
         <input type="text" id="url-input" placeholder="https://youtube.com/watch?v=..." style="flex:1" onkeydown="if(event.key==='Enter')fetchSubs()"/>
         <button class="btn btn-dark" id="fetch-btn" onclick="fetchSubs()">Extract</button>
       </div>
-      <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
-        <div style="font-size:12px;color:#666">Endpoint:</div>
-        <div style="font-size:13px;color:#444">Using public transcript API</div>
-      </div>
       <div id="fetch-status"></div>
       <div id="fetch-err"></div>
-      <div id="raw-debug" style="display:none;margin-top:10px"><div class="lbl">Upstream response (raw)</div><pre id="raw-pre" style="max-height:220px;overflow:auto;padding:10px;background:#fff;border:1px solid #eee;border-radius:8px;font-size:12px;color:#222"></pre></div>
-      <div class="info-box info">
-        Uses a free public transcript server. If it fails, use the Paste tab.<br/>
-        Try: <a href="#" onclick="setUrl('https://www.youtube.com/watch?v=NngM_qdDMm8');return false" style="color:#555">Economics Explained</a> ·
-        <a href="#" onclick="setUrl('https://www.youtube.com/watch?v=arj7oStGLkU');return false" style="color:#555">TED: Tim Urban</a>
-      </div>
       <div id="manual-paste" style="display:none;margin-top:12px">
         <div style="margin-bottom:6px" class="lbl">Or paste transcript / subtitles</div>
         <textarea id="manual-transcript" placeholder="Paste full transcript or SRT text here" style="width:100%;min-height:120px;padding:10px;border:1px solid #ddd;border-radius:8px"></textarea>
@@ -108,7 +116,14 @@ button{cursor:pointer;font-family:inherit;font-size:14px}
           <button class="btn btn-dark" onclick="useManualTranscript()">Use Transcript →</button>
         </div>
       </div>
+      <div class="info-box info">
+        Uses a free public transcript server. If it fails, use the Paste tab.<br/>
+        Try: <a href="#" onclick="setUrl('https://www.youtube.com/watch?v=NngM_qdDMm8');return false" style="color:#555">Economics Explained</a> ·
+        <a href="#" onclick="setUrl('https://www.youtube.com/watch?v=arj7oStGLkU');return false" style="color:#555">TED: Tim Urban</a>
+      </div>
     </div>
+
+    <!-- Paste -->
     <div id="panel-paste" style="display:none">
       <input type="text" id="paste-url" placeholder="YouTube URL (optional — for video embed)" style="width:100%;margin-bottom:8px"/>
       <textarea id="paste-text" rows="10" style="width:100%;resize:vertical;font-size:13px;line-height:1.6"
@@ -119,36 +134,60 @@ button{cursor:pointer;font-family:inherit;font-size:14px}
         <strong style="color:#444">Get YouTube transcript:</strong> open video → click ··· → Show transcript → select all → copy
       </div>
     </div>
+
+    <!-- Upload SRT -->
     <div id="panel-upload" style="display:none">
-      <div style="margin-bottom:8px" class="lbl">Upload SRT (supports dual subs with '---' separator)</div>
-      <input type="file" id="srt-file" accept=".srt" style="display:block;margin-bottom:8px" />
-      <div style="margin-bottom:8px;color:#666;font-size:13px">Example block:
-        <pre style="display:inline;background:transparent;border:none;padding:0;margin-left:6px">283
-00:13:04,500 --> 00:13:05,733
-记得一定要支持我
---- Hãy nhớ ủng hộ tôi nhé!</pre>
+      <div class="lbl" style="margin-bottom:8px">Upload SRT file — dual language supported</div>
+
+      <!-- Two-file upload -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+        <div>
+          <div style="font-size:12px;color:#666;margin-bottom:4px">Primary language (e.g. English)</div>
+          <input type="file" id="srt-file-primary" accept=".srt" style="width:100%;font-size:13px"/>
+        </div>
+        <div>
+          <div style="font-size:12px;color:#666;margin-bottom:4px">Translation (e.g. Vietnamese) — optional</div>
+          <input type="file" id="srt-file-trans" accept=".srt" style="width:100%;font-size:13px"/>
+        </div>
       </div>
+
+      <div style="font-size:12px;color:#aaa;margin-bottom:10px">
+        Or upload a single SRT with two lines per block separated by <code style="background:#eee;padding:1px 4px;border-radius:3px">---</code>
+      </div>
+
+      <input type="text" id="srt-video-url" placeholder="YouTube URL (optional — for video embed)" style="width:100%;margin-bottom:10px"/>
+
       <div style="display:flex;justify-content:flex-end;gap:8px">
-        <button class="btn btn-ghost" onclick="document.getElementById('srt-file').value='';switchTab('auto')">Cancel</button>
-        <button class="btn btn-dark" onclick="processSrtUpload()">Upload & Use →</button>
+        <button class="btn btn-ghost" onclick="switchTab('auto')">Cancel</button>
+        <button class="btn btn-dark" onclick="processSrtUpload()">Upload &amp; Use →</button>
       </div>
       <div id="srt-err"></div>
-      <div class="info-box info" style="margin-top:10px">SRT parser supports blocks with two subtitle lines separated by '---'. If no '---' present, first subtitle line is used as primary text.</div>
+      <div class="info-box info" style="margin-top:10px">
+        <strong style="color:#444">Single SRT dual format example:</strong><br/>
+        <pre style="font-size:12px;margin-top:4px;background:#fff;padding:8px;border-radius:6px;border:.5px solid #e0e0e0">1
+00:00:05,000 --> 00:00:07,500
+The economy is about choices.
+--- Kinh tế học là về những lựa chọn.</pre>
+        Each block: primary line first, then <code>---</code>, then translation.
+      </div>
     </div>
   </div>
 
   <!-- STEP 2 -->
   <div id="step-2" class="step">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px">
-      <span id="sub-meta" class="muted"></span>
+      <div>
+        <span id="sub-meta" class="muted"></span>
+        <span id="dual-badge" style="display:none;margin-left:8px;font-size:11px;padding:2px 8px;background:#e8f0fe;color:#2a56db;border-radius:20px;font-weight:500">Dual language</span>
+      </div>
       <button class="btn btn-ghost" onclick="goStep(1)">← Back</button>
     </div>
     <div id="vid-preview" style="display:none;border-radius:10px;overflow:hidden;background:#111;aspect-ratio:16/9;margin-bottom:12px">
       <iframe id="vp-frame" src="" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;border:none;display:block"></iframe>
     </div>
-    <div style="background:#fff;border:.5px solid #e0e0e0;border-radius:12px;max-height:260px;overflow-y:auto;margin-bottom:14px" id="script-panel"></div>
+    <div style="background:#fff;border:.5px solid #e0e0e0;border-radius:12px;max-height:300px;overflow-y:auto;margin-bottom:14px" id="script-panel"></div>
     <div class="pick-hint">
-      <span>👆 <b>Click</b> — select a single word</span>
+      <span>👆 <b>Click</b> — select a word</span>
       <span>↔ <b>Click &amp; drag</b> — select a phrase</span>
       <span>🔁 <b>Click selected</b> — deselect</span>
     </div>
@@ -185,13 +224,17 @@ button{cursor:pointer;font-family:inherit;font-size:14px}
               <span id="cb-word" style="font-size:22px;font-weight:500"></span>
               <div style="display:flex;align-items:center;gap:8px">
                 <button class="pron-btn" id="pb" onclick="speak()">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                Pronounce
-              </button>
-                <button class="btn btn-ghost" id="save-lib-btn" onclick="saveToLib()" style="font-size:12px;padding:6px 10px">Save</button>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  Pronounce
+                </button>
+                <button class="btn btn-ghost" onclick="saveToLib()" style="font-size:12px;padding:6px 10px">Save</button>
               </div>
             </div>
-            <div id="cb-sentence" style="padding:8px 12px;background:#f5f4f0;border-radius:8px;border-left:3px solid #ccc;font-size:13px;color:#555;line-height:1.7;font-style:italic"></div>
+            <!-- Dual sentence block -->
+            <div class="sentence-block">
+              <div class="sentence-primary" id="cb-sentence-primary"></div>
+              <div class="sentence-trans" id="cb-sentence-trans" style="display:none"></div>
+            </div>
             <div id="cb-ts" style="font-family:monospace;font-size:11px;color:#bbb"></div>
             <div style="display:flex;gap:10px;margin-top:4px">
               <button class="btn btn-ghost" style="flex:1;padding:11px" onclick="markL()">Still learning</button>
@@ -222,53 +265,33 @@ button{cursor:pointer;font-family:inherit;font-size:14px}
 </div>
 
 <script>
-/* ── Global state ── */
-const S={url:"",ytId:null,subs:[],cards:[],idx:0,known:[],learning:[],view:"study",showBack:false};
+const S={url:"",ytId:null,subs:[],cards:[],idx:0,known:[],learning:[],view:"study",showBack:false,hasDual:false};
+const PUBLIC_ENDPOINT='https://youtube-transcript-api-tau-one.vercel.app/transcript';
+let allToks=[], dragActive=false, dragStartIdx=-1, dragEndIdx=-1;
+const phrases=[];
 
-const PUBLIC_ENDPOINT = 'https://youtube-transcript-api-tau-one.vercel.app/transcript';
-
-// Phrase selection state — all global, no closures
-let allToks=[];          // flat array of all selectable token DOM elements
-const phrases=[];        // committed selections: [{word,ts,sentence,lo,hi}]
-let dragActive=false;
-let dragStartIdx=-1;
-let dragEndIdx=-1;
-
-/* ── Helpers ── */
+/* ── helpers ── */
 function setUrl(u){document.getElementById("url-input").value=u;}
 function switchTab(t){
-  document.getElementById("tab-auto").classList.toggle("active",t==="auto");
-  document.getElementById("tab-paste").classList.toggle("active",t==="paste");
-  const upBtn = document.getElementById('tab-upload'); if(upBtn) upBtn.classList.toggle('active', t==='upload');
-  document.getElementById("panel-auto").style.display=t==="auto"?"block":"none";
-  document.getElementById("panel-paste").style.display=t==="paste"?"block":"none";
-  const pu = document.getElementById('panel-upload'); if(pu) pu.style.display = t==='upload'?'block':'none';
+  ["auto","paste","upload"].forEach(id=>{
+    document.getElementById("tab-"+id).classList.toggle("active",id===t);
+    document.getElementById("panel-"+id).style.display=id===t?"block":"none";
+  });
 }
 function goStep(n){
   document.querySelectorAll(".step").forEach(e=>e.classList.remove("active"));
   document.getElementById("step-"+n).classList.add("active");
-  [1,2,3].forEach(i=>{
-    const e=document.getElementById("nav"+i);
-    e.classList.toggle("done",i<n);
-    e.classList.toggle("active",i===n);
-  });
+  [1,2,3].forEach(i=>{const e=document.getElementById("nav"+i);e.classList.toggle("done",i<n);e.classList.toggle("active",i===n);});
 }
 function getYtId(url){
-  try{
-    const u=new URL(url);
-    if(u.hostname.includes("youtube.com"))return u.searchParams.get("v");
-    if(u.hostname==="youtu.be")return u.pathname.slice(1).split("?")[0];
-  }catch{}return null;
+  try{const u=new URL(url);if(u.hostname.includes("youtube.com"))return u.searchParams.get("v");if(u.hostname==="youtu.be")return u.pathname.slice(1).split("?")[0];}catch{}return null;
 }
-function sec2ts(s){
-  s=Math.floor(+s||0);
-  const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),ss=s%60;
-  return h?`${h}:${pad(m)}:${pad(ss)}`:`${m}:${pad(ss)}`;
-}
+function sec2ts(s){s=Math.floor(+s||0);const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),ss=s%60;return h?`${h}:${pad(m)}:${pad(ss)}`:`${m}:${pad(ss)}`;}
 function pad(n){return String(n).padStart(2,"0");}
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function showErr(id,msg){document.getElementById(id).innerHTML=`<div class="info-box err">${esc(msg)}</div>`;}
 
-/* ── Tokeniser: English words + CJK characters ── */
+/* ── tokeniser ── */
 function tokenise(text){
   const tokens=[];
   const re=/(\s+)|([，。！？、：；""''【】《》\u3000]+)|([\u4e00-\u9fff\u3400-\u4dbf\uf900-\ufaff\u3040-\u309f\u30a0-\u30ff\uac00-\ud7af])|([a-zA-Z0-9''\-]+)|([^\s])/g;
@@ -283,114 +306,55 @@ function tokenise(text){
   return tokens;
 }
 
-/* ── Step 1: Auto-fetch ── */
+/* ── Step 1: auto-fetch ── */
 async function fetchSubs(){
   const url=document.getElementById("url-input").value.trim();
   if(!url){showErr("fetch-err","Please enter a YouTube URL.");return;}
   const id=getYtId(url);
   if(!id){showErr("fetch-err","Only YouTube URLs are supported.");return;}
-  S.ytId=id; S.url=url;
+  S.ytId=id;S.url=url;
   document.getElementById("fetch-err").innerHTML="";
   document.getElementById("fetch-btn").disabled=true;
-  document.getElementById("fetch-status").innerHTML=
-    `<div style="display:flex;align-items:center;font-size:13px;color:#666;margin-top:8px"><div class="spinner"></div>Fetching transcript…</div>`;
+  document.getElementById("fetch-status").innerHTML=`<div style="display:flex;align-items:center;font-size:13px;color:#666;margin-top:8px"><div class="spinner"></div>Fetching transcript…</div>`;
   try{
-    // Post to the public transcript API only
-    const rr = await fetch(PUBLIC_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url:`https://www.youtube.com/watch?v=${id}`})});
-    const j = await rr.json().catch(()=>null);
-    const r = rr;
+    const r=await fetch(PUBLIC_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({url:`https://www.youtube.com/watch?v=${id}`})});
+    const j=await r.json().catch(()=>({}));
     let subs=[];
     if(Array.isArray(j.segments)&&j.segments.length){
-      subs=j.segments.map(x=>({start:+x.start||0,dur:+x.duration||2,text:(x.text||"").trim()})).filter(x=>x.text);
+      subs=j.segments.map(x=>({start:+x.start||0,dur:+x.duration||2,text:(x.text||"").trim(),trans:""})).filter(x=>x.text);
     }else if(j.transcript){
       subs=splitIntoSegments(j.transcript);
     }
-    // Basic sanity checks: sometimes upstream returns an encoded/invalid transcript string
-    const looksBad = (j && typeof j.transcript==='string' && (j.transcript.length<40 || /0:\{/.test(j.transcript) || /1:null/.test(j.transcript)));
-    if(looksBad){
-      // Show diagnostic raw response and suggest paste fallback
-      showRawResponse(j);
-      document.getElementById("fetch-status").innerHTML="";
-      document.getElementById('manual-paste').style.display='block';
-      throw new Error('Upstream returned unexpected transcript format');
-    }
     if(!subs.length)throw new Error("No content returned");
-    document.getElementById("fetch-status").innerHTML=
-      `<div style="font-size:13px;color:#27ae60;margin-top:6px;font-weight:500">✓ ${subs.length} segments extracted</div>`;
-    S.subs=subs;
+    S.subs=subs;S.hasDual=false;
+    document.getElementById("fetch-status").innerHTML=`<div style="font-size:13px;color:#27ae60;margin-top:6px;font-weight:500">✓ ${subs.length} segments extracted</div>`;
     setTimeout(()=>{document.getElementById("fetch-status").innerHTML="";renderStep2();goStep(2);},600);
   }catch(e){
     document.getElementById("fetch-status").innerHTML="";
-    document.getElementById("fetch-err").innerHTML = `<div class="info-box err">Auto-fetch failed: ${esc(e.message)}<div style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end">
-        <button class="btn btn-ghost" onclick="openOnYouTube()">Open video</button>
-        <button class="btn btn-ghost" onclick="tryEmbedNoCookie()">Try nocookie embed</button>
-        <button class="btn btn-dark" onclick="showManualPaste()">Paste transcript</button>
-      </div></div>`;
-    // Reveal manual paste area as a quick fallback
-    document.getElementById('manual-paste').style.display='block';
+    document.getElementById("fetch-err").innerHTML=`<div class="info-box err">Auto-fetch failed: ${esc(e.message)}<div style="margin-top:8px"><button class="btn btn-dark" onclick="document.getElementById('manual-paste').style.display='block'">Paste transcript</button></div></div>`;
+    document.getElementById("manual-paste").style.display="block";
   }
   document.getElementById("fetch-btn").disabled=false;
 }
 
-/* ── Step 1: Paste ── */
+/* ── paste ── */
 function parsePasted(){
   const raw=document.getElementById("paste-text").value.trim();
-  const urlVal=document.getElementById("paste-url").value.trim();
+  let urlVal=document.getElementById("paste-url").value.trim();
   if(!raw){showErr("paste-err","Please paste some transcript text.");return;}
-  S.ytId=urlVal?getYtId(urlVal):null;
-  S.url=urlVal||"";
-  const lines=raw.split("\n").map(l=>l.trim()).filter(Boolean);
-  const subs=[];
-  const tsRe=/^\[?(\d+):(\d{2})(?::(\d{2}))?\]?\s*/;
-  const hasTs=lines.some(l=>tsRe.test(l));
-  if(hasTs){
-    let i=0;
-    while(i<lines.length){
-      const m=lines[i].match(tsRe);
-      if(m){
-        const start=m[3]?(+m[1])*3600+(+m[2])*60+(+m[3]):(+m[1])*60+(+m[2]);
-        const text=lines[i].replace(tsRe,"").trim();
-        if(text){
-          subs.push({start,dur:2,text});
-        }else if(i+1<lines.length){
-          i++;
-          subs.push({start,dur:2,text:lines[i]});
-        }
-      }
-      i++;
-    }
-  }else{
-    subs.push(...splitIntoSegments(lines.join(" ")));
-  }
-  for(let k=0;k<subs.length-1;k++)subs[k].dur=Math.max(1,subs[k+1].start-subs[k].start);
+  const firstLine=raw.split("\n")[0].trim();
+  if(firstLine.includes("youtube.com")||firstLine.includes("youtu.be")){urlVal=firstLine;document.getElementById("paste-url").value=urlVal;}
+  S.ytId=urlVal?getYtId(urlVal):null;S.url=urlVal||"";
+  const body=urlVal===firstLine?raw.split("\n").slice(1).join("\n").trim():raw;
+  const subs=parseTimestampedText(body);
   if(!subs.length){showErr("paste-err","Could not parse transcript.");return;}
+  S.subs=subs;S.hasDual=subs.some(s=>s.trans);
   document.getElementById("paste-err").innerHTML="";
-  S.subs=subs;
-  renderStep2();
-  goStep(2);
+  renderStep2();goStep(2);
 }
 
-function splitIntoSegments(text){
-  const words=text.split(/\s+/).filter(Boolean);
-  const subs=[];let i=0,t=0;
-  while(i<words.length){subs.push({start:t,dur:3,text:words.slice(i,i+10).join(" ")});i+=10;t+=3;}
-  return subs;
-}
-function showErr(id,msg){document.getElementById(id).innerHTML=`<div class="info-box err">${esc(msg)}</div>`;}
-
-function showRawResponse(obj){
-  try{document.getElementById('raw-pre').textContent = JSON.stringify(obj,null,2);}catch(e){document.getElementById('raw-pre').textContent=String(obj);}  
-  document.getElementById('raw-debug').style.display='block';
-  console.warn('Upstream raw response:', obj);
-}
-
-/* ── Manual paste helpers (fallback when auto-fetch fails) ── */
-function showManualPaste(){document.getElementById('manual-paste').style.display='block';document.getElementById('manual-transcript').focus();}
-function useManualTranscript(){
-  const raw=document.getElementById('manual-transcript').value.trim();
-  if(!raw){showErr('fetch-err','Please paste the transcript into the box.');return;}
-  // Simple split: lines -> if timestamp-like lines exist try to parse, else chunk by sentences
-  const lines=raw.split('\n').map(l=>l.trim()).filter(Boolean);
+function parseTimestampedText(raw){
+  const lines=raw.split("\n").map(l=>l.trim()).filter(Boolean);
   const tsRe=/^\[?(\d+):(\d{2})(?::(\d{2}))?\]?\s*/;
   const subs=[];
   if(lines.some(l=>tsRe.test(l))){
@@ -399,92 +363,119 @@ function useManualTranscript(){
       const m=lines[i].match(tsRe);
       if(m){
         const start=m[3]?(+m[1])*3600+(+m[2])*60+(+m[3]):(+m[1])*60+(+m[2]);
-        let text=lines[i].replace(tsRe,'').trim();
-        if(!text && i+1<lines.length){i++; text=lines[i];}
-        subs.push({start,dur:2,text});
+        const text=lines[i].replace(tsRe,"").trim();
+        if(text){subs.push({start,dur:2,text,trans:""});}
+        else if(i+1<lines.length){i++;subs.push({start,dur:2,text:lines[i],trans:""});}
       }
       i++;
     }
   }else{
-    // fallback: chunk by sentences/approximate groups
-    const txt=lines.join(' ');
-    const parts=txt.split(/(?<=[.?!])\s+/);
-    let t=0;
-    for(const p of parts){ if(p.trim()){subs.push({start:t,dur:Math.max(2,Math.ceil(p.split(/\s+/).length/3)),text:p.trim()}); t+=3;} }
+    subs.push(...splitIntoSegments(lines.join(" ")));
   }
-  if(!subs.length){showErr('fetch-err','Could not parse pasted transcript.');return;}
   for(let k=0;k<subs.length-1;k++)subs[k].dur=Math.max(1,subs[k+1].start-subs[k].start);
-  S.subs=subs; document.getElementById('fetch-err').innerHTML=''; document.getElementById('manual-paste').style.display='none';
-  renderStep2(); goStep(2);
+  return subs;
 }
 
-/* ── SRT upload handling ── */
+function useManualTranscript(){
+  const raw=document.getElementById("manual-transcript").value.trim();
+  if(!raw){showErr("fetch-err","Please paste the transcript.");return;}
+  const subs=parseTimestampedText(raw);
+  if(!subs.length){showErr("fetch-err","Could not parse pasted transcript.");return;}
+  S.subs=subs;S.hasDual=false;
+  document.getElementById("fetch-err").innerHTML="";
+  document.getElementById("manual-paste").style.display="none";
+  renderStep2();goStep(2);
+}
+
+function splitIntoSegments(text){
+  const words=text.split(/\s+/).filter(Boolean);
+  const subs=[];let i=0,t=0;
+  while(i<words.length){subs.push({start:t,dur:3,text:words.slice(i,i+10).join(" "),trans:""});i+=10;t+=3;}
+  return subs;
+}
+
+/* ── SRT parser ── */
 function parseSrtText(txt){
-  // Split into blocks separated by blank lines
-  const blocks = txt.split(/\r?\n\s*\r?\n/).map(b=>b.trim()).filter(Boolean);
-  const segs = [];
+  const blocks=txt.split(/\r?\n\s*\r?\n/).map(b=>b.trim()).filter(Boolean);
+  const segs=[];
   for(const b of blocks){
-    const lines = b.split(/\r?\n/).map(l=>l.trim()).filter(Boolean);
-    if(lines.length<2) continue;
-    // timestamp line is usually second line or second element
-    let timeLine = null; let contentLines = [];
-    if(/-->/.test(lines[1])){ timeLine = lines[1]; contentLines = lines.slice(2);} else if(/-->/.test(lines[0])){ timeLine = lines[0]; contentLines = lines.slice(1);} else { continue; }
-    const m = timeLine.match(/(\d{2}):(\d{2}):(\d{2}),(\d{1,3})\s*-->\s*(\d{2}):(\d{2}):(\d{2}),(\d{1,3})/);
-    if(!m) continue;
-    const start = (+m[1])*3600 + (+m[2])*60 + (+m[3]) + (+m[4])/1000;
-    const end = (+m[5])*3600 + (+m[6])*60 + (+m[7]) + (+m[8])/1000;
-    const dur = Math.max(1, end - start);
-    // join content lines; support '---' separator for dual subs
-    const joined = contentLines.join(' \n ');
-    let primary = joined; let trans = '';
-    if(joined.indexOf('---')!==-1){
-      const parts = joined.split(/---+/).map(s=>s.trim()).filter(Boolean);
-      primary = parts[0]||'';
-      trans = parts.slice(1).join(' --- ');
-    } else if(contentLines.length>=2){
-      // if two lines, take first as primary and second as translation
-      primary = contentLines[0]; trans = contentLines.slice(1).join(' ');
+    const lines=b.split(/\r?\n/).map(l=>l.trim()).filter(Boolean);
+    if(lines.length<2)continue;
+    let timeLine=null,contentLines=[];
+    if(/-->/.test(lines[1])){timeLine=lines[1];contentLines=lines.slice(2);}
+    else if(/-->/.test(lines[0])){timeLine=lines[0];contentLines=lines.slice(1);}
+    else continue;
+    const m=timeLine.match(/(\d{2}):(\d{2}):(\d{2}),(\d{1,3})\s*-->\s*(\d{2}):(\d{2}):(\d{2}),(\d{1,3})/);
+    if(!m)continue;
+    const start=(+m[1])*3600+(+m[2])*60+(+m[3])+(+m[4])/1000;
+    const end=(+m[5])*3600+(+m[6])*60+(+m[7])+(+m[8])/1000;
+    const dur=Math.max(0.5,end-start);
+    const joined=contentLines.join("\n");
+    let primary="",trans="";
+    if(joined.includes("---")){
+      const parts=joined.split(/---+/).map(s=>s.replace(/\n/g," ").trim()).filter(Boolean);
+      primary=parts[0]||"";trans=parts.slice(1).join(" / ");
+    }else if(contentLines.length>=2){
+      primary=contentLines[0];trans=contentLines.slice(1).join(" ");
+    }else{
+      primary=contentLines[0]||"";
     }
-    const sentence = trans?`${primary} — ${trans}`:primary;
-    segs.push({start: Math.round(start), dur: Math.round(dur), text: primary, trans: trans, sentence: sentence});
+    if(primary)segs.push({start:Math.round(start*10)/10,dur:Math.round(dur*10)/10,text:primary,trans});
   }
   return segs;
 }
 
-function processSrtUpload(){
-  const f = document.getElementById('srt-file').files[0];
-  if(!f){ document.getElementById('srt-err').innerHTML=`<div class="info-box err">Please choose an SRT file.</div>`; return; }
-  const reader = new FileReader();
-  reader.onload = function(e){
-    const txt = String(e.target.result || '');
-    const segs = parseSrtText(txt);
-    if(!segs.length){ document.getElementById('srt-err').innerHTML=`<div class="info-box err">Could not parse SRT file.</div>`; return; }
-    // ensure sentence field exists for older code paths
-    segs.forEach(s=>{ if(!s.sentence) s.sentence = s.trans?`${s.text} — ${s.trans}`:s.text; });
-    S.subs = segs;
-    document.getElementById('srt-err').innerHTML='';
-    renderStep2(); goStep(2);
-  };
-  reader.onerror = function(){ document.getElementById('srt-err').innerHTML=`<div class="info-box err">Failed to read file.</div>`; };
-  reader.readAsText(f, 'utf-8');
+/* ── Merge two SRT arrays by closest timestamp ── */
+function mergeSrtArrays(primary,trans){
+  // For each primary segment, find the closest translation segment by start time
+  return primary.map(p=>{
+    let best=null,bestDiff=Infinity;
+    for(const t of trans){
+      const d=Math.abs(t.start-p.start);
+      if(d<bestDiff){bestDiff=d;best=t;}
+    }
+    return {...p,trans:bestDiff<3?(best?.text||""):""};
+  });
 }
 
-// Fallback helpers for embedding / opening video when embed fails (Error 153 etc.)
-function openOnYouTube(){
-  const u = S.ytId?`https://www.youtube.com/watch?v=${S.ytId}`:(document.getElementById('url-input').value||S.url||'');
-  if(u) window.open(u,'_blank');
-}
-function tryEmbedNoCookie(){
-  if(!S.ytId){ showErr('fetch-err','No video ID available to embed.'); return; }
-  document.getElementById('vp-frame').src = `https://www.youtube-nocookie.com/embed/${S.ytId}?controls=1&rel=0&playsinline=1`;
-  document.getElementById('vid-preview').style.display='block';
+function readFile(file){
+  return new Promise((res,rej)=>{
+    const r=new FileReader();
+    r.onload=e=>res(String(e.target.result||""));
+    r.onerror=()=>rej(new Error("File read failed"));
+    r.readAsText(file,"utf-8");
+  });
 }
 
-/* ── Step 2: Render ── */
+async function processSrtUpload(){
+  const pFile=document.getElementById("srt-file-primary").files[0];
+  const tFile=document.getElementById("srt-file-trans").files[0];
+  const urlVal=document.getElementById("srt-video-url").value.trim();
+  if(!pFile){document.getElementById("srt-err").innerHTML=`<div class="info-box err">Please choose a primary SRT file.</div>`;return;}
+  try{
+    const pTxt=await readFile(pFile);
+    let segs=parseSrtText(pTxt);
+    if(!segs.length){document.getElementById("srt-err").innerHTML=`<div class="info-box err">Could not parse primary SRT file.</div>`;return;}
+    if(tFile){
+      const tTxt=await readFile(tFile);
+      const tSegs=parseSrtText(tTxt);
+      if(tSegs.length)segs=mergeSrtArrays(segs,tSegs);
+    }
+    S.ytId=urlVal?getYtId(urlVal):null;
+    S.url=urlVal||"";
+    S.subs=segs;
+    S.hasDual=segs.some(s=>s.trans);
+    document.getElementById("srt-err").innerHTML="";
+    renderStep2();goStep(2);
+  }catch(e){
+    document.getElementById("srt-err").innerHTML=`<div class="info-box err">${esc(e.message)}</div>`;
+  }
+}
+
+/* ── Step 2 ── */
 function renderStep2(){
-  // Reset selection state for new video
-  phrases.length=0;
-  allToks=[];
+  phrases.length=0;allToks=[];
+  // Video embed
   if(S.ytId){
     document.getElementById("vp-frame").src=`https://www.youtube-nocookie.com/embed/${S.ytId}?controls=1&rel=0&playsinline=1`;
     document.getElementById("vid-preview").style.display="block";
@@ -492,114 +483,92 @@ function renderStep2(){
     document.getElementById("vid-preview").style.display="none";
   }
   document.getElementById("sub-meta").textContent=`${S.subs.length} segments`;
-  document.getElementById("script-panel").innerHTML=S.subs.map((s,i)=>
-    `<div class="sub-line" id="sl${i}" onclick="seekTo(${s.start})">
-      <span class="ts">${sec2ts(s.start)}</span><span>${esc(s.sentence||s.text)}</span>
+  // Dual badge
+  const badge=document.getElementById("dual-badge");
+  badge.style.display=S.hasDual?"inline":"none";
+
+  // Script panel — show primary + translation line by line
+  document.getElementById("script-panel").innerHTML=S.subs.map((s,i)=>`
+    <div class="sub-line" id="sl${i}" onclick="seekTo(${s.start})">
+      <span class="ts">${sec2ts(s.start)}</span>
+      <div class="sub-content">
+        <div class="sub-primary">${esc(s.text)}</div>
+        ${s.trans?`<div class="sub-trans">${esc(s.trans)}</div>`:""}
+      </div>
     </div>`).join("");
+
   renderPicker();
 }
 
-/* ── Word picker ── */
+/* ── Word picker — primary language only ── */
 function renderPicker(){
   const picker=document.getElementById("word-picker");
   let html="";
   S.subs.forEach((seg,si)=>{
+    // Only tokenise primary text, not translation
     tokenise(seg.text).forEach((tok,ti)=>{
       if(tok.type==="space"){html+=" ";return;}
       if(tok.type==="punct"){html+=`<span>${esc(tok.val)}</span>`;return;}
       const cls=tok.type==="cjk"?"cjk":"w";
-      html+=`<span class="${cls}" data-si="${si}" data-ti="${ti}" data-word="${esc(tok.val)}" data-ts="${seg.start}" data-sen="${esc(seg.sentence||seg.text)}">${esc(tok.val)}</span>`;
+      html+=`<span class="${cls}" data-si="${si}" data-ti="${ti}" data-word="${esc(tok.val)}" data-ts="${seg.start}" data-sen="${esc(seg.text)}" data-trans="${esc(seg.trans||"")}">${esc(tok.val)}</span>`;
     });
-    html+=` <span style="color:#ddd;font-size:11px">|</span> `;
+    // Show translation hint inline under each segment in picker too
+    if(seg.trans){
+      html+=`<span style="display:block;font-size:11px;color:#bbb;font-style:italic;margin:2px 0 6px 2px">${esc(seg.trans)}</span>`;
+    }
+    html+=`<span style="color:#ddd;font-size:11px"> | </span>`;
   });
   picker.innerHTML=html;
-
-  // Build flat token array for index-based selection
   allToks=[...picker.querySelectorAll(".w,.cjk")];
-
-  // Re-apply highlights for existing phrases
   applyHighlights();
-
-  // Attach drag events via event delegation on the container
   picker.onmousedown=pickerDown;
   picker.onmousemove=pickerMove;
   document.onmouseup=pickerUp;
 }
 
 function applyHighlights(){
-  // Clear all highlight classes
   allToks.forEach(t=>t.classList.remove("sel","preview"));
-  // Mark committed phrases
-  phrases.forEach(p=>{
-    for(let i=p.lo;i<=p.hi;i++) allToks[i]?.classList.add("sel");
-  });
-  // Mark live drag preview
+  phrases.forEach(p=>{for(let i=p.lo;i<=p.hi;i++)allToks[i]?.classList.add("sel");});
   if(dragActive&&dragStartIdx>=0&&dragEndIdx>=0){
     const lo=Math.min(dragStartIdx,dragEndIdx),hi=Math.max(dragStartIdx,dragEndIdx);
-    for(let i=lo;i<=hi;i++) allToks[i]?.classList.add("preview");
+    for(let i=lo;i<=hi;i++)allToks[i]?.classList.add("preview");
   }
 }
-
 function tokIdx(el){return allToks.indexOf(el);}
 function nearestTok(e){return e.target.closest(".w,.cjk");}
-
 function pickerDown(e){
-  const el=nearestTok(e);
-  if(!el)return;
-  e.preventDefault();
-  dragActive=true;
-  dragStartIdx=tokIdx(el);
-  dragEndIdx=dragStartIdx;
-  applyHighlights();
+  const el=nearestTok(e);if(!el)return;
+  e.preventDefault();dragActive=true;dragStartIdx=tokIdx(el);dragEndIdx=dragStartIdx;applyHighlights();
 }
-
 function pickerMove(e){
   if(!dragActive)return;
-  const el=nearestTok(e);
-  if(!el)return;
-  const idx=tokIdx(el);
-  if(idx<0||idx===dragEndIdx)return;
-  dragEndIdx=idx;
-  applyHighlights();
+  const el=nearestTok(e);if(!el)return;
+  const idx=tokIdx(el);if(idx<0||idx===dragEndIdx)return;
+  dragEndIdx=idx;applyHighlights();
 }
-
-function pickerUp(e){
+function pickerUp(){
   if(!dragActive)return;
   dragActive=false;
   if(dragStartIdx<0){dragStartIdx=-1;dragEndIdx=-1;return;}
-
-  const lo=Math.min(dragStartIdx,dragEndIdx);
-  const hi=Math.max(dragStartIdx,dragEndIdx);
-  dragStartIdx=-1; dragEndIdx=-1;
-
-  // Toggle: if exact same range exists, remove it
+  const lo=Math.min(dragStartIdx,dragEndIdx),hi=Math.max(dragStartIdx,dragEndIdx);
+  dragStartIdx=-1;dragEndIdx=-1;
   const existing=phrases.findIndex(p=>p.lo===lo&&p.hi===hi);
-  if(existing>=0){
-    phrases.splice(existing,1);
-  }else{
-    const word=allToks.slice(lo,hi+1).map(t=>t.dataset.word).join(lo===hi?" ":" ");
+  if(existing>=0){phrases.splice(existing,1);}
+  else{
+    const word=allToks.slice(lo,hi+1).map(t=>t.dataset.word).join(" ");
     const first=allToks[lo];
-    phrases.push({word,ts:+first.dataset.ts,sentence:first.dataset.sen,lo,hi});
+    // carry trans from the token's segment
+    phrases.push({word,ts:+first.dataset.ts,sentence:first.dataset.sen,trans:first.dataset.trans||"",lo,hi});
   }
-
-  applyHighlights();
-  syncTags();
+  applyHighlights();syncTags();
 }
-
 function syncTags(){
-  const sel=document.getElementById("sel-tags");
-  sel.innerHTML=phrases.map((p,i)=>
+  document.getElementById("sel-tags").innerHTML=phrases.map((p,i)=>
     `<span class="tag">${esc(p.word)}<button onclick="removePhrase(${i})">×</button></span>`).join("");
   document.getElementById("sel-count").textContent=phrases.length;
   document.getElementById("make-btn").disabled=phrases.length===0;
 }
-
-function removePhrase(i){
-  phrases.splice(i,1);
-  applyHighlights();
-  syncTags();
-}
-
+function removePhrase(i){phrases.splice(i,1);applyHighlights();syncTags();}
 function seekTo(sec){
   if(!S.ytId)return;
   document.getElementById("vp-frame").src=`https://www.youtube-nocookie.com/embed/${S.ytId}?start=${Math.floor(sec)}&autoplay=1&controls=1&rel=0&playsinline=1`;
@@ -610,7 +579,7 @@ function seekTo(sec){
 
 /* ── Step 3 ── */
 function makeCards(){
-  S.cards=phrases.map(p=>({word:p.word,ts:p.ts,sentence:p.sentence}));
+  S.cards=phrases.map(p=>({word:p.word,ts:p.ts,sentence:p.sentence,trans:p.trans||""}));
   if(!S.cards.length)return;
   S.idx=0;S.known=[];S.learning=[];S.view="study";S.showBack=false;
   document.getElementById("results").style.display="none";
@@ -620,7 +589,6 @@ function makeCards(){
   document.getElementById("view-btn").textContent="List view";
   renderCard();goStep(3);
 }
-
 function renderProg(){
   document.getElementById("prog").innerHTML=S.cards.map((_,i)=>{
     const c=i<S.idx?"#1a1a1a":i===S.idx?"#888":"#ddd";
@@ -628,10 +596,8 @@ function renderProg(){
   }).join("");
   document.getElementById("card-ctr").textContent=`${S.idx+1} / ${S.cards.length}`;
 }
-
 function renderCard(){
-  const c=S.cards[S.idx];
-  S.showBack=false;
+  const c=S.cards[S.idx];S.showBack=false;
   document.getElementById("cf-word").textContent=c.word;
   document.getElementById("cf-ts").textContent="⏱ "+sec2ts(c.ts);
   document.getElementById("front-card").style.display="block";
@@ -639,13 +605,16 @@ function renderCard(){
   document.getElementById("flip-hint").style.display="block";
   renderProg();
 }
-
 function flipToBack(){
-  if(S.showBack)return;
-  S.showBack=true;
+  if(S.showBack)return;S.showBack=true;
   const c=S.cards[S.idx];
   document.getElementById("cb-word").textContent=c.word;
-  document.getElementById("cb-sentence").textContent=`"${c.sentence}"`;
+  // Primary sentence
+  document.getElementById("cb-sentence-primary").textContent=`"${c.sentence}"`;
+  // Translation line
+  const transEl=document.getElementById("cb-sentence-trans");
+  if(c.trans){transEl.textContent=c.trans;transEl.style.display="block";}
+  else{transEl.style.display="none";}
   document.getElementById("cb-ts").textContent="⏱ "+sec2ts(c.ts);
   const sec=Math.floor(c.ts);
   document.getElementById("cb-video").innerHTML=S.ytId
@@ -655,10 +624,8 @@ function flipToBack(){
   document.getElementById("back-card").style.display="block";
   document.getElementById("flip-hint").style.display="none";
 }
-
 function speak(){
-  const word=S.cards[S.idx]?.word;
-  if(!word||!window.speechSynthesis)return;
+  const word=S.cards[S.idx]?.word;if(!word||!window.speechSynthesis)return;
   window.speechSynthesis.cancel();
   const btn=document.getElementById("pb");
   const u=new SpeechSynthesisUtterance(word);u.lang="en-US";u.rate=0.85;
@@ -666,47 +633,19 @@ function speak(){
   u.onend=()=>{btn.classList.remove("speaking");btn.innerHTML=`<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg> Pronounce`;};
   window.speechSynthesis.speak(u);
 }
-
-// Find translation for current card (from S.subs if available)
-function findTranslationForCard(card){
-  if(!card) return '';
-  // try to find the subs segment matching the card.ts
-  const seg = S.subs && S.subs.find(s=>Math.abs((s.start||0) - (card.ts||0))<=2);
-  if(seg){ if(seg.trans) return seg.trans; // explicit translation field
-    // if sentence contains '—' we assume secondary part is translation
-    const m = (seg.sentence||'').split(/---|—/).map(p=>p.trim()).filter(Boolean);
-    if(m.length>=2) return m.slice(1).join(' — ');
-  }
-  // fallback: if card.sentence contains separator
-  const mm = (card.sentence||'').split(/---|—/).map(p=>p.trim()).filter(Boolean);
-  if(mm.length>=2) return mm.slice(1).join(' — ');
-  return '';
-}
-
-// Save current card (word + translation) to local lib.txt via small server
 async function saveToLib(){
-  const c = S.cards[S.idx];
-  if(!c) return alert('No card selected');
-  const trans = findTranslationForCard(c);
-  if(!trans){ if(!confirm('No translation found for this card. Save without translation?')) return; }
-  const payload = { word: c.word, trans };
+  const c=S.cards[S.idx];if(!c)return;
+  const payload={word:c.word,trans:c.trans||""};
   try{
-    const r = await fetch('http://localhost:4000/add',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
-    const j = await r.json().catch(()=>({ok:false}));
-    if(r.ok && j.ok){
-      if(j.skipped) alert('Already present in lib.txt'); else alert('Saved to lib.txt');
-    }else{
-      alert('Save failed: '+(j.msg||r.statusText));
-    }
-  }catch(err){
-    alert('Could not reach save server on http://localhost:4000 — start it with: cd server/save_lib && npm install && node server.js');
-  }
+    const r=await fetch("http://localhost:4000/add",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
+    const j=await r.json().catch(()=>({ok:false}));
+    if(r.ok&&j.ok){alert(j.skipped?"Already in lib.txt":"Saved to lib.txt");}
+    else alert("Save failed: "+(j.msg||r.statusText));
+  }catch{alert("Could not reach save server on localhost:4000");}
 }
-
 function markK(){S.known.push(S.cards[S.idx].word);nextCard();}
 function markL(){S.learning.push(S.cards[S.idx].word);nextCard();}
 function nextCard(){S.idx<S.cards.length-1?(S.idx++,renderCard()):showResults();}
-
 function showResults(){
   document.getElementById("study-view").style.display="none";
   document.getElementById("prog").style.display="none";
@@ -717,7 +656,6 @@ function showResults(){
   document.getElementById("r-words").innerHTML=S.learning.length
     ?`<div class="card" style="text-align:left"><p style="font-size:13px;font-weight:500;margin-bottom:8px">Review again:</p>${S.learning.map(w=>`<span style="font-size:13px;padding:4px 10px;background:#f5f4f0;border-radius:20px;display:inline-block;margin:3px">${esc(w)}</span>`).join("")}</div>`:"";
 }
-
 function restart(){
   S.idx=0;S.known=[];S.learning=[];S.showBack=false;
   document.getElementById("results").style.display="none";
@@ -725,7 +663,6 @@ function restart(){
   document.getElementById("prog").style.display="flex";
   renderCard();
 }
-
 function toggleView(){
   S.view=S.view==="study"?"list":"study";
   const isStudy=S.view==="study";
@@ -739,49 +676,12 @@ function toggleView(){
           <div><span style="font-size:17px;font-weight:500;margin-right:8px">${esc(c.word)}</span><span class="mono">${sec2ts(c.ts)}</span></div>
           <button class="btn btn-ghost" style="font-size:12px;padding:4px 10px" onclick="jumpTo(${i})">Study →</button>
         </div>
-        <p style="font-size:13px;color:#666;margin-top:6px;font-style:italic;line-height:1.5">"${esc(c.sentence)}"</p>
+        <p style="font-size:13px;color:#1a1a1a;margin-top:6px;font-style:italic;line-height:1.5">"${esc(c.sentence)}"</p>
+        ${c.trans?`<p style="font-size:12px;color:#aaa;margin-top:3px;font-style:italic">${esc(c.trans)}</p>`:""}
       </div>`).join("");
   }
 }
 function jumpTo(i){S.idx=i;toggleView();renderCard();}
-</script>
-<!-- Code injected by live-server -->
-<script>
-	// <![CDATA[  <-- For SVG support
-	if ('WebSocket' in window) {
-		(function () {
-			function refreshCSS() {
-				var sheets = [].slice.call(document.getElementsByTagName("link"));
-				var head = document.getElementsByTagName("head")[0];
-				for (var i = 0; i < sheets.length; ++i) {
-					var elem = sheets[i];
-					var parent = elem.parentElement || head;
-					parent.removeChild(elem);
-					var rel = elem.rel;
-					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
-						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
-					}
-					parent.appendChild(elem);
-				}
-			}
-			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-			var address = protocol + window.location.host + window.location.pathname + '/ws';
-			var socket = new WebSocket(address);
-			socket.onmessage = function (msg) {
-				if (msg.data == 'reload') window.location.reload();
-				else if (msg.data == 'refreshcss') refreshCSS();
-			};
-			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-				console.log('Live reload enabled.');
-				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-			}
-		})();
-	}
-	else {
-		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
-	}
-	// ]]>
 </script>
 </body>
 </html>
