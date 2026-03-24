@@ -1,4 +1,5 @@
 word	definition	language
+捞	muỗng	Chinese
 换 衣 服	Thay quần áo	Chinese
 紫 薯	Và đây là khoai lang tím.	Chinese
 鸡 胸 肉	Đây là ức gà.	Chinese
