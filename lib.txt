@@ -1,4 +1,5 @@
 word	definition	language
+酱 油	Đây là nước tương.	Chinese
 剥 鸡 蛋 皮	Tôi muốn bóc vỏ trứng.	Chinese
 捞	muỗng	Chinese
 换 衣 服	Thay quần áo	Chinese
