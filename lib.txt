@@ -1,4 +1,5 @@
 word	definition	language
+剥 鸡 蛋 皮	Tôi muốn bóc vỏ trứng.	Chinese
 捞	muỗng	Chinese
 换 衣 服	Thay quần áo	Chinese
 紫 薯	Và đây là khoai lang tím.	Chinese
