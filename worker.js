@@ -1,8 +1,6 @@
-// Cloudflare Worker — GitHub lib.txt proxy
-
 const OWNER  = 'nhung168';
 const REPO   = 'vocabulary-builder';
-const BRANCH = 'gh-pages'; // ← most common fix — check your repo's branch name
+const BRANCH = 'gh-pages';
 const PATH   = 'lib.txt';
 
 const ALLOWED_ORIGINS = [
@@ -30,30 +28,36 @@ async function ghGet(token) {
       'User-Agent':  'vocab-worker'
     }
   });
-
-  // File doesn't exist yet — that's fine, start empty
   if (r.status === 404) return { lines: [], sha: null };
-
   if (!r.ok) {
     const body = await r.text();
     throw new Error(`GitHub GET ${r.status}: ${body}`);
   }
-
   const j = await r.json();
-  const content = decodeURIComponent(escape(atob(j.content.replace(/\n/g, ''))));
-  return { lines: content.split('\n').filter(Boolean), sha: j.sha };
+  // Decode base64 — GitHub wraps content in base64 with newlines
+  const raw = atob(j.content.replace(/\n/g, ''));
+  // Decode UTF-8 bytes correctly
+  const content = new TextDecoder('utf-8').decode(
+    Uint8Array.from(raw, c => c.charCodeAt(0))
+  );
+  return { lines: content.split('\n').filter(l => l.trim() !== ''), sha: j.sha };
 }
 
 async function ghPut(token, lines, sha) {
   const url = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${PATH}`;
+  // Encode content to base64 properly for UTF-8
+  const content = lines.join('\n') + '\n';
+  const bytes = new TextEncoder().encode(content);
+  const b64 = btoa(String.fromCharCode(...bytes));
+
   const body = {
     message: 'vocab: add entry',
-    content: btoa(unescape(encodeURIComponent(lines.join('\n') + '\n'))),
+    content: b64,
     branch:  BRANCH,
     ...(sha ? { sha } : {})
   };
   const r = await fetch(url, {
-    method:  'PUT',
+    method: 'PUT',
     headers: {
       Authorization:  `Bearer ${token}`,
       Accept:         'application/vnd.github+json',
@@ -62,11 +66,32 @@ async function ghPut(token, lines, sha) {
     },
     body: JSON.stringify(body)
   });
-
   if (!r.ok) {
-    const body = await r.text();
-    throw new Error(`GitHub PUT ${r.status}: ${body}`);
+    const errBody = await r.text();
+    throw new Error(`GitHub PUT ${r.status}: ${errBody}`);
   }
+}
+
+function buildLines(existing, newEntry) {
+  // Separate header from data rows
+  const HEADER = 'word\tdefinition\tlanguage';
+  const isHeader = l => l.toLowerCase().replace(/\s/g, '').startsWith('word');
+
+  let header = null;
+  let dataRows = [];
+
+  if (existing.length > 0 && isHeader(existing[0])) {
+    header   = existing[0];          // keep existing header as-is
+    dataRows = existing.slice(1);    // everything after header
+  } else {
+    header   = HEADER;               // create header
+    dataRows = [...existing];        // all existing lines are data
+  }
+
+  // Insert new entry at the TOP of data rows (= row 2 in file)
+  dataRows.unshift(newEntry);
+
+  return [header, ...dataRows];
 }
 
 export default {
@@ -75,86 +100,77 @@ export default {
     const cors     = corsHeaders(origin);
     const pathname = '/' + new URL(request.url).pathname.replace(/^\/+/, '');
 
-    // CORS preflight
     if (request.method === 'OPTIONS') {
       return new Response(null, { status: 204, headers: cors });
     }
 
-    // ── GET /env — raw env dump for debugging ──
-    if (request.method === 'GET' && pathname === '/env') {
-      const keys = Object.keys(env);
-      return Response.json({
-        keys,
-        GITHUB_TOKEN_exists: 'GITHUB_TOKEN' in env,
-        GITHUB_TOKEN_type: typeof env.GITHUB_TOKEN,
-        GITHUB_TOKEN_preview: env.GITHUB_TOKEN ? String(env.GITHUB_TOKEN).slice(0,12)+'...' : 'undefined'
-      }, { headers: cors });
-    }
-
-    // ── GET /ping — health check, verify token + repo access ──
+    // GET /ping
     if (request.method === 'GET' && pathname === '/ping') {
+      const token = env.GITHUB_TOKEN;
+      if (!token) return Response.json({ ok: false, error: 'GITHUB_TOKEN not set', envKeys: Object.keys(env) }, { headers: cors });
       try {
-        const token = env.GITHUB_TOKEN;
-        if (!token) return Response.json({ ok: false, error: 'GITHUB_TOKEN secret not set' }, { headers: cors });
-
-        const url = `https://api.github.com/repos/${OWNER}/${REPO}`;
-        const r = await fetch(url, {
+        const r  = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}`, {
           headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'User-Agent': 'vocab-worker' }
         });
-        const j = await r.json();
-        if (!r.ok) return Response.json({ ok: false, error: `Repo access failed ${r.status}: ${j.message}` }, { headers: cors });
-
-        // Also check branch exists
+        const j  = await r.json();
+        if (!r.ok) return Response.json({ ok: false, error: `Repo ${r.status}: ${j.message}` }, { headers: cors });
         const rb = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/branches/${BRANCH}`, {
           headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'User-Agent': 'vocab-worker' }
         });
         const jb = await rb.json();
         if (!rb.ok) return Response.json({ ok: false, error: `Branch '${BRANCH}' not found: ${jb.message}` }, { headers: cors });
-
-        return Response.json({ ok: true, repo: j.full_name, branch: BRANCH, private: j.private }, { headers: cors });
+        return Response.json({ ok: true, repo: j.full_name, branch: BRANCH }, { headers: cors });
       } catch(e) {
         return Response.json({ ok: false, error: e.message }, { status: 500, headers: cors });
       }
     }
 
-    // ── GET /lib ──
+    // GET /lib
     if (request.method === 'GET' && pathname === '/lib') {
       try {
         const { lines } = await ghGet(env.GITHUB_TOKEN);
-        return Response.json({ ok: true, entries: lines }, { headers: cors });
+        return Response.json({ ok: true, entries: lines, count: lines.length }, { headers: cors });
       } catch(e) {
         return Response.json({ ok: false, error: e.message }, { status: 500, headers: cors });
       }
     }
 
-    // ── POST /save ──
+    // POST /save
     if (request.method === 'POST' && pathname === '/save') {
       try {
-        if (!env.GITHUB_TOKEN) throw new Error('GITHUB_TOKEN secret is not configured in Worker');
+        if (!env.GITHUB_TOKEN) throw new Error('GITHUB_TOKEN not configured');
 
-        const { word, definition, language } = await request.json();
-        if (!word?.trim()) return Response.json({ ok: false, error: 'word is required' }, { status: 400, headers: cors });
+        const body = await request.json();
+        const word       = (body.word       || '').trim();
+        const definition = (body.definition || '').trim();
+        const language   = (body.language   || 'English').trim();
 
+        if (!word) return Response.json({ ok: false, error: 'word is required' }, { status: 400, headers: cors });
+
+        // Tab-separated entry, strip internal tabs
         const entry = [
-          (word       || '').trim().replace(/\t/g, ' '),
-          (definition || '').trim().replace(/\t/g, ' '),
-          (language   || 'English').trim()
+          word.replace(/\t/g, ' '),
+          definition.replace(/\t/g, ' '),
+          language.replace(/\t/g, ' ')
         ].join('\t');
 
         const { lines, sha } = await ghGet(env.GITHUB_TOKEN);
 
-        const exists = lines.some(l => {
-          const c = l.split('\t');
-          return c[0]?.trim() === word.trim() && c[2]?.trim() === (language || '').trim();
+        // Deduplicate by word + language (case-insensitive)
+        const duplicate = lines.some(l => {
+          const cols = l.split('\t');
+          return cols[0]?.trim().toLowerCase() === word.toLowerCase()
+              && cols[2]?.trim().toLowerCase() === language.toLowerCase();
         });
-        if (exists) return Response.json({ ok: true, skipped: true }, { headers: cors });
+        if (duplicate) return Response.json({ ok: true, skipped: true }, { headers: cors });
 
-        lines.push(entry);
-        await ghPut(env.GITHUB_TOKEN, lines, sha);
-        return Response.json({ ok: true, skipped: false }, { headers: cors });
+        // Build final lines: header on row 1, new entry on row 2, rest below
+        const finalLines = buildLines(lines, entry);
+
+        await ghPut(env.GITHUB_TOKEN, finalLines, sha);
+        return Response.json({ ok: true, skipped: false, row: 2, total: finalLines.length }, { headers: cors });
 
       } catch(e) {
-        // Return full error detail so the browser can show it
         return Response.json({ ok: false, error: e.message }, { status: 500, headers: cors });
       }
     }
