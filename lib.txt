@@ -815,3 +815,4 @@ chiropractic	a form of alternative medicine that focuses on the diagnosis and tr
 早上好	Chào buổi sáng!	Chinese
 星期天	Hôm nay là Chủ nhật.	Chinese
 orthodox	following or conforming to the traditional or generally accepted rules or beliefs of a religion, philosophy, or practice	English
+起 床	Dậy đi, dậy đi, dậy đi	Chinese
