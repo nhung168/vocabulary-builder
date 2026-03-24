@@ -818,3 +818,4 @@ orthodox	following or conforming to the traditional or generally accepted rules 
 起 床	Dậy đi, dậy đi, dậy đi	Chinese
 懒 腰	Đầu tiên, hãy giãn cơ.	Chinese
 洗 漱	Tiếp theo, tôi cần đi vệ sinh để rửa mặt.	Chinese
+洗 脸	Sau đó rửa mặt.	Chinese
