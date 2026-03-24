@@ -820,3 +820,4 @@ orthodox	following or conforming to the traditional or generally accepted rules 
 洗 漱	Tiếp theo, tôi cần đi vệ sinh để rửa mặt.	Chinese
 洗 脸	Sau đó rửa mặt.	Chinese
 illicit	forbiden by law	English
+涂 唇 膏	Thoa son môi	Chinese
