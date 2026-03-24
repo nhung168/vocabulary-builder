@@ -1,4 +1,5 @@
 word	definition	language
+预 热	Làm nóng trước	Chinese
 壶 嘴	Chúng ta sẽ gọi đây là vòi.	Chinese
 很 干	Mỗi sáng thức dậy, cổ họng tôi đều rất khô.	Chinese
 用 工 作	Không làm việc vào Chủ nhật	Chinese
