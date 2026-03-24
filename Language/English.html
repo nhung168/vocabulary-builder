@@ -46,13 +46,15 @@
   // read list from txt file
 let words = []; // declare the variable outside the block
 
-fetch('English-lib.txt')
+fetch('../lib.txt')
   .then(response => response.text())
   .then(text => {
     var row = text.replace(/\r/g, "").split('\n');
     row.forEach(line => {
       var lineWords = line.split('\t');
-      words.push(...lineWords); // modify the variable inside the block
+      if (lineWords[2] === 'English') {
+        words.push(lineWords[0], lineWords[1], lineWords[2]);
+      }
     });
   })
   .catch(error => console.error(error));
