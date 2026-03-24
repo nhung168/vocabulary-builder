@@ -823,3 +823,4 @@ illicit	forbiden by law	English
 涂 唇 膏	Thoa son môi	Chinese
 清 洗	Dọn dẹp	Chinese
 蜂 蜜	Đây là mật ong.	Chinese
+diffusion	speading of something widely	English
