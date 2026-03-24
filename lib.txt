@@ -1,4 +1,5 @@
- 	 	
+word	definition	language
+aforementioned	denoting a thing or person previously mentioned	English
 买东西	Go shopping (mǎi dōng xi)	Chinese
 试穿衣服	Try on clothes (shì chuān yī fú)	Chinese
 退货	Return goods (tuì huò)	Chinese
