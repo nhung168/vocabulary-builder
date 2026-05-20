@@ -1,6 +1,6 @@
 word	definition	language
-verbatim ([və(ː)ˈbeɪtɪm]) adj	in exactly the same words as were used originally	English
-strangle (v.)	to kill someone by pressing their throat so that they can not breath	English
+verbatim	in exactly the same words as were used originally	English
+strangle	to kill someone by pressing their throat so that they can not breath	English
 Evangelism	Evangelism is the proclamation of the Gospel of Jesus Christ, aiming to bring individuals to faith and salvation, often working hand-in-hand with discipleship and missions.	English
 blacklash	strong negative reaction by a large number of people	English
 expropriate (v)	(of the state) take property from its owner for public use	English
