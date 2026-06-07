@@ -1,4 +1,6 @@
 word	definition	language
+investiture	(n) a ceremony in which someone is given an official rank, authority, power, etc.	English
+summon	(v) to ask someone to present at a particular event	English
 homage	(n) special honour or respect shown publicly	English
 verbatim	in exactly the same words as were used originally	English
 strangle	to kill someone by pressing their throat so that they can not breath	English
