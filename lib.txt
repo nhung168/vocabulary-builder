@@ -1,4 +1,10 @@
 word	definition	language
+strenuous	(adj) requiring or using great effort or exertion	English
+virtuosity	(n) great skill in music or another artistic pursuit	English
+exorcise	(v) drive out or attempt to drive out (a supposed evil spirit) from a person or place	English
+envoy	(n) a messenger or representative, especially one on a diplomatic mission	English
+eschew	(v) avoid sth not right for	English
+zeal for	(n) someone's interest in something	English
 investiture	(n) a ceremony in which someone is given an official rank, authority, power, etc.	English
 summon	(v) to ask someone to present at a particular event	English
 homage	(n) special honour or respect shown publicly	English
