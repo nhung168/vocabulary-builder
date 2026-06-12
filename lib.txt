@@ -1,4 +1,5 @@
 word	definition	language
+nimble	(adj) quick and exact either in movement or thought	English
 piety	the quality of being religious	English
 hagiolatry	the worship of saints	English
 obtuse	(adj) annoyingly slow to understand	English
