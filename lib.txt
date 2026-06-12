@@ -1,4 +1,5 @@
 word	definition	language
+obtuse	(adj) annoyingly slow to understand	English
 importunate	troublesomely urgent, persistent	English
 strenuous	(adj) requiring or using great effort or exertion	English
 virtuosity	(n) great skill in music or another artistic pursuit	English
