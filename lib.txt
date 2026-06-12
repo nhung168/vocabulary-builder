@@ -1,4 +1,5 @@
 word	definition	language
+importunate	troublesomely urgent, persistent	English
 strenuous	(adj) requiring or using great effort or exertion	English
 virtuosity	(n) great skill in music or another artistic pursuit	English
 exorcise	(v) drive out or attempt to drive out (a supposed evil spirit) from a person or place	English
