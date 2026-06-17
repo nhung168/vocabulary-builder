@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="stylesheet" href="style.css">
+<title>Matching Game</title>
+<style>
+  /* ---- Matching game (scoped) ---- */
+  .mg-wrap { max-width: 900px; margin: 24px auto; padding: 0 16px; font-family: system-ui, sans-serif; }
+  .mg-panel { background:#fff; border:1px solid #e0e0e0; border-radius:12px; padding:24px; }
+  .mg-title { font-size:24px; font-weight:600; margin:0 0 4px; color:#233240; }
+  .mg-sub { color:#777; font-size:14px; margin:0 0 20px; }
+
+  .mg-langs { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:20px; }
+  .mg-lang-btn { padding:10px 20px; border:1px solid #ccc; border-radius:8px; background:#fff;
+    font-size:15px; cursor:pointer; transition:all .15s; }
+  .mg-lang-btn:hover { border-color:#797ef6; }
+  .mg-lang-btn.selected { background:#797ef6; color:#fff; border-color:#797ef6; }
+
+  .mg-start { padding:11px 26px; border:none; border-radius:8px; background:#233240; color:#fff;
+    font-size:16px; font-weight:500; cursor:pointer; }
+  .mg-start:disabled { background:#bbb; cursor:not-allowed; }
+
+  /* HUD */
+  .mg-hud { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;
+    gap:12px; margin-bottom:18px; }
+  .mg-stat { font-size:15px; color:#233240; }
+  .mg-stat b { font-size:20px; }
+  .mg-timer { font-variant-numeric:tabular-nums; font-weight:700; font-size:22px; color:#233240; }
+  .mg-timer.low { color:#e23b3b; }
+
+  /* Board */
+  .mg-board { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .mg-col { display:flex; flex-direction:column; gap:10px; }
+  .mg-card { padding:12px 14px; border:1px solid #d0d0d0; border-radius:8px; background:#fff;
+    cursor:pointer; font-size:15px; line-height:1.35; text-align:left; transition:all .12s;
+    min-height:24px; }
+  .mg-card:hover { border-color:#797ef6; }
+  .mg-card.selected { border-color:#797ef6; background:#eef0ff; }
+  .mg-card.matched { background:#e6f7e9; border-color:#7bc98c; color:#3a7d4e;
+    pointer-events:none; opacity:.7; }
+  .mg-card.wrong { border-color:#e23b3b; background:#fdecec; animation: mgShake .25s; }
+  @keyframes mgShake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-5px)} 75%{transform:translateX(5px)} }
+
+  .mg-overlay { text-align:center; padding:30px 10px; }
+  .mg-overlay h2 { font-size:26px; margin:0 0 8px; color:#233240; }
+  .mg-overlay p { color:#555; margin:0 0 18px; }
+  .mg-hidden { display:none; }
+
+  @media (max-width:600px) {
+    .mg-card { font-size:14px; padding:10px; }
+    .mg-board { gap:10px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header-10">
+  <div class="container">
+    <ul class="pull-left">
+      <a href="index.html">Flash Card</a>
+      <a href="list.html">My Dictionary</a>
+      <a href="Data.html">Practice</a>
+      <a href="index-ai.html">Listening</a>
+      <a href="matching.html">Matching</a>
+    </ul>
+  </div>
+</header>
+
+<div class="mg-wrap">
+
+  <!-- Setup screen -->
+  <div class="mg-panel" id="mgSetup">
+    <h1 class="mg-title">Matching Game</h1>
+    <p class="mg-sub">Match each word to its definition. Clear all the words before the 2-minute timer
+      runs out to level up. Levels grow from 30 words up to 160.</p>
+
+    <div class="mg-langs" id="mgLangs">
+      <button class="mg-lang-btn" data-lang="English">English</button>
+      <button class="mg-lang-btn" data-lang="Spanish">Espanol</button>
+      <button class="mg-lang-btn" data-lang="Chinese">Chinese</button>
+    </div>
+
+    <p class="mg-sub" id="mgLangInfo"></p>
+    <button class="mg-start" id="mgStartBtn" disabled>Start Level 1 (30 words)</button>
+  </div>
+
+  <!-- Game screen -->
+  <div class="mg-panel mg-hidden" id="mgGame">
+    <div class="mg-hud">
+      <span class="mg-stat">Level <b id="mgLevel">1</b></span>
+      <span class="mg-stat">Matched <b id="mgMatched">0</b> / <span id="mgTotal">0</span></span>
+      <span class="mg-timer" id="mgTimer">2:00</span>
+    </div>
+    <div class="mg-board">
+      <div class="mg-col" id="mgWords"></div>
+      <div class="mg-col" id="mgDefs"></div>
+    </div>
+  </div>
+
+  <!-- Result screen -->
+  <div class="mg-panel mg-hidden" id="mgResult">
+    <div class="mg-overlay">
+      <h2 id="mgResultTitle"></h2>
+      <p id="mgResultMsg"></p>
+      <button class="mg-start" id="mgResultBtn"></button>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://unpkg.com/whatwg-fetch@3.6.2/dist/fetch.umd.js"></script>
+<script>
+  // ---- Config ----
+  const LEVELS = [30, 60, 90, 120, 150, 160]; // round size: 30 = min, 160 = highest level
+  const BATCH = 6;          // words shown per batch (column 1 = word, column 2 = definition)
+  const ROUND_SECONDS = 120; // 2-minute countdown per round
+
+  // ---- State ----
+  let allEntries = [];      // [{word, def, lang}, ...] loaded from lib.txt
+  let selectedLang = null;
+  let langPool = [];        // entries for the chosen language
+  let levelIndex = 0;       // 0-based current level
+
+  let roundPairs = [];      // pairs selected for the current round
+  let queue = [];           // pairs not yet placed on the board
+  let matchedCount = 0;
+  let pickWord = null, pickDef = null;
+  let timer = null, timeLeft = ROUND_SECONDS;
+
+  // ---- Elements ----
+  const setupEl = document.getElementById("mgSetup");
+  const gameEl  = document.getElementById("mgGame");
+  const resultEl = document.getElementById("mgResult");
+  const langInfo = document.getElementById("mgLangInfo");
+  const startBtn = document.getElementById("mgStartBtn");
+  const wordsCol = document.getElementById("mgWords");
+  const defsCol  = document.getElementById("mgDefs");
+
+  // ---- Load vocabulary ----
+  fetch('lib.txt')
+    .then(r => r.text())
+    .then(text => {
+      const rows = text.replace(/\r/g, "").split('\n');
+      rows.forEach(line => {
+        const c = line.split('\t');
+        // skip header and malformed/blank lines; need word, definition, language
+        if (c.length >= 3 && c[0] && c[1] && c[2] && c[2] !== 'language') {
+          allEntries.push({ word: c[0].trim(), def: c[1].trim(), lang: c[2].trim() });
+        }
+      });
+    })
+    .catch(err => { console.error(err); langInfo.textContent = "Could not load vocabulary list."; });
+
+  // ---- Language selection ----
+  document.getElementById("mgLangs").addEventListener("click", e => {
+    const btn = e.target.closest(".mg-lang-btn");
+    if (!btn) return;
+    document.querySelectorAll(".mg-lang-btn").forEach(b => b.classList.remove("selected"));
+    btn.classList.add("selected");
+    selectedLang = btn.dataset.lang;
+    langPool = allEntries.filter(en => en.lang === selectedLang);
+    if (langPool.length < BATCH) {
+      langInfo.textContent = `Only ${langPool.length} "${btn.textContent}" words available — need at least ${BATCH} to play.`;
+      startBtn.disabled = true;
+    } else {
+      langInfo.textContent = `${langPool.length} "${btn.textContent}" words available.`;
+      startBtn.disabled = false;
+    }
+  });
+
+  startBtn.addEventListener("click", () => { levelIndex = 0; startRound(); });
+
+  // ---- Helpers ----
+  function shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  function show(el) { el.classList.remove("mg-hidden"); }
+  function hide(el) { el.classList.add("mg-hidden"); }
+
+  // ---- Round lifecycle ----
+  function startRound() {
+    const target = Math.min(LEVELS[levelIndex], langPool.length);
+    // pick a fresh random set of words for this round
+    roundPairs = shuffle(langPool.slice()).slice(0, target)
+      .map((en, i) => ({ id: i, word: en.word, def: en.def }));
+    queue = roundPairs.slice();
+    matchedCount = 0;
+    pickWord = pickDef = null;
+
+    document.getElementById("mgLevel").textContent = levelIndex + 1;
+    document.getElementById("mgTotal").textContent = roundPairs.length;
+    document.getElementById("mgMatched").textContent = 0;
+
+    hide(setupEl); hide(resultEl); show(gameEl);
+    loadBatch();
+    startTimer();
+  }
+
+  function loadBatch() {
+    const batch = queue.splice(0, BATCH);
+    const words = shuffle(batch.slice());
+    const defs  = shuffle(batch.slice());
+
+    wordsCol.innerHTML = "";
+    defsCol.innerHTML = "";
+    words.forEach(p => wordsCol.appendChild(makeCard(p, "word")));
+    defs.forEach(p => defsCol.appendChild(makeCard(p, "def")));
+  }
+
+  function makeCard(pair, kind) {
+    const div = document.createElement("div");
+    div.className = "mg-card";
+    div.dataset.id = pair.id;
+    div.dataset.kind = kind;
+    div.textContent = kind === "word" ? pair.word : pair.def;
+    div.addEventListener("click", () => onPick(div));
+    return div;
+  }
+
+  function onPick(card) {
+    if (card.classList.contains("matched")) return;
+    const kind = card.dataset.kind;
+
+    if (kind === "word") {
+      if (pickWord) pickWord.classList.remove("selected");
+      pickWord = card;
+    } else {
+      if (pickDef) pickDef.classList.remove("selected");
+      pickDef = card;
+    }
+    card.classList.add("selected");
+
+    if (pickWord && pickDef) evaluate();
+  }
+
+  function evaluate() {
+    const w = pickWord, d = pickDef;
+    if (w.dataset.id === d.dataset.id) {
+      // correct match
+      w.classList.add("matched"); d.classList.add("matched");
+      w.classList.remove("selected"); d.classList.remove("selected");
+      pickWord = pickDef = null;
+      matchedCount++;
+      document.getElementById("mgMatched").textContent = matchedCount;
+
+      if (matchedCount === roundPairs.length) { endRound(true); return; }
+      // when the visible batch is fully cleared, bring in the next batch
+      if (wordsCol.querySelectorAll(".mg-card:not(.matched)").length === 0 && queue.length) {
+        loadBatch();
+      }
+    } else {
+      // wrong — flash both, then clear selection
+      w.classList.add("wrong"); d.classList.add("wrong");
+      const wc = w, dc = d;
+      pickWord = pickDef = null;
+      setTimeout(() => {
+        wc.classList.remove("wrong", "selected");
+        dc.classList.remove("wrong", "selected");
+      }, 300);
+    }
+  }
+
+  // ---- Timer ----
+  function startTimer() {
+    timeLeft = ROUND_SECONDS;
+    renderTimer();
+    clearInterval(timer);
+    timer = setInterval(() => {
+      timeLeft--;
+      renderTimer();
+      if (timeLeft <= 0) { clearInterval(timer); endRound(false); }
+    }, 1000);
+  }
+
+  function renderTimer() {
+    const m = Math.floor(timeLeft / 60);
+    const s = String(timeLeft % 60).padStart(2, "0");
+    const el = document.getElementById("mgTimer");
+    el.textContent = `${m}:${s}`;
+    el.classList.toggle("low", timeLeft <= 15);
+  }
+
+  // ---- End of round ----
+  function endRound(won) {
+    clearInterval(timer);
+    hide(gameEl); show(resultEl);
+    const title = document.getElementById("mgResultTitle");
+    const msg = document.getElementById("mgResultMsg");
+    const btn = document.getElementById("mgResultBtn");
+    const isMaxLevel = levelIndex >= LEVELS.length - 1;
+
+    if (won) {
+      if (isMaxLevel) {
+        title.textContent = "🏆 You beat the highest level!";
+        msg.textContent = `You matched all ${roundPairs.length} words. That's the top level (160).`;
+        btn.textContent = "Play again";
+        btn.onclick = () => { levelIndex = 0; startRound(); };
+      } else {
+        title.textContent = "✅ Level cleared!";
+        msg.textContent = `You matched all ${roundPairs.length} words in time. Ready to level up?`;
+        btn.textContent = `Start Level ${levelIndex + 2} (${Math.min(LEVELS[levelIndex + 1], langPool.length)} words)`;
+        btn.onclick = () => { levelIndex++; startRound(); };
+      }
+    } else {
+      title.textContent = "⏱ Time's up!";
+      msg.textContent = `You matched ${matchedCount} of ${roundPairs.length} words. Try this level again.`;
+      btn.textContent = `Retry Level ${levelIndex + 1}`;
+      btn.onclick = () => startRound();
+    }
+  }
+</script>
+</body>
+</html>
