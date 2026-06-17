@@ -57,10 +57,21 @@ fetch('../lib.txt')
         words.push(lineWords[0], lineWords[1], lineWords[2]);
       }
     });
+    randomWord(); // pick a random vocabulary every time the page is refreshed
   })
   .catch(error => console.error(error));
 
   let index = 0;
+
+// pick a random word triplet and display it (runs on every page refresh)
+function randomWord() {
+  if (words.length === 0) return;
+  index = Math.floor(Math.random() * (words.length / 3)) * 3;
+  document.getElementById("word").innerHTML = words[index];
+  document.getElementById("definition").innerHTML = words[index+1];
+  document.getElementById("language").innerHTML = words[index+2];
+  document.getElementById("cardInner").style.transform = "";
+}
 // switch to next
 function next() {
   index = (index + 3) % words.length;
