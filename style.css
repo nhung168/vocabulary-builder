@@ -98,6 +98,7 @@ ul > a {
   position: fixed;
   bottom: 10px;
   left: 10px;
+  z-index: 1000; /* stay above the flipped card / YouGlish widget */
 }
 
 /* Style for the Next button */
@@ -105,10 +106,23 @@ ul > a {
   position: fixed;
   bottom: 0;
   right: 0;
+  z-index: 1000; /* stay above the flipped card / YouGlish widget */
 }
 
 .lang{
   display: none;
+}
+
+/* Keep the YouGlish widget contained inside the card back so its
+   default (wide) styling can't spill over the navigation buttons */
+.flip-card-back {
+  z-index: 1;
+}
+
+#yg-widget-0 {
+  display: block;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
 button {
@@ -228,14 +242,14 @@ h1{
   position: absolute;
   bottom: 10px;
   left: 10px;
-  z-index: 20;
+  z-index: 1000;
 }
 
 .next {
   position: absolute;
   bottom: 10px;
   right: 0px;
-  z-index: 20;
+  z-index: 1000;
 }
 
 }
