@@ -1,4 +1,5 @@
 word	definition	language
+vent on	means to express negative emotions or reactions towards something or somebody	English
 ebb	(v.) (n.)(of the sea or its tide) to move away from the coast and fall to a lower level, or, more generally, (of something) to become less or disappear:	English
 nimble	(adj) quick and exact either in movement or thought	English
 piety	the quality of being religious	English
