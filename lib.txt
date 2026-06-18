@@ -1,4 +1,5 @@
 word	definition	language
+eccentric	(adj) unconventionally strange	English
 peril	(n) serious and immediate danger	English
 dreary	(adj.) depressingly dull and bleak or repetitive	English
 vent on	means to express negative emotions or reactions towards something or somebody	English
