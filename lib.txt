@@ -1,4 +1,11 @@
 word	definition	language
+supposition	a belief held without proof or certain knowledge; an assumption or hypothesis	English
+diffidence	(n) modesty or shyness resulting from a lack of self-confidence	English
+eccentric	(adj) unconventionally strange	English
+peril	(n) serious and immediate danger	English
+dreary	(adj.) depressingly dull and bleak or repetitive	English
+vent on	means to express negative emotions or reactions towards something or somebody	English
+ebb	(v.) (n.)(of the sea or its tide) to move away from the coast and fall to a lower level, or, more generally, (of something) to become less or disappear:	English
 nimble	(adj) quick and exact either in movement or thought	English
 piety	the quality of being religious	English
 hagiolatry	the worship of saints	English
