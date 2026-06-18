@@ -1,4 +1,5 @@
 word	definition	language
+supposition	a belief held without proof or certain knowledge; an assumption or hypothesis	English
 diffidence	(n) modesty or shyness resulting from a lack of self-confidence	English
 eccentric	(adj) unconventionally strange	English
 peril	(n) serious and immediate danger	English
