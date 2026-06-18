@@ -117,6 +117,18 @@
   const BATCH = 6;          // words shown per batch (column 1 = word, column 2 = definition)
   const ROUND_SECONDS = 120; // 2-minute countdown per round
 
+  // speech: map the lib.txt language to a speech-synthesis locale
+  const SPEECH_LANG = { English: "en-US", Spanish: "es-ES", Chinese: "zh-CN" };
+
+  // speak a word aloud in the current language (Web Speech API; no-op if unsupported)
+  function speak(text) {
+    if (!("speechSynthesis" in window) || !text) return;
+    speechSynthesis.cancel(); // stop any word still being spoken
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = SPEECH_LANG[selectedLang] || "en-US";
+    speechSynthesis.speak(u);
+  }
+
   // ---- State ----
   let allEntries = [];      // [{word, def, lang}, ...] loaded from lib.txt
   let selectedLang = null;
@@ -229,6 +241,7 @@
     const kind = card.dataset.kind;
 
     if (kind === "word") {
+      speak(card.textContent); // pronounce the word when clicked
       if (pickWord) pickWord.classList.remove("selected");
       pickWord = card;
     } else {
