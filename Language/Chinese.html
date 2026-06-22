@@ -58,7 +58,8 @@ fetch('../lib.txt')
         words.push(lineWords[0], lineWords[1], lineWords[2]);
       }
     });
-    randomWord(); // pick a random vocabulary every time the page is refreshed
+    applyMatchingBatch(); // if the Matching game saved a batch, review those words
+    if (!batchActive) randomWord(); // otherwise pick a random vocabulary on each refresh
   })
   .catch(error => console.error(error));
 
@@ -72,6 +73,71 @@ function randomWord() {
   document.getElementById("definition").innerHTML = words[index+1];
   document.getElementById("language").innerHTML = words[index+2];
   document.getElementById("cardInner").style.transform = "";
+}
+
+// true while the page is showing a batch fed from the Matching game
+let batchActive = false;
+
+// if the Matching game saved a batch for this language, review exactly those words
+function applyMatchingBatch() {
+  try {
+    var saved = JSON.parse(localStorage.getItem('vb_batch_Chinese'));
+    if (!Array.isArray(saved) || !saved.length) return;
+    words = [];
+    saved.forEach(function (p) { words.push(p.word, p.def, 'Chinese'); });
+    batchActive = true;
+    showBatchBanner(saved);
+    index = 0;
+    showCard(0); // start at the first batch word so it's clear the batch loaded
+  } catch (e) { console.error(e); }
+}
+
+// display the triplet at position i (word / definition / language)
+function showCard(i) {
+  document.getElementById("word").innerHTML = words[i];
+  document.getElementById("definition").innerHTML = words[i + 1];
+  document.getElementById("language").innerHTML = words[i + 2];
+  document.getElementById("cardInner").style.transform = "";
+}
+
+function showBatchBanner(batch) {
+  var bar = document.createElement('div');
+  bar.className = 'batch-banner';
+
+  var label = document.createElement('span');
+  label.textContent = 'Reviewing ' + batch.length + ' words from your last Matching round. ';
+  bar.appendChild(label);
+
+  var listBtn = document.createElement('button');
+  listBtn.className = 'batch-banner-btn';
+  listBtn.textContent = 'View list';
+  bar.appendChild(listBtn);
+
+  var allBtn = document.createElement('button');
+  allBtn.className = 'batch-banner-btn';
+  allBtn.textContent = 'Show full dictionary';
+  allBtn.onclick = function () { localStorage.removeItem('vb_batch_Chinese'); location.reload(); };
+  bar.appendChild(allBtn);
+
+  var list = document.createElement('ul');
+  list.className = 'batch-list';
+  list.style.display = 'none';
+  batch.forEach(function (p) {
+    var li = document.createElement('li');
+    li.textContent = p.word + ' — ' + p.def;
+    list.appendChild(li);
+  });
+  bar.appendChild(list);
+
+  listBtn.onclick = function () {
+    var open = list.style.display !== 'none';
+    list.style.display = open ? 'none' : 'block';
+    listBtn.textContent = open ? 'View list' : 'Hide list';
+  };
+
+  var header = document.querySelector('header.header-10');
+  if (header) header.insertAdjacentElement('afterend', bar);
+  else document.body.insertBefore(bar, document.body.firstChild);
 }
 // switch to next
 function next() {

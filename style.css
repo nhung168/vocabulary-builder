@@ -130,6 +130,47 @@ button {
   background-color:transparent
 }
 
+/* Banner shown on flash-card pages when reviewing a batch fed from the Matching game */
+.batch-banner {
+  background:#eef0ff;
+  color:#233240;
+  padding:10px 16px;
+  font-family: system-ui, sans-serif;
+  font-size:14px;
+  text-align:center;
+  border-bottom:1px solid #c9cdf5;
+}
+
+.batch-banner-btn {
+  margin-left:8px;
+  border:1px solid #797ef6;
+  background:#fff;
+  color:#797ef6;
+  border-radius:6px;
+  padding:3px 10px;
+  cursor:pointer;
+  font-size:13px;
+}
+
+.batch-list {
+  list-style:none;
+  margin:10px auto 0;
+  padding:0;
+  max-width:600px;
+  max-height:200px;
+  overflow-y:auto;
+  text-align:left;
+  background:#fff;
+  border:1px solid #c9cdf5;
+  border-radius:6px;
+}
+
+.batch-list li {
+  padding:6px 12px;
+  border-bottom:1px solid #eef0ff;
+  font-size:13px;
+}
+
 @media (max-width: 390px) {
   section {
     width: 100%;

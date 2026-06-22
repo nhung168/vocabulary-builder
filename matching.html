@@ -22,6 +22,11 @@
     font-size:16px; font-weight:500; cursor:pointer; }
   .mg-start:disabled { background:#bbb; cursor:not-allowed; }
 
+  .mg-replay { display:flex; align-items:center; gap:8px; font-size:14px; color:#555;
+    margin:0 0 16px; cursor:pointer; }
+  .mg-replay input { width:16px; height:16px; cursor:pointer; }
+  .mg-result-link { display:inline-block; margin-top:6px; color:#797ef6; }
+
   /* HUD */
   .mg-hud { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;
     gap:12px; margin-bottom:18px; }
@@ -83,6 +88,12 @@
     </div>
 
     <p class="mg-sub" id="mgLangInfo"></p>
+
+    <label class="mg-replay mg-hidden" id="mgReplayRow">
+      <input type="checkbox" id="mgReplay">
+      Replay my last practiced batch (<span id="mgReplayCount">0</span> words)
+    </label>
+
     <button class="mg-start" id="mgStartBtn" disabled>Start Level 1 (30 words)</button>
   </div>
 
@@ -120,6 +131,22 @@
   // speech: map the lib.txt language to a speech-synthesis locale
   const SPEECH_LANG = { English: "en-US", Spanish: "es-ES", Chinese: "zh-CN" };
 
+  // shared "latest batch" feed: the flash-card pages read the same per-language key,
+  // so the words you play here can be reviewed there (and replayed here) recursively.
+  const FEED_KEY = lang => "vb_batch_" + lang;
+  const FEED_PAGE = { English: "Language/English.html", Spanish: "Language/Espanol.html", Chinese: "Language/Chinese.html" };
+
+  function readBatch(lang) {
+    try {
+      const arr = JSON.parse(localStorage.getItem(FEED_KEY(lang)));
+      return Array.isArray(arr) && arr.length ? arr : null;
+    } catch (e) { return null; }
+  }
+  function writeBatch(lang, pairs) {
+    try { localStorage.setItem(FEED_KEY(lang), JSON.stringify(pairs.map(p => ({ word: p.word, def: p.def })))); }
+    catch (e) { /* storage unavailable — feature degrades silently */ }
+  }
+
   // speak a word aloud in the current language (Web Speech API; no-op if unsupported)
   function speak(text) {
     if (!("speechSynthesis" in window) || !text) return;
@@ -140,6 +167,7 @@
   let matchedCount = 0;
   let pickWord = null, pickDef = null;
   let timer = null, timeLeft = ROUND_SECONDS;
+  let replayMode = false;   // true when the round is sourced from the saved batch
 
   // ---- Elements ----
   const setupEl = document.getElementById("mgSetup");
@@ -149,6 +177,8 @@
   const startBtn = document.getElementById("mgStartBtn");
   const wordsCol = document.getElementById("mgWords");
   const defsCol  = document.getElementById("mgDefs");
+  const replayRow = document.getElementById("mgReplayRow");
+  const replayBox = document.getElementById("mgReplay");
 
   // ---- Load vocabulary ----
   fetch('lib.txt')
@@ -180,6 +210,16 @@
       langInfo.textContent = `${langPool.length} "${btn.textContent}" words available.`;
       startBtn.disabled = false;
     }
+
+    // offer to replay the last saved batch for this language, if any
+    const saved = readBatch(selectedLang);
+    replayBox.checked = false;
+    if (saved && saved.length >= BATCH) {
+      document.getElementById("mgReplayCount").textContent = saved.length;
+      show(replayRow);
+    } else {
+      hide(replayRow);
+    }
   });
 
   startBtn.addEventListener("click", () => { levelIndex = 0; startRound(); });
@@ -198,15 +238,27 @@
 
   // ---- Round lifecycle ----
   function startRound() {
-    const target = Math.min(LEVELS[levelIndex], langPool.length);
-    // pick a fresh random set of words for this round
-    roundPairs = shuffle(langPool.slice()).slice(0, target)
-      .map((en, i) => ({ id: i, word: en.word, def: en.def }));
+    replayMode = replayBox.checked;
+    const saved = replayMode ? readBatch(selectedLang) : null;
+
+    if (saved) {
+      // recursive practice: re-use exactly the words from the last saved batch
+      roundPairs = shuffle(saved.slice()).map((p, i) => ({ id: i, word: p.word, def: p.def }));
+    } else {
+      // pick a fresh random set of words for this round
+      const target = Math.min(LEVELS[levelIndex], langPool.length);
+      roundPairs = shuffle(langPool.slice()).slice(0, target)
+        .map((en, i) => ({ id: i, word: en.word, def: en.def }));
+    }
+
+    // save this round as the "latest batch" so the flash-card pages can review it
+    writeBatch(selectedLang, roundPairs);
+
     queue = roundPairs.slice();
     matchedCount = 0;
     pickWord = pickDef = null;
 
-    document.getElementById("mgLevel").textContent = levelIndex + 1;
+    document.getElementById("mgLevel").textContent = replayMode ? "↺" : (levelIndex + 1);
     document.getElementById("mgTotal").textContent = roundPairs.length;
     document.getElementById("mgMatched").textContent = 0;
 
@@ -310,7 +362,12 @@
     const isMaxLevel = levelIndex >= LEVELS.length - 1;
 
     if (won) {
-      if (isMaxLevel) {
+      if (replayMode) {
+        title.textContent = "✅ Batch cleared!";
+        msg.textContent = `You matched all ${roundPairs.length} of your saved words.`;
+        btn.textContent = "Replay this batch";
+        btn.onclick = () => startRound();
+      } else if (isMaxLevel) {
         title.textContent = "🏆 You beat the highest level!";
         msg.textContent = `You matched all ${roundPairs.length} words. That's the top level (160).`;
         btn.textContent = "Play again";
@@ -323,10 +380,19 @@
       }
     } else {
       title.textContent = "⏱ Time's up!";
-      msg.textContent = `You matched ${matchedCount} of ${roundPairs.length} words. Try this level again.`;
-      btn.textContent = `Retry Level ${levelIndex + 1}`;
+      msg.textContent = `You matched ${matchedCount} of ${roundPairs.length} words. ` +
+        (replayMode ? "Try this batch again." : "Try this level again.");
+      btn.textContent = replayMode ? "Retry this batch" : `Retry Level ${levelIndex + 1}`;
       btn.onclick = () => startRound();
     }
+
+    // these words were just saved as the latest batch — offer to review them as flash cards
+    msg.appendChild(document.createElement("br"));
+    const link = document.createElement("a");
+    link.className = "mg-result-link";
+    link.href = FEED_PAGE[selectedLang] || "#";
+    link.textContent = "Review these words as flash cards →";
+    msg.appendChild(link);
   }
 </script>
 </body>
