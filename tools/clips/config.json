@@ -1,0 +1,31 @@
+{
+  "language": "English",
+  "langCode": "en",
+  "maxClipsPerWord": 15,
+  "maxClipsPerVideo": 2,
+  "recheckDays": 30,
+
+  "commons": {
+    "enabled": true,
+    "subtitlePagesPerWord": 4
+  },
+
+  "archive": {
+    "enabled": true,
+    "maxItemsPerRun": 120,
+    "queries": [
+      "mediatype:movies AND format:(SubRip OR \"Web Video Text Tracks\") AND language:(English OR eng) AND subject:(lecture OR talk OR interview OR documentary)",
+      "mediatype:movies AND format:(SubRip OR \"Web Video Text Tracks\") AND language:(English OR eng)"
+    ]
+  },
+
+  "peertube": {
+    "enabled": true,
+    "maxVideosPerRun": 250,
+    "searches": [
+      "lecture", "interview", "documentary", "talk", "conference", "explained",
+      "climate", "environment", "economics", "trade", "development", "policy",
+      "science", "history", "nature", "podcast"
+    ]
+  }
+}

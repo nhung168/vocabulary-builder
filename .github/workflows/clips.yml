@@ -1,0 +1,59 @@
+# Collects subtitles from free video sources (Wikimedia Commons, Internet Archive, PeerTube)
+# and rebuilds the word → clip index in clips/. Runs weekly, when lib.txt changes, or manually.
+name: Build video clips index
+
+on:
+  schedule:
+    - cron: "17 2 * * 1"        # Mondays 09:17 Hanoi time
+  push:
+    branches: ["gh-page"]
+    paths: ["lib.txt"]
+  workflow_dispatch:
+
+permissions:
+  contents: write   # commit the new index
+  actions: write    # re-run the Pages deploy afterwards
+
+concurrency:
+  group: clips
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # downloaded subtitles are kept between runs so each run only fetches new videos
+      - uses: actions/cache@v4
+        with:
+          path: tools/clips/.cache
+          key: clips-cache-${{ github.run_id }}
+          restore-keys: clips-cache-
+
+      - name: Harvest subtitles and build index
+        run: node tools/clips/build.mjs --minutes 40
+
+      - name: Commit index
+        id: commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898429+github-actions[bot]@users.noreply.github.com"
+          git add clips/videos.json clips/stats.json clips/index
+          if git diff --cached --quiet; then echo "changed=false" >> "$GITHUB_OUTPUT"; exit 0; fi
+          git commit -m "clips: update video clip index"
+          git pull --rebase origin gh-page
+          git push origin HEAD:gh-page
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      # pushes made by this workflow don't trigger other workflows, so start the Pages deploy explicitly
+      - name: Redeploy site
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run jekyll-gh-pages.yml --ref gh-page
