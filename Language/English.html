@@ -47,13 +47,15 @@
 <script src="../clips/clips.js"></script>
 <script>
   VocabClips.mount(document.getElementById("vclips"));
-  // stop the clip and pre-load the next word's clips whenever the card changes
+  // stop the clip / YouGlish and pre-load the next word's clips whenever the card changes
   window.addEventListener("load", function () {
     ["next", "previous", "randomWord", "showCard"].forEach(function (name) {
       var orig = window[name];
       if (typeof orig !== "function") return;
       window[name] = function () {
+        flipSeq++; // cancel a flip that is still waiting for the clip lookup
         VocabClips.stop();
+        stopYouGlish();
         var r = orig.apply(this, arguments);
         VocabClips.prefetch(document.getElementById("word").textContent);
         return r;
@@ -184,20 +186,29 @@ document.getElementById("cardInner").addEventListener("click",()=>{
   flipCard(output,lang);
 })
 
-// flip card: play clips from our own index (free sources) first; fall back to YouGlish
+// flip card: play clips from our own index (free sources) first; fall back to P
+var flipSeq = 0; // bumped on every flip and card change so a stale lookup can't start YouGlish
 function flipCard(output,lang){
+  var seq = ++flipSeq;
+  stopYouGlish();
   VocabClips.show(output, lang, { fallback: function(){ showYouGlish(output,lang); } })
-    .then(function(found){ if (!found) showYouGlish(output,lang); else document.getElementById("yg-box").style.display = "none"; })
-    .catch(function(){ showYouGlish(output,lang); });
+    .then(function(found){ if (seq !== flipSeq) return; if (!found) showYouGlish(output,lang); })
+    .catch(function(){ if (seq === flipSeq) showYouGlish(output,lang); });
 }
 function showYouGlish(output,lang){
   document.getElementById("yg-box").style.display = "";
   onYouglishAPIReady(output,lang);
 }
+function stopYouGlish(){
+  document.getElementById("yg-box").style.display = "none";
+  if (!widget) return;
+  try { widget.pause(); } catch (e) {}
+}
 
 var widget;
       <!-- Wait for YG library to be loaded -->
       function onYouglishAPIReady(output,lang) {
+        if (!output || typeof YG === "undefined") return; // YouGlish also calls this on load with no word
         <!-- retrieve the widget object-->
         widget = YG.getWidget("yg-widget-0");
         <!-- use the API...-->
