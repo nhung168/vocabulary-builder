@@ -11,11 +11,10 @@
   'use strict';
   var BASE = (document.currentScript && document.currentScript.src || '').replace(/[^/]*$/, '');
   var PT_API = 'https://unpkg.com/@peertube/embed-api@0.2.0/build/player.min.js';
-  var PLAYS_PER_CLIP = 3;
   var SOURCE_NAME = { commons: 'Wikimedia Commons', archive: 'Internet Archive', peertube: 'PeerTube' };
 
   var meta = null, metaP = null, shards = {}, ui = null;
-  var S = { word: '', clips: [], i: 0, plays: 0, token: 0, rate: 1, dir: 1 };
+  var S = { word: '', clips: [], i: 0, token: 0, rate: 1, dir: 1 };
   var media = null;          // current <video> or PeerTube player wrapper
   var timer = null;
 
@@ -69,7 +68,7 @@
     ui.stage = el('div', { class: 'vc-stage' });
     ui.cap = el('div', { class: 'vc-cap', 'aria-live': 'polite' });
     ui.prev = el('button', { type: 'button', text: '◀ Prev', onclick: function (e) { e.stopPropagation(); go(S.i - 1); } });
-    ui.replay = el('button', { type: 'button', text: '↻ Replay', onclick: function (e) { e.stopPropagation(); S.plays = 0; play(); } });
+    ui.replay = el('button', { type: 'button', text: '↻ Replay', onclick: function (e) { e.stopPropagation(); play(); } });
     ui.next = el('button', { type: 'button', text: 'Next ▶', onclick: function (e) { e.stopPropagation(); go(S.i + 1); } });
     ui.slow = el('button', { type: 'button', text: '0.75×', 'aria-pressed': 'false', title: 'Play slower', onclick: function (e) {
       e.stopPropagation(); S.rate = S.rate === 1 ? 0.75 : 1; ui.slow.setAttribute('aria-pressed', String(S.rate !== 1)); applyRate();
@@ -122,14 +121,11 @@
   function go(i) {
     if (i < 0 || i >= S.clips.length) return;
     S.dir = i < S.i ? -1 : 1;
-    S.i = i; S.plays = 0; play();
+    S.i = i; play();
   }
 
-  // called when the clip reaches its end time
-  function clipEnded() {
-    S.plays++;
-    if (S.plays < PLAYS_PER_CLIP) { media.restart(); return; }
-    media.pause();
+  // the phrase plays once and the video keeps going; when the video itself ends, move to the next clip
+  function videoEnded() {
     if (S.i < S.clips.length - 1) { var tok = S.token; setTimeout(function () { if (tok === S.token) go(S.i + 1); }, 700); }
   }
 
@@ -141,18 +137,15 @@
     var tok = ++S.token;
     clearMedia();
     renderInfo(c, v);
-    var start = c[1], end = c[2];
-    if (v.u) playHtml5(v, start, end, tok); else if (v.e) playPeertube(v, start, end, tok);
+    var start = c[1];
+    if (v.u) playHtml5(v, start, tok); else if (v.e) playPeertube(v, start, tok);
   }
 
-  function playHtml5(v, start, end, tok) {
+  function playHtml5(v, start, tok) {
     var vid = el('video', { controls: '', playsinline: '', preload: 'auto' });
     vid.src = v.u + '#t=' + start;
     ui.stage.appendChild(vid);
-    var started = false;
     media = {
-      restart: function () { vid.currentTime = start; vid.play().catch(function () {}); },
-      pause: function () { vid.pause(); },
       rate: function (r) { vid.playbackRate = r; },
       destroy: function () { vid.pause(); vid.removeAttribute('src'); vid.load(); }
     };
@@ -162,11 +155,7 @@
       vid.playbackRate = S.rate;
       vid.play().catch(function () { /* autoplay blocked: user presses play */ });
     });
-    vid.addEventListener('playing', function () { started = true; });
-    vid.addEventListener('timeupdate', function () {
-      if (tok !== S.token || !started || vid.paused) return;
-      if (vid.currentTime >= end) clipEnded();
-    });
+    vid.addEventListener('ended', function () { if (tok === S.token) videoEnded(); });
     vid.addEventListener('error', function () {
       if (tok !== S.token) return;
       clearMedia(); msg('This video could not be loaded — skipping…');
@@ -183,13 +172,13 @@
     }));
   }
 
-  function playPeertube(v, start, end, tok) {
-    var q = 'api=1&autoplay=1&title=0&warningTitle=0&peertubeLink=0&p2p=0&start=' + Math.floor(start) + '&stop=' + Math.ceil(end);
+  function playPeertube(v, start, tok) {
+    var q = 'api=1&autoplay=1&title=0&warningTitle=0&peertubeLink=0&p2p=0&start=' + Math.floor(start);
     var ifr = el('iframe', { allow: 'autoplay; fullscreen', allowfullscreen: '', src: v.e + (v.e.indexOf('?') < 0 ? '?' : '&') + q });
     ui.stage.appendChild(ifr);
-    // basic fallback: without the JS API the embed still plays start→stop once
+    // basic fallback: without the JS API the embed still plays from start
     media = {
-      restart: function () { ifr.src = ifr.src; }, pause: function () {}, rate: null,
+      rate: null,
       destroy: function () { ifr.src = 'about:blank'; }
     };
     loadPeertubeApi().then(function () {
@@ -198,18 +187,15 @@
       var p = new Ctor(ifr);
       return p.ready.then(function () {
         if (tok !== S.token) return;
-        var busy = false;
         media = {
-          restart: function () { busy = true; p.seek(start).then(function () { return p.play(); }).finally(function () { setTimeout(function () { busy = false; }, 600); }); },
-          pause: function () { p.pause(); },
           rate: function (r) { p.setPlaybackRate(r); },
           destroy: function () { ifr.src = 'about:blank'; }
         };
         p.setPlaybackRate(S.rate);
+        var ended = false;
         p.addEventListener('playbackStatusUpdate', function (st) {
-          if (tok !== S.token || busy) return;
-          if (st.playbackState === 'playing' && st.position >= end - 0.25) clipEnded();
-          else if (st.playbackState === 'ended' || (st.playbackState === 'paused' && st.position >= Math.ceil(end) - 0.5)) clipEnded();
+          if (tok !== S.token || ended || st.playbackState !== 'ended') return;
+          ended = true; videoEnded();
         });
       });
     }).catch(function () { /* embed API unavailable — basic embed keeps working */ });
@@ -229,7 +215,7 @@
       if (!m || (lang && m.language && lang !== m.language)) { stop(); return false; }
       var clips = idx[k];
       if (!clips || !clips.length) { stop(); return false; }
-      S.clips = clips; S.i = 0; S.plays = 0; S.dir = 1;
+      S.clips = clips; S.i = 0; S.dir = 1;
       setFallback(opts.fallback, opts.fallbackLabel);
       ui.box.hidden = false;
       play();
