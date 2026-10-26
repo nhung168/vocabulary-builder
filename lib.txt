@@ -1,4 +1,11 @@
 word	definition	language
+Sacred	(adj) connected with God, religion, or a deity, or regarded with deep respect and reverence.	English
+suave	(adj)  A man is very polite, pleasant, and usually attractive, often in a way that is slightly false	English
+Quadrennial	happening once every four years or lasting for a period of four years.	English
+Subdue	(v) bring someone or something under control by using force, or to calm, quiet, or lessen the strength of an emotion, desire, or physical force.	English
+vigorous	very forceful, energetic, healthy, or strong.	English
+convalescent	a person who is gradually recovering health and strength after a serious illness, injury, or surgery.	English
+hem and haw	(v) stop often during speach	English
 supposition	a belief held without proof or certain knowledge; an assumption or hypothesis	English
 diffidence	(n) modesty or shyness resulting from a lack of self-confidence	English
 eccentric	(adj) unconventionally strange	English
