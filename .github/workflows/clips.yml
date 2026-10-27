@@ -48,7 +48,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898429+github-actions[bot]@users.noreply.github.com"
-          git add clips/videos.json clips/stats.json clips/index clips/zh clips/es
+          # every language folder that was built (a language with no words in lib.txt has none)
+          git add -A clips
           if git diff --cached --quiet; then echo "changed=false" >> "$GITHUB_OUTPUT"; exit 0; fi
           git commit -m "clips: update video clip index"
           git pull --rebase origin gh-page
