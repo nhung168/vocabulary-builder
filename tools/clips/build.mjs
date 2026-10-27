@@ -4,33 +4,47 @@
 //   node tools/clips/build.mjs              harvest new subtitles, then rebuild the index
 //   node tools/clips/build.mjs --offline    only rebuild the index from the local cache
 //   node tools/clips/build.mjs --minutes 20 stop harvesting after 20 minutes
+//   node tools/clips/build.mjs --lang zh    only this language (langCode in config.json)
 //
-// Input:  lib.txt (word<TAB>definition<TAB>language)
-// Cache:  tools/clips/.cache/   (downloaded subtitles; not published)
-// Output: clips/videos.json + clips/index/<letter>.json   (read by clips/clips.js)
+// Input:  lib.txt (word<TAB>definition<TAB>language); one index per language in config.json → languages
+// Cache:  tools/clips/.cache/ (English) and tools/clips/.cache/<langCode>/   (downloaded subtitles; not published)
+// Output: clips/<out>/videos.json + clips/<out>/index/<letter>.json   (read by clips/clips.js; English: out = "")
 
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
-import { makePattern, findMatch, tokenize } from './text.mjs';
+import { makePattern, findMatch, tokenize, isCjkLang, setT2S } from './text.mjs';
 import * as src from './sources.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '../..');
 const CACHE = path.join(HERE, '.cache');
-const VCACHE = path.join(CACHE, 'videos');
-const OUT = path.join(ROOT, 'clips');
-const cfg = JSON.parse(fs.readFileSync(path.join(HERE, 'config.json'), 'utf8'));
+const config = JSON.parse(fs.readFileSync(path.join(HERE, 'config.json'), 'utf8'));
 
 const args = process.argv.slice(2);
 const OFFLINE = args.includes('--offline');
+const ONLY = args.includes('--lang') ? args[args.indexOf('--lang') + 1] : null;
 const MINUTES = +(args[args.indexOf('--minutes') + 1] || 40) || 40;
-const deadline = Date.now() + MINUTES * 60e3;
+const runEnd = Date.now() + MINUTES * 60e3;
+let deadline = runEnd;               // per language: an equal share of what is left
 const timeLeft = () => Date.now() < deadline;
 const DAY = 864e5;
 
-fs.mkdirSync(VCACHE, { recursive: true });
+// the language being built: shared settings + its own entry in config.languages
+let cfg, VCACHE, OUT, statePath, state;
+function useLanguage(lang) {
+  cfg = { ...config, ...lang };
+  cfg.subtitleCodes ||= [cfg.langCode];
+  const dir = cfg.langCode === 'en' ? CACHE : path.join(CACHE, cfg.langCode); // English predates multi-language
+  VCACHE = path.join(dir, 'videos');
+  OUT = path.join(ROOT, 'clips', cfg.out || '');
+  fs.mkdirSync(VCACHE, { recursive: true });
+  statePath = path.join(dir, 'state.json');
+  state = fs.existsSync(statePath) ? JSON.parse(fs.readFileSync(statePath, 'utf8')) : {};
+  state.commons ||= {}; state.archive ||= {}; state.peertube ||= {};
+}
+const re = s => s ? new RegExp(s) : null;
 
 // ── lib.txt ──
 function loadWords() {
@@ -47,9 +61,6 @@ function loadWords() {
 }
 
 // ── cache ──
-const statePath = path.join(CACHE, 'state.json');
-const state = fs.existsSync(statePath) ? JSON.parse(fs.readFileSync(statePath, 'utf8')) : {};
-state.commons ||= {}; state.archive ||= {}; state.peertube ||= {};
 const saveState = () => fs.writeFileSync(statePath, JSON.stringify(state));
 const vfile = key => path.join(VCACHE, crypto.createHash('sha1').update(key).digest('hex').slice(0, 16) + '.json');
 const haveVideo = key => fs.existsSync(vfile(key));
@@ -69,16 +80,19 @@ const warn = (what, e) => { errors++; if (errors <= 40) console.warn(`  ! ${what
 
 // ── harvesting ──
 async function harvestCommons(words) {
-  const todo = words.filter(w => !fresh(state.commons[w.toLowerCase()]) && makePattern(w));
+  const todo = words.filter(w => !fresh(state.commons[w.toLowerCase()]) && makePattern(w, cfg.langCode));
   log(`Commons: searching subtitles for ${todo.length} words`);
+  // e.g. Chinese: most Chinese subtitles on Commons translate English speech, so keep files with Chinese names
+  const must = re(cfg.commons.fileMustMatch), skip = re(cfg.commons.fileSkip);
+  const fileOk = f => (!must || must.test(f)) && (!skip || !skip.test(f));
   let added = 0;
   await pool(todo, 3, async w => {
     try {
-      const titles = await src.commonsSearchWord(w, { lang: cfg.langCode, limit: cfg.commons.subtitlePagesPerWord });
+      const titles = await src.commonsSearchWord(w, { lang: cfg.langCode, codes: cfg.subtitleCodes, limit: cfg.commons.subtitlePagesPerWord, fileOk });
       for (const t of titles) {
-        const key = 'commons:' + t.replace(/^TimedText:/, '').slice(0, -(`.${cfg.langCode}.srt`.length));
+        const key = 'commons:' + src.commonsFile(t);
         if (haveVideo(key)) continue;
-        try { const v = await src.commonsVideo(t, cfg.langCode); if (v.segs.length) { saveVideo(v); added++; } }
+        try { const v = await src.commonsVideo(t); if (v.segs.length) { saveVideo(v); added++; } }
         catch (e) { warn(t, e); }
       }
       state.commons[w.toLowerCase()] = Date.now();
@@ -89,19 +103,20 @@ async function harvestCommons(words) {
 
 async function harvestArchive() {
   const ids = [];
+  const skip = re(cfg.archive.titleSkip); // e.g. Japanese songs among the Bilibili copies
   for (const q of cfg.archive.queries) {
     for (let page = 1; page <= 10 && ids.length < cfg.archive.maxItemsPerRun && timeLeft(); page++) {
       let got;
       try { got = await src.archiveSearch(q, 100, page); } catch (e) { warn('archive search', e); break; }
       if (!got.length) break;
-      for (const id of got) if (!fresh(state.archive[id]) && !ids.includes(id)) ids.push(id);
+      for (const { id, title } of got) if (!fresh(state.archive[id]) && !ids.includes(id) && !(skip && skip.test(title))) ids.push(id);
     }
   }
   const todo = ids.slice(0, cfg.archive.maxItemsPerRun);
   log(`Internet Archive: checking ${todo.length} items`);
   let added = 0;
   await pool(todo, 3, async id => {
-    try { for (const v of await src.archiveItem(id)) { saveVideo(v); added++; } state.archive[id] = Date.now(); }
+    try { for (const v of await src.archiveItem(id, { lang: cfg.langCode })) { saveVideo(v); added++; } state.archive[id] = Date.now(); }
     catch (e) { warn(`archive ${id}`, e); }
   });
   log(`  +${added} Archive videos`); saveState();
@@ -137,17 +152,21 @@ function buildIndex(words) {
   // token → [[videoIdx, segIdx], …] so each word only checks segments that contain it
   const inv = new Map();
   videos.forEach((v, vi) => v.segs.forEach((sg, si) => {
-    for (const t of new Set(tokenize(sg.text).map(x => x.w))) {
+    if (sg.text.includes('♪')) return; // song lyrics make poor examples
+    for (const t of new Set(tokenize(sg.text, cfg.langCode).map(x => x.w))) {
       let l = inv.get(t); if (!l) inv.set(t, l = []); l.push([vi, si]);
     }
   }));
 
+  const cjk = isCjkLang(cfg.langCode);
+  const idealLen = cjk ? 16 : 90; // characters in a comfortable subtitle line
   const used = new Map(); // video idx → output idx
   const shards = {};
   let covered = 0;
   for (const w of words) {
-    const pat = makePattern(w);
+    const pat = makePattern(w, cfg.langCode);
     if (!pat) continue;
+    const multi = pat.length > 1 || (pat[0].cjk || '').length > 1;
     const anchor = pat.find(p => p.forms);
     const cands = [];
     const seenSeg = new Set();
@@ -156,16 +175,16 @@ function buildIndex(words) {
       if (seenSeg.has(id)) continue; seenSeg.add(id);
       const v = videos[vi], sg = v.segs[si];
       let text = sg.text, end = sg.end, m = findMatch(pat, text);
-      if (!m && pat.length > 1 && v.segs[si + 1]) {       // phrase split across two cues
+      if (!m && multi && v.segs[si + 1]) {       // phrase split across two cues
         const nx = v.segs[si + 1];
-        const joined = text + ' ' + nx.text;
+        const joined = text + (cjk ? '' : ' ') + nx.text;
         const mm = findMatch(pat, joined);
         if (mm && mm.s < text.length) { m = mm; text = joined; end = nx.end; }
       }
       if (!m) continue;
       const dur = end - sg.start;
       if (dur > 25 || text.length > 260) continue;
-      const score = -Math.abs(dur - 6) / 2 - Math.abs(text.length - 90) / 50 + (/^[A-Z]/.test(text) ? 0.5 : 0);
+      const score = -Math.abs(dur - 6) / 2 - Math.abs(text.length - idealLen) / (idealLen / 2) + (/^[A-Z]/.test(text) ? 0.5 : 0);
       cands.push({ vi, start: sg.start, end, text, m, score });
     }
     if (!cands.length) continue;
@@ -205,12 +224,38 @@ function buildIndex(words) {
   log(`Done: ${covered}/${words.length} words have clips, from ${outVideos.length} videos`, bySrc);
 }
 
-// ── main ──
-const words = loadWords();
-if (!OFFLINE) {
-  if (cfg.commons?.enabled) await harvestCommons(words);
-  if (cfg.archive?.enabled && timeLeft()) await harvestArchive();
-  if (cfg.peertube?.enabled && timeLeft()) await harvestPeertube();
-  if (errors) log(`(${errors} fetch errors — skipped)`);
+// ── Traditional → Simplified table for matching Chinese (OpenCC, Apache-2.0), cached ──
+async function loadT2S() {
+  const file = path.join(CACHE, 'opencc-TSCharacters.txt');
+  if (!fs.existsSync(file) && !OFFLINE) {
+    try { fs.writeFileSync(file, await src.get('https://raw.githubusercontent.com/BYVoid/OpenCC/master/data/dictionary/TSCharacters.txt', 'text')); }
+    catch (e) { warn('OpenCC table', e); }
+  }
+  if (!fs.existsSync(file)) return log('  (no Traditional→Simplified table: only Simplified subtitles will match)');
+  const map = new Map();
+  for (const l of fs.readFileSync(file, 'utf8').split('\n')) {
+    const [t, s] = l.split('\t');
+    const simp = (s || '').split(' ')[0];
+    if (t && t.length === 1 && simp.length === 1) map.set(t, simp);
+  }
+  setT2S(map);
 }
-buildIndex(words);
+
+// ── main ──
+const langs = config.languages.filter(l => !ONLY || l.langCode === ONLY).map(l => ({ l, words: (useLanguage(l), loadWords()) }));
+const todo = langs.filter(x => x.words.length);
+for (const { l } of langs) if (!todo.some(x => x.l === l)) log(`\n== ${l.language}: no words in lib.txt — skipped`);
+for (const [n, { l, words }] of todo.entries()) {
+  useLanguage(l);
+  deadline = Date.now() + (runEnd - Date.now()) / (todo.length - n);
+  log(`\n== ${cfg.language} (${cfg.langCode}): ${words.length} words`);
+  if (isCjkLang(cfg.langCode)) await loadT2S();
+  if (!OFFLINE) {
+    errors = 0;
+    if (cfg.commons?.enabled) await harvestCommons(words);
+    if (cfg.archive?.enabled && timeLeft()) await harvestArchive();
+    if (cfg.peertube?.enabled && timeLeft()) await harvestPeertube();
+    if (errors) log(`(${errors} fetch errors — skipped)`);
+  }
+  buildIndex(words);
+}

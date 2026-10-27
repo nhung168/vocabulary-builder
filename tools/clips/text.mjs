@@ -1,4 +1,19 @@
 // Subtitle parsing and word/phrase matching. No dependencies.
+// lang: 'en' (default, with English inflections), 'es' (accented words + plurals), 'zh' (characters, no spaces).
+
+// ── Chinese: subtitles are often in Traditional characters, the word list is Simplified ──
+// The build loads OpenCC's Traditional→Simplified character table with setT2S(); every mapping is
+// one UTF-16 unit to one, so offsets found in the converted text are valid in the original text.
+let T2S = null;
+export function setT2S(map) { T2S = map; }
+export function toSimplified(s) {
+  if (!T2S) return s;
+  let o = '';
+  for (let i = 0; i < s.length; i++) o += T2S.get(s[i]) || s[i];
+  return o;
+}
+const CJK = /[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]/;
+export const isCjkLang = lang => /^(zh|yue|cmn)/.test(lang);
 
 // ── Subtitles (SRT or WebVTT) → [{start, end, text}] ──
 function toSec(t) {
@@ -137,29 +152,53 @@ export function cleanEntry(word) {
     .replace(/[’‘`]/g, "'")
     .replace(/\([^)]*\)|\[[^\]]*\]/g, ' ')  // (sth), [informal]
     .split(/\s+\/\s+|;|,/)[0]                // "a / b" → a
-    .replace(/[~…!?.:"“”]/g, ' ')
+    .replace(/[~…!?¡¿.:"“”]/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
 }
 
-// Returns a pattern [{forms:Set}|{gap:true}], or null when the entry can't be matched in English text
-export function makePattern(word) {
+// Returns a pattern [{forms:Set}|{gap:true}], or null when the entry can't be matched in text of that language.
+// Chinese: [{forms: Set([first character]), cjk: 'whole word'}], matched as a substring.
+export function makePattern(word, lang = 'en') {
+  if (isCjkLang(lang)) {
+    const c = toSimplified(String(word).replace(/<[^>]*>|\([^)]*\)|（[^）]*）/g, '').replace(/\s+/g, ''));
+    if (!c || ![...c].every(ch => CJK.test(ch)) || c.length > 12) return null;
+    return [{ forms: new Set([c[0]]), cjk: c }];
+  }
   const c = cleanEntry(word);
-  if (!c || !/^[a-z0-9' -]+$/.test(c)) return null;
+  const ok = lang === 'en' ? /^[a-z0-9' -]+$/ : /^[\p{L}\p{N}' -]+$/u;
+  if (!c || !ok.test(c)) return null;
   const toks = c.split(' ').filter(Boolean);
   if (!toks.length || toks.length > 6) return null;
-  const pat = toks.map(t => GAP_WORDS.has(t) ? { gap: true } : { forms: forms(t) });
+  const pat = toks.map(t => GAP_WORDS.has(t) ? { gap: true } : { forms: lang === 'en' ? forms(t) : simpleForms(t) });
   while (pat.length && pat[0].gap) pat.shift();
   while (pat.length && pat.at(-1).gap) pat.pop();
   if (!pat.length) return null;
   if (pat.length === 1 && [...pat[0].forms][0].length < 3) return null;
+  pat.lang = lang;
   return pat;
 }
 
-// Text → tokens with char offsets
-export function tokenize(text) {
+// other alphabetic languages: the word and its plural
+function simpleForms(w) {
+  const f = new Set([w]);
+  if (w.length < 3) return f;
+  if (/[aeiouáéíóú]$/.test(w)) f.add(w + 's');
+  else if (/z$/.test(w)) f.add(w.slice(0, -1) + 'ces');
+  else if (/[áéíóú][ns]$/.test(w)) f.add(w.slice(0, -2) + 'aeiou'['áéíóú'.indexOf(w.at(-2))] + w.at(-1) + 'es'); // canción → canciones
+  else f.add(w + 'es');
+  return f;
+}
+
+// Text → tokens with char offsets (Chinese: one token per character, Simplified)
+export function tokenize(text, lang = 'en') {
   const toks = [];
-  const re = /[a-z0-9]+(?:['’-][a-z0-9]+)*/gi;
+  if (isCjkLang(lang)) {
+    const t = toSimplified(text);
+    for (let i = 0; i < t.length; i++) if (CJK.test(t[i])) toks.push({ w: t[i], s: i, e: i + 1 });
+    return toks;
+  }
+  const re = lang === 'en' ? /[a-z0-9]+(?:['’-][a-z0-9]+)*/gi : /[\p{L}\p{N}]+(?:['’-][\p{L}\p{N}]+)*/gu;
   let m;
   while ((m = re.exec(text))) toks.push({ w: m[0].toLowerCase().replace(/’/g, "'"), s: m.index, e: m.index + m[0].length });
   return toks;
@@ -184,7 +223,12 @@ function matchAt(pat, toks, pi, ti) {
 }
 
 // → {s, e} char range of the first match in text, or null
-export function findMatch(pat, text, toks = tokenize(text)) {
+export function findMatch(pat, text, toks) {
+  if (pat[0].cjk) {
+    const i = toSimplified(text).indexOf(pat[0].cjk);
+    return i < 0 ? null : { s: i, e: i + pat[0].cjk.length };
+  }
+  toks ||= tokenize(text, pat.lang);
   for (let i = 0; i < toks.length; i++) {
     const end = matchAt(pat, toks, 0, i);
     if (end >= 0) return { s: toks[i].s, e: toks[end - 1].e };
@@ -193,7 +237,8 @@ export function findMatch(pat, text, toks = tokenize(text)) {
 }
 
 // Words worth searching for in a full-text engine (drops gaps and function words)
-export function searchTerms(word) {
+export function searchTerms(word, lang = 'en') {
+  if (isCjkLang(lang)) return [String(word).replace(/<[^>]*>|\([^)]*\)|（[^）]*）|\s+/g, '')].filter(Boolean);
   const c = cleanEntry(word);
   const toks = c.split(' ').filter(t => t && !GAP_WORDS.has(t));
   return toks;

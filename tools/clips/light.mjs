@@ -2,11 +2,12 @@
 // Adds lighter versions of each video to clips/videos.json so phones start playing sooner:
 //   u  → direct file URL (skips the Special:FilePath redirect on Commons)
 //   l  → low-resolution copy (Commons 240p/360p transcode, Internet Archive .ia.mp4 / _512kb.mp4)
-//   m  → MPEG-4 copy for browsers that can't play WebM (older iPhones)
+//   m  → copy every phone can play: MPEG-4 for browsers without WebM (older iPhones), H.264 for
+//        Archive originals in other codecs (the Bilibili copies are HEVC, which many phones can't decode)
 // Commons transcodes live at <upload>/transcoded/<hash>/<file>/<file>.<key>, so l/m store just <key>
 // (e.g. "240p.vp9.webm"); clips.js rebuilds the URL from u.
 //
-//   node tools/clips/light.mjs          run after build.mjs (the workflow does this)
+//   node tools/clips/light.mjs          run after build.mjs (the workflow does this); covers every language
 //
 // Lookups are cached in tools/clips/.cache/light.json, so each run only asks about new videos.
 
@@ -18,7 +19,6 @@ import { get } from './sources.mjs';
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '../..');
 const CACHE = path.join(HERE, '.cache');
-const OUT = path.join(ROOT, 'clips', 'videos.json');
 const cfg = JSON.parse(fs.readFileSync(path.join(HERE, 'config.json'), 'utf8'));
 const DAY = 864e5;
 
@@ -65,23 +65,14 @@ async function archiveOne(v) {
   const files = j.files || [];
   const me = files.find(f => f.name === name);
   const base = name.replace(/\.[a-z0-9]+$/i, '');
-  const light = files
-    .filter(f => IA_LIGHT.includes(f.format) && f.name !== name && (f.original === name || f.name.startsWith(base)))
-    .filter(f => !me || +f.size < +me.size)
-    .sort((a, b) => +a.size - +b.size)[0];
-  cache[v.u] = { ts: Date.now(),
-    l: light && `https://archive.org/download/${encodeURIComponent(id)}/${light.name.split('/').map(encodeURIComponent).join('/')}` };
+  const derived = files.filter(f => IA_LIGHT.includes(f.format) && f.name !== name && (f.original === name || f.name.startsWith(base)));
+  const light = derived.filter(f => !me || +f.size < +me.size).sort((a, b) => +a.size - +b.size)[0];
+  const h264 = derived.find(f => f.format === 'h.264 IA');
+  const url = f => f && `https://archive.org/download/${encodeURIComponent(id)}/${f.name.split('/').map(encodeURIComponent).join('/')}`;
+  cache[v.u] = { ts: Date.now(), l: url(light), m: url(h264) };
 }
 
-const meta = JSON.parse(fs.readFileSync(OUT, 'utf8'));
-const vids = meta.videos;
 const keyOf = v => v.s === 'archive' ? v.u : v.p;
-const commonsTodo = vids.filter(v => v.s === 'commons' && v.p && !fresh(cache[v.p]));
-const archiveTodo = vids.filter(v => v.s === 'archive' && v.u && !fresh(cache[keyOf(v)]));
-console.log(`Light versions: looking up ${commonsTodo.length} Commons + ${archiveTodo.length} Archive videos`);
-await commonsBatch(commonsTodo);
-for (const v of archiveTodo) await archiveOne(v);
-fs.writeFileSync(cachePath, JSON.stringify(cache));
 
 // Commons: keep only the transcode key when the URL follows the usual layout
 function short(v, url) {
@@ -90,13 +81,26 @@ function short(v, url) {
   return url.startsWith(pre) ? url.slice(pre.length) : url;
 }
 
-let n = 0;
-for (const v of vids) {
-  const c = cache[keyOf(v)];
-  if (!c) continue;
-  if (c.u) v.u = c.u;
-  if (c.l) { v.l = short(v, c.l); n++; }
-  if (c.m) v.m = short(v, c.m);
+for (const lang of cfg.languages) {
+  const OUT = path.join(ROOT, 'clips', lang.out || '', 'videos.json');
+  if (!fs.existsSync(OUT)) continue;
+  const meta = JSON.parse(fs.readFileSync(OUT, 'utf8'));
+  const vids = meta.videos;
+  const commonsTodo = vids.filter(v => v.s === 'commons' && v.p && !fresh(cache[v.p]));
+  const archiveTodo = vids.filter(v => v.s === 'archive' && v.u && !fresh(cache[keyOf(v)]));
+  console.log(`${lang.language} light versions: looking up ${commonsTodo.length} Commons + ${archiveTodo.length} Archive videos`);
+  await commonsBatch(commonsTodo);
+  for (const v of archiveTodo) await archiveOne(v);
+  fs.writeFileSync(cachePath, JSON.stringify(cache));
+
+  let n = 0;
+  for (const v of vids) {
+    const c = cache[keyOf(v)];
+    if (!c) continue;
+    if (c.u) v.u = c.u;
+    if (c.l) { v.l = short(v, c.l); n++; }
+    if (c.m) v.m = short(v, c.m);
+  }
+  fs.writeFileSync(OUT, JSON.stringify(meta));
+  console.log(`${lang.language} light versions: ${n}/${vids.length} videos have a low-resolution copy`);
 }
-fs.writeFileSync(OUT, JSON.stringify(meta));
-console.log(`Light versions: ${n}/${vids.length} videos have a low-resolution copy`);

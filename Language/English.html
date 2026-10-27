@@ -43,6 +43,7 @@
       <div id="vclips"></div>
       <div id="yg-box">
       <a  id="yg-widget-0" class="youglish-widget" href="https://youglish.com">Visit YouGlish.com</a>
+      <div id="yg-shield"></div><!-- reel: catches swipes over the YouGlish frame; tap = pause / play -->
       </div>
     </div>
   </div>
@@ -68,6 +69,7 @@
 
     // ── Reel (phones): full screen, swipe up / down = next / previous word, left / right = next / previous video ──
     var reelStarted = false;
+    var ygPaused = false;
 
     // the definition stays blurred until tapped, like the back of the flash card
     function veil(on) {
@@ -105,6 +107,11 @@
       document.getElementById("yg-box").style.display = "none"; // shown only when a word has no clips
       info.addEventListener("click", () => veil(!document.getElementById("definition").classList.contains("veiled")));
       document.getElementById("reel-start").addEventListener("click", startReel);
+      // touches inside the YouGlish frame never reach the page, so a layer over it takes them
+      document.getElementById("yg-shield").addEventListener("click", () => {
+        if (!widget) return;
+        try { if (ygPaused) widget.play(); else widget.pause(); ygPaused = !ygPaused; } catch (e) {}
+      });
 
       // listen on the whole document: a listener on #card (display: contents, no box of its own)
       // can't stop the browser from scrolling, which is why swipes did nothing on iPhone
@@ -290,6 +297,7 @@ function flipCard(output,lang){
 }
 function showYouGlish(output,lang){
   document.getElementById("yg-box").style.display = "";
+  ygPaused = false;
   onYouglishAPIReady(output,lang);
 }
 function stopYouGlish(){

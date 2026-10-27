@@ -1,31 +1,96 @@
 {
-  "language": "English",
-  "langCode": "en",
   "maxClipsPerWord": 15,
   "maxClipsPerVideo": 2,
   "recheckDays": 30,
 
-  "commons": {
-    "enabled": true,
-    "subtitlePagesPerWord": 4
-  },
+  "languages": [
+    {
+      "language": "English",
+      "langCode": "en",
+      "out": "",
 
-  "archive": {
-    "enabled": true,
-    "maxItemsPerRun": 120,
-    "queries": [
-      "mediatype:movies AND format:(SubRip OR \"Web Video Text Tracks\") AND language:(English OR eng) AND subject:(lecture OR talk OR interview OR documentary)",
-      "mediatype:movies AND format:(SubRip OR \"Web Video Text Tracks\") AND language:(English OR eng)"
-    ]
-  },
+      "commons": {
+        "enabled": true,
+        "subtitlePagesPerWord": 4
+      },
 
-  "peertube": {
-    "enabled": true,
-    "maxVideosPerRun": 250,
-    "searches": [
-      "lecture", "interview", "documentary", "talk", "conference", "explained",
-      "climate", "environment", "economics", "trade", "development", "policy",
-      "science", "history", "nature", "podcast"
-    ]
-  }
+      "archive": {
+        "enabled": true,
+        "maxItemsPerRun": 120,
+        "queries": [
+          "mediatype:movies AND format:(SubRip OR \"Web Video Text Tracks\") AND language:(English OR eng) AND subject:(lecture OR talk OR interview OR documentary)",
+          "mediatype:movies AND format:(SubRip OR \"Web Video Text Tracks\") AND language:(English OR eng)"
+        ]
+      },
+
+      "peertube": {
+        "enabled": true,
+        "maxVideosPerRun": 250,
+        "searches": [
+          "lecture", "interview", "documentary", "talk", "conference", "explained",
+          "climate", "environment", "economics", "trade", "development", "policy",
+          "science", "history", "nature", "podcast"
+        ]
+      }
+    },
+
+    {
+      "language": "Chinese",
+      "langCode": "zh",
+      "out": "zh",
+      "subtitleCodes": ["zh", "zh-hans", "zh-cn", "zh-sg", "zh-hant", "zh-tw", "zh-hk"],
+
+      "commons": {
+        "enabled": true,
+        "subtitlePagesPerWord": 4,
+        "fileMustMatch": "[\\u4e00-\\u9fff]",
+        "fileSkip": "[\\u3040-\\u30ff]"
+      },
+
+      "archive": {
+        "enabled": true,
+        "maxItemsPerRun": 300,
+        "titleSkip": "[\\u3040-\\u30ff]|AI|[Cc]over|feat|翻唱|原创曲|歌|MV|音乐|♪|洛天依|言和|初音",
+        "queries": [
+          "collection:bilibili_videos AND format:SubRip AND title:(美食 OR 做饭 OR 菜谱 OR 家常菜 OR 厨房 OR 烘焙 OR 早餐 OR 做菜)",
+          "collection:bilibili_videos AND format:SubRip AND title:(购物 OR 超市 OR 逛街 OR 开箱 OR 探店 OR 买)",
+          "collection:bilibili_videos AND format:SubRip AND title:(生活 OR 日常 OR vlog OR Vlog OR 旅行 OR 健身)",
+          "collection:bilibili_videos AND format:SubRip AND title:(教程 OR 科普 OR 知识 OR 讲解 OR 学中文 OR 汉语 OR 纪录片)",
+          "mediatype:movies AND format:(SubRip OR \"Web Video Text Tracks\") AND language:(Chinese OR chi OR zho OR cmn OR Mandarin) AND NOT collection:tvarchive"
+        ]
+      },
+
+      "peertube": {
+        "enabled": true,
+        "maxVideosPerRun": 250,
+        "searches": ["chinese", "中文", "学习", "教程", "china", "生活", "美食", "科学", "历史", "新闻"]
+      }
+    },
+
+    {
+      "language": "Spanish",
+      "langCode": "es",
+      "out": "es",
+      "subtitleCodes": ["es", "es-419", "es-mx", "es-es"],
+
+      "commons": {
+        "enabled": true,
+        "subtitlePagesPerWord": 4
+      },
+
+      "archive": {
+        "enabled": true,
+        "maxItemsPerRun": 120,
+        "queries": [
+          "mediatype:movies AND format:(SubRip OR \"Web Video Text Tracks\") AND language:(Spanish OR spa OR Español)"
+        ]
+      },
+
+      "peertube": {
+        "enabled": true,
+        "maxVideosPerRun": 250,
+        "searches": ["entrevista", "documental", "conferencia", "historia", "ciencia", "cocina", "noticias", "aprender"]
+      }
+    }
+  ]
 }

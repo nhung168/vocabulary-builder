@@ -24,18 +24,23 @@ export async function get(url, type = 'json', tries = 3) {
 // so we can search subtitles *for a specific word* (like YouGlish does).
 const COMMONS = 'https://commons.wikimedia.org';
 
-export async function commonsSearchWord(word, { lang = 'en', limit = 4 } = {}) {
-  const terms = searchTerms(word);
+// codes: subtitle language codes to accept (e.g. zh, zh-hans, zh-hant); fileOk: filter on the video's file name
+export async function commonsSearchWord(word, { lang = 'en', codes = [lang], limit = 4, fileOk = () => true } = {}) {
+  const terms = searchTerms(word, lang);
   if (!terms.length) return [];
-  const q = terms.length > 1 ? `"${terms.join(' ')}"` : terms[0];
-  const url = `${COMMONS}/w/api.php?action=query&list=search&srnamespace=102&srlimit=30&srprop=&format=json&srsearch=${encodeURIComponent(q)}`;
+  const q = terms.length > 1 || terms[0].length < 4 ? `"${terms.join(' ')}"` : terms[0];
+  const url = `${COMMONS}/w/api.php?action=query&list=search&srnamespace=102&srlimit=50&srprop=&format=json&srsearch=${encodeURIComponent(q)}`;
   const j = await get(url);
-  const suffix = `.${lang}.srt`;
-  return (j.query?.search || []).map(x => x.title).filter(t => t.endsWith(suffix)).slice(0, limit);
+  return (j.query?.search || []).map(x => x.title)
+    .filter(t => codes.some(c => t.endsWith(`.${c}.srt`)) && fileOk(commonsFile(t)))
+    .slice(0, limit);
 }
 
-export async function commonsVideo(ttTitle, lang = 'en') {
-  const file = ttTitle.replace(/^TimedText:/, '').slice(0, -(`.${lang}.srt`.length));
+// "TimedText:<file>.<lang code>.srt" → "<file>"
+export const commonsFile = ttTitle => ttTitle.replace(/^TimedText:/, '').replace(/\.[a-z]{2,3}(-[a-z]+)*\.srt$/i, '');
+
+export async function commonsVideo(ttTitle) {
+  const file = commonsFile(ttTitle);
   const raw = await get(`${COMMONS}/w/index.php?action=raw&title=${encodeURIComponent(ttTitle)}`, 'text');
   const segs = parseSubs(raw);
   return {
@@ -51,27 +56,35 @@ export async function commonsVideo(ttTitle, lang = 'en') {
 // Items with .srt/.vtt files next to their videos. Collected by search query (subtitle text is not searchable).
 const ARCHIVE = 'https://archive.org';
 
+// → [{ id, title }]
 export async function archiveSearch(query, rows = 50, page = 1) {
-  const url = `${ARCHIVE}/advancedsearch.php?q=${encodeURIComponent(query)}&fl[]=identifier&sort[]=downloads+desc&rows=${rows}&page=${page}&output=json`;
+  const url = `${ARCHIVE}/advancedsearch.php?q=${encodeURIComponent(query)}&fl[]=identifier&fl[]=title&sort[]=downloads+desc&rows=${rows}&page=${page}&output=json`;
   const j = await get(url);
-  return (j.response?.docs || []).map(d => d.identifier);
+  return (j.response?.docs || []).map(d => ({ id: d.identifier, title: [].concat(d.title || '')[0] }));
 }
 
 const VIDEO_EXT = /\.(mp4|m4v|webm|ogv)$/i;
-const CAP_RE = /^(.*?)(?:\.(en|eng|english|en-us|en-gb))?\.(srt|vtt)$/i;
+// caption file name tags that mean the wanted language: "x.en.srt", "x.eng.srt", "x-ai-zh.srt" (Bilibili copies)
+const LANG_TAGS = {
+  en: 'en|eng|english|en-us|en-gb',
+  zh: 'zh|chi|zho|cmn|chs|cht|chinese|zh-cn|zh-tw|zh-hk|zh-hans|zh-hant',
+  es: 'es|spa|spanish|es-es|es-mx|es-419',
+};
+const capRe = lang => new RegExp(`^(.*?)(?:[._-](?:ai-)?(${LANG_TAGS[lang] || lang}))?\\.(srt|vtt)$`, 'i');
 
-export async function archiveItem(id, { maxPerItem = 3 } = {}) {
+export async function archiveItem(id, { maxPerItem = 3, lang = 'en' } = {}) {
+  const CAP_RE = capRe(lang);
   const j = await get(`${ARCHIVE}/metadata/${encodeURIComponent(id)}`);
   const files = j.files || [];
-  const title = (Array.isArray(j.metadata?.title) ? j.metadata.title[0] : j.metadata?.title) || id;
+  let title = (Array.isArray(j.metadata?.title) ? j.metadata.title[0] : j.metadata?.title) || id;
+  if (/^BiliBili-/.test(id)) title = title.replace(/\s+P\d+(\s.*)?$/, ''); // "<title> P1 <part title>"
   const vids = files.filter(f => VIDEO_EXT.test(f.name));
   const out = [];
   for (const f of files) {
     const m = f.name.match(CAP_RE);
     if (!m) continue;
-    const lang = (m[2] || '').toLowerCase();
-    // skip captions explicitly tagged with another language (e.g. ".es.srt")
-    if (!lang && /\.[a-z]{2}(-[a-z]{2})?$/i.test(m[1]) && !/\.(en|eng)$/i.test(m[1])) continue;
+    // skip captions explicitly tagged with another language (e.g. ".es.srt", "-ai-ja.srt")
+    if (!m[2] && /(\.[a-z]{2}(-[a-z]{2})?|-ai-[a-z]{2,3})$/i.test(m[1])) continue;
     const base = m[1];
     const video = vids.find(v => v.name.replace(VIDEO_EXT, '') === base && /\.mp4$/i.test(v.name))
       || vids.find(v => v.name.replace(VIDEO_EXT, '') === base)
@@ -82,7 +95,7 @@ export async function archiveItem(id, { maxPerItem = 3 } = {}) {
     if (segs.length < 5) continue;
     out.push({
       key: `archive:${id}/${video.name}`, s: 'archive', id: `${id}/${video.name}`,
-      t: new Set(vids.map(v => v.name.replace(VIDEO_EXT, ''))).size > 1 ? `${title} — ${base.split('/').pop()}` : title,
+      t: new Set(vids.map(v => v.name.replace(VIDEO_EXT, '').replace(/\.ia$/, ''))).size > 1 ? `${title} — ${base.split('/').pop()}` : title,
       u: `${ARCHIVE}/download/${encodeURIComponent(id)}/${video.name.split('/').map(encodeURIComponent).join('/')}`,
       p: `${ARCHIVE}/details/${encodeURIComponent(id)}`,
       segs,

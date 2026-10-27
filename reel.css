@@ -73,6 +73,8 @@ html.reel #yg-box {
   bottom: calc(150px + env(safe-area-inset-bottom));
   overflow: hidden;
 }
+#yg-shield { display: none; }
+html.reel #yg-shield { display: block; position: absolute; inset: 0; z-index: 2; }
 html.reel .previous, html.reel .next { display: none; }
 
 /* word + definition, bottom left over the video */

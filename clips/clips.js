@@ -1,6 +1,7 @@
 /* VocabClips — a small YouGlish-style player for clips from free video sources.
  *
- *   VocabClips.mount(element, opts)    create the player inside element; opts.reel = full-screen phone layout
+ *   VocabClips.mount(element, opts)    create the player inside element; opts.reel = full-screen phone layout,
+ *                                      opts.data = the language's folder under clips/ (e.g. 'zh/'; English: none)
  *   VocabClips.prefetch(word)          load the index shard early (call when a word is shown)
  *   await VocabClips.show(word, lang)  play clips for word → true, or false when there are none
  *   VocabClips.stop()                  stop playback and hide the player
@@ -8,11 +9,12 @@
  *
  * Videos play from a low-resolution copy (u/l/m in videos.json, see tools/clips/light.mjs) unless HD is on.
  *
- * Data: clips/videos.json + clips/index/<first letter>.json, built by tools/clips/build.mjs.
+ * Data: clips/<data>videos.json + clips/<data>index/<first letter>.json, built by tools/clips/build.mjs.
  */
 (function () {
   'use strict';
   var BASE = (document.currentScript && document.currentScript.src || '').replace(/[^/]*$/, '');
+  var DATA = BASE;           // + the language folder, set by mount()
   var PT_API = 'https://unpkg.com/@peertube/embed-api@0.2.0/build/player.min.js';
   var SOURCE_NAME = { commons: 'Wikimedia Commons', archive: 'Internet Archive', peertube: 'PeerTube' };
 
@@ -33,13 +35,13 @@
     return fetch(url, { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
   }
   function loadMeta() {
-    return metaP || (metaP = getJSON(BASE + 'videos.json').then(function (j) { meta = j; return j; }).catch(function () { metaP = null; return null; }));
+    return metaP || (metaP = getJSON(DATA + 'videos.json').then(function (j) { meta = j; return j; }).catch(function () { metaP = null; return null; }));
   }
   function keyOf(w) { return String(w || '').replace(/<[^>]*>/g, '').trim().toLowerCase(); }
   function shardOf(k) { return /^[a-z]/.test(k) ? k[0] : '_'; }
   function loadShard(k) {
     var s = shardOf(k);
-    return shards[s] || (shards[s] = getJSON(BASE + 'index/' + s + '.json').catch(function () { delete shards[s]; return {}; }));
+    return shards[s] || (shards[s] = getJSON(DATA + 'index/' + s + '.json').catch(function () { delete shards[s]; return {}; }));
   }
 
   // ── UI ──
@@ -75,7 +77,8 @@
     'padding:calc(52px + env(safe-area-inset-top)) 0 calc(150px + env(safe-area-inset-bottom));display:flex;flex-direction:column;justify-content:center;overflow:hidden}' +
     '.vc.reel[hidden]{display:none}' +
     '.reel .vc-top{padding:0 12px;margin-bottom:6px;color:#9aa3b2;font-size:12px}.reel .vc-top a{color:#c9cbff}' +
-    '.reel .vc-stage{border-radius:0;background:#000;flex:none;max-height:58vh}' +
+    '.vc.reel>*{flex-shrink:0}' +
+    '.reel .vc-stage{border-radius:0;background:#000;flex:0 1 auto;min-height:120px;max-height:58vh}' + // only the video gives way
     '.reel .vc-stage video{background:#000}' +
     '.reel .vc-cap{color:#fff;font-size:19px;padding:0 76px 0 16px;margin:4px 0 0;min-height:0;text-shadow:0 1px 3px #000}' +
     '.reel .vc-cap mark{background:#ffe58a;color:#111}' +
@@ -96,6 +99,7 @@
   function mount(host, opts) {
     if (ui) return ui;
     REEL = !!(opts && opts.reel);
+    DATA = BASE + ((opts && opts.data) || '');
     var st = document.createElement('style'); st.textContent = CSS + (REEL ? REEL_CSS : ''); document.head.appendChild(st);
     ['https://upload.wikimedia.org', 'https://archive.org'].forEach(function (h) {
       document.head.appendChild(el('link', { rel: 'preconnect', href: h, crossorigin: '' }));
@@ -184,6 +188,7 @@
     if (media && media.destroy) media.destroy();
     media = null; cur = null; userPaused = false;
     ui.stage.innerHTML = '';
+    ui.stage.style.aspectRatio = '';
     setPaused(false); setProgress(0, 0);
   }
 
@@ -227,13 +232,15 @@
     if (v.u) playHtml5(v, start, tok); else if (v.e) playPeertube(v, start, tok);
   }
 
-  // candidate files, lightest first; the browser plays the first one it supports
+  // candidate files, lightest first (HD: original first); the browser plays the first one it can decode,
+  // and m is the copy every phone can play
   function sourcesOf(v) {
     var full = function (x) {
       if (!x || /^https?:/.test(x)) return x;
       return v.u.replace('/wikipedia/commons/', '/wikipedia/commons/transcoded/') + '/' + v.u.split('/').pop() + '.' + x;
     };
-    return (S.hd ? [] : [full(v.l), full(v.m)]).concat(v.u).filter(Boolean);
+    var list = S.hd ? [v.u, full(v.m)] : [full(v.l), full(v.m), v.u];
+    return list.filter(function (x, i) { return x && list.indexOf(x) === i; });
   }
   function typeOf(url) { return /\.webm$/i.test(url) ? 'video/webm' : /\.mov$/i.test(url) ? 'video/quicktime' : /\.mp4$/i.test(url) ? 'video/mp4' : ''; }
 
@@ -250,7 +257,11 @@
   function makeSharedVideo() {
     var vid = el('video', { playsinline: '', 'webkit-playsinline': '', preload: 'auto' });
     if (!REEL) vid.controls = true;
-    vid.addEventListener('loadedmetadata', function () { if (cur) cur.begin(); });
+    vid.addEventListener('loadedmetadata', function () {
+      // reel: give vertical videos (common on Bilibili) the height they need
+      if (REEL && vid.videoWidth) ui.stage.style.aspectRatio = vid.videoWidth + '/' + vid.videoHeight;
+      if (cur) cur.begin();
+    });
     vid.addEventListener('ended', function () { if (cur) videoEnded(); });
     vid.addEventListener('error', function () { if (cur) cur.failed(); });
     vid.addEventListener('play', function () { setPaused(false); });
