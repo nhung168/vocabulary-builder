@@ -1,9 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <!-- opened from the iPhone home screen, the page runs full screen without Safari's bars -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../reel.css">
   <title>Learning Vocabulary</title>
+  <script>
+    // phones get a full-screen, swipeable "reel" (like TikTok / Reels) instead of the flip card
+    var REEL = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+    if (REEL) document.documentElement.classList.add("reel");
+  </script>
 </head>
 <body>
 	
@@ -21,7 +32,6 @@
 
 </header>
 <section>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <div class="flip-card" id="card">
   <div class="flip-card-inner" id="cardInner">
     <div class="flip-card-front" id="front">
@@ -37,7 +47,14 @@
     </div>
   </div>
 </div>
-<p class="swipe-hint">Swipe ↑ ↓ to change word · Swipe ← → for more videos</p>
+<!-- reel (phones only): the word and definition move here, over the video -->
+<div id="reel-info">
+  <div class="reveal-hint" id="reveal-hint">Tap to see the meaning</div>
+</div>
+<div id="reel-start">
+  <button type="button" id="reel-start-btn">▶ Tap to start</button>
+  <p>Swipe ↑ ↓ to change word<br>Swipe ← → for more videos<br>Tap the video to pause</p>
+</div>
 
 <button class = "previous" onclick="previous()"><img width="50" height="50" src="../img/backward.png" alt="circled-left-2--v1"/></button>
 <button class = "next" onclick="next()"><img width="50" height="50" src="../img/forward.png" alt="end"/></button>
@@ -47,8 +64,79 @@
 <script src="https://unpkg.com/whatwg-fetch@3.6.2/dist/fetch.umd.js"></script>
 <script src="../clips/clips.js"></script>
 <script>
-  VocabClips.mount(document.getElementById("vclips"));
-  // stop the clip / YouGlish and pre-load the next word's clips whenever the card changes
+  VocabClips.mount(document.getElementById("vclips"), { reel: REEL });
+
+    // ── Reel (phones): full screen, swipe up / down = next / previous word, left / right = next / previous video ──
+    var reelStarted = false;
+
+    // the definition stays blurred until tapped, like the back of the flash card
+    function veil(on) {
+      document.getElementById("definition").classList.toggle("veiled", on);
+      document.getElementById("reveal-hint").hidden = !on;
+    }
+
+    function playCurrent() {
+      if (!words.length) return;
+      flipCard(document.getElementById("word").innerHTML, document.getElementById("language").innerHTML);
+      VocabClips.prefetch(words[(index + 3) % words.length]); // the word a swipe up will show
+    }
+
+    // the first tap also lets the iPhone play videos with sound
+    function startReel() {
+      if (reelStarted) return;
+      reelStarted = true;
+      document.getElementById("reel-start").hidden = true;
+      playCurrent();
+    }
+
+    // next / previous video: our own clips first, otherwise the YouGlish widget
+    function stepVideo(d) {
+      if (VocabClips.step(d)) return;
+      if (widget && document.getElementById("yg-box").style.display !== "none") {
+        try { d > 0 ? widget.next() : widget.previous(); } catch (e) {}
+      }
+    }
+
+    if (REEL) {
+      const info = document.getElementById("reel-info");
+      info.insertBefore(document.getElementById("word"), info.firstChild);
+      info.insertBefore(document.getElementById("definition"), document.getElementById("reveal-hint"));
+      veil(true);
+      document.getElementById("yg-box").style.display = "none"; // shown only when a word has no clips
+      info.addEventListener("click", () => veil(!document.getElementById("definition").classList.contains("veiled")));
+      document.getElementById("reel-start").addEventListener("click", startReel);
+
+      // listen on the whole document: a listener on #card (display: contents, no box of its own)
+      // can't stop the browser from scrolling, which is why swipes did nothing on iPhone
+      const swipeThreshold = 50; // minimum swipe distance in px
+      let x0 = 0, y0 = 0, tracking = false;
+      // the header links and the Matching batch list scroll by themselves
+      const scrollsItself = t => !!(t && t.closest && t.closest(".header-10, .batch-banner"));
+
+      document.addEventListener("touchstart", e => {
+        tracking = e.touches.length === 1 && !scrollsItself(e.target);
+        if (tracking) { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }
+      }, { passive: true });
+      document.addEventListener("touchmove", e => { if (tracking) e.preventDefault(); }, { passive: false });
+      document.addEventListener("touchcancel", () => { tracking = false; });
+      document.addEventListener("touchend", e => {
+        if (!tracking) return;
+        tracking = false;
+        const t = e.changedTouches[0], dx = t.clientX - x0, dy = t.clientY - y0;
+        if (Math.max(Math.abs(dx), Math.abs(dy)) < swipeThreshold) return; // a tap: buttons handle it
+        if (Math.abs(dy) > Math.abs(dx)) {
+          if (dy < 0) next();          // Swipe Up
+          else previous();             // Swipe Down
+        } else {
+          stepVideo(dx < 0 ? 1 : -1);  // Swipe Left / Right
+        }
+        startReel();
+      }, { passive: true });
+    }
+
+
+  // stop the clip / YouGlish and pre-load the next word's clips whenever the card changes;
+  // in the reel the new word's videos start straight away
   window.addEventListener("load", function () {
     ["next", "previous", "randomWord", "showCard"].forEach(function (name) {
       var orig = window[name];
@@ -58,7 +146,9 @@
         VocabClips.stop();
         stopYouGlish();
         var r = orig.apply(this, arguments);
-        VocabClips.prefetch(document.getElementById("word").textContent);
+        if (REEL) veil(true);
+        if (REEL && reelStarted) playCurrent();
+        else VocabClips.prefetch(document.getElementById("word").textContent);
         return r;
       };
     });
@@ -81,6 +171,7 @@ fetch('../lib.txt')
     });
     applyMatchingBatch(); // if the Matching game saved a batch, review those words
     if (!batchActive) randomWord(); // otherwise pick a random vocabulary on each refresh
+    if (REEL && reelStarted) playCurrent(); // the learner tapped "start" before the words arrived
   })
   .catch(error => console.error(error));
 
@@ -180,6 +271,7 @@ function previous() {
 // log result from next and previous
 
 document.getElementById("cardInner").addEventListener("click",()=>{
+  if (REEL) return; // the reel plays without flipping
   const output = document.getElementById("word").innerHTML;
   const lang = document.getElementById("language").innerHTML;
   document.getElementById("cardInner").style.transform = "rotateY(180deg)";
@@ -226,65 +318,6 @@ var widget;
 <script async src="https://youglish.com/public/emb/widget.js" charset="utf-8"></script>
 
 <script>
-    // Swipe (phones): up / down = next / previous word, left / right = next / previous video
-    let touchStartX = 0;
-    let touchStartY = 0;
-    let onVideoControls = false; // touch began on the video's seek bar: leave it to the player
-
-    const card = document.getElementById("card");
-    const swipeThreshold = 50; // minimum swipe distance in px
-
-    // the bottom strip of a <video> holds its native controls (seek bar, volume)
-    function isVideoControls(target, y) {
-      if (!target || target.tagName !== "VIDEO") return false;
-      const r = target.getBoundingClientRect();
-      return y > r.bottom - Math.max(48, r.height * 0.25);
-    }
-
-    // Prevent default scrolling when swiping on the card
-    card.addEventListener('touchmove', function(event) {
-      if (!onVideoControls) event.preventDefault();
-    }, { passive: false });
-
-    // Touch Start
-    card.addEventListener("touchstart", function(evt) {
-      const touch = evt.changedTouches[0];
-      touchStartX = touch.screenX;
-      touchStartY = touch.screenY;
-      onVideoControls = isVideoControls(evt.target, touch.clientY);
-    }, false);
-
-    // next / previous video: our own clips first, otherwise the YouGlish widget
-    function stepVideo(d) {
-      if (VocabClips.step(d)) return;
-      if (widget && document.getElementById("yg-box").style.display !== "none") {
-        try { d > 0 ? widget.next() : widget.previous(); } catch (e) {}
-      }
-    }
-
-    // Touch End
-    card.addEventListener("touchend", function(evt) {
-      const touch = evt.changedTouches[0];
-      const deltaX = touch.screenX - touchStartX;
-      const deltaY = touch.screenY - touchStartY;
-      const wasOnControls = onVideoControls;
-      touchStartX = 0;
-      touchStartY = 0;
-      onVideoControls = false;
-      if (wasOnControls) return;
-
-      if (Math.abs(deltaY) > Math.abs(deltaX)) {
-        if (Math.abs(deltaY) < swipeThreshold) return;
-        if (deltaY < 0) next();      // Swipe Up
-        else previous();             // Swipe Down
-      } else {
-        if (Math.abs(deltaX) < swipeThreshold) return;
-        if (deltaX < 0) stepVideo(1);   // Swipe Left
-        else stepVideo(-1);             // Swipe Right
-      }
-    }, false);
-
-
     document.addEventListener("DOMContentLoaded", () => {
       if (words.length >= 2) {
       }
