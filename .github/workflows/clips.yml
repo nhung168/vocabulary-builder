@@ -39,6 +39,10 @@ jobs:
       - name: Harvest subtitles and build index
         run: node tools/clips/build.mjs --minutes 40
 
+      # low-resolution copies so clips start faster on phones
+      - name: Find lighter video versions
+        run: node tools/clips/light.mjs
+
       - name: Commit index
         id: commit
         run: |

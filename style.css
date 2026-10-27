@@ -171,6 +171,19 @@ button {
   font-size:13px;
 }
 
+/* Swipe instructions, only on touch screens */
+.swipe-hint {
+  display:none;
+  margin:8px 16px 0;
+  text-align:center;
+  font-family: system-ui, sans-serif;
+  font-size:13px;
+  color:#5b6675;
+}
+@media (hover: none) and (pointer: coarse) {
+  .swipe-hint { display:block; }
+}
+
 @media (max-width: 390px) {
   section {
     width: 100%;

@@ -37,6 +37,7 @@
     </div>
   </div>
 </div>
+<p class="swipe-hint">Swipe ↑ ↓ to change word · Swipe ← → for more videos</p>
 
 <button class = "previous" onclick="previous()"><img width="50" height="50" src="../img/backward.png" alt="circled-left-2--v1"/></button>
 <button class = "next" onclick="next()"><img width="50" height="50" src="../img/forward.png" alt="end"/></button>
@@ -225,27 +226,24 @@ var widget;
 <script async src="https://youglish.com/public/emb/widget.js" charset="utf-8"></script>
 
 <script>
-    // Swipe Detection Variables
+    // Swipe (phones): up / down = next / previous word, left / right = next / previous video
     let touchStartX = 0;
     let touchStartY = 0;
-    
+    let onVideoControls = false; // touch began on the video's seek bar: leave it to the player
 
     const card = document.getElementById("card");
-    const cardback = document.getElementById("back").offsetWidth;
-    const cardfront = document.getElementById("front").offsetWidth;
-    console.log("back width:",cardback,"front width:",cardfront);
-    
-    let swipeThreshold;
-    if (cardback < cardfront){
-      swipeThreshold = cardback -30 // Minimum swipe distance in px
-    }else{
-      swipeThreshold = cardfront - 30
+    const swipeThreshold = 50; // minimum swipe distance in px
+
+    // the bottom strip of a <video> holds its native controls (seek bar, volume)
+    function isVideoControls(target, y) {
+      if (!target || target.tagName !== "VIDEO") return false;
+      const r = target.getBoundingClientRect();
+      return y > r.bottom - Math.max(48, r.height * 0.25);
     }
-    
 
     // Prevent default scrolling when swiping on the card
     card.addEventListener('touchmove', function(event) {
-      event.preventDefault();
+      if (!onVideoControls) event.preventDefault();
     }, { passive: false });
 
     // Touch Start
@@ -253,29 +251,37 @@ var widget;
       const touch = evt.changedTouches[0];
       touchStartX = touch.screenX;
       touchStartY = touch.screenY;
+      onVideoControls = isVideoControls(evt.target, touch.clientY);
     }, false);
+
+    // next / previous video: our own clips first, otherwise the YouGlish widget
+    function stepVideo(d) {
+      if (VocabClips.step(d)) return;
+      if (widget && document.getElementById("yg-box").style.display !== "none") {
+        try { d > 0 ? widget.next() : widget.previous(); } catch (e) {}
+      }
+    }
 
     // Touch End
     card.addEventListener("touchend", function(evt) {
       const touch = evt.changedTouches[0];
       const deltaX = touch.screenX - touchStartX;
       const deltaY = touch.screenY - touchStartY;
-
-      // Check if the swipe is predominantly horizontal
-      if (Math.abs(deltaX) > Math.abs(deltaY)) {
-        if (Math.abs(deltaX) > swipeThreshold) {
-          if (deltaX < 0) {
-            // Swipe Left
-            next();
-          } else {
-            // Swipe Right
-            previous();
-          }
-        }
-      }
-      // Reset values
+      const wasOnControls = onVideoControls;
       touchStartX = 0;
       touchStartY = 0;
+      onVideoControls = false;
+      if (wasOnControls) return;
+
+      if (Math.abs(deltaY) > Math.abs(deltaX)) {
+        if (Math.abs(deltaY) < swipeThreshold) return;
+        if (deltaY < 0) next();      // Swipe Up
+        else previous();             // Swipe Down
+      } else {
+        if (Math.abs(deltaX) < swipeThreshold) return;
+        if (deltaX < 0) stepVideo(1);   // Swipe Left
+        else stepVideo(-1);             // Swipe Right
+      }
     }, false);
 
 

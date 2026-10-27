@@ -4,6 +4,9 @@
  *   VocabClips.prefetch(word)          load the index shard early (call when a word is shown)
  *   await VocabClips.show(word, lang)  play clips for word → true, or false when there are none
  *   VocabClips.stop()                  stop playback and hide the player
+ *   VocabClips.step(±1)                next / previous clip → false when the player isn't showing
+ *
+ * Videos play from a low-resolution copy (u/l/m in videos.json, see tools/clips/light.mjs) unless HD is on.
  *
  * Data: clips/videos.json + clips/index/<first letter>.json, built by tools/clips/build.mjs.
  */
@@ -14,9 +17,15 @@
   var SOURCE_NAME = { commons: 'Wikimedia Commons', archive: 'Internet Archive', peertube: 'PeerTube' };
 
   var meta = null, metaP = null, shards = {}, ui = null;
-  var S = { word: '', clips: [], i: 0, token: 0, rate: 1, dir: 1 };
+  var HD_KEY = 'vc_hd';
+  var S = { word: '', clips: [], i: 0, token: 0, rate: 1, dir: 1, hd: readPref(HD_KEY) === '1' };
   var media = null;          // current <video> or PeerTube player wrapper
   var timer = null;
+  var warm = null;           // { key, vid }: the next word's first clip, loading in the background
+
+  function readPref(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function writePref(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  function saveData() { var c = navigator.connection; return !!(c && (c.saveData || /2g/.test(c.effectiveType || ''))); }
 
   function getJSON(url) {
     return fetch(url, { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
@@ -62,6 +71,9 @@
   function mount(host) {
     if (ui) return ui;
     var st = document.createElement('style'); st.textContent = CSS; document.head.appendChild(st);
+    ['https://upload.wikimedia.org', 'https://archive.org'].forEach(function (h) {
+      document.head.appendChild(el('link', { rel: 'preconnect', href: h, crossorigin: '' }));
+    });
     ui = {};
     ui.title = el('span', { class: 'vc-title' });
     ui.src = el('a', { target: '_blank', rel: 'noopener', text: 'Source ↗' });
@@ -73,12 +85,17 @@
     ui.slow = el('button', { type: 'button', text: '0.75×', 'aria-pressed': 'false', title: 'Play slower', onclick: function (e) {
       e.stopPropagation(); S.rate = S.rate === 1 ? 0.75 : 1; ui.slow.setAttribute('aria-pressed', String(S.rate !== 1)); applyRate();
     } });
+    ui.hd = el('button', { type: 'button', text: 'HD', 'aria-pressed': String(S.hd), title: 'Full quality (slower to load)', onclick: function (e) {
+      e.stopPropagation(); S.hd = !S.hd; writePref(HD_KEY, S.hd ? '1' : '0'); ui.hd.setAttribute('aria-pressed', String(S.hd));
+      if (!media) return;
+      if (media.setHd) media.setHd(S.hd); else play(media.time && media.time()); // keep listening from the same spot
+    } });
     ui.count = el('span', { class: 'vc-count' });
     ui.yg = el('div', { class: 'vc-yg' });
     ui.box = el('div', { class: 'vc', hidden: '' }, [
       el('div', { class: 'vc-top' }, [ui.title, ui.src]),
       ui.stage, ui.cap,
-      el('div', { class: 'vc-bar' }, [ui.prev, ui.replay, ui.next, ui.slow, ui.count]),
+      el('div', { class: 'vc-bar' }, [ui.prev, ui.replay, ui.next, ui.slow, ui.hd, ui.count]),
       ui.yg
     ]);
     // clicks inside the player must not flip the flash card
@@ -131,37 +148,79 @@
 
   function applyRate() { if (media && media.rate) media.rate(S.rate); }
 
-  function play() {
+  // at: optional time to start from instead of the phrase (used when switching quality)
+  function play(at) {
     var c = S.clips[S.i]; if (!c) return;
     var v = meta.videos[c[0]];
     var tok = ++S.token;
     clearMedia();
     renderInfo(c, v);
-    var start = c[1];
+    var start = at != null ? at : c[1];
     if (v.u) playHtml5(v, start, tok); else if (v.e) playPeertube(v, start, tok);
   }
 
-  function playHtml5(v, start, tok) {
+  // candidate files, lightest first; the browser plays the first one it supports
+  function sourcesOf(v) {
+    var full = function (x) {
+      if (!x || /^https?:/.test(x)) return x;
+      return v.u.replace('/wikipedia/commons/', '/wikipedia/commons/transcoded/') + '/' + v.u.split('/').pop() + '.' + x;
+    };
+    return (S.hd ? [] : [full(v.l), full(v.m)]).concat(v.u).filter(Boolean);
+  }
+  function typeOf(url) { return /\.webm$/i.test(url) ? 'video/webm' : /\.mov$/i.test(url) ? 'video/quicktime' : /\.mp4$/i.test(url) ? 'video/mp4' : ''; }
+  function warmKey(v, start) { return v.u + '#' + start + (S.hd ? '#hd' : ''); }
+
+  function makeVideo(v, start) {
     var vid = el('video', { controls: '', playsinline: '', preload: 'auto' });
-    vid.src = v.u + '#t=' + start;
+    sourcesOf(v).forEach(function (u) {
+      var a = { src: u + '#t=' + start }, t = typeOf(u);
+      if (t) a.type = t;
+      vid.appendChild(el('source', a));
+    });
+    return vid;
+  }
+
+  function playHtml5(v, start, tok) {
+    var vid;
+    if (warm && warm.key === warmKey(v, start)) { vid = warm.vid; warm = null; vid.preload = 'auto'; }
+    else vid = makeVideo(v, start);
     ui.stage.appendChild(vid);
     media = {
       rate: function (r) { vid.playbackRate = r; },
-      destroy: function () { vid.pause(); vid.removeAttribute('src'); vid.load(); }
+      time: function () { return vid.currentTime; },
+      destroy: function () { vid.pause(); vid.innerHTML = ''; vid.load(); }
     };
-    vid.addEventListener('loadedmetadata', function () {
+    function begin() {
       if (tok !== S.token) return;
       if (Math.abs(vid.currentTime - start) > 0.3) vid.currentTime = start;
       vid.playbackRate = S.rate;
       vid.play().catch(function () { /* autoplay blocked: user presses play */ });
-    });
+    }
+    if (vid.readyState >= 1) begin(); else vid.addEventListener('loadedmetadata', begin);
     vid.addEventListener('ended', function () { if (tok === S.token) videoEnded(); });
-    vid.addEventListener('error', function () {
+    function failed() {
       if (tok !== S.token) return;
       clearMedia(); msg('This video could not be loaded — skipping…');
       // skip broken videos in the direction the learner was moving
       setTimeout(function () { if (tok === S.token) go(S.i + (S.dir || 1)); }, 1200);
-    });
+    }
+    vid.addEventListener('error', failed);
+    // with <source> children, "no playable file" is reported on the last one
+    if (vid.lastChild) vid.lastChild.addEventListener('error', failed);
+    if (vid.networkState === 3) failed(); // warmed element that already gave up (NETWORK_NO_SOURCE)
+  }
+
+  // start loading the first clip of a word before the card is flipped
+  function warmUp(c) {
+    var v = meta && meta.videos[c[0]];
+    if (!v || !v.u || saveData()) return;
+    var key = warmKey(v, c[1]);
+    if (warm && warm.key === key) return;
+    if (warm) { warm.vid.innerHTML = ''; warm.vid.load(); }
+    var vid = makeVideo(v, c[1]);
+    vid.preload = 'metadata';
+    warm = { key: key, vid: vid };
+    vid.load();
   }
 
   var ptLib = null;
@@ -189,20 +248,48 @@
         if (tok !== S.token) return;
         media = {
           rate: function (r) { p.setPlaybackRate(r); },
+          setHd: function (hd) { pickResolution(p, hd); },
           destroy: function () { ifr.src = 'about:blank'; }
         };
         p.setPlaybackRate(S.rate);
-        var ended = false;
+        pickResolution(p, S.hd);
+        var ended = false, picked = false;
         p.addEventListener('playbackStatusUpdate', function (st) {
-          if (tok !== S.token || ended || st.playbackState !== 'ended') return;
+          if (tok !== S.token) return;
+          // some players only list their resolutions once playback starts
+          if (!picked && st.playbackState === 'playing') { picked = true; pickResolution(p, S.hd); }
+          if (ended || st.playbackState !== 'ended') return;
           ended = true; videoEnded();
         });
       });
     }).catch(function () { /* embed API unavailable — basic embed keeps working */ });
   }
 
+  // HD → the player's automatic choice; otherwise the smallest picture of at least 240p
+  function pickResolution(p, hd) {
+    Promise.resolve(p.getResolutions()).then(function (rs) {
+      var list = (rs || []).filter(function (r) { return r.height > 0; }).sort(function (a, b) { return a.height - b.height; });
+      if (!list.length) return;
+      if (hd) return p.setResolution(-1);
+      var low = list.filter(function (r) { return r.height >= 240; })[0] || list[0];
+      if (!low.active) return p.setResolution(low.id);
+    }).catch(function () { /* resolution switching not supported by this server */ });
+  }
+
   // ── public API ──
-  function prefetch(word) { loadMeta(); var k = keyOf(word); if (k) loadShard(k); }
+  function prefetch(word) {
+    var k = keyOf(word); if (!k) { loadMeta(); return; }
+    Promise.all([loadMeta(), loadShard(k)]).then(function (r) {
+      var clips = r[0] && r[1][k];
+      if (clips && clips.length) warmUp(clips[0]);
+    });
+  }
+
+  function step(d) {
+    if (!ui || ui.box.hidden || !S.clips.length) return false;
+    go(S.i + d);
+    return true;
+  }
 
   function show(word, lang, opts) {
     opts = opts || {};
@@ -235,5 +322,5 @@
     return loadShard(k).then(function (idx) { return !!(idx[k] && idx[k].length); });
   }
 
-  window.VocabClips = { mount: mount, show: show, stop: stop, prefetch: prefetch, has: has };
+  window.VocabClips = { mount: mount, show: show, stop: stop, prefetch: prefetch, has: has, step: step };
 })();
