@@ -1,4 +1,5 @@
 word	definition	language
+小 吃 店	Sẽ có rất nhiều cửa hàng bán đồ ăn nhẹ và nhà hàng.	Chinese
 一 层	Đó là tầng hầm.	Chinese
 三 层	B3 là tầng hầm thứ ba.	Chinese
 出 站 口	Tôi cần tìm lối ra của nhà ga xe lửa.	Chinese
