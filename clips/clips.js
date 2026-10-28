@@ -43,7 +43,7 @@
     return metaP || (metaP = getJSON(DATA + 'videos.json').then(function (j) { meta = j; return j; }).catch(function () { metaP = null; return null; }));
   }
   function keyOf(w) { return String(w || '').replace(/<[^>]*>/g, '').trim().toLowerCase(); }
-  function shardOf(k) { return /^[a-z]/.test(k) ? k[0] : '_'; }
+  function shardOf(k) { return /^[a-z]/.test(k) ? k[0] : 'other'; } // words not starting with a-z (e.g. Chinese)
   function loadShard(k) {
     var s = shardOf(k);
     return shards[s] || (shards[s] = getJSON(DATA + 'index/' + s + '.json').catch(function () { delete shards[s]; return {}; }));

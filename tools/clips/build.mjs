@@ -225,7 +225,7 @@ function buildIndex(words) {
     while (picked.length < cfg.maxClipsPerWord && lists.some(l => l.length)) for (const l of lists) if (l.length && picked.length < cfg.maxClipsPerWord) picked.push(l.shift());
 
     const key = w.toLowerCase();
-    const shard = /^[a-z]/.test(key) ? key[0] : '_';
+    const shard = /^[a-z]/.test(key) ? key[0] : 'other'; // not "_": GitHub Pages (Jekyll) drops files starting with _
     (shards[shard] ||= {})[key] = picked.map(c => {
       if (!used.has(c.vi)) used.set(c.vi, used.size);
       return [used.get(c.vi), +Math.max(0, c.start - 0.5).toFixed(2), +(c.end + 0.3).toFixed(2), c.text, c.m.s, c.m.e];
