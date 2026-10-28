@@ -855,7 +855,8 @@ async function saveToLib() {
   try {
     const word       = c.word.trim();
     const definition = (c.trans ? c.trans : c.sentence).trim();
-    const language   = DEFAULT_LANGUAGE;
+    // the video's language from step 2 (detected, or what you picked next to "Archive subtitles")
+    const language   = document.getElementById('archive-lang')?.value || DEFAULT_LANGUAGE;
 
     const r = await fetch(`${WORKER_URL}/save`, {
       method:  'POST',

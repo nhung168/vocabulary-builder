@@ -65,7 +65,9 @@ jobs:
           git add -A clips
           if git diff --cached --quiet; then echo "changed=false" >> "$GITHUB_OUTPUT"; exit 0; fi
           git commit -m "clips: update video clip index"
-          git pull --rebase origin gh-page
+          # another run may have committed the index meanwhile (saving several words quickly starts several runs);
+          # this run's files are generated from newer input, so on a conflict they win (-X theirs = the commit being replayed)
+          git pull --rebase -X theirs origin gh-page
           git push origin HEAD:gh-page
           echo "changed=true" >> "$GITHUB_OUTPUT"
 
