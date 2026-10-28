@@ -49,7 +49,7 @@ button{cursor:pointer;font-family:inherit;font-size:14px}
 .step-line{flex:1;height:1px;background:#e0e0e0;margin:0 8px;align-self:center}
 
 /* Script panel — dual language */
-.sub-line{padding:8px 14px;border-bottom:.5px solid #f0f0f0;display:flex;gap:12px;cursor:pointer;transition:background .1s}
+.sub-line{padding:8px 14px;border-bottom:.5px solid #f0f0f0;display:flex;gap:12px;cursor:pointer;transition:background .1s;content-visibility:auto;contain-intrinsic-size:auto 40px}
 .sub-line:last-child{border-bottom:none}
 .sub-line:hover{background:#fafaf8}
 .sub-line.hi{background:#fffbe6}
@@ -62,8 +62,13 @@ button{cursor:pointer;font-family:inherit;font-size:14px}
 .word-zone{border:1px dashed #ccc;border-radius:10px;padding:14px;min-height:80px;background:#fafaf8;font-size:15px;line-height:2.4;user-select:none;-webkit-user-select:none;cursor:crosshair}
 .w,.cjk{display:inline;cursor:crosshair;border-radius:3px;padding:2px 1px;transition:background .08s}
 .w:hover,.cjk:hover{background:#ffe9a0}
-.w.sel,.cjk.sel{background:#ffd640;border-radius:4px;padding:2px 3px;font-weight:500}
-.w.preview,.cjk.preview{background:#fff0a0;border-radius:4px}
+/* highlights only change colour: a change of width (padding, bold) re-laid out the whole transcript on every mouse move */
+.w.sel,.cjk.sel{background:#ffd640;box-shadow:0 0 0 2px #ffd640;border-radius:4px}
+.w.preview,.cjk.preview{background:#fff0a0;box-shadow:0 0 0 2px #fff0a0;border-radius:4px}
+/* one block per subtitle line; lines off screen are not laid out or drawn (long films have thousands) */
+.seg{content-visibility:auto;contain-intrinsic-size:auto 38px;border-bottom:1px dashed #ececec;padding:0 0 2px}
+.seg:last-child{border-bottom:none}
+.seg-trans{display:block;font-size:11px;color:#bbb;font-style:italic;line-height:1.6;margin:0 0 6px 2px}
 .pick-hint{font-size:12px;color:#aaa;margin-bottom:8px;display:flex;gap:16px;flex-wrap:wrap}
 .pick-hint b{color:#666}
 
@@ -568,9 +573,14 @@ function parseSrtText(txt){
 /* ── Merge two SRT arrays by closest timestamp ── */
 function mergeSrtArrays(primary,trans){
   // For each primary segment, find the closest translation segment by start time
+  // (binary search on the sorted translation: scanning all of it per line froze the page on long files)
+  const ts=[...trans].sort((a,b)=>a.start-b.start);
   return primary.map(p=>{
+    let lo=0,hi=ts.length-1;
+    while(lo<hi){const mid=(lo+hi)>>1;if(ts[mid].start<p.start)lo=mid+1;else hi=mid;}
     let best=null,bestDiff=Infinity;
-    for(const t of trans){
+    for(const t of [ts[lo-1],ts[lo]]){
+      if(!t)continue;
       const d=Math.abs(t.start-p.start);
       if(d<bestDiff){bestDiff=d;best=t;}
     }
@@ -689,36 +699,43 @@ function renderPicker(){
   const picker=document.getElementById("word-picker");
   let html="";
   S.subs.forEach((seg,si)=>{
+    html+=`<div class="seg">`;
     // Only tokenise primary text, not translation
     tokenise(seg.text).forEach((tok,ti)=>{
       if(tok.type==="space"){html+=" ";return;}
       if(tok.type==="punct"){html+=`<span>${esc(tok.val)}</span>`;return;}
       const cls=tok.type==="cjk"?"cjk":"w";
-      html+=`<span class="${cls}" data-si="${si}" data-ti="${ti}" data-word="${esc(tok.val)}" data-ts="${seg.start}" data-sen="${esc(seg.text)}" data-trans="${esc(seg.trans||"")}">${esc(tok.val)}</span>`;
+      // only the segment index: copying the sentence onto every word made the picker megabytes long
+      html+=`<span class="${cls}" data-si="${si}">${esc(tok.val)}</span>`;
     });
     // Show translation hint inline under each segment in picker too
-    if(seg.trans){
-      html+=`<span style="display:block;font-size:11px;color:#bbb;font-style:italic;margin:2px 0 6px 2px">${esc(seg.trans)}</span>`;
-    }
-    html+=`<span style="color:#ddd;font-size:11px"> | </span>`;
+    if(seg.trans)html+=`<span class="seg-trans">${esc(seg.trans)}</span>`;
+    html+=`</div>`;
   });
   picker.innerHTML=html;
   allToks=[...picker.querySelectorAll(".w,.cjk")];
+  allToks.forEach((t,i)=>{t._i=i;});
+  lit.clear();
   applyHighlights();
   picker.onmousedown=pickerDown;
   picker.onmousemove=pickerMove;
   document.onmouseup=pickerUp;
 }
 
+// index → "sel" | "preview" for the words currently highlighted; only changes are written to the page
+const lit=new Map();
 function applyHighlights(){
-  allToks.forEach(t=>t.classList.remove("sel","preview"));
-  phrases.forEach(p=>{for(let i=p.lo;i<=p.hi;i++)allToks[i]?.classList.add("sel");});
+  const want=new Map();
+  phrases.forEach(p=>{for(let i=p.lo;i<=p.hi;i++)want.set(i,"sel");});
   if(dragActive&&dragStartIdx>=0&&dragEndIdx>=0){
     const lo=Math.min(dragStartIdx,dragEndIdx),hi=Math.max(dragStartIdx,dragEndIdx);
-    for(let i=lo;i<=hi;i++)allToks[i]?.classList.add("preview");
+    for(let i=lo;i<=hi;i++)want.set(i,"preview");
   }
+  lit.forEach((c,i)=>{if(want.get(i)!==c)allToks[i]?.classList.remove(c);});
+  want.forEach((c,i)=>{if(lit.get(i)!==c)allToks[i]?.classList.add(c);});
+  lit.clear();want.forEach((c,i)=>lit.set(i,c));
 }
-function tokIdx(el){return allToks.indexOf(el);}
+function tokIdx(el){return el._i ?? -1;}
 function nearestTok(e){return e.target.closest(".w,.cjk");}
 function pickerDown(e){
   const el=nearestTok(e);if(!el)return;
@@ -739,10 +756,10 @@ function pickerUp(){
   const existing=phrases.findIndex(p=>p.lo===lo&&p.hi===hi);
   if(existing>=0){phrases.splice(existing,1);}
   else{
-    const word=allToks.slice(lo,hi+1).map(t=>t.dataset.word).join(" ");
-    const first=allToks[lo];
+    const word=allToks.slice(lo,hi+1).map(t=>t.textContent).join(" ");
+    const seg=S.subs[+allToks[lo].dataset.si];
     // carry trans from the token's segment
-    phrases.push({word,ts:+first.dataset.ts,sentence:first.dataset.sen,trans:first.dataset.trans||"",lo,hi});
+    phrases.push({word,ts:seg.start,sentence:seg.text,trans:seg.trans||"",lo,hi});
   }
   applyHighlights();syncTags();
 }
