@@ -8,6 +8,8 @@ When a card is flipped, `Language/English.html`, `Chinese.html` and `Espanol.htm
   For Chinese this includes the archived **Bilibili** copies (`bilibili_videos`, Chinese audio with machine-made Chinese subtitles), searched by topic (cooking, shopping, daily life…).
 - **PeerTube**: open-source video sites, found through SepiaSearch, with each video's captions.
 
+- **Your own videos**: subtitles you extract in `index-ai.html` and save with *Archive subtitles*. The Worker (`worker.js`, route `/archive`) commits them to `tools/clips/user/<lang>/<video>.json`, which triggers a quick re-index (no harvesting). They are ranked before the other sources and play from YouTube, or from the video file for direct `.mp4`/`.webm` links.
+
 If a word has no clips, the page falls back to YouGlish as before, which saves your YouGlish quota.
 
 ## How it runs

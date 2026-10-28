@@ -7,6 +7,7 @@
  *   VocabClips.stop()                  stop playback and hide the player
  *   VocabClips.step(±1)                next / previous clip → false when the player isn't showing
  *
+ * Videos you archived from index-ai.html play from YouTube (y) or their own file (u).
  * Videos play from a low-resolution copy (u/l/m in videos.json, see tools/clips/light.mjs) unless HD is on.
  *
  * Data: clips/<data>videos.json + clips/<data>index/<first letter>.json, built by tools/clips/build.mjs.
@@ -16,7 +17,10 @@
   var BASE = (document.currentScript && document.currentScript.src || '').replace(/[^/]*$/, '');
   var DATA = BASE;           // + the language folder, set by mount()
   var PT_API = 'https://unpkg.com/@peertube/embed-api@0.2.0/build/player.min.js';
-  var SOURCE_NAME = { commons: 'Wikimedia Commons', archive: 'Internet Archive', peertube: 'PeerTube' };
+  var YT_API = 'https://www.youtube.com/iframe_api';
+  // each clip is a 3-minute window: from 1 minute before the word to 2 minutes after it
+  var BEFORE = 60, AFTER = 120;
+  var SOURCE_NAME = { commons: 'Wikimedia Commons', archive: 'Internet Archive', peertube: 'PeerTube', youtube: 'YouTube · saved by you', link: 'saved by you' };
 
   var meta = null, metaP = null, shards = {}, ui = null;
   var HD_KEY = 'vc_hd';
@@ -26,6 +30,7 @@
   var cur = null;            // { tok, begin, failed } for the clip in the shared <video>
   var warm = null;           // { key, vid }: the next word's first clip, loading in the background
   var mutedByUs = false;     // the browser refused sound, so the clip plays muted until the next tap
+  var win = { from: 0, to: Infinity }; // the current clip's window, in seconds of the video
 
   function readPref(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function writePref(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
@@ -110,7 +115,7 @@
     ui.stage = el('div', { class: 'vc-stage' });
     ui.cap = el('div', { class: 'vc-cap', 'aria-live': 'polite' });
     ui.prev = el('button', { type: 'button', class: 'vc-prev', text: '◀ Prev', onclick: function (e) { e.stopPropagation(); go(S.i - 1); } });
-    ui.replay = el('button', { type: 'button', text: REEL ? '↻' : '↻ Replay', title: 'Replay the phrase', 'aria-label': 'Replay the phrase', onclick: function (e) { e.stopPropagation(); play(); } });
+    ui.replay = el('button', { type: 'button', text: REEL ? '↻' : '↻ To the word', title: 'Jump to the word', 'aria-label': 'Jump to the word', onclick: function (e) { e.stopPropagation(); var c = S.clips[S.i]; if (c) play(c[1]); } });
     ui.next = el('button', { type: 'button', class: 'vc-next', text: 'Next ▶', onclick: function (e) { e.stopPropagation(); go(S.i + 1); } });
     ui.slow = el('button', { type: 'button', text: '0.75×', 'aria-pressed': 'false', title: 'Play slower', onclick: function (e) {
       e.stopPropagation(); S.rate = S.rate === 1 ? 0.75 : 1; ui.slow.setAttribute('aria-pressed', String(S.rate !== 1)); applyRate();
@@ -163,6 +168,7 @@
   }
   function unmute() {
     mutedByUs = false; ui.unmute.hidden = true;
+    if (media && media.unmute) { media.unmute(); return; }
     ui.vid.muted = false;
     if (ui.vid.paused && cur) startVideo(ui.vid);
   }
@@ -182,6 +188,10 @@
   }
   function setPaused(p) { ui.stage.classList.toggle('paused', !!p && REEL); }
   function setProgress(pos, dur) { if (ui.prog) ui.prog.firstChild.style.width = dur ? Math.min(100, pos / dur * 100) + '%' : '0'; }
+  // progress bar and seeking cover the clip's window (or less, when the video ends sooner)
+  function winEnd(dur) { return dur ? Math.min(win.to, dur) : win.to; }
+  function showProgress(t, dur) { setProgress(Math.max(0, t - win.from), winEnd(dur) - win.from); }
+  function winAt(f, dur) { return win.from + f * (winEnd(dur) - win.from); }
 
   // ── playback ──
   function clearMedia() {
@@ -214,22 +224,23 @@
     S.i = i; play();
   }
 
-  // the phrase plays once and the video keeps going; when the video itself ends, move to the next clip
+  // the window (or the video) has ended: move to the next clip
   function videoEnded() {
     if (S.i < S.clips.length - 1) { var tok = S.token; setTimeout(function () { if (tok === S.token) go(S.i + 1); }, 700); }
   }
 
   function applyRate() { if (media && media.rate) media.rate(S.rate); }
 
-  // at: optional time to start from instead of the phrase (used when switching quality)
+  // at: optional time to start from instead of the window's start (jump to the word, switch quality)
   function play(at) {
     var c = S.clips[S.i]; if (!c) return;
     var v = meta.videos[c[0]];
     var tok = ++S.token;
     clearMedia();
     renderInfo(c, v);
-    var start = at != null ? at : c[1];
-    if (v.u) playHtml5(v, start, tok); else if (v.e) playPeertube(v, start, tok);
+    win = { from: Math.max(0, c[1] - BEFORE), to: c[1] + AFTER };
+    var start = at != null ? at : win.from;
+    if (v.y) playYoutube(v, start, tok); else if (v.u) playHtml5(v, start, tok); else if (v.e) playPeertube(v, start, tok);
   }
 
   // candidate files, lightest first (HD: original first); the browser plays the first one it can decode,
@@ -266,7 +277,14 @@
     vid.addEventListener('error', function () { if (cur) cur.failed(); });
     vid.addEventListener('play', function () { setPaused(false); });
     vid.addEventListener('pause', function () { if (cur) setPaused(true); });
-    vid.addEventListener('timeupdate', function () { if (cur) setProgress(vid.currentTime, vid.duration); });
+    vid.addEventListener('timeupdate', function () {
+      if (!cur) return;
+      var t = vid.currentTime;
+      showProgress(t, vid.duration);
+      // playback reached the end of the window (a seek past it on the desktop controls doesn't count)
+      if (cur.last < win.to && t >= win.to && t - cur.last < 2) { vid.pause(); videoEnded(); }
+      cur.last = t;
+    });
     return vid;
   }
 
@@ -277,6 +295,7 @@
     if (REEL) ui.stage.appendChild(el('div', { class: 'vc-shield', onclick: function (e) { e.stopPropagation(); togglePause(); } }));
     ui.stage.appendChild(ui.unmute);
     cur = {
+      last: start,
       begin: function () {
         if (tok !== S.token) return;
         if (Math.abs(vid.currentTime - start) > 0.3) vid.currentTime = start;
@@ -294,7 +313,7 @@
       rate: function (r) { vid.playbackRate = r; },
       time: function () { return vid.currentTime; },
       toggle: function () { if (vid.paused) { startVideo(vid); return false; } vid.pause(); return true; }, // → paused?
-      seekTo: function (f) { if (vid.duration) vid.currentTime = f * vid.duration; },
+      seekTo: function (f) { if (vid.duration) vid.currentTime = winAt(f, vid.duration); },
       destroy: function () { vid.pause(); vid.innerHTML = ''; vid.removeAttribute('src'); vid.load(); }
     };
     // with <source> children, "no playable file" is reported on the last one
@@ -306,11 +325,12 @@
   function warmUp(c) {
     var v = meta && meta.videos[c[0]];
     if (!v || !v.u || saveData()) return;
-    var key = v.u + '#' + c[1] + (S.hd ? '#hd' : '');
+    var from = Math.max(0, c[1] - BEFORE);
+    var key = v.u + '#' + from + (S.hd ? '#hd' : '');
     if (warm && warm.key === key) return;
     if (warm) { warm.vid.innerHTML = ''; warm.vid.load(); }
     var vid = el('video', { preload: 'metadata', muted: '' });
-    setSources(vid, v, c[1]);
+    setSources(vid, v, from);
     warm = { key: key, vid: vid };
     vid.load();
   }
@@ -324,7 +344,7 @@
   }
 
   function playPeertube(v, start, tok) {
-    var q = 'api=1&autoplay=1&title=0&warningTitle=0&peertubeLink=0&p2p=0&start=' + Math.floor(start);
+    var q = 'api=1&autoplay=1&title=0&warningTitle=0&peertubeLink=0&p2p=0&start=' + Math.floor(start) + '&stop=' + Math.ceil(win.to);
     var ifr = el('iframe', { allow: 'autoplay; fullscreen', allowfullscreen: '', src: v.e + (v.e.indexOf('?') < 0 ? '?' : '&') + q });
     ui.stage.appendChild(ifr);
     // in the reel, touches over the embed must reach the page so swipes still work
@@ -345,7 +365,7 @@
           rate: function (r) { p.setPlaybackRate(r); },
           setHd: function (hd) { pickResolution(p, hd); },
           toggle: function () { if (state === 'playing') { p.pause(); return true; } p.play(); return false; },
-          seekTo: function (f) { if (dur) p.seek(f * dur); },
+          seekTo: function (f) { if (dur) p.seek(winAt(f, dur)); },
           destroy: function () { ifr.src = 'about:blank'; }
         };
         p.setPlaybackRate(S.rate);
@@ -354,14 +374,78 @@
         p.addEventListener('playbackStatusUpdate', function (st) {
           if (tok !== S.token) return;
           state = st.playbackState; dur = st.duration || dur;
-          setPaused(state === 'paused'); setProgress(st.position, dur);
+          setPaused(state === 'paused'); showProgress(st.position, dur);
           // some players only list their resolutions once playback starts
           if (!picked && state === 'playing') { picked = true; pickResolution(p, S.hd); }
-          if (ended || state !== 'ended') return;
-          ended = true; videoEnded();
+          // the embed stops itself at the window's end (stop=…): it pauses there or reports "ended"
+          var atEnd = state === 'ended' || (state !== 'unstarted' && st.position >= win.to - 0.5);
+          if (ended || !atEnd) return;
+          ended = true; p.pause(); videoEnded();
         });
       });
     }).catch(function () { /* embed API unavailable — basic embed keeps working */ });
+  }
+
+  var ytLib = null;
+  function loadYoutubeApi() {
+    return ytLib || (ytLib = new Promise(function (res, rej) {
+      if (window.YT && window.YT.Player) return res();
+      var prev = window.onYouTubeIframeAPIReady; // YouGlish's widget loads the same API
+      window.onYouTubeIframeAPIReady = function () { if (prev) prev(); res(); };
+      var s = document.createElement('script'); s.src = YT_API; s.onerror = function () { ytLib = null; rej(); }; document.head.appendChild(s);
+    }));
+  }
+
+  // videos archived from index-ai.html: YouTube's embedded player, driven through its API
+  function playYoutube(v, start, tok) {
+    var box = el('div');
+    ui.stage.appendChild(box);
+    if (REEL) ui.stage.appendChild(el('div', { class: 'vc-shield', onclick: function (e) { e.stopPropagation(); togglePause(); } }));
+    ui.stage.appendChild(ui.unmute);
+    var p = null, poll = null, state = -1;
+    media = { rate: null, destroy: function () { clearInterval(poll); try { p && p.destroy(); } catch (e) {} } };
+    function failed() {
+      if (tok !== S.token) return;
+      clearMedia(); msg('This video could not be loaded — skipping…');
+      setTimeout(function () { if (tok === S.token) go(S.i + (S.dir || 1)); }, 1200);
+    }
+    loadYoutubeApi().then(function () {
+      if (tok !== S.token) return;
+      p = new YT.Player(box, {
+        host: 'https://www.youtube-nocookie.com', videoId: v.y,
+        playerVars: { start: Math.floor(start), end: Math.ceil(win.to), autoplay: 1, playsinline: 1, rel: 0, controls: REEL ? 0 : 1, iv_load_policy: 3 },
+        events: {
+          onReady: function () {
+            if (tok !== S.token) return;
+            p.setPlaybackRate(S.rate);
+            p.playVideo();
+            media = {
+              rate: function (r) { p.setPlaybackRate(r); },
+              time: function () { return p.getCurrentTime(); },
+              toggle: function () { if (state === 1) { p.pauseVideo(); return true; } p.playVideo(); return false; },
+              seekTo: function (f) { var d = p.getDuration(); if (d) p.seekTo(winAt(f, d), true); },
+              unmute: function () { p.unMute(); p.playVideo(); },
+              setHd: function () {}, // YouTube picks the quality itself
+              destroy: media.destroy
+            };
+            poll = setInterval(function () { if (state === 1) showProgress(p.getCurrentTime(), p.getDuration()); }, 500);
+            // no sound allowed yet (iPhone): play muted and offer the sound button
+            setTimeout(function () {
+              if (tok !== S.token || state === 1 || userPaused) return;
+              p.mute(); p.playVideo(); mutedByUs = true; ui.unmute.hidden = false;
+            }, 1500);
+          },
+          onStateChange: function (e) {
+            if (tok !== S.token) return;
+            state = e.data;
+            if (state === 1) setPaused(false);
+            else if (state === 2) setPaused(true);
+            else if (state === 0) videoEnded(); // the player stops at end=… (the window's end)
+          },
+          onError: failed
+        }
+      });
+    }).catch(failed);
   }
 
   // HD → the player's automatic choice; otherwise the smallest picture of at least 240p

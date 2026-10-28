@@ -7,7 +7,7 @@ on:
     - cron: "17 2 * * 1"        # Mondays 09:17 Hanoi time
   push:
     branches: ["gh-page"]
-    paths: ["lib.txt"]
+    paths: ["lib.txt", "tools/clips/user/**"]   # new words, or subtitles archived from index-ai.html
   workflow_dispatch:
 
 permissions:
@@ -24,6 +24,8 @@ jobs:
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 50   # to see which files the push changed
 
       - uses: actions/setup-node@v4
         with:
@@ -36,8 +38,19 @@ jobs:
           key: clips-cache-${{ github.run_id }}
           restore-keys: clips-cache-
 
+      # a push that only archives subtitles just re-indexes (a minute); anything else also harvests
       - name: Harvest subtitles and build index
-        run: node tools/clips/build.mjs --minutes 40
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          # (only when the subtitle cache came back: without it an offline build would drop every other video)
+          if [ "${{ github.event_name }}" = "push" ] && [ -d tools/clips/.cache/videos ] \
+             && [ -n "$BEFORE" ] && git cat-file -e "$BEFORE" 2>/dev/null \
+             && ! git diff --name-only "$BEFORE" HEAD | grep -qv '^tools/clips/user/'; then
+            node tools/clips/build.mjs --offline
+          else
+            node tools/clips/build.mjs --minutes 40
+          fi
 
       # low-resolution copies so clips start faster on phones
       - name: Find lighter video versions

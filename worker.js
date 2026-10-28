@@ -1,6 +1,6 @@
 const OWNER  = 'nhung168';
 const REPO   = 'vocabulary-builder';
-const BRANCH = 'gh-pages';
+const BRANCH = 'gh-page';
 const PATH   = 'lib.txt';
 
 const ALLOWED_ORIGINS = [
@@ -17,6 +17,54 @@ function corsHeaders(origin) {
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type',
   };
+}
+
+// any file in the repo → { text, sha } (text null when it doesn't exist yet)
+async function ghReadFile(token, path) {
+  const url = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}?ref=${BRANCH}`;
+  const r = await fetch(url, {
+    headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'User-Agent': 'vocab-worker' }
+  });
+  if (r.status === 404) return { text: null, sha: null };
+  if (!r.ok) throw new Error(`GitHub GET ${r.status}: ${await r.text()}`);
+  const j = await r.json();
+  return { text: j.content ? new TextDecoder('utf-8').decode(Uint8Array.from(atob(j.content.replace(/\n/g, '')), c => c.charCodeAt(0))) : '', sha: j.sha };
+}
+
+// create or replace a file (sha: the current version, or null for a new file)
+async function ghWriteFile(token, path, text, sha, message) {
+  const bytes = new TextEncoder().encode(text);
+  let bin = '';
+  for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode(...bytes.subarray(i, i + 0x8000)); // big files
+  const r = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`, {
+    method: 'PUT',
+    headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json', 'User-Agent': 'vocab-worker' },
+    body: JSON.stringify({ message, content: btoa(bin), branch: BRANCH, ...(sha ? { sha } : {}) })
+  });
+  if (!r.ok) throw new Error(`GitHub PUT ${r.status}: ${await r.text()}`);
+}
+
+// ── subtitles archived from index-ai.html → tools/clips/user/<lang>/<id>.json, indexed by the clips workflow ──
+const ARCHIVE_LANGS = { English: 'en', Chinese: 'zh', Spanish: 'es' };
+
+// YouTube watch / short / embed links → { y: id }; a direct video file → { u: url }
+function videoOf(link) {
+  let u;
+  try { u = new URL(link); } catch { return null; }
+  if (!/^https?:$/.test(u.protocol)) return null;
+  const host = u.hostname.replace(/^(www|m|music)\./, '');
+  let id = null;
+  if (host === 'youtube.com' || host === 'youtube-nocookie.com') {
+    id = u.searchParams.get('v') || (u.pathname.match(/^\/(?:shorts|embed|live)\/([\w-]{11})/) || [])[1];
+  } else if (host === 'youtu.be') id = u.pathname.slice(1, 12);
+  if (id && /^[\w-]{11}$/.test(id)) return { y: id, name: id };
+  if (/\.(mp4|m4v|webm|ogv|mov)$/i.test(u.pathname)) return { u: u.href };
+  return null;
+}
+
+async function sha1hex(s) {
+  const d = await crypto.subtle.digest('SHA-1', new TextEncoder().encode(s));
+  return [...new Uint8Array(d)].map(b => b.toString(16).padStart(2, '0')).join('').slice(0, 16);
 }
 
 async function ghGet(token) {
@@ -171,6 +219,32 @@ export default {
         return Response.json({ ok: true, skipped: false, row: 2, total: finalLines.length }, { headers: cors });
 
       } catch(e) {
+        return Response.json({ ok: false, error: e.message }, { status: 500, headers: cors });
+      }
+    }
+
+    // POST /archive  { language, url, title, segs: [[start, end, text], …] }
+    if (request.method === 'POST' && pathname === '/archive') {
+      try {
+        if (!env.GITHUB_TOKEN) throw new Error('GITHUB_TOKEN not configured');
+        const body = await request.json();
+        const code = ARCHIVE_LANGS[body.language];
+        if (!code) return Response.json({ ok: false, error: `language must be one of ${Object.keys(ARCHIVE_LANGS).join(', ')}` }, { status: 400, headers: cors });
+        const video = videoOf(String(body.url || '').trim());
+        if (!video) return Response.json({ ok: false, error: 'Use a YouTube link or a direct link to a video file (.mp4, .webm…)' }, { status: 400, headers: cors });
+        const segs = (Array.isArray(body.segs) ? body.segs : [])
+          .map(s => [+(+s[0]).toFixed(2), +(+s[1]).toFixed(2), String(s[2] || '').replace(/\s+/g, ' ').trim().slice(0, 500)])
+          .filter(s => isFinite(s[0]) && s[1] > s[0] && s[2]);
+        if (segs.length < 3) return Response.json({ ok: false, error: 'needs at least 3 timed subtitle lines' }, { status: 400, headers: cors });
+        if (segs.length > 20000) return Response.json({ ok: false, error: 'too many subtitle lines' }, { status: 413, headers: cors });
+
+        const name = video.name || await sha1hex(video.u);
+        const path = `tools/clips/user/${code}/${name}.json`;
+        const file = { t: String(body.title || '').slice(0, 200) || (video.y ? `YouTube ${video.y}` : video.u), url: body.url, y: video.y, u: video.u, segs };
+        const { sha } = await ghReadFile(env.GITHUB_TOKEN, path);
+        await ghWriteFile(env.GITHUB_TOKEN, path, JSON.stringify(file) + '\n', sha, `clips: archive subtitles (${code}) ${name}`);
+        return Response.json({ ok: true, updated: !!sha, path, lines: segs.length }, { headers: cors });
+      } catch (e) {
         return Response.json({ ok: false, error: e.message }, { status: 500, headers: cors });
       }
     }

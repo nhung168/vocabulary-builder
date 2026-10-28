@@ -8,6 +8,7 @@
 //
 // Input:  lib.txt (word<TAB>definition<TAB>language); one index per language in config.json → languages
 // Cache:  tools/clips/.cache/ (English) and tools/clips/.cache/<langCode>/   (downloaded subtitles; not published)
+// Also:   tools/clips/user/<langCode>/*.json   (subtitles archived from index-ai.html; committed, always used)
 // Output: clips/<out>/videos.json + clips/<out>/index/<letter>.json   (read by clips/clips.js; English: out = "")
 
 import fs from 'node:fs';
@@ -143,11 +144,33 @@ async function harvestPeertube() {
 }
 
 // ── indexing ──
+// videos the learner archived from index-ai.html: { t, url, y (YouTube id) | u (file URL), segs: [[start, end, text]] }
+function loadUserVideos() {
+  const dir = path.join(HERE, 'user', cfg.langCode);
+  if (!fs.existsSync(dir)) return [];
+  const out = [];
+  for (const f of fs.readdirSync(dir).filter(f => f.endsWith('.json')).sort()) {
+    try {
+      const v = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'));
+      if (!v.y && !v.u) continue;
+      out.push({
+        key: 'user:' + f, s: v.y ? 'youtube' : 'link', user: true, t: v.t || v.url, y: v.y, u: v.u,
+        p: v.y ? `https://www.youtube.com/watch?v=${v.y}` : v.url,
+        segs: (v.segs || []).map(([start, end, text]) => ({ start: +start, end: +end, text: String(text || '') }))
+          .filter(sg => isFinite(sg.start) && sg.end > sg.start && sg.text),
+      });
+    } catch (e) { warn(`user video ${f}`, e); }
+  }
+  return out;
+}
+
 function buildIndex(words) {
+  const user = loadUserVideos();
   const videos = fs.readdirSync(VCACHE).filter(f => f.endsWith('.json'))
     .map(f => JSON.parse(fs.readFileSync(path.join(VCACHE, f), 'utf8')))
+    .concat(user)
     .sort((a, b) => a.key.localeCompare(b.key));
-  log(`Indexing ${words.length} words against ${videos.length} videos`);
+  log(`Indexing ${words.length} words against ${videos.length} videos (${user.length} archived by you)`);
 
   // token → [[videoIdx, segIdx], …] so each word only checks segments that contain it
   const inv = new Map();
@@ -184,7 +207,8 @@ function buildIndex(words) {
       if (!m) continue;
       const dur = end - sg.start;
       if (dur > 25 || text.length > 260) continue;
-      const score = -Math.abs(dur - 6) / 2 - Math.abs(text.length - idealLen) / (idealLen / 2) + (/^[A-Z]/.test(text) ? 0.5 : 0);
+      const score = -Math.abs(dur - 6) / 2 - Math.abs(text.length - idealLen) / (idealLen / 2) + (/^[A-Z]/.test(text) ? 0.5 : 0)
+        + (v.user ? 3 : 0); // videos you archived come first
       cands.push({ vi, start: sg.start, end, text, m, score });
     }
     if (!cands.length) continue;
@@ -212,7 +236,7 @@ function buildIndex(words) {
   const outVideos = [];
   for (const [vi, oi] of used) {
     const v = videos[vi];
-    outVideos[oi] = Object.fromEntries(Object.entries({ s: v.s, t: v.t, u: v.u, e: v.e, p: v.p }).filter(([, x]) => x));
+    outVideos[oi] = Object.fromEntries(Object.entries({ s: v.s, t: v.t, u: v.u, e: v.e, y: v.y, p: v.p }).filter(([, x]) => x));
   }
   fs.rmSync(path.join(OUT, 'index'), { recursive: true, force: true });
   fs.mkdirSync(path.join(OUT, 'index'), { recursive: true });

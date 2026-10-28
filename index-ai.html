@@ -6,8 +6,21 @@
 <title>Video Vocabulary Builder</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:system-ui,sans-serif;background:#f5f4f0;color:#1a1a1a;min-height:100vh;display:flex;justify-content:center;padding:2rem 1rem}
-#app{width:100%;max-width:900px}
+body{font-family:system-ui,sans-serif;background:#f5f4f0;color:#1a1a1a;min-height:100vh}
+#app{width:100%;max-width:900px;margin:0 auto;padding:2rem 1rem}
+
+/* Site navigation, same as the other pages (style.css .header-10; copied here because style.css's
+   global body/button rules would clash with this page) */
+.header-10{width:100%;height:80px;background:#233240;color:#fff}
+.header-10 .container{display:flex;flex-wrap:wrap;justify-content:right;width:100%;margin:20px 0 80px}
+.header-10 ul{margin:16px 0;padding-left:40px;white-space:nowrap} /* the browser's list spacing, which the reset above removes */
+.header-10 ul > a{padding:29px 20px 27px;font-family:serif;font-size:25px;font-weight:600;color:#fff;text-decoration:underline}
+/* phones: smaller links that scroll sideways instead of widening the page */
+@media(max-width:700px){
+  .header-10 .container{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;overflow-y:hidden;margin-bottom:0}
+  .header-10 ul{padding-left:4px}
+  .header-10 ul > a{font-size:18px;padding:29px 10px 27px}
+}
 h2{font-size:20px;font-weight:500}
 .muted{color:#777;font-size:13px}
 input[type=text],textarea{font-family:inherit;font-size:14px;border:1px solid #d0d0d0;border-radius:8px;background:#fff;outline:none;color:#1a1a1a;padding:10px 14px}
@@ -79,6 +92,17 @@ button{cursor:pointer;font-family:inherit;font-size:14px}
 </style>
 </head>
 <body>
+<header class="header-10">
+  <div class="container">
+    <ul class="pull-left">
+      <a href="index.html">Flash Card</a>
+      <a href="list.html">My Dictionary</a>
+      <a href="Data.html">Practice</a>
+      <a href="index-ai.html">Listening</a>
+      <a href="matching.html">Matching</a>
+    </ul>
+  </div>
+</header>
 <div id="app">
   <div style="margin-bottom:1.5rem">
     <h2>Video Vocabulary Builder</h2>
@@ -187,6 +211,15 @@ The economy is about choices.
       <iframe id="vp-frame" src="" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;border:none;display:block"></iframe>
     </div>
     <div style="background:#fff;border:.5px solid #e0e0e0;border-radius:12px;max-height:300px;overflow-y:auto;margin-bottom:14px" id="script-panel"></div>
+    <!-- save these subtitles so the flash-card pages can play this video for every word in it -->
+    <div class="card" id="archive-box" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+      <span style="font-size:13px;color:#555;flex:1;min-width:180px">Use this video in the flash cards</span>
+      <select id="archive-lang" style="font:inherit;font-size:13px;padding:7px 8px;border:1px solid #d0d0d0;border-radius:8px;background:#fff">
+        <option>English</option><option>Chinese</option><option>Spanish</option>
+      </select>
+      <button class="btn btn-dark" id="archive-btn" onclick="archiveSubs()">Archive subtitles</button>
+      <div id="archive-msg" class="muted" style="width:100%"></div>
+    </div>
     <div class="pick-hint">
       <span>👆 <b>Click</b> — select a word</span>
       <span>↔ <b>Click &amp; drag</b> — select a phrase</span>
@@ -330,7 +363,7 @@ const SOURCES = [
       if (!r.ok) throw new Error(j.detail || j.error || `HTTP ${r.status}`);
       if (Array.isArray(j.segments) && j.segments.length)
         return j.segments.map(x => ({ start: +x.start||0, dur: +x.duration||2, text: (x.text||'').trim(), trans: '' })).filter(x=>x.text);
-      if (j.transcript) return splitIntoSegments(j.transcript);
+      if (j.transcript) return splitIntoSegments(j.transcript); // no timings
       throw new Error('No content');
     }
   }
@@ -478,6 +511,7 @@ function parseTimestampedText(raw){
     subs.push(...splitIntoSegments(lines.join(" ")));
   }
   for(let k=0;k<subs.length-1;k++)subs[k].dur=Math.max(1,subs[k+1].start-subs[k].start);
+  subs.timed=lines.some(l=>tsRe.test(l)); // plain text gets made-up timings
   return subs;
 }
 
@@ -496,6 +530,7 @@ function splitIntoSegments(text){
   const words=text.split(/\s+/).filter(Boolean);
   const subs=[];let i=0,t=0;
   while(i<words.length){subs.push({start:t,dur:3,text:words.slice(i,i+10).join(" "),trans:""});i+=10;t+=3;}
+  subs.timed=false; // made-up timings: not good enough to play clips from
   return subs;
 }
 
@@ -603,6 +638,50 @@ function renderStep2(){
     </div>`).join("");
 
   renderPicker();
+  renderArchiveBox();
+}
+
+/* ── Archive: subtitles → repo (via the Worker) → clip index used by Language/*.html ── */
+function guessLanguage(){
+  const text=S.subs.slice(0,80).map(s=>s.text).join(" ");
+  const cjk=(text.match(/[\u4e00-\u9fff]/g)||[]).length;
+  if(cjk>text.replace(/\s/g,"").length*0.3)return "Chinese";
+  const es=(text.match(/[ñ¿¡]|\b(que|los|las|está|para|pero|muy|también)\b/gi)||[]).length;
+  return es>8?"Spanish":"English";
+}
+function archiveVideoUrl(){
+  if(S.ytId)return `https://www.youtube.com/watch?v=${S.ytId}`;
+  return /^https?:\/\/\S+\.(mp4|m4v|webm|ogv|mov)(\?\S*)?$/i.test(S.url)?S.url:"";
+}
+function renderArchiveBox(){
+  const btn=document.getElementById("archive-btn"),msg=document.getElementById("archive-msg");
+  document.getElementById("archive-lang").value=guessLanguage();
+  btn.textContent="Archive subtitles";
+  const why=!archiveVideoUrl()?"Add a YouTube link (or a direct .mp4 / .webm link) in step 1 to archive these subtitles."
+    :S.subs.timed===false?"These subtitles have no timestamps, so clips can't be cut from them.":"";
+  btn.disabled=!!why;
+  msg.textContent=why||"Every word from your dictionary that is spoken in this video will get it as an example clip.";
+}
+async function archiveSubs(){
+  const btn=document.getElementById("archive-btn"),msg=document.getElementById("archive-msg");
+  const url=archiveVideoUrl();if(!url)return;
+  btn.disabled=true;btn.textContent="Archiving…";msg.textContent="";
+  try{
+    let title="";
+    if(S.ytId){ // best effort: the page shows it above the clip
+      try{const j=await (await fetch(`https://noembed.com/embed?url=${encodeURIComponent(url)}`)).json();title=j.title||"";}catch{}
+    }
+    const segs=S.subs.map(s=>[s.start,s.start+Math.min(Math.max(s.dur||2,0.5),12),s.text]);
+    const r=await fetch(`${WORKER_URL}/archive`,{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({language:document.getElementById("archive-lang").value,url,title,segs})});
+    const j=await r.json().catch(()=>({error:`HTTP ${r.status}`}));
+    if(!r.ok||!j.ok)throw new Error(j.error||`HTTP ${r.status}`);
+    btn.textContent=j.updated?"✓ Updated":"✓ Archived";
+    msg.textContent=`Saved ${j.lines} lines. The flash cards will include this video in a few minutes, once the clip index rebuilds.`;
+  }catch(e){
+    btn.disabled=false;btn.textContent="Archive subtitles";
+    msg.innerHTML=`<span style="color:#c0392b">Archive failed: ${esc(e.message)}</span>`;
+  }
 }
 
 /* ── Word picker — primary language only ── */
