@@ -1,4 +1,5 @@
 word	definition	language
+天 气	Thời tiết ở Bắc Kinh dạo gần đây thực sự rất tệ.	Chinese
 口 红	Son môi của tôi đây rồi.	Chinese
 去 逛 商 场	Chuẩn bị đi mua sắm	Chinese
 Sacred	(adj) connected with God, religion, or a deity, or regarded with deep respect and reverence.	English
