@@ -1,4 +1,5 @@
 word	definition	language
+三 层	B3 là tầng hầm thứ ba.	Chinese
 出 站 口	Tôi cần tìm lối ra của nhà ga xe lửa.	Chinese
 一 块 逛 商 场	Sau đó, tôi sẽ dẫn bạn đi mua sắm ở trung tâm thương mại.	Chinese
 绝 了 绝 了	Tuyệt vời!	Chinese
