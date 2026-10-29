@@ -1,4 +1,5 @@
 word	definition	language
+电 影 院	Ngoài ra, còn có một rạp chiếu phim ở tầng năm.	Chinese
 餐 厅	Hầu hết trong số đó là nhà hàng.	Chinese
 孩 子 们	Hãy nhìn xem, có rất nhiều trẻ em đang học trượt băng ở bên trong.	Chinese
 溜 冰 场	Ở đây có một sân trượt băng.	Chinese
