@@ -1,4 +1,5 @@
 word	definition	language
+坐 便	Một loại là bồn cầu.	Chinese
 蹲 便	Đây được gọi là tư thế ngồi xổm khi đi vệ sinh.	Chinese
 卫 生 间	Này, có nhà vệ sinh ở đây.	Chinese
 衣 服 卖 鞋 子 的	Nhiều cửa hàng trong số đó bán quần áo và giày dép.	Chinese
