@@ -1,4 +1,5 @@
 word	definition	language
+衣 服 卖 鞋 子 的	Nhiều cửa hàng trong số đó bán quần áo và giày dép.	Chinese
 小 蜜 蜂	Wow, chú ong nhỏ này dễ thương quá!	Chinese
 化 妆 品 店	Ngoài ra còn có các cửa hàng mỹ phẩm.	Chinese
 服 装 店	Sẽ có thêm nhiều cửa hàng quần áo.	Chinese
