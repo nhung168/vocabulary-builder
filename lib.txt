@@ -1,4 +1,5 @@
 word	definition	language
+原 则	Có một nguyên tắc.	Chinese
 条 长 裙	Có một chiếc áo và một chiếc váy dài.	Chinese
 一 件 白 色 的 t 恤	Đây là một chiếc áo phông trắng.	Chinese
 坐 便	Một loại là bồn cầu.	Chinese
