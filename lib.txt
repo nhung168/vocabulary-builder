@@ -1,4 +1,5 @@
 word	definition	language
+手 工 艺 品	Các sản phẩm thủ công mỹ nghệ ở cửa hàng này trông rất độc đáo và đẹp mắt.	Chinese
 麦 当 劳	Trong tiếng Trung, chúng tôi gọi đây là McDonald's.	Chinese
 首 饰 啊	Đồ trang sức và những thứ tương tự	Chinese
 种 电 梯	Còn loại thang máy này thì sao?	Chinese
