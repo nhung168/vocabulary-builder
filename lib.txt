@@ -1,4 +1,5 @@
 word	definition	language
+售 票 处	Đây là quầy bán vé.	Chinese
 检 票 口	Đây là điểm kiểm soát vé của rạp chiếu phim.	Chinese
 电 影 院	Ngoài ra, còn có một rạp chiếu phim ở tầng năm.	Chinese
 餐 厅	Hầu hết trong số đó là nhà hàng.	Chinese
