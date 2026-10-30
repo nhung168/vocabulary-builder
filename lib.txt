@@ -1,37 +1,34 @@
 word	definition	language
-顶 层	Đây là tầng cao nhất của trung tâm mua sắm.	Chinese
-售 票 处	Đây là quầy bán vé.	Chinese
-检 票 口	Đây là điểm kiểm soát vé của rạp chiếu phim.	Chinese
-电 影 院	Ngoài ra, còn có một rạp chiếu phim ở tầng năm.	Chinese
-餐 厅	Hầu hết trong số đó là nhà hàng.	Chinese
-孩 子 们	Hãy nhìn xem, có rất nhiều trẻ em đang học trượt băng ở bên trong.	Chinese
-溜 冰 场	Ở đây có một sân trượt băng.	Chinese
-原 则	Có một nguyên tắc.	Chinese
-条 长 裙	Có một chiếc áo và một chiếc váy dài.	Chinese
-一 件 白 色 的 t 恤	Đây là một chiếc áo phông trắng.	Chinese
-坐 便	Một loại là bồn cầu.	Chinese
-蹲 便	Đây được gọi là tư thế ngồi xổm khi đi vệ sinh.	Chinese
-卫 生 间	Này, có nhà vệ sinh ở đây.	Chinese
-衣 服 卖 鞋 子 的	Nhiều cửa hàng trong số đó bán quần áo và giày dép.	Chinese
-小 蜜 蜂	Wow, chú ong nhỏ này dễ thương quá!	Chinese
-化 妆 品 店	Ngoài ra còn có các cửa hàng mỹ phẩm.	Chinese
-服 装 店	Sẽ có thêm nhiều cửa hàng quần áo.	Chinese
-手 工 艺 品	Các sản phẩm thủ công mỹ nghệ ở cửa hàng này trông rất độc đáo và đẹp mắt.	Chinese
-麦 当 劳	Trong tiếng Trung, chúng tôi gọi đây là McDonald's.	Chinese
-首 饰 啊	Đồ trang sức và những thứ tương tự	Chinese
-种 电 梯	Còn loại thang máy này thì sao?	Chinese
-电 梯	Còn loại thang máy này thì sao?	Chinese
-宜 家	Trong tiếng Trung, chúng tôi gọi IKEA là "宜家宜家宜家".	Chinese
-负 一 层	Đó là tầng hầm.	Chinese
-小 吃 店	Sẽ có rất nhiều cửa hàng bán đồ ăn nhẹ và nhà hàng.	Chinese
-一 层	Đó là tầng hầm.	Chinese
-三 层	B3 là tầng hầm thứ ba.	Chinese
-出 站 口	Tôi cần tìm lối ra của nhà ga xe lửa.	Chinese
-一 块 逛 商 场	Sau đó, tôi sẽ dẫn bạn đi mua sắm ở trung tâm thương mại.	Chinese
-绝 了 绝 了	Tuyệt vời!	Chinese
-天 气	Thời tiết ở Bắc Kinh dạo gần đây thực sự rất tệ.	Chinese
-口 红	Son môi của tôi đây rồi.	Chinese
-去 逛 商 场	Chuẩn bị đi mua sắm	Chinese
+顶 层	(dǐng céng) tầng cao nhất	Chinese
+售 票 处	(shòu piào chù) quầy bán vé.	Chinese
+检 票 口	(jiǎn piào kǒu) điểm kiểm soát vé	Chinese
+电 影 院	(diàn yǐng yuàn) rạp chiếu phim	Chinese
+餐 厅	(cān tīng)canteen	Chinese
+孩 子 们	(hái zi men)trẻ em	Chinese
+溜 冰 场	(liū bīng chǎng)sân trượt băng.	Chinese
+原 则	(yuán zé) nguyên tắc.	Chinese
+条 长 裙	(tiáo cháng qún)chiếc váy dài.	Chinese
+一 件 白 色 的 t 恤	(yī jiàn bái sè de t-xù) một chiếc áo phông trắng.	Chinese
+坐 便	(zuò biàn)Flush toilet	Chinese
+蹲 便	(dūn biàn)squat toilet	Chinese
+卫 生 间	(wèi shēng jiān)nhà vệ sinh	Chinese
+衣 服 卖 鞋	(yī fu mài xié)cửa hàng bán quần áo bao gồm giày dép.	Chinese
+小 蜜 蜂	(xiǎo mì fēng)chú ong nhỏ	Chinese
+化 妆 品 店	(huà zhuāng pǐn diàn)cửa hàng mỹ phẩm.	Chinese
+服 装 店	(fú zhuāng diàn)apparel boutique	Chinese
+手 工 艺 品	(shǒu gōng yì pǐn) Handicraft	Chinese
+麦 当 劳	(mài dāng láo)McDonald's	Chinese
+首 饰 啊	(shǒu shì a) Đồ trang sức	Chinese
+电 梯	(diàn tī) thang máy	Chinese
+宜 家	(yí jiā)IKEA	Chinese
+负 一 层	(fù yī céng)tầng hầm.	Chinese
+小 吃 店	(xiǎo chī diàn)đồ ăn nhẹ	Chinese
+出 站 口	(chū zhàn kǒu)lối ra	Chinese
+一 块 逛 商 场	(yī kuài guàng shāng chǎng)đi mua sắm ở trung tâm thương mại.	Chinese
+绝 了	(jué le)Tuyệt vời	Chinese
+天 气	(tiān qì)Thời tiết	Chinese
+口 红	(kǒu hóng)son môi 	Chinese
+去 逛 商 场	(qu guang shang chang) đi mua sắm	Chinese
 Sacred	(adj) connected with God, religion, or a deity, or regarded with deep respect and reverence.	English
 suave	(adj)  A man is very polite, pleasant, and usually attractive, often in a way that is slightly false	English
 Quadrennial	happening once every four years or lasting for a period of four years.	English
