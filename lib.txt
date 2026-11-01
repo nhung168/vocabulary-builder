@@ -1,4 +1,44 @@
 word	definition	language
+味 道	mô tả mùi vị của món ăn, (wèi dào)	Chinese
+口 感	kết cấu của món ăn, (kǒu gǎn)	Chinese
+酸	chua, (suān)	Chinese
+甜	ngọt (tián)	Chinese
+辣	cay (là)	Chinese
+聊 吃	nói về chủ đề đồ ăn (small-talk about food) (liáo chī)	Chinese
+聊 食	nói về chủ đề đồ ăn vặt (small-talk about food) (liáo shí)	Chinese
+榴 莲 酥	bánh ngọt sầu riêng. (liú lián sū)	Chinese
+榴 莲 味 的	có hương vị sầu riêng (liú lián wèi de)	Chinese
+味 儿 的	có hương vị (wèi ér de)	Chinese
+苹 果 味 儿 的	có vị táo. (píng guǒ wèi ér de)	Chinese
+撕 开	xé nó ra (sī kāi)	Chinese
+很 臭	Hôi quá (hěn chòu)	Chinese
+糕 点	bánh ngọt (gāo diǎn)	Chinese
+吃 起 来	"Có mùi như" (chī qǐ lái)	Chinese
+闻 起 来	"có vị như" (wén qǐ lái)	Chinese
+很 甜	ngọt lắm (hěn tián)	Chinese
+山 楂 片	lát táo gai. (shān zhā piàn)	Chinese
+没 开 封	chưa mở, chưa mở. (méi kāi fēng)	Chinese
+打 开 了	đã mở rồi (dǎ kāi le)	Chinese
+它 有 点 儿	Hơi chua một chút. (tā yǒu diǎn er)	Chinese
+很 它 很 酸	"Rất" — nó rất chua. (hěn tā hěn suān)	Chinese
+它 非 常 酸	nó chua chát vô cùng, chua chát vô cùng. (tā fēi cháng suān)	Chinese
+它 太 酸 了	Chua quá. (tā tài suān le)	Chinese
+威 化 饼 干	bánh quy wafer, bánh quy wafer. (wēi huà bǐng gān)	Chinese
+小 包 装	bao bì riêng lẻ. (xiǎo bāo zhuāng)	Chinese
+非 常 的 脆	Giòn thật. (fēi cháng de cuì)	Chinese
+椰 子 味 的	có vị dừa. (yē zǐ wèi de)	Chinese
+吃 光 了	đã ăn hết rồi. (chī guāng le)	Chinese
+薯 片	khoai tây chiên. (shǔ piàn)	Chinese
+垃 圾 食	đồ ăn vặt (lā jī shí)	Chinese
+有 点 咸	Vị hơi mặn (yǒu diǎn xián)	Chinese
+手 指	liếm ngón tay của bạn. (shǒu zhǐ)	Chinese
+擦 一 下 手	Lau tay đi. (cā yí xià shǒu)	Chinese
+沙 琪 玛	sachima. (shā qí mǎ)	Chinese
+有 点 饱 了	hơi no rồi. (yǒu diǎn bǎo le)	Chinese
+很 粘	rất dính. (hěn nián)	Chinese
+它 入 口 即 化	tan chảy trong miệng của bạn. (tā rù kǒu jí huà)	Chinese
+太 硬	Khó quá (tài yìng)	Chinese
+吐 出 来 了	Tôi nhổ nó ra. (tǔ chū lái le)	Chinese
 顶 层	(dǐng céng) tầng cao nhất	Chinese
 售 票 处	(shòu piào chù) quầy bán vé.	Chinese
 检 票 口	(jiǎn piào kǒu) điểm kiểm soát vé	Chinese
