@@ -1,12 +1,12 @@
 {
- "words": 30,
- "wordsWithClips": 29,
- "videosUsed": 98,
- "videosCached": 1723,
+ "words": 70,
+ "wordsWithClips": 69,
+ "videosUsed": 211,
+ "videosCached": 1725,
  "bySource": {
-  "youtube": 1,
-  "archive": 82,
-  "peertube": 9,
-  "commons": 6
+  "youtube": 2,
+  "archive": 161,
+  "peertube": 36,
+  "commons": 12
  }
 }
