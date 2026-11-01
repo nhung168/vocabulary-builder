@@ -48,28 +48,36 @@ button{cursor:pointer;font-family:inherit;font-size:14px}
 .step-dot.active .num{border-color:#1a1a1a;color:#1a1a1a}
 .step-line{flex:1;height:1px;background:#e0e0e0;margin:0 8px;align-self:center}
 
-/* Script panel — dual language */
-.sub-line{padding:8px 14px;border-bottom:.5px solid #f0f0f0;display:flex;gap:12px;cursor:pointer;transition:background .1s;content-visibility:auto;contain-intrinsic-size:auto 40px}
-.sub-line:last-child{border-bottom:none}
-.sub-line:hover{background:#fafaf8}
-.sub-line.hi{background:#fffbe6}
-.sub-line .ts{font-family:monospace;font-size:11px;color:#bbb;min-width:48px;flex-shrink:0;padding-top:3px}
-.sub-line .sub-content{display:flex;flex-direction:column;gap:2px;flex:1}
-.sub-primary{font-size:13px;color:#1a1a1a;line-height:1.5}
-.sub-trans{font-size:12px;color:#aaa;line-height:1.4;font-style:italic}
+/* Step 2: video on the left, subtitles in a sidebar that follows the video */
+#app.wide{max-width:1240px}
+.watch{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(320px,1fr);gap:16px;align-items:start}
+.watch.no-video{grid-template-columns:minmax(0,1fr) minmax(320px,1.4fr)}
+.subs-side{position:sticky;top:12px;display:flex;flex-direction:column;height:min(720px,calc(100vh - 24px));background:#fff;border:.5px solid #e0e0e0;border-radius:12px;overflow:hidden}
+.subs-head{padding:10px 12px;border-bottom:.5px solid #e8e8e8}
+.subs-title{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px}
+.subs-title .lbl{margin:0}
+.follow{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:#666;cursor:pointer}
+@media(max-width:860px){
+  .watch,.watch.no-video{grid-template-columns:minmax(0,1fr)}
+  .subs-side{position:static;height:60vh}
+}
 
-/* Word picker */
-.word-zone{border:1px dashed #ccc;border-radius:10px;padding:14px;min-height:80px;background:#fafaf8;font-size:15px;line-height:2.4;user-select:none;-webkit-user-select:none;cursor:crosshair}
+/* Word picker: the subtitles themselves */
+.word-zone{flex:1;min-height:0;overflow-y:auto;position:relative;background:#fff;font-size:15px;line-height:1.9;user-select:none;-webkit-user-select:none;cursor:crosshair}
 .w,.cjk{display:inline;cursor:crosshair;border-radius:3px;padding:2px 1px;transition:background .08s}
 .w:hover,.cjk:hover{background:#ffe9a0}
 /* highlights only change colour: a change of width (padding, bold) re-laid out the whole transcript on every mouse move */
 .w.sel,.cjk.sel{background:#ffd640;box-shadow:0 0 0 2px #ffd640;border-radius:4px}
 .w.preview,.cjk.preview{background:#fff0a0;box-shadow:0 0 0 2px #fff0a0;border-radius:4px}
 /* one block per subtitle line; lines off screen are not laid out or drawn (long films have thousands) */
-.seg{content-visibility:auto;contain-intrinsic-size:auto 38px;border-bottom:1px dashed #ececec;padding:0 0 2px}
+.seg{display:flex;gap:10px;padding:5px 12px;border-bottom:.5px solid #f2f2f0;content-visibility:auto;contain-intrinsic-size:auto 44px}
 .seg:last-child{border-bottom:none}
-.seg-trans{display:block;font-size:11px;color:#bbb;font-style:italic;line-height:1.6;margin:0 0 6px 2px}
-.pick-hint{font-size:12px;color:#aaa;margin-bottom:8px;display:flex;gap:16px;flex-wrap:wrap}
+.seg.now{background:#fffbe6;box-shadow:inset 3px 0 0 #ffd640}
+.seg-body{flex:1;min-width:0}
+.seg-ts{flex-shrink:0;min-width:40px;height:fit-content;margin-top:5px;padding:0;border:none;background:none;font-family:monospace;font-size:11px;line-height:1.4;color:#aaa;text-align:left;cursor:pointer}
+.seg-ts:hover{color:#2a56db;text-decoration:underline}
+.seg-trans{display:block;font-size:12px;color:#aaa;font-style:italic;line-height:1.5}
+.pick-hint{font-size:11px;color:#aaa;display:flex;gap:10px;flex-wrap:wrap}
 .pick-hint b{color:#666}
 
 /* Flashcard layout */
@@ -94,6 +102,13 @@ button{cursor:pointer;font-family:inherit;font-size:14px}
 .tabs{display:flex;border:.5px solid #e0e0e0;border-radius:8px;overflow:hidden;margin-bottom:12px}
 .tab{flex:1;padding:8px;font-size:13px;border:none;background:#f5f4f0;color:#666;cursor:pointer;font-family:inherit}
 .tab.active{background:#1a1a1a;color:#fff;font-weight:500}
+
+/* Step 3: fields saved to lib.txt */
+input.field,textarea.field{display:block;width:100%;font:inherit;font-size:13px;line-height:1.5;padding:7px 10px;border:1px solid #d0d0d0;border-radius:8px;background:#fff;color:#1a1a1a;outline:none;resize:vertical}
+.field:focus{border-color:#888}
+.field:disabled{background:#f5f4f0;color:#777}
+.field-lbl{display:block;font-size:11px;color:#999;margin:8px 0 3px}
+.saved-mark{font-size:12px;color:#27ae60}
 </style>
 </head>
 <body>
@@ -212,31 +227,43 @@ The economy is about choices.
       </div>
       <button class="btn btn-ghost" onclick="goStep(1)">← Back</button>
     </div>
-    <div id="vid-preview" style="display:none;border-radius:10px;overflow:hidden;background:#111;aspect-ratio:16/9;margin-bottom:12px">
-      <iframe id="vp-frame" src="" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;border:none;display:block"></iframe>
-    </div>
-    <div style="background:#fff;border:.5px solid #e0e0e0;border-radius:12px;max-height:300px;overflow-y:auto;margin-bottom:14px" id="script-panel"></div>
-    <!-- save these subtitles so the flash-card pages can play this video for every word in it -->
-    <div class="card" id="archive-box" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:14px">
-      <span style="font-size:13px;color:#555;flex:1;min-width:180px">Use this video in the flash cards</span>
-      <select id="archive-lang" style="font:inherit;font-size:13px;padding:7px 8px;border:1px solid #d0d0d0;border-radius:8px;background:#fff">
-        <option>English</option><option>Chinese</option><option>Spanish</option>
-      </select>
-      <button class="btn btn-dark" id="archive-btn" onclick="archiveSubs()">Archive subtitles</button>
-      <div id="archive-msg" class="muted" style="width:100%"></div>
-    </div>
-    <div class="pick-hint">
-      <span>👆 <b>Click</b> — select a word</span>
-      <span>↔ <b>Click &amp; drag</b> — select a phrase</span>
-      <span>🔁 <b>Click selected</b> — deselect</span>
-    </div>
-    <div class="word-zone" id="word-picker"></div>
-    <div style="margin-top:12px">
-      <div class="lbl">Selected (<span id="sel-count">0</span>)</div>
-      <div id="sel-tags" style="min-height:28px"></div>
-    </div>
-    <div style="display:flex;justify-content:flex-end;margin-top:14px">
-      <button class="btn btn-dark" id="make-btn" onclick="makeCards()" disabled>Make Flashcards →</button>
+    <div class="watch" id="watch">
+      <div>
+        <div id="vid-preview" style="display:none;border-radius:10px;overflow:hidden;background:#111;aspect-ratio:16/9;margin-bottom:12px">
+          <div id="vp-box" style="width:100%;height:100%"></div>
+        </div>
+        <div class="card" style="margin-bottom:12px">
+          <div class="lbl">Selected (<span id="sel-count">0</span>)</div>
+          <div id="sel-tags" style="min-height:28px"></div>
+          <div style="display:flex;justify-content:flex-end;margin-top:8px">
+            <button class="btn btn-dark" id="make-btn" onclick="makeCards()" disabled>Make Flashcards →</button>
+          </div>
+        </div>
+        <!-- save these subtitles so the flash-card pages can play this video for every word in it -->
+        <div class="card" id="archive-box" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          <span style="font-size:13px;color:#555;flex:1;min-width:180px">Video language</span>
+          <select id="archive-lang" style="font:inherit;font-size:13px;padding:7px 8px;border:1px solid #d0d0d0;border-radius:8px;background:#fff">
+            <option>English</option><option>Chinese</option><option>Spanish</option>
+          </select>
+          <button class="btn btn-dark" id="archive-btn" onclick="archiveSubs()">Archive subtitles</button>
+          <div id="archive-msg" class="muted" style="width:100%"></div>
+        </div>
+      </div>
+      <aside class="subs-side">
+        <div class="subs-head">
+          <div class="subs-title">
+            <span class="lbl">Subtitles</span>
+            <label class="follow" id="follow-box"><input type="checkbox" id="follow" checked/> Auto-scroll</label>
+          </div>
+          <div class="pick-hint">
+            <span><b>Click</b> a word</span>
+            <span><b>Drag</b> for a phrase</span>
+            <span><b>Click again</b> to remove</span>
+            <span><b>Time</b> jumps the video</span>
+          </div>
+        </div>
+        <div class="word-zone" id="word-picker"></div>
+      </aside>
     </div>
   </div>
 
@@ -246,9 +273,11 @@ The economy is about choices.
       <div><div class="lbl" style="margin-bottom:2px">Flashcards</div><span id="card-ctr" class="muted"></span></div>
       <div style="display:flex;gap:8px">
         <button class="btn btn-ghost" onclick="goStep(2)">← Edit</button>
-        <button class="btn btn-ghost" id="view-btn" onclick="toggleView()">List view</button>
+        <button class="btn btn-ghost" id="view-btn" onclick="toggleView()">Edit all</button>
+        <button class="btn btn-dark" id="save-all-btn" onclick="saveAll()">Save to lib</button>
       </div>
     </div>
+    <div id="save-msg" class="muted" style="margin-bottom:12px"></div>
     <div id="prog" style="display:flex;gap:4px;margin-bottom:16px"></div>
     <div id="study-view">
       <div id="front-card" style="background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:2rem;text-align:center;cursor:pointer;margin-bottom:14px" onclick="flipToBack()">
@@ -266,8 +295,15 @@ The economy is about choices.
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                   Pronounce
                 </button>
-                <button class="btn btn-ghost" id="save-lib-btn" onclick="saveToLib()" style="font-size:12px;padding:6px 10px" title="Save to lib.txt on GitHub">Save to lib</button>
               </div>
+            </div>
+            <div>
+              <div id="cb-pinyin-row" style="display:none">
+                <label class="field-lbl" for="cb-pinyin">Pinyin</label>
+                <input class="field" id="cb-pinyin" type="text" oninput="setCard(S.idx,'pinyin',this.value)"/>
+              </div>
+              <label class="field-lbl" for="cb-meaning">Meaning</label>
+              <textarea class="field" id="cb-meaning" rows="2" oninput="setCard(S.idx,'meaning',this.value)"></textarea>
             </div>
             <!-- Dual sentence block -->
             <div class="sentence-block">
@@ -387,6 +423,9 @@ function switchTab(t){
 function goStep(n){
   document.querySelectorAll(".step").forEach(e=>e.classList.remove("active"));
   document.getElementById("step-"+n).classList.add("active");
+  document.getElementById("app").classList.toggle("wide",n===2);
+  if(n!==2)try{ytp?.pauseVideo?.();}catch{}
+  if(n!==3)document.getElementById("cb-video").innerHTML="";
   [1,2,3].forEach(i=>{const e=document.getElementById("nav"+i);e.classList.toggle("done",i<n);e.classList.toggle("active",i===n);});
 }
 function getYtId(url){
@@ -624,31 +663,74 @@ async function processSrtUpload(){
 
 /* ── Step 2 ── */
 function renderStep2(){
-  phrases.length=0;allToks=[];
-  // Video embed
-  if(S.ytId){
-    document.getElementById("vp-frame").src=`https://www.youtube-nocookie.com/embed/${S.ytId}?controls=1&rel=0&playsinline=1`;
-    document.getElementById("vid-preview").style.display="block";
-  }else{
-    document.getElementById("vid-preview").style.display="none";
-  }
+  phrases.length=0;allToks=[];S.cards=[];syncTags();
+  document.getElementById("vid-preview").style.display=S.ytId?"block":"none";
+  document.getElementById("watch").classList.toggle("no-video",!S.ytId);
   document.getElementById("sub-meta").textContent=`${S.subs.length} segments`;
   // Dual badge
   const badge=document.getElementById("dual-badge");
   badge.style.display=S.hasDual?"inline":"none";
-
-  // Script panel — show primary + translation line by line
-  document.getElementById("script-panel").innerHTML=S.subs.map((s,i)=>`
-    <div class="sub-line" id="sl${i}" onclick="seekTo(${s.start})">
-      <span class="ts">${sec2ts(s.start)}</span>
-      <div class="sub-content">
-        <div class="sub-primary">${esc(s.text)}</div>
-        ${s.trans?`<div class="sub-trans">${esc(s.trans)}</div>`:""}
-      </div>
-    </div>`).join("");
+  document.getElementById("follow-box").style.display=S.ytId&&S.subs.timed!==false?"":"none";
 
   renderPicker();
   renderArchiveBox();
+  loadVideo();
+}
+
+/* ── Step 2 video: the sidebar follows it through YouTube's player API ── */
+let ytp=null,ytApi=null,followTimer=null,nowIdx=-1,userScrollAt=0,segEls=[];
+function loadYtApi(){
+  return ytApi||(ytApi=new Promise((res,rej)=>{
+    if(window.YT?.Player)return res();
+    window.onYouTubeIframeAPIReady=res;
+    const s=document.createElement("script");
+    s.src="https://www.youtube.com/iframe_api";
+    s.onerror=()=>{ytApi=null;rej(new Error("YouTube API blocked"));};
+    document.head.appendChild(s);
+  }));
+}
+function embedUrl(sec){
+  return `https://www.youtube-nocookie.com/embed/${S.ytId}?${sec!=null?`start=${Math.floor(sec)}&autoplay=1&`:""}controls=1&rel=0&playsinline=1`;
+}
+async function loadVideo(){
+  clearInterval(followTimer);
+  try{ytp?.destroy?.();}catch{}
+  ytp=null;nowIdx=-1;
+  const box=document.getElementById("vp-box"),id=S.ytId;
+  box.innerHTML="";
+  if(!id)return;
+  try{await loadYtApi();}
+  catch{ // no API (e.g. blocked): a plain player still works, without auto-scroll
+    box.innerHTML=`<iframe src="${embedUrl()}" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="width:100%;height:100%;border:none;display:block"></iframe>`;
+    document.getElementById("follow-box").style.display="none";
+    return;
+  }
+  if(id!==S.ytId)return;
+  const el=document.createElement("div");
+  box.appendChild(el);
+  ytp=new YT.Player(el,{host:"https://www.youtube-nocookie.com",videoId:id,width:"100%",height:"100%",playerVars:{rel:0,playsinline:1}});
+  followTimer=setInterval(followVideo,300);
+}
+// highlight the line being spoken, and keep it in view unless you are scrolling or selecting
+function followVideo(){
+  if(!ytp?.getCurrentTime||S.subs.timed===false||!document.getElementById("step-2").classList.contains("active"))return;
+  const t=ytp.getCurrentTime();
+  let lo=0,hi=S.subs.length-1,i=-1;
+  while(lo<=hi){const mid=(lo+hi)>>1;if(S.subs[mid].start<=t){i=mid;lo=mid+1;}else hi=mid-1;}
+  if(i===nowIdx)return;
+  segEls[nowIdx]?.classList.remove("now");
+  segEls[i]?.classList.add("now");
+  nowIdx=i;
+  if(document.getElementById("follow").checked&&!dragActive&&Date.now()-userScrollAt>4000)scrollToSeg(i);
+}
+// only the sidebar scrolls, never the page
+function scrollToSeg(i){
+  const zone=document.getElementById("word-picker"),el=segEls[i];
+  if(!el)return;
+  const top=()=>el.offsetTop-zone.clientHeight/3;
+  const far=Math.abs(top()-zone.scrollTop)>zone.clientHeight;
+  zone.scrollTo({top:top(),behavior:far?"auto":"smooth"});
+  if(far)requestAnimationFrame(()=>{zone.scrollTop=top();}); // heights of lines off screen are estimates
 }
 
 /* ── Archive: subtitles → repo (via the Worker) → clip index used by Language/*.html ── */
@@ -700,6 +782,8 @@ function renderPicker(){
   let html="";
   S.subs.forEach((seg,si)=>{
     html+=`<div class="seg">`;
+    if(S.subs.timed!==false)html+=`<button class="seg-ts" data-t="${seg.start}" tabindex="-1">${sec2ts(seg.start)}</button>`;
+    html+=`<div class="seg-body">`;
     // Only tokenise primary text, not translation
     tokenise(seg.text).forEach((tok,ti)=>{
       if(tok.type==="space"){html+=" ";return;}
@@ -710,15 +794,18 @@ function renderPicker(){
     });
     // Show translation hint inline under each segment in picker too
     if(seg.trans)html+=`<span class="seg-trans">${esc(seg.trans)}</span>`;
-    html+=`</div>`;
+    html+=`</div></div>`;
   });
   picker.innerHTML=html;
   allToks=[...picker.querySelectorAll(".w,.cjk")];
   allToks.forEach((t,i)=>{t._i=i;});
+  segEls=[...picker.querySelectorAll(".seg")];
   lit.clear();
   applyHighlights();
   picker.onmousedown=pickerDown;
   picker.onmousemove=pickerMove;
+  picker.onclick=e=>{const b=e.target.closest(".seg-ts");if(b)seekTo(+b.dataset.t);};
+  picker.onwheel=picker.ontouchmove=()=>{userScrollAt=Date.now();};
   document.onmouseup=pickerUp;
 }
 
@@ -738,6 +825,7 @@ function applyHighlights(){
 function tokIdx(el){return el._i ?? -1;}
 function nearestTok(e){return e.target.closest(".w,.cjk");}
 function pickerDown(e){
+  userScrollAt=Date.now();
   const el=nearestTok(e);if(!el)return;
   e.preventDefault();dragActive=true;dragStartIdx=tokIdx(el);dragEndIdx=dragStartIdx;applyHighlights();
 }
@@ -753,7 +841,8 @@ function pickerUp(){
   if(dragStartIdx<0){dragStartIdx=-1;dragEndIdx=-1;return;}
   const lo=Math.min(dragStartIdx,dragEndIdx),hi=Math.max(dragStartIdx,dragEndIdx);
   dragStartIdx=-1;dragEndIdx=-1;
-  const existing=phrases.findIndex(p=>p.lo===lo&&p.hi===hi);
+  // clicking any word of a selection removes it
+  const existing=phrases.findIndex(p=>lo===hi?p.lo<=lo&&lo<=p.hi:p.lo===lo&&p.hi===hi);
   if(existing>=0){phrases.splice(existing,1);}
   else{
     const word=allToks.slice(lo,hi+1).map(t=>t.textContent).join(" ");
@@ -771,24 +860,26 @@ function syncTags(){
 }
 function removePhrase(i){phrases.splice(i,1);applyHighlights();syncTags();}
 function seekTo(sec){
-  if(!S.ytId)return;
-  document.getElementById("vp-frame").src=`https://www.youtube-nocookie.com/embed/${S.ytId}?start=${Math.floor(sec)}&autoplay=1&controls=1&rel=0&playsinline=1`;
-  document.querySelectorAll(".sub-line").forEach(e=>e.classList.remove("hi"));
-  const i=S.subs.findIndex(s=>s.start===sec);
-  if(i>=0){const el=document.getElementById("sl"+i);el?.classList.add("hi");el?.scrollIntoView({block:"nearest",behavior:"smooth"});}
+  if(ytp?.seekTo){ytp.seekTo(sec,true);ytp.playVideo();}
+  else{const f=document.querySelector("#vp-box iframe");if(f)f.src=embedUrl(sec);}
+  userScrollAt=0;
 }
 
 /* ── Step 3 ── */
 function makeCards(){
-  S.cards=phrases.map(p=>({word:p.word,ts:p.ts,sentence:p.sentence,trans:p.trans||""}));
+  // going back to add words keeps what was already typed or saved on the others
+  const old=new Map(S.cards.map(c=>[c.word+"@"+c.ts,c]));
+  S.cards=phrases.map(p=>old.get(p.word+"@"+p.ts)||
+    {word:p.word,ts:p.ts,sentence:p.sentence,trans:p.trans||"",meaning:p.trans||p.sentence,pinyin:"",on:true,saved:false});
   if(!S.cards.length)return;
   S.idx=0;S.known=[];S.learning=[];S.view="study";S.showBack=false;
   document.getElementById("results").style.display="none";
   document.getElementById("study-view").style.display="block";
   document.getElementById("list-view").style.display="none";
   document.getElementById("prog").style.display="flex";
-  document.getElementById("view-btn").textContent="List view";
-  renderCard();goStep(3);
+  document.getElementById("view-btn").textContent="Edit all";
+  document.getElementById("save-msg").textContent="";
+  renderCard();goStep(3);syncSave();fillPinyin();
 }
 function renderProg(){
   document.getElementById("prog").innerHTML=S.cards.map((_,i)=>{
@@ -799,6 +890,7 @@ function renderProg(){
 }
 function renderCard(){
   const c=S.cards[S.idx];S.showBack=false;
+  document.getElementById("cb-video").innerHTML="";
   document.getElementById("cf-word").textContent=c.word;
   document.getElementById("cf-ts").textContent="⏱ "+sec2ts(c.ts);
   document.getElementById("front-card").style.display="block";
@@ -810,6 +902,7 @@ function flipToBack(){
   if(S.showBack)return;S.showBack=true;
   const c=S.cards[S.idx];
   document.getElementById("cb-word").textContent=c.word;
+  syncBackFields();
   // Primary sentence
   document.getElementById("cb-sentence-primary").textContent=`"${c.sentence}"`;
   // Translation line
@@ -817,7 +910,7 @@ function flipToBack(){
   if(c.trans){transEl.textContent=c.trans;transEl.style.display="block";}
   else{transEl.style.display="none";}
   document.getElementById("cb-ts").textContent="⏱ "+sec2ts(c.ts);
-  const sec=Math.floor(c.ts);
+  const sec=Math.max(0,Math.floor(c.ts)-2); // start 2 seconds before the word's line
   document.getElementById("cb-video").innerHTML=S.ytId
     ?`<iframe src="https://www.youtube-nocookie.com/embed/${S.ytId}?start=${sec}&autoplay=1&controls=1&rel=0&mute=0&playsinline=1" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>`
     :`<div style="height:160px;display:flex;align-items:center;justify-content:center;background:#f5f4f0;border-radius:8px;font-size:13px;color:#aaa">No video</div>`;
@@ -836,44 +929,71 @@ function speak(){
 }
 // ── Cloudflare Worker endpoint (no token in browser) ──
 const WORKER_URL = 'https://falling-band-588d.nhung168.workers.dev';
-const DEFAULT_LANGUAGE = 'Chinese'; // Change to your primary language
 
-async function saveToLib() {
-  const c = S.cards[S.idx];
-  if (!c) return;
-
-  if (WORKER_URL.includes('YOUR_WORKER')) {
-    alert('Please set WORKER_URL to your Cloudflare Worker address.');
-    return;
+/* ── Meaning, pinyin and saving to lib.txt ── */
+const PINYIN_JS='https://cdn.jsdelivr.net/npm/pinyin-pro@3.26.0/dist/index.js';
+let pinyinLib=null;
+// the video's language from step 2 (detected, or what you picked there)
+function cardLang(){return document.getElementById("archive-lang").value;}
+function loadPinyin(){
+  return pinyinLib||(pinyinLib=new Promise((res,rej)=>{
+    const s=document.createElement("script");
+    s.src=PINYIN_JS;s.onload=res;
+    s.onerror=()=>{pinyinLib=null;rej(new Error("pinyin library unavailable"));};
+    document.head.appendChild(s);
+  }));
+}
+// fills empty pinyin fields; without the library they just stay empty for typing
+async function fillPinyin(){
+  if(cardLang()!=="Chinese")return;
+  try{await loadPinyin();}catch{return;}
+  S.cards.forEach(c=>{
+    if(!c.pinyin)c.pinyin=window.pinyinPro.pinyin(c.word.replace(/\s+/g,""),{toneType:"symbol",nonZh:"consecutive"});
+  });
+  syncBackFields();
+  if(S.view==="list")renderList();
+}
+function syncBackFields(){
+  const c=S.cards[S.idx];if(!c)return;
+  const pin=document.getElementById("cb-pinyin"),mean=document.getElementById("cb-meaning");
+  document.getElementById("cb-pinyin-row").style.display=cardLang()==="Chinese"?"block":"none";
+  if(document.activeElement!==pin)pin.value=c.pinyin;
+  if(document.activeElement!==mean)mean.value=c.meaning;
+  pin.disabled=mean.disabled=c.saved;
+}
+function setCard(i,key,val){S.cards[i][key]=val;syncSave();}
+function syncSave(){
+  const btn=document.getElementById("save-all-btn");
+  const n=S.cards.filter(c=>c.on&&!c.saved).length;
+  btn.disabled=n===0;
+  btn.textContent=n?`Save ${n} to lib`:S.cards.some(c=>c.saved)?"✓ Saved":"Save to lib";
+}
+// same format as the entries already in lib.txt: "Go shopping (mǎi dōng xi)"
+function definitionOf(c){
+  const meaning=(c.meaning||c.sentence).trim(),pinyin=(c.pinyin||"").trim();
+  return pinyin?`${meaning} (${pinyin})`:meaning;
+}
+async function saveAll(){
+  const todo=S.cards.filter(c=>c.on&&!c.saved);
+  if(!todo.length)return;
+  const btn=document.getElementById("save-all-btn"),msg=document.getElementById("save-msg");
+  const language=cardLang();
+  btn.disabled=true;btn.textContent="Saving…";msg.textContent="";
+  try{
+    const r=await fetch(`${WORKER_URL}/save-batch`,{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({entries:todo.map(c=>({word:c.word.trim(),definition:definitionOf(c),language}))})});
+    if(r.status===404)throw new Error("the Worker needs redeploying with the latest worker.js");
+    const j=await r.json().catch(()=>({error:`HTTP ${r.status} — check Worker logs`}));
+    if(!r.ok||!j.ok)throw new Error(j.error||`HTTP ${r.status}`);
+    todo.forEach(c=>{c.saved=true;});
+    const already=j.skipped?` ${j.skipped} already there, left unchanged.`:"";
+    msg.textContent=`Added ${j.added} to lib.txt as ${language}.${already}${j.added?" Their clips appear in a few minutes, once the index rebuilds.":""}`;
+    syncBackFields();
+    if(S.view==="list")renderList();
+  }catch(e){
+    msg.innerHTML=`<span style="color:#c0392b">Save failed: ${esc(e.message)}</span>`;
   }
-
-  const btn  = document.getElementById('save-lib-btn');
-  const orig = btn.textContent;
-  btn.textContent = '…';
-  btn.disabled = true;
-
-  try {
-    const word       = c.word.trim();
-    const definition = (c.trans ? c.trans : c.sentence).trim();
-    // the video's language from step 2 (detected, or what you picked next to "Archive subtitles")
-    const language   = document.getElementById('archive-lang')?.value || DEFAULT_LANGUAGE;
-
-    const r = await fetch(`${WORKER_URL}/save`, {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify({ word, definition, language })
-    });
-    const j = await r.json().catch(() => ({ error: `HTTP ${r.status} — check Worker logs` }));
-    if (!r.ok) throw new Error(j.error || `HTTP ${r.status}`);
-
-    btn.textContent = j.skipped ? '✓ already in lib' : '✓ saved!';
-    setTimeout(() => { btn.textContent = orig; btn.disabled = false; }, 2500);
-
-  } catch(e) {
-    btn.textContent = '✗ error';
-    btn.disabled = false;
-    alert('Save failed: ' + e.message);
-  }
+  syncSave();
 }
 function markK(){S.known.push(S.cards[S.idx].word);nextCard();}
 function markL(){S.learning.push(S.cards[S.idx].word);nextCard();}
@@ -900,18 +1020,30 @@ function toggleView(){
   const isStudy=S.view==="study";
   document.getElementById("study-view").style.display=isStudy?"block":"none";
   document.getElementById("list-view").style.display=isStudy?"none":"block";
-  document.getElementById("view-btn").textContent=isStudy?"List view":"Study view";
-  if(!isStudy){
-    document.getElementById("list-view").innerHTML=S.cards.map((c,i)=>`
-      <div class="card" style="margin-bottom:10px">
+  document.getElementById("view-btn").textContent=isStudy?"Edit all":"Study view";
+  if(isStudy)syncBackFields();else renderList();
+}
+function renderList(){
+  const zh=cardLang()==="Chinese";
+  document.getElementById("list-view").innerHTML=S.cards.map((c,i)=>{
+    const off=c.saved?"disabled":"";
+    return `<div class="card" style="margin-bottom:10px">
         <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
-          <div><span style="font-size:17px;font-weight:500;margin-right:8px">${esc(c.word)}</span><span class="mono">${sec2ts(c.ts)}</span></div>
-          <button class="btn btn-ghost" style="font-size:12px;padding:4px 10px" onclick="jumpTo(${i})">Study →</button>
+          <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+            <input type="checkbox" ${c.on?"checked":""} ${off} title="Save this word" onchange="setCard(${i},'on',this.checked)"/>
+            <span style="font-size:17px;font-weight:500">${esc(c.word)}</span><span class="mono">${sec2ts(c.ts)}</span>
+          </label>
+          <div style="display:flex;align-items:center;gap:8px">
+            ${c.saved?`<span class="saved-mark">✓ Saved</span>`:""}
+            <button class="btn btn-ghost" style="font-size:12px;padding:4px 10px" onclick="jumpTo(${i})">Study →</button>
+          </div>
         </div>
         <p style="font-size:13px;color:#1a1a1a;margin-top:6px;font-style:italic;line-height:1.5">"${esc(c.sentence)}"</p>
-        ${c.trans?`<p style="font-size:12px;color:#aaa;margin-top:3px;font-style:italic">${esc(c.trans)}</p>`:""}
-      </div>`).join("");
-  }
+        ${zh?`<label class="field-lbl">Pinyin</label><input class="field" type="text" value="${esc(c.pinyin)}" ${off} oninput="setCard(${i},'pinyin',this.value)"/>`:""}
+        <label class="field-lbl">Meaning</label>
+        <textarea class="field" rows="2" ${off} oninput="setCard(${i},'meaning',this.value)">${esc(c.meaning)}</textarea>
+      </div>`;
+  }).join("");
 }
 function jumpTo(i){S.idx=i;toggleView();renderCard();}
 </script>

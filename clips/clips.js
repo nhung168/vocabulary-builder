@@ -18,8 +18,9 @@
   var DATA = BASE;           // + the language folder, set by mount()
   var PT_API = 'https://unpkg.com/@peertube/embed-api@0.2.0/build/player.min.js';
   var YT_API = 'https://www.youtube.com/iframe_api';
-  // each clip is a 3-minute window: from 1 minute before the word to 2 minutes after it
-  var BEFORE = 60, AFTER = 120;
+  // each clip runs from 2 seconds before the word's subtitle line to 2 minutes after it
+  // (index times already start 0.5 s before the line, so 1.5 here makes 2)
+  var BEFORE = 1.5, AFTER = 120;
   var SOURCE_NAME = { commons: 'Wikimedia Commons', archive: 'Internet Archive', peertube: 'PeerTube', youtube: 'YouTube · saved by you', link: 'saved by you' };
 
   var meta = null, metaP = null, shards = {}, ui = null;
@@ -115,7 +116,7 @@
     ui.stage = el('div', { class: 'vc-stage' });
     ui.cap = el('div', { class: 'vc-cap', 'aria-live': 'polite' });
     ui.prev = el('button', { type: 'button', class: 'vc-prev', text: '◀ Prev', onclick: function (e) { e.stopPropagation(); go(S.i - 1); } });
-    ui.replay = el('button', { type: 'button', text: REEL ? '↻' : '↻ To the word', title: 'Jump to the word', 'aria-label': 'Jump to the word', onclick: function (e) { e.stopPropagation(); var c = S.clips[S.i]; if (c) play(c[1]); } });
+    ui.replay = el('button', { type: 'button', text: REEL ? '↻' : '↻ Replay', title: 'Replay from the word', 'aria-label': 'Replay from the word', onclick: function (e) { e.stopPropagation(); play(); } });
     ui.next = el('button', { type: 'button', class: 'vc-next', text: 'Next ▶', onclick: function (e) { e.stopPropagation(); go(S.i + 1); } });
     ui.slow = el('button', { type: 'button', text: '0.75×', 'aria-pressed': 'false', title: 'Play slower', onclick: function (e) {
       e.stopPropagation(); S.rate = S.rate === 1 ? 0.75 : 1; ui.slow.setAttribute('aria-pressed', String(S.rate !== 1)); applyRate();
@@ -231,7 +232,7 @@
 
   function applyRate() { if (media && media.rate) media.rate(S.rate); }
 
-  // at: optional time to start from instead of the window's start (jump to the word, switch quality)
+  // at: optional time to start from instead of the window's start (used when switching quality)
   function play(at) {
     var c = S.clips[S.i]; if (!c) return;
     var v = meta.videos[c[0]];

@@ -91,36 +91,11 @@ async function ghGet(token) {
   return { lines: content.split('\n').filter(l => l.trim() !== ''), sha: j.sha };
 }
 
-async function ghPut(token, lines, sha) {
-  const url = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${PATH}`;
-  // Encode content to base64 properly for UTF-8
-  const content = lines.join('\n') + '\n';
-  const bytes = new TextEncoder().encode(content);
-  const b64 = btoa(String.fromCharCode(...bytes));
-
-  const body = {
-    message: 'vocab: add entry',
-    content: b64,
-    branch:  BRANCH,
-    ...(sha ? { sha } : {})
-  };
-  const r = await fetch(url, {
-    method: 'PUT',
-    headers: {
-      Authorization:  `Bearer ${token}`,
-      Accept:         'application/vnd.github+json',
-      'Content-Type': 'application/json',
-      'User-Agent':   'vocab-worker'
-    },
-    body: JSON.stringify(body)
-  });
-  if (!r.ok) {
-    const errBody = await r.text();
-    throw new Error(`GitHub PUT ${r.status}: ${errBody}`);
-  }
+async function ghPut(token, lines, sha, message = 'vocab: add entry') {
+  await ghWriteFile(token, PATH, lines.join('\n') + '\n', sha, message);
 }
 
-function buildLines(existing, newEntry) {
+function buildLines(existing, newEntries) {
   // Separate header from data rows
   const HEADER = 'word\tdefinition\tlanguage';
   const isHeader = l => l.toLowerCase().replace(/\s/g, '').startsWith('word');
@@ -136,10 +111,37 @@ function buildLines(existing, newEntry) {
     dataRows = [...existing];        // all existing lines are data
   }
 
-  // Insert new entry at the TOP of data rows (= row 2 in file)
-  dataRows.unshift(newEntry);
+  // Insert new entries at the TOP of data rows (first one = row 2 in file)
+  dataRows.unshift(...newEntries);
 
   return [header, ...dataRows];
+}
+
+// Add entries to lib.txt in one commit, skipping words already there → { added, skipped, total }
+async function addEntries(token, entries) {
+  const clean = s => String(s || '').replace(/\s*[\t\r\n]+\s*/g, ' ').trim(); // one line, tab-separated
+  const { lines, sha } = await ghGet(token);
+
+  // Deduplicate by word + language (case-insensitive)
+  const keyOf = (word, language) => `${word.trim().toLowerCase()}\t${language.trim().toLowerCase()}`;
+  const seen = new Set(lines.map(l => { const c = l.split('\t'); return keyOf(c[0] || '', c[2] || ''); }));
+
+  const fresh = [];
+  let skipped = 0;
+  for (const e of entries) {
+    const word = clean(e.word), definition = clean(e.definition), language = clean(e.language) || 'English';
+    if (!word) continue;
+    const key = keyOf(word, language);
+    if (seen.has(key)) { skipped++; continue; }
+    seen.add(key);
+    fresh.push([word, definition, language].join('\t'));
+  }
+  if (!fresh.length) return { added: 0, skipped, total: lines.length };
+
+  // Build final lines: header on row 1, new entries from row 2, rest below
+  const finalLines = buildLines(lines, fresh);
+  await ghPut(token, finalLines, sha, fresh.length > 1 ? `vocab: add ${fresh.length} entries` : 'vocab: add entry');
+  return { added: fresh.length, skipped, total: finalLines.length };
 }
 
 export default {
@@ -195,29 +197,24 @@ export default {
 
         if (!word) return Response.json({ ok: false, error: 'word is required' }, { status: 400, headers: cors });
 
-        // Tab-separated entry, strip internal tabs
-        const entry = [
-          word.replace(/\t/g, ' '),
-          definition.replace(/\t/g, ' '),
-          language.replace(/\t/g, ' ')
-        ].join('\t');
+        const { added, total } = await addEntries(env.GITHUB_TOKEN, [{ word, definition, language }]);
+        if (!added) return Response.json({ ok: true, skipped: true }, { headers: cors });
+        return Response.json({ ok: true, skipped: false, row: 2, total }, { headers: cors });
 
-        const { lines, sha } = await ghGet(env.GITHUB_TOKEN);
+      } catch(e) {
+        return Response.json({ ok: false, error: e.message }, { status: 500, headers: cors });
+      }
+    }
 
-        // Deduplicate by word + language (case-insensitive)
-        const duplicate = lines.some(l => {
-          const cols = l.split('\t');
-          return cols[0]?.trim().toLowerCase() === word.toLowerCase()
-              && cols[2]?.trim().toLowerCase() === language.toLowerCase();
-        });
-        if (duplicate) return Response.json({ ok: true, skipped: true }, { headers: cors });
-
-        // Build final lines: header on row 1, new entry on row 2, rest below
-        const finalLines = buildLines(lines, entry);
-
-        await ghPut(env.GITHUB_TOKEN, finalLines, sha);
-        return Response.json({ ok: true, skipped: false, row: 2, total: finalLines.length }, { headers: cors });
-
+    // POST /save-batch  { entries: [{ word, definition, language }, …] } — one commit, so one clip rebuild
+    if (request.method === 'POST' && pathname === '/save-batch') {
+      try {
+        if (!env.GITHUB_TOKEN) throw new Error('GITHUB_TOKEN not configured');
+        const body = await request.json();
+        const entries = Array.isArray(body.entries) ? body.entries : [];
+        if (!entries.length) return Response.json({ ok: false, error: 'entries is required' }, { status: 400, headers: cors });
+        if (entries.length > 500) return Response.json({ ok: false, error: 'at most 500 words at a time' }, { status: 413, headers: cors });
+        return Response.json({ ok: true, ...await addEntries(env.GITHUB_TOKEN, entries) }, { headers: cors });
       } catch(e) {
         return Response.json({ ok: false, error: e.message }, { status: 500, headers: cors });
       }
