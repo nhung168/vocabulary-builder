@@ -198,6 +198,7 @@
   function clearMedia() {
     if (media && media.destroy) media.destroy();
     media = null; cur = null; userPaused = false;
+    mutedByUs = false; ui.unmute.hidden = true; // every clip tries sound again
     ui.stage.innerHTML = '';
     ui.stage.style.aspectRatio = '';
     setPaused(false); setProgress(0, 0);
@@ -301,6 +302,7 @@
         if (tok !== S.token) return;
         if (Math.abs(vid.currentTime - start) > 0.3) vid.currentTime = start;
         vid.playbackRate = S.rate;
+        vid.muted = false;
         startVideo(vid);
       },
       failed: function () {
@@ -387,6 +389,12 @@
     }).catch(function () { /* embed API unavailable — basic embed keeps working */ });
   }
 
+  // Chrome / Edge / Firefox pass an earlier tap on to embedded players; Safari (all iPhone browsers) doesn't
+  function tapReachesEmbeds() {
+    var a = navigator.userActivation;
+    return !!(a && a.hasBeenActive) && !/^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  }
+
   var ytLib = null;
   function loadYoutubeApi() {
     return ytLib || (ytLib = new Promise(function (res, rej) {
@@ -419,6 +427,7 @@
           onReady: function () {
             if (tok !== S.token) return;
             p.setPlaybackRate(S.rate);
+            p.unMute(); // YouTube remembers mute from earlier embeds
             p.playVideo();
             media = {
               rate: function (r) { p.setPlaybackRate(r); },
@@ -430,11 +439,15 @@
               destroy: media.destroy
             };
             poll = setInterval(function () { if (state === 1) showProgress(p.getCurrentTime(), p.getDuration()); }, 500);
-            // no sound allowed yet (iPhone): play muted and offer the sound button
-            setTimeout(function () {
-              if (tok !== S.token || state === 1 || userPaused) return;
+            // no sound allowed (iPhone, or no tap yet): play muted and offer the sound button.
+            // It can sit unstarted for seconds while seeking, so where a tap carries into YouTube's frame, wait
+            var stuck = 0, patience = tapReachesEmbeds() ? 24 : 5, watch = setInterval(function () {
+              if (tok !== S.token || state === 1 || state === 0 || userPaused) { clearInterval(watch); return; }
+              stuck = state === 3 ? 0 : stuck + 1; // still buffering is just a slow connection
+              if (stuck < patience) return;
+              clearInterval(watch);
               p.mute(); p.playVideo(); mutedByUs = true; ui.unmute.hidden = false;
-            }, 1500);
+            }, 500);
           },
           onStateChange: function (e) {
             if (tok !== S.token) return;
