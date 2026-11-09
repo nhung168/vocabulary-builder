@@ -1,11 +1,11 @@
 {
  "words": 805,
- "wordsWithClips": 707,
- "videosUsed": 2315,
- "videosCached": 3719,
+ "wordsWithClips": 708,
+ "videosUsed": 2366,
+ "videosCached": 3847,
  "bySource": {
-  "peertube": 554,
-  "archive": 440,
-  "commons": 1321
+  "peertube": 571,
+  "archive": 479,
+  "commons": 1316
  }
 }
