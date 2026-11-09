@@ -1,4 +1,5 @@
 word	definition	language
+Bewildered	adj. deeply or utterly confused	English
 味 道	mô tả mùi vị của món ăn, (wèi dào)	Chinese
 口 感	kết cấu của món ăn, (kǒu gǎn)	Chinese
 酸	chua, (suān)	Chinese
